@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Empresa;
+use App\Models\Enquete;
 use Illuminate\Http\Request;
 
-class EmpresaController extends Controller
+class EnqueteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class EmpresaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Empresa  $empresa
+     * @param  \App\Models\Enquete  $enquete
      * @return \Illuminate\Http\Response
      */
-    public function show(Empresa $empresa)
+    public function show(Enquete $enquete)
     {
         //
     }
@@ -52,10 +52,10 @@ class EmpresaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Empresa  $empresa
+     * @param  \App\Models\Enquete  $enquete
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empresa $empresa)
+    public function edit(Enquete $enquete)
     {
         //
     }
@@ -64,10 +64,10 @@ class EmpresaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Empresa  $empresa
+     * @param  \App\Models\Enquete  $enquete
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empresa $empresa)
+    public function update(Request $request, Enquete $enquete)
     {
         //
     }
@@ -75,10 +75,10 @@ class EmpresaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Empresa  $empresa
+     * @param  \App\Models\Enquete  $enquete
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empresa $empresa)
+    public function destroy(Enquete $enquete)
     {
         //
     }

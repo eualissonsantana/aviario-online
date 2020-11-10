@@ -17,6 +17,7 @@ class CreateEmpresasTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('slogan')->nullable();
+            $table->string('imagem')->nullable();
             $table->longText('descricao')->nullable();
             $table->string('telefone');
             $table->boolean('ehWhats')->default(0);
@@ -24,9 +25,10 @@ class CreateEmpresasTable extends Migration
             $table->string('youtube')->nullable();
             $table->string('instagram')->nullable();
             $table->string('facebook')->nullable();
-            $table->boolean('boleto')->default(0);
-            $table->boolean('cartao')->default(0);
-            $table->boolean('dinheiro')->default(1);
+            $table->boolean('aceitaBoleto')->default(0);
+            $table->boolean('aceitaCredito')->default(0);
+            $table->boolean('aceitaDebito')->default(0);
+            $table->boolean('aceitaDinheiro')->default(1);
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('endereco_id');
             $table->foreign('categoria_id')->references('id')->on('empresa_categorias');
