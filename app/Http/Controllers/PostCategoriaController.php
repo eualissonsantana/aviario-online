@@ -14,7 +14,8 @@ class PostCategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = PostCategoria::all();
+        return view('listagem.post_categorias', compact('categorias'));
     }
 
     /**
@@ -35,16 +36,22 @@ class PostCategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $categoria = new PostCategoria();
+        $categoria->descricao = $data['descricao'];
+        $categoria->save();
+        
+        return redirect()->route('post.categorias');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PostCategoria  $postCategoria
+     * @param  \App\Models\PostCategoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function show(PostCategoria $postCategoria)
+    public function show(PostCategoria $categoria)
     {
         //
     }
@@ -55,9 +62,9 @@ class PostCategoriaController extends Controller
      * @param  \App\Models\PostCategoria  $postCategoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(PostCategoria $postCategoria)
+    public function edit(PostCategoria $categoria)
     {
-        //
+        return view('editar.post_categoria', compact('categoria'));
     }
 
     /**
@@ -67,9 +74,11 @@ class PostCategoriaController extends Controller
      * @param  \App\Models\PostCategoria  $postCategoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PostCategoria $postCategoria)
+    public function update(Request $request, PostCategoria $categoria)
     {
-        //
+        $categoria->descricao = $request->input("descricao");
+        $categoria->save();
+        return redirect()->route('posts.categorias');
     }
 
     /**
@@ -78,8 +87,8 @@ class PostCategoriaController extends Controller
      * @param  \App\Models\PostCategoria  $postCategoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostCategoria $postCategoria)
+    public function destroy(PostCategoria $categoria)
     {
-        //
+        $categoria->delete();
     }
 }
