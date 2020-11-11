@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\EmpresaCategoriaController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostCategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +22,12 @@ use App\Http\Controllers\PostController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Usuários
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/cadastro', [UserController::class, 'create'])->name('users.novo-cadastro');
+Route::post('/users/cadastro/novo', [UserController::class, 'store'])->name('users.cadastro');
+
 // Empresas
 Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas');
 Route::get('/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresas.categorias');
@@ -30,6 +39,5 @@ Route::get('/posts/categorias', [PostCategoriaController::class, 'index'])->name
 Route::post('/posts/cadastro', [PostController::class, 'store'])->name('posts.cadastro');
 
 Auth::routes();
-Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
