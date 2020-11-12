@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
             $usuarios = User::all();
             return view('listagem.usuarios', compact('usuarios'));
         }else {
-            return view('listagem.permissao');
+            return redirect('/');
         }        
     }
 
@@ -31,7 +32,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('cadastrar.usuario');
+        if(Gate::allows('gerente')) {
+            return view('cadastrar.usuario');
+        }else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -42,16 +47,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'max:15', 'unique:users'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ],
+        [
+            'same' => 'Teste 1',
+            'size' => 'Teste 2',
+            'between' => 'Teste 3',
+            'in' => 'teste 4',
+        ]);
 
-        $usuario = new User();
-        $usuario->name = $data['nome'];
-        $usuario->email = $data['email'];
-        $usuario->password = $data['password'];
-        $usuario->ehGerente = $data['ehGerente'];
-        $usuario->save();
+        if(Gate::allows('gerente')) {
+            $data = $request->all();
+
+            $usuario = new User();
+            $usuario->name = $data['name'];
+            $usuario->username = $data['username'];
+            $usuario->email = $data['username']."@padrao.com";
+            $usuario->password = Hash::make($data['password']);
+            $usuario->ehGerente = '0';
+            $usuario->save();
+            
+            return redirect()->route('users.index');
+        }else {
+            return redirect('/');
+        }        
         
-        return redirect()->route('users.index');
+        
     }
 
     /**

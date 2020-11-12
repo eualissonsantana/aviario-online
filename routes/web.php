@@ -38,6 +38,6 @@ Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/posts/categorias', [PostCategoriaController::class, 'index'])->name('posts.categorias');
 Route::post('/posts/cadastro', [PostController::class, 'store'])->name('posts.cadastro');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
