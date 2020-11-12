@@ -143,6 +143,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Gate::allows('gerente')) {
+            $user = new User();
+            $user = $user->destroy($id);
+
+            return($user)?"Sim":"Não";
+        }else {
+            return view('home');
+        }
     }
 }

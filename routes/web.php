@@ -27,6 +27,7 @@ Route::get('/users/cadastro', [UserController::class, 'create'])->name('users.no
 Route::post('/users/cadastro', [UserController::class, 'store'])->name('users.store');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
 // Empresas
 Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas');
