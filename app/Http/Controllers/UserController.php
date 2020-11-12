@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +22,7 @@ class UserController extends Controller
             $usuarios = User::all();
             return view('listagem.usuarios', compact('usuarios'));
         }else {
-            return view('listagem.permissao');
+            return redirect('/');
         }        
     }
 
@@ -31,7 +33,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('cadastrar.usuario');
+        if(Gate::allows('gerente')) {
+            return view('cadastrar.usuario');
+        }else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -42,16 +48,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'max:15', 'unique:users'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ]);
 
-        $usuario = new User();
-        $usuario->name = $data['nome'];
-        $usuario->email = $data['email'];
-        $usuario->password = $data['password'];
-        $usuario->ehGerente = $data['ehGerente'];
-        $usuario->save();
+        if(Gate::allows('gerente')) {
+            $data = $request->all();
+
+            $usuario = new User();
+            $usuario->name = $data['name'];
+            $usuario->username = $data['username'];
+            $usuario->email = $data['username']."@padrao.com";
+            $usuario->password = Hash::make($data['password']);
+            $usuario->ehGerente = '0';
+            $usuario->save();
+            
+            return redirect()->route('users.index');
+        }else {
+            return redirect('/');
+        }        
         
-        return redirect()->route('users.index');
+        
     }
 
     /**
@@ -73,7 +92,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Gate::allows('gerente')) {
+            $user = new User();
+            $user = $user->find($id);
+
+            return view('cadastrar.usuario', compact('user'));
+        }else {
+            return view('home');
+        }
     }
 
     /**
@@ -85,7 +111,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'max:15', 'unique:users'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ]);
+
+        if(Gate::allows('gerente')) {
+            $data = $request->all();
+            $user = new User();
+
+            $user->where(['id'=>$id])->update([
+            'name' => $data['name'],
+                'username' => $data['username'],
+                'email' => $data['username']."@padrao.com",
+                'password' => Hash::make($data['password']),
+                'ehGerente' => '0'
+            ]);
+
+            return redirect()->route('users.index');
+        }else {
+            return view('home');
+        }
     }
 
     /**
