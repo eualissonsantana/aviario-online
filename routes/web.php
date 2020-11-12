@@ -19,14 +19,14 @@ use App\Http\Controllers\PostCategoriaController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/login');
 
 //Usuários
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/cadastro', [UserController::class, 'create'])->name('users.novo-cadastro');
-Route::post('/users/cadastro/novo', [UserController::class, 'store'])->name('users.cadastro');
+Route::post('/users/cadastro', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
 // Empresas
 Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas');

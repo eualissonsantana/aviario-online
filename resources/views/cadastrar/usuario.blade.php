@@ -2,13 +2,21 @@
 
 @section('content')
     <div class="container">
-        <form action = "{{ route('users.cadastro') }}" method = "POST">
+        <h1>@if(isset($user))Editar @else Cadastrar @endif</h1>
+
+        @if(isset($user))
+            <form action = "{{ url("users/$user->id")}}" method = "POST">
+                @method('PUT')
+        @else
+            <form action = "{{ route('users.cadastro') }}" method = "POST">
+        @endif
+
             @csrf
             <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nome e sobrenome" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nome e sobrenome" name="name" value="{{$user->name ?? ''}}" required autocomplete="name" autofocus>
 
                     @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -22,7 +30,7 @@
                 <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                 <div class="col-md-6">
-                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
+                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{$user->username ?? ''}}" required autocomplete="username">
 
                     @error('username')
                         <span class="invalid-feedback" role="alert">

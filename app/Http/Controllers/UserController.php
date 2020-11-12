@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -51,12 +52,6 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'max:15', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
-        ],
-        [
-            'same' => 'Teste 1',
-            'size' => 'Teste 2',
-            'between' => 'Teste 3',
-            'in' => 'teste 4',
         ]);
 
         if(Gate::allows('gerente')) {
@@ -97,7 +92,14 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Gate::allows('gerente')) {
+            $user = new User();
+            $user = $user->find($id);
+
+            return view('cadastrar.usuario', compact('user'));
+        }else {
+            return view('home');
+        }
     }
 
     /**
@@ -109,7 +111,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'max:15', 'unique:users'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ]);
+
+        if(Gate::allows('gerente')) {
+            $data = $request->all();
+            $user = new User();
+
+            $user->where(['id'=>$id])->update([
+            'name' => $data['name'],
+                'username' => $data['username'],
+                'email' => $data['username']."@padrao.com",
+                'password' => Hash::make($data['password']),
+                'ehGerente' => '0'
+            ]);
+
+            return redirect()->route('users.index');
+        }else {
+            return view('home');
+        }
     }
 
     /**
