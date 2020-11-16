@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresa;
+use App\Models\Endereco;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
@@ -14,7 +15,8 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        //
+        $empresas = Empresa::all();
+        return view('listagem.empresas', compact('empresas'));
     }
 
     /**
@@ -24,7 +26,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrar.empresa');
     }
 
     /**
@@ -35,7 +37,73 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       /* $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'max:15', 'unique:users'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ]); */
+       
+        $data = $request->all();
+        
+        $endereco = new Endereco();
+        $endereco->bairro = $data['bairro'];
+        $endereco->rua = $data['rua'];
+        $endereco->cep = $data['cep'];
+        $endereco->numero = $data['numero'];
+        $endereco->cidade = $data['cidade'];
+        $endereco->estado = $data['estado'];
+
+        if(array_key_exists("ehComercial", $data)){
+            $endereco->ehComercial = $data['ehComercial'];
+        }
+
+        $endereco->save();
+
+        $empresa = new Empresa();
+        $empresa->nome = $data['nome'];
+        $empresa->slogan = $data['slogan'];
+        $empresa->descricao = $data['descricao'];
+        $empresa->telefone = $data['telefone'];
+        $empresa->email = $data['email'];
+        $empresa->youtube = $data['youtube'];
+        $empresa->instagram = $data['instagram'];
+        $empresa->facebook = $data['facebook'];
+        $empresa->categoria_id = $data['categoria_id'];
+        $empresa->endereco_id = $endereco->id;
+
+        if(array_key_exists("ehWhats", $data)){
+            $empresa->ehWhats = $data['ehWhats'];
+        }
+
+        if(array_key_exists("aceitaBoleto", $data)){
+            $empresa->aceitaBoleto = $data['aceitaBoleto'];
+        }
+
+        if(array_key_exists("aceitaCredito", $data)){
+            $empresa->aceitaCredito = $data['aceitaCredito'];
+        }
+
+        if(array_key_exists("aceitaDebito", $data)){
+            $empresa->aceitaDebito = $data['aceitaDebito'];
+        }
+
+        if(array_key_exists("aceitaDinheiro", $data)){
+            $empresa->aceitaDinheiro = $data['aceitaDinheiro'];
+        }
+
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            $id = $empresa->id;
+
+            $extension = $request->imagem->extension();
+            $nameFile = "{$id}.{$extension}";
+            $empresa->imagem = $nameFile;
+
+            $upload = $request->imagem->storeAs('chamadas', $nameFile);
+        }  
+
+        $empresa->save();
+        
+        return redirect()->route('empresas.index');
     }
 
     /**
