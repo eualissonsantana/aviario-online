@@ -30,7 +30,7 @@
                 <label for="slogan" class="col-md-4 col-form-label text-md-right">{{ __('slogan') }}</label>
 
                 <div class="col-md-6">
-                    <input id="slogan" type="text" class="form-control @error('slogan') is-invalid @enderror"  name="slogan" value="{{$empresa->slogan ?? ''}}" required autocomplete="slogan" autofocus>
+                    <input id="slogan" type="text" class="form-control @error('slogan') is-invalid @enderror"  name="slogan" value="{{$empresa->slogan ?? ''}}" >
 
                     @error('slogan')
                         <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                 <label for="arquivo" class="col-md-4 col-form-label text-md-right">{{ __('arquivo') }}</label>
 
                 <div class="col-md-6">
-                    <input id="arquivo" type="file" name="imagem" class="form-control @error('arquivo') is-invalid @enderror"  name="arquivo" value="{{$empresa->arquivo ?? ''}}" required autocomplete="arquivo" autofocus>
+                    <input id="arquivo" type="file" name="imagem" class="form-control @error('arquivo') is-invalid @enderror"  name="arquivo" value="{{$empresa->arquivo ?? ''}}">
 
                     @error('arquivo')
                         <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                 <label for="descricao" class="col-md-4 col-form-label text-md-right">{{ __('descricao') }}</label>
 
                 <div class="col-md-6">
-                    <input id="descricao" type="text" class="form-control @error('descricao') is-invalid @enderror"  name="descricao" value="{{$empresa->descricao ?? ''}}" required autocomplete="descricao" autofocus>
+                    <input id="descricao" type="text" class="form-control @error('descricao') is-invalid @enderror"  name="descricao" value="{{$empresa->descricao ?? ''}}">
 
                     @error('descricao')
                         <span class="invalid-feedback" role="alert">
@@ -88,7 +88,7 @@
                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  name="email" value="{{$empresa->email ?? ''}}" required autocomplete="email" autofocus>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  name="email" value="{{$empresa->email ?? ''}}">
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -102,7 +102,7 @@
                 <label for="youtube" class="col-md-4 col-form-label text-md-right">{{ __('youtube') }}</label>
 
                 <div class="col-md-6">
-                    <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror"  name="youtube" value="{{$empresa->youtube ?? ''}}" required autocomplete="youtube" autofocus>
+                    <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror"  name="youtube" value="{{$empresa->youtube ?? ''}}">
 
                     @error('youtube')
                         <span class="invalid-feedback" role="alert">
@@ -116,7 +116,7 @@
                 <label for="instagram" class="col-md-4 col-form-label text-md-right">{{ __('instagram') }}</label>
 
                 <div class="col-md-6">
-                    <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror"  name="instagram" value="{{$empresa->instagram ?? ''}}" required autocomplete="instagram" autofocus>
+                    <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror"  name="instagram" value="{{$empresa->instagram ?? ''}}">
 
                     @error('instagram')
                         <span class="invalid-feedback" role="alert">
@@ -130,7 +130,7 @@
                 <label for="facebook" class="col-md-4 col-form-label text-md-right">{{ __('facebook') }}</label>
 
                 <div class="col-md-6">
-                    <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror"  name="facebook" value="{{$empresa->facebook ?? ''}}" required autocomplete="facebook" autofocus>
+                    <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror"  name="facebook" value="{{$empresa->facebook ?? ''}}">
 
                     @error('facebook')
                         <span class="invalid-feedback" role="alert">
@@ -157,7 +157,7 @@
                         <label class="form-check-label" for="inlineCheckbox1">Débito</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="aceitaDinheiro" id="inlineCheckbox1" value="1">
+                        <input class="form-check-input" type="checkbox" name="aceitaDinheiro" id="inlineCheckbox1" value="1" checked>
                         <label class="form-check-label" for="inlineCheckbox1">Dinheiro</label>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
                 <label for="Bairro" class="col-md-4 col-form-label text-md-right">{{ __('Rua') }}</label>
 
                 <div class="col-md-6">
-                    <input id="rua" type="text" class="form-control @error('rua') is-invalid @enderror"  name="rua" required autocomplete="bairro" autofocus>
+                    <input id="rua" type="text" class="form-control @error('rua') is-invalid @enderror"  name="rua" >
 
                     @error('rua')
                         <span class="invalid-feedback" role="alert">
@@ -212,7 +212,7 @@
                 <label for="Bairro" class="col-md-4 col-form-label text-md-right">{{ __('CEP') }}</label>
 
                 <div class="col-md-6">
-                    <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror"  name="cep" required autocomplete="cep" autofocus>
+                    <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror"  name="cep">
 
                     @error('cep')
                         <span class="invalid-feedback" role="alert">
@@ -226,7 +226,7 @@
                 <label for="Bairro" class="col-md-4 col-form-label text-md-right">{{ __('Número') }}</label>
 
                 <div class="col-md-6">
-                    <input id="numero" type="number" class="form-control @error('rua') is-invalid @enderror"  name="numero" required autocomplete="bairro" autofocus>
+                    <input id="numero" type="number" class="form-control @error('rua') is-invalid @enderror"  name="numero">
 
                     @error('rua')
                         <span class="invalid-feedback" role="alert">
@@ -240,7 +240,7 @@
                 <label for="Bairro" class="col-md-4 col-form-label text-md-right">{{ __('Cidade') }}</label>
 
                 <div class="col-md-6">
-                    <input id="cidade" type="text" class="form-control @error('rua') is-invalid @enderror"  name="cidade" required autocomplete="cidade" autofocus>
+                    <input id="cidade" type="text" class="form-control @error('rua') is-invalid @enderror"  name="cidade" value="Feira de Santana" autofocus>
 
                     @error('cidade')
                         <span class="invalid-feedback" role="alert">
@@ -254,7 +254,7 @@
                 <label for="Estado" class="col-md-4 col-form-label text-md-right">{{ __('Estado') }}</label>
 
                 <div class="col-md-6">
-                    <input id="estado" type="text" class="form-control @error('estado') is-invalid @enderror"  name="estado" required autocomplete="estado" autofocus>
+                    <input id="estado" type="text" class="form-control @error('estado') is-invalid @enderror" value="BA" name="estado" required autocomplete="estado" autofocus>
 
                     @error('estado')
                         <span class="invalid-feedback" role="alert">

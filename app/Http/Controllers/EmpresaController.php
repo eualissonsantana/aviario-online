@@ -37,11 +37,21 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-       /* $validatedData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'max:15', 'unique:users'],
-            'password' => ['required', 'string', 'min:4', 'confirmed'],
-        ]); */
+        $validatedData = $request->validate([
+            'nome' => ['required', 'string', 'max:255'],
+            'slogan' => ['max:255'],
+            'imagem' => [],
+            'telefone' => ['required', 'string', 'max:14'],
+            'email' => ['max:255'],
+            'youtube' => ['max:255'],
+            'instagram' => ['max:255'],
+            'facebook' => ['max:255'],
+            'bairro' => ['string', 'max:255'],
+            'rua' => ['max:255'],
+            'cep' => ['max:9'],
+            'cidade' => ['max:255'],
+            'estado' => ['max:2']
+        ]); 
        
         $data = $request->all();
         
