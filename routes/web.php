@@ -34,6 +34,10 @@ Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas.ind
 Route::get('/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresas.categorias')->middleware('auth');
 Route::get('/empresas/cadastro', [EmpresaController::class, 'create'])->name('empresas.create')->middleware('auth');
 Route::post('/empresas/cadastro', [EmpresaController::class, 'store'])->name('empresas.store')->middleware('auth');
+Route::get('/empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit')->middleware('auth');
+Route::put('/empresas/{user}', [EmpresaController::class, 'update'])->name('empresas.update')->middleware('auth');
+Route::delete('/empresas/{user}', [EmpresaController::class, 'destroy'])->name('empresas.destroy')->middleware('auth');
+
 
 // Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts');

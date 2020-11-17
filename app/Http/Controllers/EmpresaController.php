@@ -108,7 +108,7 @@ class EmpresaController extends Controller
             $nameFile = "{$id}.{$extension}";
             $empresa->imagem = $nameFile;
 
-            $upload = $request->imagem->storeAs('chamadas', $nameFile);
+            $upload = $request->imagem->storeAs('fotos_empresas', $nameFile);
         }  
 
         $empresa->save();
@@ -133,9 +133,12 @@ class EmpresaController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empresa $empresa)
+    public function edit($id)
     {
-        //
+        $empresa = new Empresa();
+        $empresa = $empresa->find($id);
+
+        return view('cadastrar.empresa', compact('empresa'));
     }
 
     /**
@@ -145,9 +148,112 @@ class EmpresaController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empresa $empresa)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nome' => ['required', 'string', 'max:255'],
+            'slogan' => ['max:255'],
+            'imagem' => [],
+            'telefone' => ['required', 'string', 'max:14'],
+            'email' => ['max:255'],
+            'youtube' => ['max:255'],
+            'instagram' => ['max:255'],
+            'facebook' => ['max:255'],
+            'bairro' => ['string', 'max:255'],
+            'rua' => ['max:255'],
+            'cep' => ['max:9'],
+            'cidade' => ['max:255'],
+            'estado' => ['max:2']
+        ]); 
+       
+        $data = $request->all();
+
+        $empresa = new Empresa();
+        $endereco = new Endereco();
+
+        
+        if(array_key_exists("ehComercial", $data)){
+            $ehComercial = $data['ehComercial'];
+        }else {
+            $ehComercial = 0;
+        }
+
+        $endereco->where(['id'=>$id])->update([
+            'bairro' => $data['bairro'],
+            'rua' => $data['rua'],
+            'cep' => $data['cep'],
+            'numero' => $data['numero'],
+            'cidade' => $data['cidade'],
+            'estado' => $data['estado'],
+            'ehComercial' => $ehComercial,
+        ]);
+
+        if(array_key_exists("ehWhats", $data)){
+            $ehWhats = $data['ehWhats'];
+        }else {
+            $ehWhats = 0;
+        }
+
+        if(array_key_exists("aceitaBoleto", $data)){
+            $aceitaBoleto = $data['aceitaBoleto'];
+        }else {
+            $aceitaBoleto = 0;
+        }
+
+        if(array_key_exists("aceitaCredito", $data)){
+            $aceitaCredito = $data['aceitaCredito'];
+        }else {
+            $aceitaCredito = 0;
+        }
+
+        if(array_key_exists("aceitaDebito", $data)){
+            $aceitaDebito = $data['aceitaDebito'];
+        }else {
+            $aceitaDebito = 0;
+        }
+
+        if(array_key_exists("aceitaDinheiro", $data)){
+            $aceitaDinheiro = $data['aceitaDinheiro'];
+        }else {
+            $aceitaDinheiro = 0;
+        }
+
+        $empresa->where(['id'=>$id])->update([
+            'nome' => $data['nome'],
+            'slogan' => $data['slogan'],
+            'descricao' => $data['descricao'],
+            'telefone' => $data['telefone'],
+            'email' => $data['email'],
+            'youtube' => $data['youtube'],
+            'instagram' => $data['instagram'],
+            'facebook' => $data['facebook'],
+            'categoria_id' => $data['categoria_id'],
+            'endereco_id' => $id,
+            'ehWhats' => $ehWhats,
+            'aceitaDinheiro' => $aceitaDinheiro,
+            'aceitaDebito' => $aceitaDebito,
+            'aceitaCredito' => $aceitaCredito,
+            'aceitaBoleto' => $aceitaBoleto,
+        ]);
+
+        
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            $extension = $request->imagem->extension();
+            $nameFile = "{$id}.{$extension}";
+            $empresa->where(['id'=>$id])->update([
+                'imagem' => $nameFile,
+            ]);
+
+            $upload = $request->imagem->storeAs('fotos_empresas', $nameFile);
+
+            if(!$upload) {
+                return redirect()
+                            ->back()
+                            ->with('error', 'Falha ao fazer upload de imagem');
+            }
+        }  
+        
+        return redirect()->route('empresas.index');
     }
 
     /**

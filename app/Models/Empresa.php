@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Empresa extends Model
 {
     use HasFactory;
+
+    public function endereco()
+    {
+        return $this->belongsTo('App\Models\Endereco');
+    }
 }
