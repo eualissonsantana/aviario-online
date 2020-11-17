@@ -16,7 +16,7 @@
                     <a href="{{url("users/$user->id/edit")}}">
                         <button class="btn btn-primary">Editar</button>
                     </a>
-                    <a href="{{url("users/$user->id")}}" class="js-del">
+                    <a href="{{url("users/$user->id")}}" class="js-del-user">
                         <button class="btn btn-danger">Excluir</button>
                     </a>
                 </div>

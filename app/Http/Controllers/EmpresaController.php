@@ -262,8 +262,12 @@ class EmpresaController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empresa $empresa)
+    
+    public function destroy($id)
     {
-        //
+        $empresa = new Empresa();
+        $empresa = $empresa->destroy($id);
+
+        return($empresa)?"Sim":"Não";
     }
 }
