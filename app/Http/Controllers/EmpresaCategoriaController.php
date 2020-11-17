@@ -25,7 +25,7 @@ class EmpresaCategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrar.empresa_categoria');
     }
 
     /**
@@ -36,13 +36,17 @@ class EmpresaCategoriaController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'descricao' => ['required', 'string', 'max:255'],
+        ]);
+        
         $data = $request->all();
 
         $categoria = new EmpresaCategoria();
         $categoria->descricao = $data['descricao'];
         $categoria->save();
         
-        return redirect()->route('empresa.categorias');
+        return redirect()->route('empresa_categorias.index');
     }
 
     /**
@@ -62,9 +66,12 @@ class EmpresaCategoriaController extends Controller
      * @param  \App\Models\EmpresaCategoria  $empresaCategoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmpresaCategoria $categoria)
+    public function edit($id)
     {
-        return view('editar.post_categoria', compact('categoria'));
+        $categoria = new EmpresaCategoria();
+        $categoria = $categoria->find($id);
+
+        return view('cadastrar.empresa_categoria', compact('categoria'));
     }
 
     /**
@@ -74,11 +81,20 @@ class EmpresaCategoriaController extends Controller
      * @param  \App\Models\EmpresaCategoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmpresaCategoria $categoria)
+    public function update(Request $request, $id)
     {
-        $categoria->descricao = $request->input("descricao");
-        $categoria->save();
-        return redirect()->route('posts.categorias');
+        $validatedData = $request->validate([
+            'descricao' => ['required', 'string', 'max:255'],
+        ]);
+        
+        $data = $request->all();
+        $categoria = new EmpresaCategoria();
+        
+        $categoria->where(['id'=>$id])->update([
+            'descricao' => $data['descricao']
+        ]);
+
+        return redirect()->route('empresa_categorias.index');
     }
 
     /**
@@ -87,8 +103,11 @@ class EmpresaCategoriaController extends Controller
      * @param  \App\Models\EmpresaCategoria  $empresaCategoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmpresaCategoria $categoria)
+    public function destroy($id)
     {
-        $categoria->delete();
+        $categoria = new EmpresaCategoria();
+        $categoria = $categoria->destroy($id);
+
+        return($categoria)?"Sim":"Não";
     }
 }

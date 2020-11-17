@@ -31,13 +31,19 @@ Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.
 
 // Empresas
 Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas.index')->middleware('auth');
-Route::get('/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresas.categorias')->middleware('auth');
 Route::get('/empresas/cadastro', [EmpresaController::class, 'create'])->name('empresas.create')->middleware('auth');
 Route::post('/empresas/cadastro', [EmpresaController::class, 'store'])->name('empresas.store')->middleware('auth');
 Route::get('/empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit')->middleware('auth');
-Route::put('/empresas/{user}', [EmpresaController::class, 'update'])->name('empresas.update')->middleware('auth');
-Route::delete('/empresas/{user}', [EmpresaController::class, 'destroy'])->name('empresas.destroy')->middleware('auth');
+Route::put('/empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update')->middleware('auth');
+Route::delete('/empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy')->middleware('auth');
 
+// Categorias de empresa
+Route::get('/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresa_categorias.index')->middleware('auth');
+Route::get('/empresas/categorias/cadastro', [EmpresaCategoriaController::class, 'create'])->name('empresa_categorias.create')->middleware('auth');
+Route::post('/empresas/categorias/cadastro', [EmpresaCategoriaController::class, 'store'])->name('empresa_categorias.store')->middleware('auth');
+Route::get('/empresas/categorias/{categoria}/edit', [EmpresaCategoriaController::class, 'edit'])->name('empresa.edit')->middleware('auth');
+Route::put('/empresas/categorias/{categoria}', [EmpresaCategoriaController::class, 'update'])->name('empresa_categorias.update')->middleware('auth');
+Route::delete('/empresas/categorias/{categoria}', [EmpresaCategoriaController::class, 'destroy'])->name('empresa_categorias.destroy')->middleware('auth');
 
 // Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
