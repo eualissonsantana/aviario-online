@@ -3,7 +3,7 @@
 @section('content')
     
     <div class="container col-md-8 col-12">
-        <h2>Lista de catresas</h2>
+        <h2>Lista de Categorias de empresa</h2>
         <hr>
         @csrf
         @foreach ($categorias as $cat)
