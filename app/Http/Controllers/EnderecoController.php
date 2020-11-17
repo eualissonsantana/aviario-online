@@ -44,10 +44,14 @@ class EnderecoController extends Controller
         $endereco->numero = $data['numero'];
         $endereco->cidade = $data['cidade'];
         $endereco->estado = $data['estado'];
-        $endereco->ehComercial = $data['ehComercial'];
+
+        if(array_key_exists("ehComercial", $data)){
+            $endereco->ehComercial = $data['ehComercial'];
+        }
+
         $endereco->save();
         
-        return redirect()->route('post.categorias');
+        return $endereco->id;
     }
 
     /**

@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v9.0" nonce="o8PXlyab"></script>
     <div class="container">
+
+    
         <h1>@if(isset($user))Editar @else Cadastrar @endif</h1>
 
         @if(isset($user))
             <form action = "{{ url("users/$user->id")}}" method = "POST">
                 @method('PUT')
         @else
-            <form action = "{{ route('users.cadastro') }}" method = "POST">
+            <form action = "{{ route('users.create') }}" method = "POST">
         @endif
 
             @csrf
@@ -65,4 +69,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+    @if(isset($user))
+<div class="fb-comments" data-href="https://localhost:8000/users/{{$user->id}}/edit" data-numposts="10" data-width="100%"></div>
+    @endif
 @endsection

@@ -22,22 +22,23 @@ use App\Http\Controllers\PostCategoriaController;
 Route::redirect('/', '/login');
 
 //Usuários
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/cadastro', [UserController::class, 'create'])->name('users.novo-cadastro');
-Route::post('/users/cadastro', [UserController::class, 'store'])->name('users.store');
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+Route::get('/users/cadastro', [UserController::class, 'create'])->name('users.create')->middleware('auth');
+Route::post('/users/cadastro', [UserController::class, 'store'])->name('users.store')->middleware('auth');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 
 // Empresas
-Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas');
-Route::get('/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresas.categorias');
-Route::post('/posts/empresa', [PostController::class, 'store'])->name('post/cadastro/done');
+Route::get('/empresas', [EmpresaController::class, 'index'])->name('empresas.index')->middleware('auth');
+Route::get('/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresas.categorias')->middleware('auth');
+Route::get('/empresas/cadastro', [EmpresaController::class, 'create'])->name('empresas.create')->middleware('auth');
+Route::post('/empresas/cadastro', [EmpresaController::class, 'store'])->name('empresas.store')->middleware('auth');
 
 // Posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts');
 Route::get('/posts/categorias', [PostCategoriaController::class, 'index'])->name('posts.categorias');
-Route::post('/posts/cadastro', [PostController::class, 'store'])->name('posts.cadastro');
+Route::post('/posts/cadastro', [PostController::class, 'store'])->name('posts.cadastro')->middleware('auth');
 
 Auth::routes(['register' => false]);
 
