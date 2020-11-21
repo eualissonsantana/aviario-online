@@ -25,7 +25,7 @@ class PostCategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrar.post_categoria');
     }
 
     /**
@@ -36,13 +36,17 @@ class PostCategoriaController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'descricao' => ['required', 'string', 'max:255'],
+        ]);
+        
         $data = $request->all();
 
         $categoria = new PostCategoria();
         $categoria->descricao = $data['descricao'];
         $categoria->save();
         
-        return redirect()->route('post.categorias');
+        return redirect()->route('post_categorias.index');
     }
 
     /**
@@ -62,9 +66,12 @@ class PostCategoriaController extends Controller
      * @param  \App\Models\PostCategoria  $postCategoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(PostCategoria $categoria)
+    public function edit($id)
     {
-        return view('editar.post_categoria', compact('categoria'));
+        $categoria = new PostCategoria();
+        $categoria = $categoria->find($id);
+
+        return view('cadastrar.post_categoria', compact('categoria'));
     }
 
     /**
@@ -74,11 +81,20 @@ class PostCategoriaController extends Controller
      * @param  \App\Models\PostCategoria  $postCategoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PostCategoria $categoria)
+    public function update(Request $request, $id)
     {
-        $categoria->descricao = $request->input("descricao");
-        $categoria->save();
-        return redirect()->route('posts.categorias');
+        $validatedData = $request->validate([
+            'descricao' => ['required', 'string', 'max:255'],
+        ]);
+        
+        $data = $request->all();
+        $categoria = new PostCategoria();
+        
+        $categoria->where(['id'=>$id])->update([
+            'descricao' => $data['descricao']
+        ]);
+
+        return redirect()->route('post_categorias.index');
     }
 
     /**
@@ -87,8 +103,11 @@ class PostCategoriaController extends Controller
      * @param  \App\Models\PostCategoria  $postCategoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostCategoria $categoria)
+    public function destroy($id)
     {
-        $categoria->delete();
+        $categoria = new PostCategoria();
+        $categoria = $categoria->destroy($id);
+
+        return($categoria)?"Sim":"Não";
     }
 }

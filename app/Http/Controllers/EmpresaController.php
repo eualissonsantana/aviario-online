@@ -102,13 +102,18 @@ class EmpresaController extends Controller
         }
 
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            $id = $empresa->id;
+            if(!Empresa::all()->isEmpty()){
+                $id = Empresa::latest()->first()->id + 1;
+            }else {
+                $id = 0;
+            }
 
+            $path = 'imagens/empresas';
             $extension = $request->imagem->extension();
             $nameFile = "{$id}.{$extension}";
             $empresa->imagem = $nameFile;
 
-            $upload = $request->imagem->storeAs('fotos_empresas', $nameFile);
+            $upload = $request->imagem->storeAs($path, $nameFile);
         }  
 
         $empresa->save();
@@ -238,13 +243,15 @@ class EmpresaController extends Controller
 
         
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+
+            $path = 'imagens/empresas';
             $extension = $request->imagem->extension();
             $nameFile = "{$id}.{$extension}";
             $empresa->where(['id'=>$id])->update([
-                'imagem' => $nameFile,
+                'imagem' => $nameFile
             ]);
 
-            $upload = $request->imagem->storeAs('fotos_empresas', $nameFile);
+            $upload = $request->imagem->storeAs($path, $nameFile);
 
             if(!$upload) {
                 return redirect()

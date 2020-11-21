@@ -8,17 +8,6 @@ use App\Http\Controllers\EmpresaCategoriaController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCategoriaController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::redirect('/', '/login');
 
 //Usuários
@@ -46,9 +35,23 @@ Route::put('/empresas/categorias/{categoria}', [EmpresaCategoriaController::clas
 Route::delete('/empresas/categorias/{categoria}', [EmpresaCategoriaController::class, 'destroy'])->name('empresa_categorias.destroy')->middleware('auth');
 
 // Posts
-Route::get('/posts', [PostController::class, 'index'])->name('posts');
-Route::get('/posts/categorias', [PostCategoriaController::class, 'index'])->name('posts.categorias');
-Route::post('/posts/cadastro', [PostController::class, 'store'])->name('posts.cadastro')->middleware('auth');
+Route::get('/noticias', [PostController::class, 'index'])->name('posts.index');
+Route::get('/noticias/cadastro', [PostController::class, 'create'])->name('posts.create')->middleware('auth');
+Route::post('/noticias/cadastro', [PostController::class, 'store'])->name('posts.store')->middleware('auth');
+Route::get('/noticias/{noticia}/edit', [PostController::class, 'edit'])->name('posts.edit')->middleware('auth');
+Route::put('/noticias/{noticia}', [PostController::class, 'update'])->name('posts.update')->middleware('auth');
+Route::delete('/noticias/{noticia}', [PostController::class, 'destroy'])->name('posts.destroy')->middleware('auth');
+
+
+Route::get('/noticias/categorias', [PostCategoriaController::class, 'index'])->name('post_categorias.index');
+Route::get('/noticias/categorias/cadastro', [PostCategoriaController::class, 'create'])->name('post_categorias.create')->middleware('auth');
+Route::post('/noticias/categorias/cadastro', [PostCategoriaController::class, 'store'])->name('post_categorias.store')->middleware('auth');
+Route::get('/noticas/categorias/{categoria}/edit', [PostCategoriaController::class, 'edit'])->name('post.edit')->middleware('auth');
+Route::put('/noticias/categorias/{categoria}', [PostCategoriaController::class, 'update'])->name('post_categorias.update')->middleware('auth');
+Route::delete('/noticias/categorias/{categoria}', [PostCategoriaController::class, 'destroy'])->name('post_categorias.destroy')->middleware('auth');
+
+
+
 
 Auth::routes(['register' => false]);
 
