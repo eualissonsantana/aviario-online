@@ -13,4 +13,9 @@ class Empresa extends Model
     {
         return $this->belongsTo('App\Models\Endereco');
     }
+
+    public function categoria()
+    {
+        return $this->belongsTo('App\Models\EmpresaCategoria');
+    }
 }
