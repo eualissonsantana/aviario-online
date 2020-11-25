@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>@if(isset($empresa))Editar @else Cadastrar @endif</h1>
+    <div class="content-child">
+        <h2>
+            @if(isset($empresa))
+                Editar
+            @else 
+                Cadastrar 
+            @endif
+        </h2>
 
         @if(isset($empresa))
             <form action = "{{ url("empresas/$empresa->id")}}" method = "POST" enctype="multipart/form-data">
@@ -12,19 +18,33 @@
         @endif
 
             @csrf
-            <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                <div class="col-md-6">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nome e sobrenome" name="nome" value="{{$empresa->name ?? ''}}" required autocomplete="name" autofocus>
-
+            
+            <section class="row">
+                <div class="form-group col-md-4 col-form-label text-md-left">
+                    <label for="arquivo" class="col-form-label">{{ __('Imagem') }}</label>
+                    <input id="arquivo" type="file" name="imagem" class="form-control @error('arquivo') is-invalid @enderror"  name="arquivo" value="{{$empresa->arquivo ?? ''}}">
+    
+                    @error('arquivo')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+    
+                <div class="form-group col-md-8 col-form-label text-md-left">
+                    <label for="name" class="col-form-label">{{ __('Nome do comércio ou profissional') }}</label>            
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="nome" value="{{$empresa->nome ?? ''}}" required autocomplete="name" autofocus>
+    
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-            </div>
+            </section>
+
+
+
 
             <div class="form-group row">
                 <label for="slogan" class="col-md-4 col-form-label text-md-right">{{ __('slogan') }}</label>
@@ -40,19 +60,6 @@
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label for="arquivo" class="col-md-4 col-form-label text-md-right">{{ __('arquivo') }}</label>
-
-                <div class="col-md-6">
-                    <input id="arquivo" type="file" name="imagem" class="form-control @error('arquivo') is-invalid @enderror"  name="arquivo" value="{{$empresa->arquivo ?? ''}}">
-
-                    @error('arquivo')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
 
             <div class="form-group row">
                 <label for="descricao" class="col-md-4 col-form-label text-md-right">{{ __('descricao') }}</label>

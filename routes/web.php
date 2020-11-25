@@ -55,4 +55,4 @@ Route::delete('/noticias/categorias/{categoria}', [PostCategoriaController::clas
 
 Auth::routes(['register' => false]);
 
-Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
