@@ -14,7 +14,8 @@ class EmpresaCategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = EmpresaCategoria::all();
+        return view('listagem.empresa_categorias', compact('categorias'));
     }
 
     /**
@@ -24,7 +25,7 @@ class EmpresaCategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrar.empresa_categoria');
     }
 
     /**
@@ -35,7 +36,17 @@ class EmpresaCategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'descricao' => ['required', 'string', 'max:255'],
+        ]);
+        
+        $data = $request->all();
+
+        $categoria = new EmpresaCategoria();
+        $categoria->descricao = $data['descricao'];
+        $categoria->save();
+        
+        return redirect()->route('empresa_categorias.index');
     }
 
     /**
@@ -55,21 +66,35 @@ class EmpresaCategoriaController extends Controller
      * @param  \App\Models\EmpresaCategoria  $empresaCategoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(EmpresaCategoria $empresaCategoria)
+    public function edit($id)
     {
-        //
+        $categoria = new EmpresaCategoria();
+        $categoria = $categoria->find($id);
+
+        return view('cadastrar.empresa_categoria', compact('categoria'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EmpresaCategoria  $empresaCategoria
+     * @param  \App\Models\EmpresaCategoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmpresaCategoria $empresaCategoria)
+    public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'descricao' => ['required', 'string', 'max:255'],
+        ]);
+        
+        $data = $request->all();
+        $categoria = new EmpresaCategoria();
+        
+        $categoria->where(['id'=>$id])->update([
+            'descricao' => $data['descricao']
+        ]);
+
+        return redirect()->route('empresa_categorias.index');
     }
 
     /**
@@ -78,8 +103,11 @@ class EmpresaCategoriaController extends Controller
      * @param  \App\Models\EmpresaCategoria  $empresaCategoria
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EmpresaCategoria $empresaCategoria)
+    public function destroy($id)
     {
-        //
+        $categoria = new EmpresaCategoria();
+        $categoria = $categoria->destroy($id);
+
+        return($categoria)?"Sim":"Não";
     }
 }

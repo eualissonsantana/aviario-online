@@ -14,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return view('listagem.posts', compact('posts'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrar.post');
     }
 
     /**
@@ -35,7 +36,35 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $post = new Post();
+        $post->titulo = $data['titulo'];
+        $post->previa = $data['previa'];
+        $post->conteudo = $data['conteudo'];
+        $post->user_id = $data['usuario_id'];
+        $post->categoria_id = $data['categoria_id'];
+        
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            
+            if(!Post::all()->isEmpty()){
+                $id = Post::latest()->first()->id + 1;
+            }else {
+                $id = 0;
+            }
+
+            $path = 'imagens/chamadas';
+            $extension = $request->imagem->extension();
+            $nameFile = "{$id}.{$extension}";
+            $post->imagem = $nameFile;
+
+            $upload = $request->imagem->storeAs($path, $nameFile);
+    
+        }  
+        
+        $post->save();
+
+        return redirect()->route('posts',  ['posts' => Post::all()]);
     }
 
     /**
@@ -55,9 +84,12 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        //
+        $post = new Post();
+        $post = $post->find($id);
+
+        return view('cadastrar.post', compact('post'));
     }
 
     /**
@@ -67,9 +99,35 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $post = new Post();
+
+        $post->where(['id'=>$id])->update([
+            'titulo' => $data['titulo'],
+            'previa' => $data['previa'],
+            'conteudo' => $data['conteudo'],
+            'user_id' => $data['usuario_id'],
+            'categoria_id' => $data['categoria_id'],
+        ]);
+        
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            
+            $path = 'imagens/chamadas';
+            $extension = $request->imagem->extension();
+            $nameFile = "{$id}.{$extension}";
+            $post->where(['id'=>$id])->update([
+                'imagem' => $nameFile
+            ]);
+
+            $upload = $request->imagem->storeAs($path, $nameFile);
+    
+        }  
+        
+
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -78,8 +136,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = new Post();
+        $post = $post->destroy($id);
+
+        return($post)?"Sim":"Não";
     }
 }

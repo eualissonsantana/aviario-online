@@ -1,0 +1,168 @@
+h1 {
+    font-size: 2.7rem;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+/********* BOTÕES *********/
+
+.btn:hover {
+    color: #d1d1d1;
+    box-shadow: #FFD800;
+}
+
+.btn-cadastrar {
+    margin-top: 10px;
+    width: 200px;
+    background-color: #0084B8;
+    color: #fff;
+}
+
+.btn-editar, .btn-excluir {
+    width: 80px;
+    color: #fff;
+}
+
+.btn-editar {
+    background-color: #80AB99;
+}
+
+.btn-excluir {
+    background-color: #ff6670;
+}
+
+/********* APP *********/
+
+.content {
+    display: flex;
+}
+
+#app {
+    font-family: 'Poppins', sans-serif;
+    color: #3D4053 !important;
+    align-items: center;
+}
+
+#app .nav-acesso {
+    padding: 0;
+    background-color: #0084B8;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#app .nav-acesso a {
+    color: #fff;
+}
+
+#app .nav-acesso h6 {
+    font-size: 12px;
+    margin:0;
+    font-weight: thin;
+}
+
+/********* LOGIN *********/
+
+.login-page .login-img {
+    margin: auto;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 0.6rem;
+}
+
+label {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: #757575;
+}
+
+.form-control:focus{
+    box-shadow: none !important;
+    border: 1px solid #00a0e0;
+}
+
+.login-page .btn-entrar, .btn-salvar {
+    background-color: #0084B8;
+    color: #fff;
+    width: 100%;
+}
+
+/********* HOME *********/
+
+.home-page .nav-row, .gerenciamento{
+    padding: 0 80px !important;
+}
+
+.home-page .nav-admin {
+    padding: 0;
+}
+
+.items {
+    margin-top: 60px;
+}
+
+.home-page a {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #0084B8 !important;
+    margin: 0 0 0 10px;
+}
+
+.hr-menu {
+    margin: 0;
+    border-color:  #0084B8;
+}
+
+.faixa {
+    background-color: #FFD800;
+    min-height: 30px;
+}
+
+.content-child {
+    padding: 0 80px;
+    width: 100vw;
+}
+
+/********* USUÁRIOS *********/
+
+.content-child .lista-usuarios {
+    padding: 20px 0;
+}
+
+.usuarios .titulo {
+    background-color: #0084B8 !important;
+    color: #fff;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.usuarios th {
+    height: 10px !important;
+}
+
+.usuarios th:nth-child(1){
+    width: 20%;
+}
+
+.usuarios th:nth-child(2) {
+    width: 70%;
+}
+

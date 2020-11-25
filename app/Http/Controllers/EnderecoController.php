@@ -14,7 +14,7 @@ class EnderecoController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +24,7 @@ class EnderecoController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +35,23 @@ class EnderecoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $endereco = new Endereco();
+        $endereco->bairro = $data['bairro'];
+        $endereco->rua = $data['rua'];
+        $endereco->cep = $data['cep'];
+        $endereco->numero = $data['numero'];
+        $endereco->cidade = $data['cidade'];
+        $endereco->estado = $data['estado'];
+
+        if(array_key_exists("ehComercial", $data)){
+            $endereco->ehComercial = $data['ehComercial'];
+        }
+
+        $endereco->save();
+        
+        return $endereco->id;
     }
 
     /**
