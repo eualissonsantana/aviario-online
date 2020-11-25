@@ -1,75 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v9.0" nonce="o8PXlyab"></script>
-    <div class="container">
+    <section class="content-child">
 
-    
-        <h1>@if(isset($user))Editar @else Cadastrar @endif</h1>
+        <h1>
+            @if(isset($user))
+                Editar usuário 
+            @else 
+                Cadastrar novo usuário
+            @endif
+        </h1>
+        <section class="py-4 row justify-content-center">
+            <article class="col-md-4">
+                <section class="card">
+                    <article class="card-body">
+                        @if(isset($user))
+                            <form action = "{{ url("users/$user->id")}}" method = "POST">
+                                @method('PUT')
+                        @else
+                            <form action = "{{ route('users.create') }}" method = "POST">
+                        @endif
+                            @csrf
+                            <div class="form-group">
+                                <label for="name" class="col-form-label">{{ __('Nome') }}</label>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nome e sobrenome" name="name" value="{{$user->name ?? ''}}" required autocomplete="name" autofocus>
 
-        @if(isset($user))
-            <form action = "{{ url("users/$user->id")}}" method = "POST">
-                @method('PUT')
-        @else
-            <form action = "{{ route('users.create') }}" method = "POST">
-        @endif
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            
+                            </div>
 
-            @csrf
-            <div class="form-group row">
-                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <div class="form-group">
+                                <label for="username" class="col-form-label ">{{ __('Username') }}</label>
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{$user->username ?? ''}}" required autocomplete="username">
 
-                <div class="col-md-6">
-                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nome e sobrenome" name="name" value="{{$user->name ?? ''}}" required autocomplete="name" autofocus>
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-                    @error('name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-form-label">{{ __('Senha') }}</label>                    
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-            <div class="form-group row">
-                <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                               
+                            </div>
 
-                <div class="col-md-6">
-                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{$user->username ?? ''}}" required autocomplete="username">
+                            <div class="form-group">
+                                <label for="password-confirm" class="col-form-label ">{{ __('Confirmação de senha') }}</label>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                
+                            </div>
 
-                    @error('username')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                <div class="col-md-6">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                    @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                <div class="col-md-6">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+                            <button type="submit" class="btn btn-salvar">Salvar</button>
+                        </form>
+                    </article>
+                </section>
+            </article>
+        </section>
     </div>
-    @if(isset($user))
-<div class="fb-comments" data-href="https://localhost:8000/users/{{$user->id}}/edit" data-numposts="10" data-width="100%"></div>
-    @endif
 @endsection
