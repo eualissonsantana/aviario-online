@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use App\Models\Endereco;
+use App\Models\EmpresaCategoria;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
@@ -26,7 +27,9 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        return view('cadastrar.empresa');
+        $categorias = EmpresaCategoria::all();
+
+        return view('cadastrar.empresa', compact('categorias'));
     }
 
     /**
@@ -141,9 +144,10 @@ class EmpresaController extends Controller
     public function edit($id)
     {
         $empresa = new Empresa();
+        $categorias = EmpresaCategoria::all();
         $empresa = $empresa->find($id);
-
-        return view('cadastrar.empresa', compact('empresa'));
+        
+        return view('cadastrar.empresa', compact('empresa', 'categorias'));
     }
 
     /**

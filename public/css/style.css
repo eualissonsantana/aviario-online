@@ -59,6 +59,11 @@ p {
     background-color: #ff6670;
 }
 
+.btn-salvar {
+    width: 300px;
+    height: 50px;
+}
+
 /********* APP *********/
 
 .content {
@@ -104,8 +109,8 @@ label {
     margin: 0;
     padding: 0;
     font-size: 0.8rem;
-    font-weight: 300;
-    color: #757575;
+    font-weight: 500;
+    color: #333;
 }
 
 .form-control:focus{
@@ -113,9 +118,12 @@ label {
     border: 1px solid #0084B8;
 }
 
-.login-page .btn-entrar, .btn-salvar {
+.btn-entrar, .btn-salvar {
     background-color: #0084B8;
     color: #fff;
+}
+
+.login-page .btn-entrar, .login-page .btn-salvar {
     width: 100%;
 }
 
@@ -201,4 +209,8 @@ ul {
 
 .dados-comercio .telefone h5 {
     font-weight: 600;
+}
+
+.arquivo input{
+    padding:  20px !important;
 }
