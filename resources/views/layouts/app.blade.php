@@ -1,3 +1,7 @@
+<?php
+use Carbon\Carbon;
+?>
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -30,7 +34,7 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="mr-auto">
-                        <h6>Terça-feira, 24 de Novembro de 2020</h6>
+                    <h6>{{now()->toDateTimeString()}} </h6>
                     </div>
                     
                     <!-- Right Side Of Navbar -->

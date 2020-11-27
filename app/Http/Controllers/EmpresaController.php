@@ -17,7 +17,9 @@ class EmpresaController extends Controller
     public function index()
     {
         $empresas = Empresa::all();
-        return view('listagem.empresas', compact('empresas'));
+        $categorias = EmpresaCategoria::all();
+
+        return view('listagem.empresas', compact('empresas', 'categorias'));
     }
 
     /**
@@ -281,4 +283,20 @@ class EmpresaController extends Controller
 
         return($empresa)?"Sim":"Não";
     }
+
+    public function search(Request $request)
+    {
+        $categorias = EmpresaCategoria::all();
+        $emp = new Empresa();
+        
+        if($request->option == 'nome') {
+            $empresas = $emp->searchName($request->filter);
+        }else {
+            $empresas = $emp->searchCategory($request->filter);
+        }
+        
+        return view('listagem.empresas', compact('empresas', 'categorias'));
+        
+    }
+    
 }

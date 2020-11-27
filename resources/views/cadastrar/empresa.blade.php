@@ -53,11 +53,15 @@
                             </div>
                             <select class="custom-select" id="categoria_id" name="categoria_id">
                                 @foreach($categorias as $cat) 
-                                    @if($cat->id != $empresa->categoria->id)
-                                        <option value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>
+                                    @if(isset($empresa))
+                                        @if($cat->id != $empresa->categoria->id)
+                                            <option value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>
+                                        @else
+                                            <option selected value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>
+                                        @endif
                                     @else
-                                        <option selected value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>
-                                    @endif   
+                                        <option value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>   
+                                    @endif
                                 @endforeach
                             </select>
 
@@ -73,7 +77,7 @@
                             <span class="input-group-text">Imagem</span>
                             </div>
                             <div class="custom-file arquivo">
-                                <input id="arquivo" type="file" name="imagem" class="custom-file-input" @error('arquivo') is-invalid @enderror  name="arquivo" value="{{$empresa->arquivo ?? ''}}">
+                                <input id="arquivo" type="file" name="imagem" class="custom-file-input" @error('arquivo') is-invalid @enderror  name="arquivo" value="{{$empresa->imagem ?? ''}}">
                                 <label class="custom-file-label" for="inputGroupFile01">Carregar imagem</label>
                                 
                                 @error('arquivo')
@@ -102,7 +106,7 @@
                         <div class="form-group col-4 col-form-label text-md-left">
                             <label for="telefone" class="col-form-label">Telefone/Celular *</label>
                             <input id="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" value="{{$empresa->telefone ?? ''}}" required autocomplete="telefone" autofocus>
-                            <input type="checkbox"  class="mt-2" name="ehWhats" value="1" @if(isset($empresa) && $empresa->ehWhats) checked @endif>
+                            <input type="checkbox" class="mt-2" name="ehWhats" value="1" @if(isset($empresa) && $empresa->ehWhats) checked @endif>
                             <small>Marque aqui se o número for Whats App</small>
                             
                             @error('telefone')

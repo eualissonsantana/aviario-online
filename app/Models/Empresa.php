@@ -18,4 +18,26 @@ class Empresa extends Model
     {
         return $this->belongsTo('App\Models\EmpresaCategoria');
     }
+
+    public function searchName($filter = null) 
+    {
+        $results = $this->where(function ($query) use($filter) {
+            if ($filter) {
+                $query->where('nome', 'LIKE', "%{$filter}%");
+            }
+        })->paginate();
+
+        return $results;
+    }
+
+    public function searchCategory($filter = null) 
+    {
+        $results = $this->where(function ($query) use($filter) {
+            if ($filter) {
+                $query->where('categoria_id', 'LIKE', "%{$filter}%");
+            }
+        })->paginate();
+
+        return $results;
+    }
 }

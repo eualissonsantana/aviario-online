@@ -2,8 +2,41 @@
 
 @section('content')
     
-    <div class="content-child">
-        <h2>Comércios</h2>
+    <section class="content-child">
+        <article class="row px-3 justify-content-between ">
+            <h2>Comércios</h2>
+            <a href="{{route("empresas.create")}}">
+                <button class="btn btn-cadastrar">Novo Comércio</button>
+            </a>
+        </article>
+        <hr>
+
+        <article class="row px-3 mb-3 justify-content-between">
+            <div>
+                <div class="input-group">
+                    <form class="form-inline my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                        @csrf
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="button submit">Filtrar por categoria</button>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect03" name="filter">
+                            @foreach($categorias as $cat)
+                                <option value="{{$cat->id}}">{{$cat->descricao}}</option>
+                            @endforeach
+                        </select>
+                        <input type="text" hidden="true" name="option" value="categoria">
+                    </form>
+                </div>
+            </div>
+            <div>
+                <form class="form-inline my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                    @csrf
+                    <input type="text" hidden="true" name="option" value="nome">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" name="filter" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+            </div>
+        </article>
         <hr>
         @csrf
         @foreach ($empresas as $emp)
@@ -39,5 +72,5 @@
             </section>
             <hr>
         @endforeach
-    </div>
+    </section>
 @endsection

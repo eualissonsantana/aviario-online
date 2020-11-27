@@ -25,6 +25,9 @@ Route::post('/empresas/cadastro', [EmpresaController::class, 'store'])->name('em
 Route::get('/empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit')->middleware('auth');
 Route::put('/empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update')->middleware('auth');
 Route::delete('/empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy')->middleware('auth');
+Route::any('/empresas/buscar', [EmpresaController::class, 'search'])->name('empresas.search');
+
+
 
 // Categorias de empresa
 Route::get('/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresa_categorias.index')->middleware('auth');

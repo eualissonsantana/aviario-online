@@ -4,7 +4,7 @@
     
     <div class="content-child usuarios">
         <div class="row px-3 justify-content-between ">
-            <h1>Usuários</h1>
+            <h2>Usuários</h2>
             <a href="{{route("users.create")}}">
                 <button class="btn btn-cadastrar">Novo Usuário</button>
             </a>
