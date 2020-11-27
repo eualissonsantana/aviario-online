@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <textarea name="conteudo" value="{{$post->conteudo ?? ''}}" id="myTextarea"></textarea>
+            <textarea name="conteudo" { id="myTextarea">{{$post->conteudo ?? ''}}</textarea>
 
             <div class="form-group row">
                 <label for="arquivo" class="col-md-4 col-form-label text-md-right">{{ __('arquivo') }}</label>

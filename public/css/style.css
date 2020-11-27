@@ -225,11 +225,17 @@ ul {
     padding:  20px !important;
 }
 
-.painel-empresas .busca-nome input {
+.busca-nome input {
     width: 350px !important;
 }
 
 .painel-empresas .busca-categoria select{
     border-bottom-left-radius: 0 !important;
     border-top-left-radius: 0 !important;
+}
+
+/********* NOTÍCIAS *********/
+
+.painel-noticias .botoes {
+    margin-left: 2px;
 }

@@ -44,6 +44,7 @@ Route::post('/noticias/cadastro', [PostController::class, 'store'])->name('posts
 Route::get('/noticias/{noticia}/edit', [PostController::class, 'edit'])->name('posts.edit')->middleware('auth');
 Route::put('/noticias/{noticia}', [PostController::class, 'update'])->name('posts.update')->middleware('auth');
 Route::delete('/noticias/{noticia}', [PostController::class, 'destroy'])->name('posts.destroy')->middleware('auth');
+Route::any('/noticias/buscar', [PostController::class, 'search'])->name('posts.search');
 
 
 Route::get('/noticias/categorias', [PostCategoriaController::class, 'index'])->name('post_categorias.index');

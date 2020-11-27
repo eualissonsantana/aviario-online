@@ -3,10 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostCategoria;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    private $post;
+    private $posts;
+    private $postCategoria;
+    private $postCategorias;
+
+    public function __construct()
+    {
+        $this->post = new Post();
+        $this->posts = Post::all();
+        $this->postCategoria = new PostCategoria();
+        $this->postCategorias = PostCategoria::all();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +29,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('listagem.posts', compact('posts'));
+        $posts = $this->posts;
+        $categorias = $this->postCategorias;
+
+        return view('listagem.posts', compact('posts', 'categorias'));
     }
 
     /**
@@ -143,4 +160,19 @@ class PostController extends Controller
 
         return($post)?"Sim":"Não";
     }
+
+    public function search(Request $request)
+    {
+        $categorias = $this->postCategorias;
+        
+        if($request->option == 'titulo') {
+            $posts = $this->post->searchTitulo($request->filter);
+        }else {
+            $posts = $this->post->searchCategory($request->filter);
+        }
+        
+        return view('listagem.posts', compact('posts', 'categorias'));
+        
+    }
+
 }
