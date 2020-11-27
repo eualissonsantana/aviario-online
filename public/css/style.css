@@ -44,19 +44,17 @@ p {
 }
 
 .btn-cadastrar {
-    margin-top: 10px;
-    width: 200px;
-    background-color: #0084B8;
-    color: #fff;
+    background-color: #2EA44F;
 }
 
-.btn-editar, .btn-excluir {
+.btn {
     width: 70px;
     color: #fff;
+    font-weight: 700;
 }
 
 .btn-editar {
-    background-color: #80AB99;
+    background-color: #0297e5;
 }
 
 .btn-excluir {
@@ -66,6 +64,13 @@ p {
 .btn-salvar {
     width: 300px;
     height: 50px;
+}
+
+.btn-busca-categoria {
+    background-color: #8f8f8f;
+    width: auto;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
 }
 
 /********* APP *********/
@@ -218,4 +223,13 @@ ul {
 
 .arquivo input{
     padding:  20px !important;
+}
+
+.painel-empresas .busca-nome input {
+    width: 350px !important;
+}
+
+.painel-empresas .busca-categoria select{
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
 }
