@@ -43,17 +43,29 @@
         
         @csrf
         @foreach ($posts as $post)
-            <section class="row">
-                <article class="col-10">
-                    <h3 class="">{{$post->titulo}} </h3>
-                    <h5>{{$post->previa}} </h5>
-                    <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}" style="max-width: 400px " /> 
+            <section class="row ">
+                <article class="col-3 imagem-noticia">
+                    <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                </article>
+                <article class="col-7 row align-content-between flex-wrap">
+                    
+                    <div class="col-12">
+                        <h6> {{$post->categoria->descricao}} </h6>
+                        <h4 class="">{{$post->titulo}} </h4>
+
+                    </div>
+                    <div class="col-12 previa">
+                        <p>{{$post->previa}}</p>
+                    </div>
+                    <div class="col-12">
+                        <p> {{$post->created_at}} </p>
+                    </div>
                 </article>
                 <article class="botoes col-2 row justify-content-end">
-                    <a href="{{url("noticias/$post->id/edit")}}">
+                    <a href="{{url("painel/noticias/$post->id/edit")}}">
                         <button class="btn btn-primary">Editar</button>
                     </a>
-                    <a href="{{url("noticias/$post->id")}}" class="ml-2 js-del-post">
+                    <a href="{{url("painel/noticias/$post->id")}}" class="ml-2 js-del-post">
                         <button class="btn btn-danger">Excluir</button>
                     </a>
                 </article>

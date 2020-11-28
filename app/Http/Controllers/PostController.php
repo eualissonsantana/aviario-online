@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\PostCategoria;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,13 +14,15 @@ class PostController extends Controller
     private $posts;
     private $postCategoria;
     private $postCategorias;
+    private $users;
 
     public function __construct()
     {
         $this->post = new Post();
-        $this->posts = Post::all();
         $this->postCategoria = new PostCategoria();
+        $this->posts = Post::all();
         $this->postCategorias = PostCategoria::all();
+        $this->users = User::all();
     }
 
     /**
@@ -31,6 +34,7 @@ class PostController extends Controller
     {
         $posts = $this->posts;
         $categorias = $this->postCategorias;
+        
 
         return view('listagem.posts', compact('posts', 'categorias'));
     }
@@ -42,7 +46,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('cadastrar.post');
+        $categorias = $this->postCategorias;
+        $usuarios = $this->users;
+
+        return view('cadastrar.post', compact('categorias', 'usuarios'));
     }
 
     /**
@@ -81,7 +88,7 @@ class PostController extends Controller
         
         $post->save();
 
-        return redirect()->route('posts',  ['posts' => Post::all()]);
+        return redirect()->route('posts.index',  ['posts' => Post::all()]);
     }
 
     /**
@@ -103,10 +110,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = new Post();
-        $post = $post->find($id);
+        $post = $this->post->find($id);
+        $categorias = $this->postCategorias;
+        $usuarios = $this->users;
 
-        return view('cadastrar.post', compact('post'));
+        return view('cadastrar.post', compact('post', 'categorias', 'usuarios'));
     }
 
     /**

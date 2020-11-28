@@ -14,7 +14,7 @@
                 </h2>
         
                 @if(isset($empresa))
-                    <form action = "{{ url("empresas/$empresa->id")}}" method = "POST" enctype="multipart/form-data">
+                    <form action = "{{ url("painel/empresas/$empresa->id")}}" method = "POST" enctype="multipart/form-data">
                         @method('PUT')
                 @else
                     <form action = "{{ route('empresas.create') }}" method = "POST" enctype="multipart/form-data">
@@ -74,7 +74,7 @@
 
                         <div class="input-group col-md-6">
                             <div class="input-group-prepend">
-                            <span class="input-group-text">Imagem</span>
+                                <span class="input-group-text">Imagem</span>
                             </div>
                             <div class="custom-file arquivo">
                                 <input id="arquivo" type="file" name="imagem" class="custom-file-input" @error('arquivo') is-invalid @enderror  name="arquivo" value="{{$empresa->imagem ?? ''}}">

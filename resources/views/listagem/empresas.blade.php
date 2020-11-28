@@ -67,10 +67,10 @@
                     
                 </article>
                 <article class="col-2 row justify-content-end">
-                    <a href="{{url("empresas/$emp->id/edit")}}">
+                    <a href="{{url("painel/empresas/$emp->id/edit")}}">
                         <button class="btn btn-editar">Editar</button>
                     </a>
-                    <a href="{{url("empresas/$emp->id")}}" class="ml-2 js-del-emp">
+                    <a href="{{url("painel/empresas/$emp->id")}}" class="ml-2 js-del-emp">
                         <button class="btn btn-excluir">Excluir</button>
                     </a>
                 </article>

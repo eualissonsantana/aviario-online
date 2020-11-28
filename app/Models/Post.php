@@ -14,6 +14,11 @@ class Post extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function categoria()
+    {
+        return $this->belongsTo('App\Models\PostCategoria');
+    }
+
     public function searchTitulo($filter = null) 
     {
         $results = $this->where(function ($query) use($filter) {
