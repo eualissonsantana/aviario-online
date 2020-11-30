@@ -28,7 +28,7 @@ class CreateEmpresasTable extends Migration
             $table->boolean('aceitaBoleto')->default(0);
             $table->boolean('aceitaCredito')->default(0);
             $table->boolean('aceitaDebito')->default(0);
-            $table->boolean('aceitaDinheiro')->default(1);
+            $table->boolean('aceitaDinheiro')->default(0);
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('endereco_id');
             $table->foreign('categoria_id')->references('id')->on('empresa_categorias');

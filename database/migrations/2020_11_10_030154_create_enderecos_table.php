@@ -21,7 +21,7 @@ class CreateEnderecosTable extends Migration
             $table->smallInteger('numero')->nullable();
             $table->string('cidade')->default('Feira de Santana');
             $table->string('estado')->default('BA');
-            $table->boolean('ehComercial')->default(true);
+            $table->boolean('ehComercial')->default(false);
             $table->timestamps();
         });
     }
