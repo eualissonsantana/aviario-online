@@ -1,5 +1,0 @@
-@yield('nav-content')
-
-
-
-

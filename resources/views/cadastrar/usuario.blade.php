@@ -15,7 +15,7 @@
                 <section class="card">
                     <article class="card-body">
                         @if(isset($user))
-                            <form action = "{{ url("users/$user->id")}}" method = "POST">
+                            <form action = "{{ url("painel/users/$user->id")}}" method = "POST">
                                 @method('PUT')
                         @else
                             <form action = "{{ route('users.create') }}" method = "POST">

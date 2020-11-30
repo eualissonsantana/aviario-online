@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use App\Models\Endereco;
+use App\Models\EmpresaCategoria;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
@@ -16,7 +17,9 @@ class EmpresaController extends Controller
     public function index()
     {
         $empresas = Empresa::all();
-        return view('listagem.empresas', compact('empresas'));
+        $categorias = EmpresaCategoria::all();
+
+        return view('listagem.empresas', compact('empresas', 'categorias'));
     }
 
     /**
@@ -26,7 +29,9 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        return view('cadastrar.empresa');
+        $categorias = EmpresaCategoria::all();
+
+        return view('cadastrar.empresa', compact('categorias'));
     }
 
     /**
@@ -141,9 +146,10 @@ class EmpresaController extends Controller
     public function edit($id)
     {
         $empresa = new Empresa();
+        $categorias = EmpresaCategoria::all();
         $empresa = $empresa->find($id);
-
-        return view('cadastrar.empresa', compact('empresa'));
+        
+        return view('cadastrar.empresa', compact('empresa', 'categorias'));
     }
 
     /**
@@ -277,4 +283,20 @@ class EmpresaController extends Controller
 
         return($empresa)?"Sim":"Não";
     }
+
+    public function search(Request $request)
+    {
+        $categorias = EmpresaCategoria::all();
+        $emp = new Empresa();
+        
+        if($request->option == 'nome') {
+            $empresas = $emp->searchName($request->filter);
+        }else {
+            $empresas = $emp->searchCategory($request->filter);
+        }
+        
+        return view('listagem.empresas', compact('empresas', 'categorias'));
+        
+    }
+    
 }

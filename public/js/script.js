@@ -107,6 +107,7 @@
             btn[i].addEventListener('click', confirmDelUsers, false);
         }
     } else if(doc.querySelector('.js-del-emp')){
+        console.log("teste")
         let btn = doc.querySelectorAll('.js-del-emp')
 
         for(let i=0; i < btn.length; i++) {

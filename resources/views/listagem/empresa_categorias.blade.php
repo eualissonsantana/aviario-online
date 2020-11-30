@@ -13,10 +13,10 @@
                     <h5><strong>Descrição:</strong>  {{$cat->descricao}} </h5>
                 </div>
                 <div class="col">
-                    <a href="{{url("empresas/categorias/$cat->id/edit")}}">
+                    <a href="{{url("painel/empresas/categorias/$cat->id/edit")}}">
                         <button class="btn btn-primary">Editar</button>
                     </a>
-                    <a href="{{url("empresas/categorias/$cat->id")}}" class="js-del-emp-cat">
+                    <a href="{{url("painel/empresas/categorias/$cat->id")}}" class="js-del-emp-cat">
                         <button class="btn btn-danger">Excluir</button>
                     </a>
                 </div>

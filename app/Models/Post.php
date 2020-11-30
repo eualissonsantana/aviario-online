@@ -13,6 +13,33 @@ class Post extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function categoria()
+    {
+        return $this->belongsTo('App\Models\PostCategoria');
+    }
+
+    public function searchTitulo($filter = null) 
+    {
+        $results = $this->where(function ($query) use($filter) {
+            if ($filter) {
+                $query->where('titulo', 'LIKE', "%{$filter}%");
+            }
+        })->paginate();
+
+        return $results;
+    }
+
+    public function searchCategory($filter = null) 
+    {
+        $results = $this->where(function ($query) use($filter) {
+            if ($filter) {
+                $query->where('categoria_id', 'LIKE', "%{$filter}%");
+            }
+        })->paginate();
+
+        return $results;
+    }
 }
 
 

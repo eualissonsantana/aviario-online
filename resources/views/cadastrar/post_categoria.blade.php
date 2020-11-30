@@ -5,7 +5,7 @@
         <h1>@if(isset($categoria))Editar @else Cadastrar @endif</h1>
 
         @if(isset($categoria))
-            <form action = "{{ url("noticias/categorias/$categoria->id")}}" method = "POST">
+            <form action = "{{ url("painel/noticias/categorias/$categoria->id")}}" method = "POST">
                 @method('PUT')
         @else
             <form action = "{{ route('post_categorias.create') }}" method = "POST">

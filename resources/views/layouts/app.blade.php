@@ -1,3 +1,7 @@
+<?php
+use Carbon\Carbon;
+?>
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -13,12 +17,11 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src='https://cdn.tiny.cloud/1/5f1scw7zl01d1jwmygfksnkg8tlk7dft9qvie9wkeopsbhdt/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
     <script type="text/javascript" src="{{url("js/tinymce.js")}}"></script>
-    <script src="{{url("js/script.js")}}"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -31,7 +34,7 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="mr-auto">
-                        <h6>Terça-feira, 24 de Novembro de 2020</h6>
+                    <h6>{{now()->toDateTimeString()}} </h6>
                     </div>
                     
                     <!-- Right Side Of Navbar -->
@@ -102,5 +105,6 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{url("js/script.js")}}"></script>
 </body>
 </html>
