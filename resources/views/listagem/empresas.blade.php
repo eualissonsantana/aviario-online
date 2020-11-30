@@ -51,7 +51,7 @@
                 </article>
                 <article class="col-8 dados-comercio">
                     <article class="mb-3">
-                        <small><strong>{{$emp->categoria->descricao}}</strong></small>
+                        <h6>{{$emp->categoria->descricao}}</h6>
                         <h3><strong>{{$emp->nome}}</strong></h3>
                         <h5>{{$emp->slogan}} </h5>
                     </article>
