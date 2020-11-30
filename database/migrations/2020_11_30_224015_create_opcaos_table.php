@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpresaCategoriasTable extends Migration
+class CreateOpcaosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateEmpresaCategoriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('empresa_categorias', function (Blueprint $table) {
+        Schema::create('opcaos', function (Blueprint $table) {
             $table->id();
             $table->string('descricao');
-            $table->unsignedBigInteger('ramo_id');
-            $table->foreign('ramo_id')->references('id')->on('ramos');
+            $table->bigInteger('qtd_votos')->default(0);
+            $table->unsignedBigInteger('enquete_id');
+            $table->foreign('enquete_id')->references('id')->on('enquetes');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateEmpresaCategoriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empresa_categorias');
+        Schema::dropIfExists('opcaos');
     }
 }
