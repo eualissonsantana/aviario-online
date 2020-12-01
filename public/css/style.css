@@ -80,8 +80,8 @@ table {
 }
 
 .btn-salvar {
-    width: 300px;
-    height: 50px;
+    width: 200px;
+    height: 40px;
 }
 
 .btn-busca-categoria {
@@ -189,7 +189,7 @@ label {
 }
 
 .content-child {
-    padding: 0 80px;
+    padding: 0 70px;
     width: 100vw;
     background-color: #fff;
 }

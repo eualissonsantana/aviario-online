@@ -13,4 +13,9 @@ class EmpresaCategoria extends Model
     {
         return $this->hasMany('App\Models\Empresa');
     }
+
+    public function ramo()
+    {
+        return $this->belongsTo('App\Models\Ramo');
+    }
 }

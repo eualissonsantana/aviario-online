@@ -43,8 +43,8 @@
         
         @csrf
         @foreach ($posts as $post)
-            <section class="row ">
-                <article class="col-3 imagem-noticia">
+            <section class="row justify-content-between pr-3">
+                <article class="col-2 imagem-noticia">
                     <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}"/> 
                 </article>
                 <article class="col-7 row align-content-between flex-wrap">

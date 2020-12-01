@@ -7,7 +7,7 @@
                 <h2>Comércios</h2>
             </div>
             
-            <section class="row col-8 justify-content-end mt-2">
+            <section class="row col-10 justify-content-end mt-2">
                 <div class="mr-2 busca-categoria">
                     <div class="input-group">
                         <form class="form-inline my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">

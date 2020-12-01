@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Ramo extends Model
 {
     use HasFactory;
+
+    public function categoria()
+    {
+        return $this->hasMany('App\Models\EmpresaCategoria');
+    }
 }

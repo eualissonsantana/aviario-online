@@ -50,7 +50,7 @@ Route::any('/painel/noticias/buscar', [PostController::class, 'search'])->name('
 Route::get('/painel/noticias/categorias', [PostCategoriaController::class, 'index'])->name('post_categorias.index');
 Route::get('/painel/noticias/categorias/cadastro', [PostCategoriaController::class, 'create'])->name('post_categorias.create')->middleware('auth');
 Route::post('/painel/noticias/categorias/cadastro', [PostCategoriaController::class, 'store'])->name('post_categorias.store')->middleware('auth');
-Route::get('/painel/noticas/categorias/{categoria}/edit', [PostCategoriaController::class, 'edit'])->name('post.edit')->middleware('auth');
+Route::get('/painel/noticias/categorias/{categoria}/edit', [PostCategoriaController::class, 'edit'])->name('post_categorias.edit')->middleware('auth');
 Route::put('/painel/noticias/categorias/{categoria}', [PostCategoriaController::class, 'update'])->name('post_categorias.update')->middleware('auth');
 Route::delete('/painel/noticias/categorias/{categoria}', [PostCategoriaController::class, 'destroy'])->name('post_categorias.destroy')->middleware('auth');
 
