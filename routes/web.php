@@ -27,8 +27,6 @@ Route::put('/painel/empresas/{empresa}', [EmpresaController::class, 'update'])->
 Route::delete('/painel/empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy')->middleware('auth');
 Route::any('/painel/empresas/buscar', [EmpresaController::class, 'search'])->name('empresas.search');
 
-
-
 // Categorias de empresa
 Route::get('/painel/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresa_categorias.index')->middleware('auth');
 Route::get('/painel/empresas/categorias/cadastro', [EmpresaCategoriaController::class, 'create'])->name('empresa_categorias.create')->middleware('auth');
@@ -54,6 +52,7 @@ Route::get('/painel/noticias/categorias/{categoria}/edit', [PostCategoriaControl
 Route::put('/painel/noticias/categorias/{categoria}', [PostCategoriaController::class, 'update'])->name('post_categorias.update')->middleware('auth');
 Route::delete('/painel/noticias/categorias/{categoria}', [PostCategoriaController::class, 'destroy'])->name('post_categorias.destroy')->middleware('auth');
 
+Route::any('/painel/empresas/categorias/buscar-por-ramo', [EmpresaCategoriaController::class, 'search'])->name('ramos.search');
 
 
 

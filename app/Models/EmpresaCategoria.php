@@ -18,4 +18,15 @@ class EmpresaCategoria extends Model
     {
         return $this->belongsTo('App\Models\Ramo');
     }
+
+    public function search($filter = null) 
+    {
+        $results = $this->where(function ($query) use($filter) {
+            if ($filter) {
+                $query->where("ramo_id", "=" ,"$filter");
+            }
+        })->paginate();
+
+        return $results;
+    }
 }

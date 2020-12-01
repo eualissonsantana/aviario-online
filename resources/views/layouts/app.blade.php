@@ -89,8 +89,22 @@ use Carbon\Carbon;
                         <div class="collapse navbar-collapse justify-content-end " id="navbarNavAltMarkup">
                         <div class="navbar-nav justify-content-end ">
                             <a class="nav-item nav-link active" href="{{route('users.index')}}" >Usuários <span class="sr-only">(current)</span></a>
-                            <a class="nav-item nav-link" href="{{route('posts.index')}}">Notícias</a>
-                            <a class="nav-item nav-link" href="{{route('empresas.index')}}">Guia Comercial</a>
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{{route('posts.index')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Notícias
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('post_categorias.index')}}">Categorias</a>
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="{{route('empresas.index')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Guia Comercial
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route('empresa_categorias.index')}}">Categorias</a>
+                                </div>
+                            </div>
                             <a class="nav-item nav-link" href="{{route('users.index')}}">Banners</a>
                             <a class="nav-item nav-link" href="{{route('users.index')}}">Enquetes</a>
                         </div>

@@ -10,17 +10,16 @@
             <section class="row col-6 justify-content-end mt-2">
                 <div class="mr-2 busca-categoria">
                     <div class="input-group">
-                        <form class="form-inline my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                        <form class="form-inline my-2 my-lg-0" action="{{route('ramos.search')}}" method="POST">
                             @csrf
                             <div class="input-group-prepend">
                                 <button class="btn btn-busca-categoria" type="button submit">O</button>
                             </div>
                             <select class="custom-select" id="inputGroupSelect03" name="filter">
-                                @foreach($categorias as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->descricao}}</option>
+                                @foreach($ramos as $ramo)
+                                    <option value="{{$ramo->id}}">{{$ramo->descricao}}</option>
                                 @endforeach
                             </select>
-                            <input type="text" hidden="true" name="option" value="categoria">
                         </form>
                     </div>
                 </div>
