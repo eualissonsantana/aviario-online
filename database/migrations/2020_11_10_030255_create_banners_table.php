@@ -15,6 +15,11 @@ class CreateBannersTable extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo');
+            $table->string('imagem');
+            $table->enum('posicao', ['topo', 'lado']);
+            $table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

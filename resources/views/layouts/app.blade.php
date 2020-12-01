@@ -1,3 +1,7 @@
+<?php
+use Carbon\Carbon;
+?>
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -13,12 +17,11 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src='https://cdn.tiny.cloud/1/5f1scw7zl01d1jwmygfksnkg8tlk7dft9qvie9wkeopsbhdt/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
     <script type="text/javascript" src="{{url("js/tinymce.js")}}"></script>
-    <script src="{{url("js/script.js")}}"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
@@ -31,7 +34,7 @@
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="mr-auto">
-                        <h6>Terça-feira, 24 de Novembro de 2020</h6>
+                    <h6>{{now()->toDateTimeString()}} </h6>
                     </div>
                     
                     <!-- Right Side Of Navbar -->
@@ -41,12 +44,6 @@
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Acesso restrito') }}</a>
-                                </li>
-                            @endif
-                            
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -72,35 +69,61 @@
                 </div>
             </div>
         </nav>
-
-        <section class="pt-4 container-fluid home-page">
-            <article class="nav-row row justify-content-between">
-                <div class="col-3">
-                    <img src="{{ url('img/aviario-online-logo.png') }}" alt="">
-                </div>
-                <div class="items col-9 ">
-                    <nav class="navbar nav-admin navbar-expand-lg navbar-light bg-light  ">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-end " id="navbarNavAltMarkup">
-                        <div class="navbar-nav justify-content-end ">
-                            <a class="nav-item nav-link active" href="{{route('users.index')}}" >Usuários <span class="sr-only">(current)</span></a>
-                            <a class="nav-item nav-link" href="{{route('posts.index')}}">Notícias</a>
-                            <a class="nav-item nav-link" href="{{route('empresas.index')}}">Guia Comercial</a>
-                            <a class="nav-item nav-link" href="{{route('users.index')}}">Banners</a>
-                            <a class="nav-item nav-link" href="{{route('users.index')}}">Enquetes</a>
-                        </div>
-                        </div>
-                    </nav>
-                </div>
-            </article>
-        </section>
+        @auth
+            <section class="pt-4 container-fluid home-page">
+                <article class="nav-row row justify-content-between">
+                    <div class="col-3">
+                        <img src="{{ url('img/aviario-online-logo.png') }}" alt="">
+                    </div>
+                    <div class="items col-9 ">
+                        <nav class="navbar nav-admin navbar-expand-lg navbar-light bg-light  ">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-end " id="navbarNavAltMarkup">
+                            <ul class="navbar-nav justify-content-end ">
+                                @if(Auth::user()->ehGerente)
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{{route('users.index')}}" >Usuários <span class="sr-only">(current)</span></a>
+                                    </li>
+                                @endif
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Notícias
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{route('posts.index')}}">Posts</a>
+                                        <a class="dropdown-item" href="{{route('post_categorias.index')}}">Categorias</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Guia Comercial
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{route('empresas.index')}}">Comércios</a>
+                                        <a class="dropdown-item" href="{{route('empresa_categorias.index')}}">Categorias</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('users.index')}}">Banners</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('users.index')}}">Enquetes</a>
+                                </li>
+                            </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </article>
+            </section>
+        @endauth
         <hr class="col-10 m-auto hr-menu">
         
         <main class="content p-4">
             @yield('content')
         </main>
     </div>
+    <script src="{{url("js/script.js")}}"></script>
 </body>
 </html>

@@ -1,90 +1,126 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>@if(isset($post))Editar @else Cadastrar @endif</h1>
+    <div class="content-child painel-nova-noticia">
+        <section class="card">
+            <article class="card-body">
+                <h2>
+                    @if(isset($post))
+                        Editar notícia
+                    @else 
+                        Nova notícia 
+                    @endif
+                </h2>
 
-        @if(isset($post))
-            <form action = "{{ url("noticias/$post->id")}}" method = "POST" enctype="multipart/form-data">
-                @method('PUT')
-        @else
-            <form action = "{{ route('posts.store') }}" method = "POST" enctype="multipart/form-data">
-        @endif
+                @if(isset($post))
+                    <form action = "{{ url("painel/noticias/$post->id")}}" method = "POST" enctype="multipart/form-data">
+                        @method('PUT')
+                @else
+                    <form action = "{{ route('posts.store') }}" method = "POST" enctype="multipart/form-data">
+                @endif
 
-            @csrf
-            <div class="form-group row">
-                <label for="titulo" class="col-md-4 col-form-label text-md-right">{{ __('Titulo') }}</label>
+                    @csrf
+                    <div class="form-group col-form-label text-md-left">
+                        <label for="titulo" class="col-form-label">{{ __('Titulo') }}</label>
+                        <input id="titulo" type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" value="{{$post->titulo ?? ''}}" required autocomplete="titulo" autofocus>
 
-                <div class="col-md-6">
-                    <input id="titulo" type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" value="{{$post->titulo ?? ''}}" required autocomplete="titulo" autofocus>
+                        @error('titulo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
-                    @error('titulo')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
+                    <div class="form-group col-form-label text-md-left">
+                        <label for="previa" class="col-form-label">Prévia</label>
+                        <input id="previa" type="text" class="form-control @error('previa') is-invalid @enderror"  name="previa" value="{{$post->previa ?? ''}}" >
 
-            <div class="form-group row">
-                <label for="previa" class="col-md-4 col-form-label text-md-right">{{ __('previa') }}</label>
+                        @error('previa')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                       
+                    </div>
 
-                <div class="col-md-6">
-                    <input id="previa" type="text" class="form-control @error('previa') is-invalid @enderror"  name="previa" value="{{$post->previa ?? ''}}" >
+                    <article class="row">
+                        <div class="form-group col-md-4 text-md-left align-self-end">
+                            <label for="arquivo" class="col-form-label">Imagem</label>
+                            <input id="arquivo" type="file" name="imagem" class="form-control @error('arquivo') is-invalid @enderror"  name="arquivo" value="{{$post->arquivo ?? ''}}">
 
-                    @error('previa')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
+                            @error('arquivo')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <div class="input-group col-md-4 categoria align-self-end">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="categoria_id">Categoria</label>
+                            </div>
+                            
+                            <select class="custom-select" id="categoria_id" name="categoria_id">
+                                @foreach($categorias as $cat) 
+                                    @if(isset($post))
+                                        @if($cat->id != $post->categoria_id)
+                                            <option value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>
+                                        @else
+                                            <option selected value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>
+                                        @endif
+                                    @else
+                                        <option value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>   
+                                    @endif
+                                @endforeach
+                            </select>
 
-            <textarea name="conteudo" value="{{$post->conteudo ?? ''}}" id="myTextarea"></textarea>
+                            @error('categoria_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                           
+                        </div>
+    
+                        <div class="input-group col-md-4 autor align-self-end">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="usuario_id">Autor</label>
+                            </div>
 
-            <div class="form-group row">
-                <label for="arquivo" class="col-md-4 col-form-label text-md-right">{{ __('arquivo') }}</label>
+                            <select class="custom-select" id="usuario_id" name="usuario_id">
+                                @foreach($usuarios as $user) 
+                                    @if(isset($post))
+                                        @if($user->id != $post->usuario_id)
+                                            <option value="{{$user->id}}">{{$user->id}} - {{$user->name}}</option>
+                                        @else
+                                            <option selected value="{{$user->id}}">{{$user->id}} - {{$user->name}}</option>
+                                        @endif
+                                    @else
+                                        <option value="{{$user->id}}">{{$user->id}} - {{$user->name}}</option>   
+                                    @endif
+                                @endforeach
+                            </select>
 
-                <div class="col-md-6">
-                    <input id="arquivo" type="file" name="imagem" class="form-control @error('arquivo') is-invalid @enderror"  name="arquivo" value="{{$post->arquivo ?? ''}}">
+                            @error('usuario_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            
+                        </div>
+                    </article>
 
-                    @error('arquivo')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-             
-            <div class="form-group row">
-                <label for="Categoria" class="col-md-4 col-form-label text-md-right">{{ __('Categoria') }}</label>
+                    <div class="form-group col-form-label text-md-left">
+                        <label for="conteudo" class="col-form-label">Conteúdo</label>
+                        <textarea name="conteudo" { id="myTextarea">{{$post->conteudo ?? ''}}</textarea>
+                    </div>
 
-                <div class="col-md-6">
-                    <input id="categoria" type="text" class="form-control @error('categoria') is-invalid @enderror"  name="categoria_id" value="{{$post->categoria_id ?? ''}}" required autocomplete="categoria" autofocus>
 
-                    @error('categoria')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="usuario_id" class="col-md-4 col-form-label text-md-right">{{ __('Usuário') }}</label>
-
-                <div class="col-md-6">
-                    <input id="usuario_id" type="text" class="form-control @error('usuario_id') is-invalid @enderror"  name="usuario_id" value="{{$post->usuario_id ?? ''}}" required autocomplete="categoria" autofocus>
-
-                    @error('usuario_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+                    <div class="row col-12 justify-content-end">
+                        <button type="submit" class="btn btn-salvar">Salvar</button>
+                    </div>
+                </form>
+            </article>
+        </section>
     </div>
 @endsection

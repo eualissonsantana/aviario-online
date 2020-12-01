@@ -1,32 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h1>@if(isset($categoria))Editar @else Cadastrar @endif</h1>
+    <div class="content-child">
+        <section class="card">
+            <article class="card-body">
+                <h2>
+                    @if(isset($categoria))
+                        Editar categoria
+                    @else 
+                        Cadastrar categoria
+                    @endif
+                </h2>
 
-        @if(isset($categoria))
-            <form action = "{{ url("noticias/categorias/$categoria->id")}}" method = "POST">
-                @method('PUT')
-        @else
-            <form action = "{{ route('post_categorias.create') }}" method = "POST">
-        @endif
+                @if(isset($categoria))
+                    <form action = "{{ url("painel/noticias/categorias/$categoria->id")}}" method = "POST">
+                        @method('PUT')
+                @else
+                    <form action = "{{ route('post_categorias.create') }}" method = "POST">
+                @endif
 
-            @csrf
-            <div class="form-group row">
-                <label for="descricao" class="col-md-4 col-form-label text-md-right">{{ __('Descrição') }}</label>
+                    @csrf
+                    <div class="form-group">
+                        <label for="descricao" class="col-form-label">Descrição</label>
+                        <input id="descricao" type="text" class="form-control @error('descricao') is-invalid @enderror" name="descricao" value="{{$categoria->descricao ?? ''}}" required autocomplete="descricao" autofocus>
 
-                <div class="col-md-6">
-                    <input id="descricao" type="text" class="form-control @error('descricao') is-invalid @enderror" name="descricao" value="{{$categoria->descricao ?? ''}}" required autocomplete="descricao" autofocus>
+                        @error('descricao')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    
+                    </div>
+                    <div class="d-flex justify-content-end px-0">
+                        <button type="submit" class="btn btn-salvar">Salvar</button>
 
-                    @error('descricao')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+                    </div>
+                </form>
+            </article>
+        </section>
     </div>
 @endsection

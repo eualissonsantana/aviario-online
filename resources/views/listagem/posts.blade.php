@@ -1,30 +1,76 @@
 @extends('layouts.app')
 
-@section('content')
+@section('content')    
+    <section class="container-fluid content-child painel-noticias">
+        <article class="row px-3 justify-content-between ">
+            <div class="">
+                <h2>Notícias</h2>
+            </div>
+            
+            <section class="row col-8 justify-content-end mt-2">
+                <div class="mr-2 busca-categoria">
+                    <div class="input-group">
+                        <form class="form-inline my-2 my-lg-0" action="{{route('posts.search')}}" method="POST">
+                            @csrf
+                            <div class="input-group-prepend">
+                                <button class="btn btn-busca-categoria" type="button submit">O</button>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect03" name="filter">
+                                @foreach($categorias as $cat)
+                                    <option value="{{$cat->id}}">{{$cat->descricao}}</option>
+                                @endforeach
+                            </select>
+                            <input type="text" hidden="true" name="option" value="categoria">
+                        </form>
+                    </div>
+                </div>
+
+                <div class="busca-nome">
+                    <form class="form-inline my-2 my-lg-0" action="{{route('posts.search')}}" method="POST">
+                        @csrf
+                        <input type="text" hidden="true" name="option" value="titulo">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar por uma parte do nome" name="filter" aria-label="Search">
+                        <button hidden="true" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </form>
+                </div>
     
-    <div class="container col-md-8 col-12">
-        <h2>Notícias</h2>
+                <a href="{{route("posts.create")}}">
+                    <button class="btn btn-cadastrar">Novo</button>
+                </a>
+            </section>
+        </article>
         <hr>
+        
         @csrf
         @foreach ($posts as $post)
-            <div class="row">
-                <div class="col-9">
-                    <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}" style="max-width: 650px " />
-                    <h1 class="mt-2">{{$post->titulo}} </h1>
-                    <h3>{{$post->previa}} </h3>
-                    <hr>
-                    {!! $post->conteudo !!}
-                </div>
-                <div class="col">
-                    <a href="{{url("noticias/$post->id/edit")}}">
+            <section class="row justify-content-between pr-3">
+                <article class="col-2 imagem-noticia">
+                    <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                </article>
+                <article class="col-7 row align-content-between flex-wrap">
+                    
+                    <div class="col-12">
+                        <h6> {{$post->categoria->descricao}} </h6>
+                        <h4 class="">{{$post->titulo}} </h4>
+
+                    </div>
+                    <div class="col-12 previa">
+                        <p>{{$post->previa}}</p>
+                    </div>
+                    <div class="col-12">
+                        <p> {{$post->created_at}} </p>
+                    </div>
+                </article>
+                <article class="botoes col-2 row justify-content-end">
+                    <a href="{{url("painel/noticias/$post->id/edit")}}">
                         <button class="btn btn-primary">Editar</button>
                     </a>
-                    <a href="{{url("noticias/$post->id")}}" class="js-del-post">
+                    <a href="{{url("painel/noticias/$post->id")}}" class="ml-2 js-del-post">
                         <button class="btn btn-danger">Excluir</button>
                     </a>
-                </div>
-            </div>
+                </article>
+            </section>
             <hr>
         @endforeach
-    </div>
+    </section>
 @endsection
