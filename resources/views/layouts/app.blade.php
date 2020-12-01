@@ -46,12 +46,6 @@ use Carbon\Carbon;
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Acesso restrito') }}</a>
                                 </li>
                             @endif
-                            
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -75,44 +69,55 @@ use Carbon\Carbon;
                 </div>
             </div>
         </nav>
-
-        <section class="pt-4 container-fluid home-page">
-            <article class="nav-row row justify-content-between">
-                <div class="col-3">
-                    <img src="{{ url('img/aviario-online-logo.png') }}" alt="">
-                </div>
-                <div class="items col-9 ">
-                    <nav class="navbar nav-admin navbar-expand-lg navbar-light bg-light  ">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse justify-content-end " id="navbarNavAltMarkup">
-                        <div class="navbar-nav justify-content-end ">
-                            <a class="nav-item nav-link active" href="{{route('users.index')}}" >Usuários <span class="sr-only">(current)</span></a>
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="{{route('posts.index')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Notícias
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('post_categorias.index')}}">Categorias</a>
-                                </div>
+        @auth
+            <section class="pt-4 container-fluid home-page">
+                <article class="nav-row row justify-content-between">
+                    <div class="col-3">
+                        <img src="{{ url('img/aviario-online-logo.png') }}" alt="">
+                    </div>
+                    <div class="items col-9 ">
+                        <nav class="navbar nav-admin navbar-expand-lg navbar-light bg-light  ">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-end " id="navbarNavAltMarkup">
+                            <ul class="navbar-nav justify-content-end ">
+                                @if(Auth::user()->ehGerente)
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{{route('users.index')}}" >Usuários <span class="sr-only">(current)</span></a>
+                                    </li>
+                                @endif
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Notícias
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{route('posts.index')}}">Posts</a>
+                                        <a class="dropdown-item" href="{{route('post_categorias.index')}}">Categorias</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Guia Comercial
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{route('empresas.index')}}">Comércios</a>
+                                        <a class="dropdown-item" href="{{route('empresa_categorias.index')}}">Categorias</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('users.index')}}">Banners</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('users.index')}}">Enquetes</a>
+                                </li>
+                            </ul>
                             </div>
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="{{route('empresas.index')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Guia Comercial
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('empresa_categorias.index')}}">Categorias</a>
-                                </div>
-                            </div>
-                            <a class="nav-item nav-link" href="{{route('users.index')}}">Banners</a>
-                            <a class="nav-item nav-link" href="{{route('users.index')}}">Enquetes</a>
-                        </div>
-                        </div>
-                    </nav>
-                </div>
-            </article>
-        </section>
+                        </nav>
+                    </div>
+                </article>
+            </section>
+        @endauth
         <hr class="col-10 m-auto hr-menu">
         
         <main class="content p-4">
