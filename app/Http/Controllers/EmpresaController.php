@@ -6,6 +6,8 @@ use App\Models\Empresa;
 use App\Models\Endereco;
 use App\Models\EmpresaCategoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class EmpresaController extends Controller
 {
@@ -113,12 +115,22 @@ class EmpresaController extends Controller
                 $id = 0;
             }
 
+            $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg');
+
             $path = 'imagens/empresas';
             $extension = $request->imagem->extension();
             $nameFile = "{$id}.{$extension}";
             $empresa->imagem = $nameFile;
 
-            $upload = $request->imagem->storeAs($path, $nameFile);
+            $hash = md5($resize->__toString());
+
+            // Prepare qualified image name
+            $image = $hash."jpg";
+
+            $save = Storage::put("imagens/empresas/{$nameFile}", $resize->__toString());
+            //$upload = $request->imagem->storeAs($path, $resize);
         }  
 
         $empresa->save();
@@ -298,5 +310,6 @@ class EmpresaController extends Controller
         return view('listagem.empresas', compact('empresas', 'categorias'));
         
     }
+
     
 }
