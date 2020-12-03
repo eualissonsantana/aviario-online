@@ -9,7 +9,7 @@
             </div>
             
             <section class="row col-6 justify-content-end mt-2">
-                <a href="{{route("empresa_categorias.create")}}">
+                <a href="{{route("post_categorias.create")}}">
                     <button class="btn btn-cadastrar">Nova</button>
                 </a>
             </section>

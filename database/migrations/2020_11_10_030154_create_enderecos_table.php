@@ -16,11 +16,9 @@ class CreateEnderecosTable extends Migration
         Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
             $table->string('bairro')->default('Aviário');
-            $table->string('rua')->nullable();
-            $table->string('cep')->nullable();
+            $table->string('logradouro')->nullable();
+            $table->string('complemento')->nullable();
             $table->smallInteger('numero')->nullable();
-            $table->string('cidade')->default('Feira de Santana');
-            $table->string('estado')->default('BA');
             $table->boolean('ehComercial')->default(false);
             $table->timestamps();
         });

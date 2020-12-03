@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Models\PostCategoria;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -68,23 +70,7 @@ class PostController extends Controller
         $post->conteudo = $data['conteudo'];
         $post->user_id = $data['usuario_id'];
         $post->categoria_id = $data['categoria_id'];
-        
-        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            
-            if(!Post::all()->isEmpty()){
-                $id = Post::latest()->first()->id + 1;
-            }else {
-                $id = 0;
-            }
-
-            $path = 'imagens/chamadas';
-            $extension = $request->imagem->extension();
-            $nameFile = "{$id}.{$extension}";
-            $post->imagem = $nameFile;
-
-            $upload = $request->imagem->storeAs($path, $nameFile);
-    
-        }  
+        $post->imagem = $this->uploadImage($request);
         
         $post->save();
 
@@ -127,8 +113,9 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-
         $post = new Post();
+
+        $nameFile = $this->uploadImage($request);
 
         $post->where(['id'=>$id])->update([
             'titulo' => $data['titulo'],
@@ -136,21 +123,8 @@ class PostController extends Controller
             'conteudo' => $data['conteudo'],
             'user_id' => $data['usuario_id'],
             'categoria_id' => $data['categoria_id'],
-        ]);
-        
-        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            
-            $path = 'imagens/chamadas';
-            $extension = $request->imagem->extension();
-            $nameFile = "{$id}.{$extension}";
-            $post->where(['id'=>$id])->update([
-                'imagem' => $nameFile
-            ]);
-
-            $upload = $request->imagem->storeAs($path, $nameFile);
-    
-        }  
-        
+            'imagem' => $nameFile,
+        ]); 
 
         return redirect()->route('posts.index');
     }
@@ -167,6 +141,32 @@ class PostController extends Controller
         $post = $post->destroy($id);
 
         return($post)?"Sim":"Não";
+    }
+
+    public function uploadImage($request)
+    {
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            
+            if(!Post::all()->isEmpty()){
+                $id = Post::latest()->first()->id + 1;
+            }else {
+                $id = 0;
+            }
+
+            $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg');
+
+            $extension = $request->imagem->extension();
+            $nameFile = "{$id}.{$extension}";
+            $hash = md5($resize->__toString());
+         
+            $save = Storage::put("imagens/chamadas/{$nameFile}", $resize->__toString());
+            
+            return $nameFile;
+        }
+
+        return null;
     }
 
     public function search(Request $request)

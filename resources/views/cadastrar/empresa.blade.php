@@ -190,28 +190,19 @@
                     <h3>Endereço</h3>
 
                     <article class="row">
-                        <div class="form-group col-2 col-form-label text-md-left">
-                            <label for="Estado" class="col-form-label">Estado</label>
-                            <input id="estado" type="text" class="form-control @error('estado') is-invalid @enderror" value="BA" name="estado" required autocomplete="estado" autofocus>
-            
-                            @error('estado')
+                        <div class="form-group col-7 col-form-label text-md-left">
+                            <label for="Bairro" class="col-form-label">Logradouro</label>
+                            <input id="logradouro" type="text" class="form-control @error('logradouro') is-invalid @enderror" value="{{$empresa->endereco->logradouro ?? ''}}" name="logradouro" >
+
+                          
+
+                            @error('rua')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-
-                        <div class="form-group col-4 col-form-label text-md-left">
-                            <label for="cidade" class="col-form-label">Cidade</label>
-                            <input id="cidade" type="text" class="form-control @error('cidade') is-invalid @enderror"  name="cidade" value="Feira de Santana" autofocus>
-            
-                            @error('cidade')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
+                        
                         <div class="form-group col-3 col-form-label text-md-left">
                             <label for="Bairro" class="col-form-label">Bairro</label>
                             <input id="bairro" type="text" class="form-control @error('bairro') is-invalid @enderror" name="bairro" value="{{$empresa->endereco->bairro ?? 'Aviário'}}" required autocomplete="bairro" autofocus>
@@ -222,12 +213,12 @@
                                 </span>
                             @enderror
                         </div>
-
-                        <div class="form-group col-3 col-form-label text-md-left">
-                            <label for="CEP" class="col-form-label">CEP</label>
-                            <input id="cep" type="text" class="form-control @error('cep') is-invalid @enderror"  name="cep" value="{{$empresa->endereco->cep ?? ''}}">
             
-                            @error('cep')
+                        <div class="form-group col-2 col-form-label text-md-left">
+                            <label for="Numero" class="col-form-label">Número</label>
+                            <input id="numero" type="number" class="form-control @error('rua') is-invalid @enderror"  name="numero" value="{{$empresa->endereco->numero ?? ''}}">
+
+                            @error('numero')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -236,9 +227,9 @@
                     </article>
 
                     <article class="row">
-                        <div class="form-group col-5 col-form-label text-md-left">
-                            <label for="Bairro" class="col-form-label">Rua/Logradouro</label>
-                            <input id="rua" type="text" class="form-control @error('rua') is-invalid @enderror" value="{{$empresa->endereco->rua ?? ''}}" name="rua" >
+                        <div class="form-group col-12 col-form-label text-md-left">
+                            <label for="complemento" class="col-form-label">Complemento</label>
+                            <input id="complemento" type="text" class="form-control @error('complemento') is-invalid @enderror" value="{{$empresa->endereco->complemento ?? ''}}" name="complemento" >
 
                             <div class="form-check mt-2">
                                 <input class="form-check-input" type="checkbox" name="ehComercial" id="inlineCheckbox1" value="1" @if(isset($empresa) && $empresa->endereco->ehComercial) checked @endif>
@@ -250,22 +241,10 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        
-                        </div>
-            
-                        <div class="form-group col-3 col-form-label text-md-left">
-                            <label for="Numero" class="col-form-label">Número</label>
-                            <input id="numero" type="number" class="form-control @error('rua') is-invalid @enderror"  name="numero" value="{{$empresa->endereco->numero ?? ''}}">
-
-                            @error('numero')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                     </article>
                     
-                    <div class="row col-12 justify-content-end">
+                    <div class="row pr-3 justify-content-end">
                         <button type="submit" class="btn btn-salvar">Salvar</button>
                     </div>
                 </form>

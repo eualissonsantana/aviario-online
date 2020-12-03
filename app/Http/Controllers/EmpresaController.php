@@ -54,27 +54,13 @@ class EmpresaController extends Controller
             'instagram' => ['max:255'],
             'facebook' => ['max:255'],
             'bairro' => ['string', 'max:255'],
-            'rua' => ['max:255'],
-            'cep' => ['max:9'],
-            'cidade' => ['max:255'],
-            'estado' => ['max:2']
+            'logradouro' => ['max:255'],
+            'complemento' => ['max:255'],
         ]); 
        
         $data = $request->all();
         
-        $endereco = new Endereco();
-        $endereco->bairro = $data['bairro'];
-        $endereco->rua = $data['rua'];
-        $endereco->cep = $data['cep'];
-        $endereco->numero = $data['numero'];
-        $endereco->cidade = $data['cidade'];
-        $endereco->estado = $data['estado'];
-
-        if(array_key_exists("ehComercial", $data)){
-            $endereco->ehComercial = $data['ehComercial'];
-        }
-
-        $endereco->save();
+        $endereco_id = $this->createEndereco($request);
 
         $empresa = new Empresa();
         $empresa->nome = $data['nome'];
@@ -86,7 +72,7 @@ class EmpresaController extends Controller
         $empresa->instagram = $data['instagram'];
         $empresa->facebook = $data['facebook'];
         $empresa->categoria_id = $data['categoria_id'];
-        $empresa->endereco_id = $endereco->id;
+        $empresa->endereco_id = $endereco_id;
 
         if(array_key_exists("ehWhats", $data)){
             $empresa->ehWhats = $data['ehWhats'];
@@ -108,30 +94,7 @@ class EmpresaController extends Controller
             $empresa->aceitaDinheiro = $data['aceitaDinheiro'];
         }
 
-        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            if(!Empresa::all()->isEmpty()){
-                $id = Empresa::latest()->first()->id + 1;
-            }else {
-                $id = 0;
-            }
-
-            $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->encode('jpg');
-
-            $path = 'imagens/empresas';
-            $extension = $request->imagem->extension();
-            $nameFile = "{$id}.{$extension}";
-            $empresa->imagem = $nameFile;
-
-            $hash = md5($resize->__toString());
-
-            // Prepare qualified image name
-            $image = $hash."jpg";
-
-            $save = Storage::put("imagens/empresas/{$nameFile}", $resize->__toString());
-            //$upload = $request->imagem->storeAs($path, $resize);
-        }  
+        $empresa->imagem = $this->uploadImage($request);
 
         $empresa->save();
         
@@ -183,33 +146,14 @@ class EmpresaController extends Controller
             'instagram' => ['max:255'],
             'facebook' => ['max:255'],
             'bairro' => ['string', 'max:255'],
-            'rua' => ['max:255'],
+            'logradouro' => ['max:255'],
             'cep' => ['max:9'],
-            'cidade' => ['max:255'],
-            'estado' => ['max:2']
         ]); 
        
         $data = $request->all();
 
+        $this->updateEndereco($request, $id);
         $empresa = new Empresa();
-        $endereco = new Endereco();
-
-        
-        if(array_key_exists("ehComercial", $data)){
-            $ehComercial = $data['ehComercial'];
-        }else {
-            $ehComercial = 0;
-        }
-
-        $endereco->where(['id'=>$id])->update([
-            'bairro' => $data['bairro'],
-            'rua' => $data['rua'],
-            'cep' => $data['cep'],
-            'numero' => $data['numero'],
-            'cidade' => $data['cidade'],
-            'estado' => $data['estado'],
-            'ehComercial' => $ehComercial,
-        ]);
 
         if(array_key_exists("ehWhats", $data)){
             $ehWhats = $data['ehWhats'];
@@ -240,7 +184,9 @@ class EmpresaController extends Controller
         }else {
             $aceitaDinheiro = 0;
         }
-
+        
+        $nameFile = $this->uploadImage($request);
+        
         $empresa->where(['id'=>$id])->update([
             'nome' => $data['nome'],
             'slogan' => $data['slogan'],
@@ -257,27 +203,9 @@ class EmpresaController extends Controller
             'aceitaDebito' => $aceitaDebito,
             'aceitaCredito' => $aceitaCredito,
             'aceitaBoleto' => $aceitaBoleto,
+            'imagem' => $nameFile,
         ]);
-
-        
-        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-
-            $path = 'imagens/empresas';
-            $extension = $request->imagem->extension();
-            $nameFile = "{$id}.{$extension}";
-            $empresa->where(['id'=>$id])->update([
-                'imagem' => $nameFile
-            ]);
-
-            $upload = $request->imagem->storeAs($path, $nameFile);
-
-            if(!$upload) {
-                return redirect()
-                            ->back()
-                            ->with('error', 'Falha ao fazer upload de imagem');
-            }
-        }  
-        
+      
         return redirect()->route('empresas.index');
     }
 
@@ -294,6 +222,73 @@ class EmpresaController extends Controller
         $empresa = $empresa->destroy($id);
 
         return($empresa)?"Sim":"Não";
+    }
+
+    public function createEndereco(Request $request)
+    {
+        $data = $request->all();
+        
+        $endereco = new Endereco();
+        $endereco->bairro = $data['bairro'];
+        $endereco->logradouro = $data['logradouro'];
+        $endereco->numero = $data['numero'];
+        $endereco->complemento = $data['complemento'];
+
+        if(array_key_exists("ehComercial", $data)){
+            $endereco->ehComercial = $data['ehComercial'];
+        }
+
+        $endereco->save();
+
+        return $endereco->id;
+    }
+
+    public function updateEndereco(Request $request, $id)
+    {
+        $data = $request->all();
+        $endereco = new Endereco();
+
+        if(array_key_exists("ehComercial", $data)){
+            $ehComercial = $data['ehComercial'];
+        }else {
+            $ehComercial = 0;
+        }
+
+        $endereco->where(['id'=>$id])->update([
+            'bairro' => $data['bairro'],
+            'logradouro' => $data['logradouro'],
+            'complemento' => $data['complemento'],
+            'numero' => $data['numero'],
+            'ehComercial' => $ehComercial,
+        ]);
+
+        return;
+    }
+
+    public function uploadImage($request)
+    {
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            if(!Empresa::all()->isEmpty()){
+                $id = Empresa::latest()->first()->id + 1;
+            }else {
+                $id = 0;
+            }
+
+            $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg');
+
+            $extension = $request->imagem->extension();
+            $nameFile = "{$id}.{$extension}";
+            $hash = md5($resize->__toString());
+
+            $save = Storage::put("imagens/empresas/{$nameFile}", $resize->__toString());
+            //$upload = $request->imagem->storeAs($path, $resize);
+            
+            return $nameFile;
+        }  
+
+        return null;
     }
 
     public function search(Request $request)

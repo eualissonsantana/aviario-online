@@ -57,8 +57,8 @@
                     </article>
                     <article class="mb-3">
                         <p>
-                            {{$emp->endereco->rua}}, {{$emp->endereco->numero}} <br> 
-                            {{$emp->endereco->bairro}} - {{$emp->endereco->cep}} - {{$emp->endereco->cidade}}/{{$emp->endereco->estado}}
+                            {{$emp->endereco->logradouro}}, {{$emp->endereco->numero}} <br> 
+                            {{$emp->endereco->bairro}} - Feira de Santana/BA
                         </p>
                     </article>
                     <article class="telefone">

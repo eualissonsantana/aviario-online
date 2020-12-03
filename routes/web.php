@@ -7,8 +7,9 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpresaCategoriaController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCategoriaController;
+use App\Http\Controllers\AviarioController;
 
-Route::redirect('/', '/login');
+
 
 //Usuários
 Route::get('/painel/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
@@ -36,7 +37,7 @@ Route::put('/painel/empresas/categorias/{categoria}', [EmpresaCategoriaControlle
 Route::delete('/painel/empresas/categorias/{categoria}', [EmpresaCategoriaController::class, 'destroy'])->name('empresa_categorias.destroy')->middleware('auth');
 
 // Posts
-Route::get('/painel/noticias', [PostController::class, 'index'])->name('posts.index');
+Route::get('/painel/noticias', [PostController::class, 'index'])->name('posts.index')->middleware('auth');
 Route::get('/painel/noticias/cadastro', [PostController::class, 'create'])->name('posts.create')->middleware('auth');
 Route::post('/painel/noticias/cadastro', [PostController::class, 'store'])->name('posts.store')->middleware('auth');
 Route::get('/painel/noticias/{noticia}/edit', [PostController::class, 'edit'])->name('posts.edit')->middleware('auth');
@@ -44,18 +45,22 @@ Route::put('/painel/noticias/{noticia}', [PostController::class, 'update'])->nam
 Route::delete('/painel/noticias/{noticia}', [PostController::class, 'destroy'])->name('posts.destroy')->middleware('auth');
 Route::any('/painel/noticias/buscar', [PostController::class, 'search'])->name('posts.search');
 
-
-Route::get('/painel/noticias/categorias', [PostCategoriaController::class, 'index'])->name('post_categorias.index');
+// Categorias de post
+Route::get('/painel/noticias/categorias', [PostCategoriaController::class, 'index'])->name('post_categorias.index')->middleware('auth');
 Route::get('/painel/noticias/categorias/cadastro', [PostCategoriaController::class, 'create'])->name('post_categorias.create')->middleware('auth');
 Route::post('/painel/noticias/categorias/cadastro', [PostCategoriaController::class, 'store'])->name('post_categorias.store')->middleware('auth');
 Route::get('/painel/noticias/categorias/{categoria}/edit', [PostCategoriaController::class, 'edit'])->name('post_categorias.edit')->middleware('auth');
 Route::put('/painel/noticias/categorias/{categoria}', [PostCategoriaController::class, 'update'])->name('post_categorias.update')->middleware('auth');
 Route::delete('/painel/noticias/categorias/{categoria}', [PostCategoriaController::class, 'destroy'])->name('post_categorias.destroy')->middleware('auth');
-
 Route::any('/painel/empresas/categorias/buscar-por-ramo', [EmpresaCategoriaController::class, 'search'])->name('ramos.search');
 
 
+// Rotas comuns
+
+Route::get('/', [AviarioController::class, 'index'])->name('aviario.index');
+
+
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
+
 
 Auth::routes(['register' => false]);
-
-Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
