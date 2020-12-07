@@ -77,5 +77,9 @@
             </section>
             <hr>
         @endforeach
+
+        <div class="container">
+            {{ $empresas->links() }}
+        </div>
     </section>
 @endsection

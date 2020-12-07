@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class PostCategoriaController extends Controller
 {
+
+    private $categoria;
+    private $categorias;
+
+    public function __construct()
+    {
+        $this->categoria = new PostCategoria();
+        $this->categorias = PostCategoria::paginate(15);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,7 @@ class PostCategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = PostCategoria::all();
+        $categorias = $this->categorias;
         return view('listagem.post_categorias', compact('categorias'));
     }
 
@@ -42,7 +53,7 @@ class PostCategoriaController extends Controller
         
         $data = $request->all();
 
-        $categoria = new PostCategoria();
+        $categoria = $this->categoria;
         $categoria->descricao = $data['descricao'];
         $categoria->save();
         
@@ -68,7 +79,7 @@ class PostCategoriaController extends Controller
      */
     public function edit($id)
     {
-        $categoria = new PostCategoria();
+        $categoria = $this->categoria;
         $categoria = $categoria->find($id);
 
         return view('cadastrar.post_categoria', compact('categoria'));
@@ -88,7 +99,7 @@ class PostCategoriaController extends Controller
         ]);
         
         $data = $request->all();
-        $categoria = new PostCategoria();
+        $categoria = $this->categoria;
         
         $categoria->where(['id'=>$id])->update([
             'descricao' => $data['descricao']
@@ -105,7 +116,7 @@ class PostCategoriaController extends Controller
      */
     public function destroy($id)
     {
-        $categoria = new PostCategoria();
+        $categoria = $this->categoria;
         $categoria = $categoria->destroy($id);
 
         return($categoria)?"Sim":"Não";

@@ -1,0 +1,74 @@
+.aviario-home h2{
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.aviario-home h4{
+    font-size: 1.2rem;
+    line-height: 1.15;
+}
+
+.aviario-home h6{
+    font-size: 0.95rem;
+}
+
+.aviario-home .penultimo-post img {
+    width: 100%;
+    height: 378px;
+    object-fit: cover;
+}
+
+.aviario-home .penultimo-post {
+    position: relative;
+    overflow: hidden;
+}
+
+.aviario-home .penultimo-post .titulo-post {
+    height: auto;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 10px 15px;
+    background: linear-gradient(0deg, rgba(0,0,0,0.83) 34%, rgba(0,0,0,0.82) 35%, rgba(0,0,0,0.66) 68%, transparent 100%);
+}
+
+.aviario-home .penultimo-post .titulo-post h4 {
+    color: #fff;
+}
+
+.aviario-home .posts-laterais {
+    margin-left: 15px;
+}
+
+.aviario-home .posts-laterais p {
+    font-size: 0.8rem;
+}
+
+.aviario-home .posts-laterais img {
+    width: 280px;
+    height: 176px;
+    object-fit: cover;
+}
+
+.aviario-home .posts-laterais:nth-child(1){
+    margin-bottom: 22px;
+}
+
+.aviario-home .previa {   
+    width: 100%;      
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+a {
+    color: #333;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #333;
+}

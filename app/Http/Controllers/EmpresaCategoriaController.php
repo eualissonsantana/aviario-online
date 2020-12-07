@@ -11,13 +11,13 @@ class EmpresaCategoriaController extends Controller
 
     private $ramos;
     private $categorias;
-    private $cat;
+    private $categoria;
 
     public function __construct()
     {
         $this->ramos = Ramo::all();
-        $this->categorias = EmpresaCategoria::all();
-        $this->cat = new EmpresaCategoria();
+        $this->categorias = EmpresaCategoria::paginate(10);
+        $this->categoria = new EmpresaCategoria();
     }
 
 
@@ -132,7 +132,7 @@ class EmpresaCategoriaController extends Controller
     public function search(Request $request)
     {
         $ramos = $this->ramos;
-        $categorias = $this->cat->search($request->filter);
+        $categorias = $this->categoria->search($request->filter);
         
         return view('listagem.empresa_categorias', compact('ramos', 'categorias'));
         
