@@ -23,7 +23,7 @@ class PostController extends Controller
         $this->post = new Post();
         $this->postCategoria = new PostCategoria();
         $this->posts = Post::all();
-        $this->postCategorias = PostCategoria::all();
+        $this->postCategorias = PostCategoria::all()->sortBy("descricao");
         $this->users = User::all();
     }
 
@@ -64,7 +64,7 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        $post = new Post();
+        $post = $this->post;
         $post->titulo = $data['titulo'];
         $post->previa = $data['previa'];
         $post->conteudo = $data['conteudo'];
@@ -113,7 +113,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $post = new Post();
+        $post = $this->post;
 
         $nameFile = $this->uploadImage($request);
 
@@ -137,7 +137,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = new Post();
+        $post = $this->post;
         $post = $post->destroy($id);
 
         return($post)?"Sim":"Não";

@@ -7,10 +7,12 @@ use App\Models\Post;
 use App\Models\PostCategoria;
 use App\Models\Empresa;
 use App\Models\EmpresaCategoria;
+use Illuminate\Support\Facades\DB;
 
 class AviarioController extends Controller
 {
-    private $lastPost;
+    private $ultimoPost;
+    private $penultimoPost;
     private $posts;
     private $postCategoria;
     private $postCategorias;
@@ -21,19 +23,36 @@ class AviarioController extends Controller
 
     public function __construct()
     {
-        $this->lastPost = Post::first();
+        $this->ultimoPost = Post::latest()->first();
+        //dd($this->lastPost);
         $this->post = new Post();
         $this->postCategoria = new PostCategoria();
-        $this->posts = Post::all();
+        
+        Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(3, function($noticias){
+            $i = 0;
+            foreach ($noticias as $post)
+            {
+                if($i == 0) {
+                    $this->penultimoPost = $post;
+                    $i++;
+                }else {
+                    $this->posts[] = $post;
+                }
+            }
+            
+            return false;
+        });
+
         $this->postCategorias = PostCategoria::all();
     }
 
     public function index () {
         $posts = $this->posts;
         $categorias = $this->postCategorias;
-        $lastPost = $this->lastPost;
+        $ultimoPost = $this->ultimoPost;
+        $penultimoPost = $this->penultimoPost;
         
-        return view('aviario.home', compact('posts', 'categorias', 'lastPost'));
+        return view('aviario.home', compact('posts', 'categorias', 'ultimoPost', 'penultimoPost'));
     }
 
 }

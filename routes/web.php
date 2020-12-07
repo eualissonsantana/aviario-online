@@ -60,7 +60,7 @@ Route::any('/painel/empresas/categorias/buscar-por-ramo', [EmpresaCategoriaContr
 Route::get('/', [AviarioController::class, 'index'])->name('aviario.index');
 
 
-//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
+Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
 
 
 Auth::routes(['register' => false]);

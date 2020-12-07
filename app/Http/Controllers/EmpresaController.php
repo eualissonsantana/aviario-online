@@ -11,6 +11,21 @@ use Intervention\Image\Facades\Image;
 
 class EmpresaController extends Controller
 {
+
+    private $empresa;
+    private $empresas;
+    private $categorias;
+    private $endereco;
+
+    public function __construct()
+    {
+        $this->empresa = new Empresa();
+        $this->empresas = Empresa::paginate();
+        $this->categorias = EmpresaCategoria::all()->sortBy("descricao");
+        $this->endereco = new Endereco();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,8 +33,8 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::all();
-        $categorias = EmpresaCategoria::all();
+        $empresas = $this->empresas;
+        $categorias = $this->categorias;
 
         return view('listagem.empresas', compact('empresas', 'categorias'));
     }
@@ -31,7 +46,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        $categorias = EmpresaCategoria::all();
+        $categorias = $this->categorias;
 
         return view('cadastrar.empresa', compact('categorias'));
     }
@@ -120,8 +135,9 @@ class EmpresaController extends Controller
      */
     public function edit($id)
     {
-        $empresa = new Empresa();
-        $categorias = EmpresaCategoria::all();
+        $empresa = $this->empresa;
+        $categorias = $this->categorias;
+        
         $empresa = $empresa->find($id);
         
         return view('cadastrar.empresa', compact('empresa', 'categorias'));
@@ -153,7 +169,7 @@ class EmpresaController extends Controller
         $data = $request->all();
 
         $this->updateEndereco($request, $id);
-        $empresa = new Empresa();
+        $empresa = $this->empresa;
 
         if(array_key_exists("ehWhats", $data)){
             $ehWhats = $data['ehWhats'];
@@ -218,7 +234,7 @@ class EmpresaController extends Controller
     
     public function destroy($id)
     {
-        $empresa = new Empresa();
+        $empresa = $this->empresa;
         $empresa = $empresa->destroy($id);
 
         return($empresa)?"Sim":"Não";
@@ -228,7 +244,7 @@ class EmpresaController extends Controller
     {
         $data = $request->all();
         
-        $endereco = new Endereco();
+        $endereco = $this->endereco;
         $endereco->bairro = $data['bairro'];
         $endereco->logradouro = $data['logradouro'];
         $endereco->numero = $data['numero'];
@@ -246,7 +262,7 @@ class EmpresaController extends Controller
     public function updateEndereco(Request $request, $id)
     {
         $data = $request->all();
-        $endereco = new Endereco();
+        $endereco = $this->endereco;
 
         if(array_key_exists("ehComercial", $data)){
             $ehComercial = $data['ehComercial'];
