@@ -52,7 +52,7 @@
 }
 
 .aviario-home .posts-laterais:nth-child(1){
-    margin-bottom: 26px;
+    margin-bottom: 22px;
 }
 
 .aviario-home .previa {   
@@ -62,4 +62,13 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+a {
+    color: #333;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #333;
 }
