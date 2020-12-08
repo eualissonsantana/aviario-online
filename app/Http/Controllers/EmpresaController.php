@@ -8,6 +8,8 @@ use App\Models\EmpresaCategoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class EmpresaController extends Controller
 {
@@ -78,6 +80,7 @@ class EmpresaController extends Controller
         $endereco_id = $this->createEndereco($request);
 
         $empresa = new Empresa();
+        $empresa->slug = Str::slug($data['nome']);
         $empresa->nome = $data['nome'];
         $empresa->slogan = $data['slogan'];
         $empresa->descricao = $data['descricao'];
@@ -122,9 +125,14 @@ class EmpresaController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(Empresa $empresa)
-    {
-        //
+    public function buscaEmpresa($slug, $id)
+    {   
+        if (!$empresa = Empresa::find($id))
+            return redirect()->back();
+    
+        return view('aviario.guia-comercial.exibe_empresa', [
+            'empresa' => $empresa
+        ]);
     }
 
     /**
@@ -204,6 +212,7 @@ class EmpresaController extends Controller
         $nameFile = $this->uploadImage($request);
         
         $empresa->where(['id'=>$id])->update([
+            'slug' => Str::slug($data['nome']),
             'nome' => $data['nome'],
             'slogan' => $data['slogan'],
             'descricao' => $data['descricao'],

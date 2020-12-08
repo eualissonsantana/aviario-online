@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -65,6 +66,7 @@ class PostController extends Controller
         $data = $request->all();
 
         $post = $this->post;
+        $post->slug = Str::slug($data['titulo']);
         $post->titulo = $data['titulo'];
         $post->previa = $data['previa'];
         $post->conteudo = $data['conteudo'];
@@ -83,9 +85,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($slug, $id)
     {
-        //
+        if (!$post = Post::find($id))
+            return redirect()->back();
+        
+        return view('aviario.noticias.exibe_noticia', [
+            'post' => $post
+        ]);
     }
 
     /**
@@ -118,6 +125,7 @@ class PostController extends Controller
         $nameFile = $this->uploadImage($request);
 
         $post->where(['id'=>$id])->update([
+            'slug' => Str::slug($data['titulo']),
             'titulo' => $data['titulo'],
             'previa' => $data['previa'],
             'conteudo' => $data['conteudo'],

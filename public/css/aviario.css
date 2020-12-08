@@ -13,6 +13,27 @@
     font-size: 0.95rem;
 }
 
+.exibe-noticia h1{
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.exibe-noticia h3 {
+    color: #0084B8;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.exibe-noticia h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #757575;
+}
+
+.exibe-noticia hr {
+    border-color: #a7a7a7;
+}
+
 .aviario-home .penultimo-post img {
     width: 100%;
     height: 378px;
