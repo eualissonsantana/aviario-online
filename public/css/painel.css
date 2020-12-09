@@ -77,11 +77,15 @@ table {
 }
 
 .btn-editar {
-    background-color: #0297e5;
+    color: #0297e5;
+    background-color: transparent;
+    border: 2px solid #0297e5;
 }
 
 .btn-excluir {
-    background-color: #ff6670;
+    color: #ff6670;
+    background-color: transparent;
+    border: 2px solid #ff6670;
 }
 
 .btn-salvar {
@@ -107,6 +111,7 @@ table {
 
 .content {
     display: flex;
+    height: 92vh;
 }
 
 #app {

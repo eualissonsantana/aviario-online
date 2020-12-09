@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="gerenciamento">
-        <h1>Painel de gerenciamento</h1>
+        <h2>Painel de gerenciamento</h2>
     </section>
 
 @endsection

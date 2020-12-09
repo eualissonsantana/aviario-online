@@ -63,10 +63,10 @@
                 </article>
                 <article class="botoes col-2 row justify-content-end">
                     <a href="{{url("painel/noticias/$post->id/edit")}}">
-                        <button class="btn btn-primary">Editar</button>
+                        <button class="btn btn-editar">Editar</button>
                     </a>
                     <a href="{{url("painel/noticias/$post->id")}}" class="ml-2 js-del-post">
-                        <button class="btn btn-danger">Excluir</button>
+                        <button class="btn btn-excluir">Excluir</button>
                     </a>
                 </article>
             </section>
