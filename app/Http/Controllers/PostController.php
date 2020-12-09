@@ -11,6 +11,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
+
 class PostController extends Controller
 {
 
@@ -68,7 +69,7 @@ class PostController extends Controller
         $slug = Str::slug($data['titulo']);
 
         $post = $this->post;
-        $post->slug = $slug;
+        $post->slug = Str::slug($data['titulo']);
         $post->titulo = $data['titulo'];
         $post->previa = $data['previa'];
         $post->conteudo = $data['conteudo'];
@@ -90,9 +91,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($slug, $id)
     {
-        //
+        if (!$post = Post::find($id))
+            return redirect()->back();
+        
+        return view('aviario.noticias.exibe_noticia', [
+            'post' => $post
+        ]);
     }
 
     /**
@@ -125,13 +131,14 @@ class PostController extends Controller
         $slug = Str::slug($data['titulo']);
         
         $post->where(['id'=>$id])->update([
-            'slug' => $slug,
+            'slug' => Str::slug($data['titulo']),
             'titulo' => $data['titulo'],
             'previa' => $data['previa'],
             'conteudo' => $data['conteudo'],
             'user_id' => $data['usuario_id'],
             'categoria_id' => $data['categoria_id'],
             ]); 
+        
         $this->uploadImage($request, $slug, $id);
 
         return redirect()->route('posts.index');

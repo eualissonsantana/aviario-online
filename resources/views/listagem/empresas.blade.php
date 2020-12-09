@@ -49,7 +49,7 @@
                 <article class="col-2 imagem-comercio">
                     <img src="{{ url('storage/imagens/empresas/'.$emp->imagem) }}" style="max-width: 175px " />
                 </article>
-                
+
                 <article class="col-8 dados-comercio">
                     <article class="mb-3">
                         <h6>{{$emp->categoria->descricao}}</h6>
@@ -67,7 +67,7 @@
                     </article>
                     
                 </article>
-            
+
                 <article class="col-2 row justify-content-end">
                     <a href="{{url("painel/empresas/$emp->id/edit")}}">
                         <button class="btn btn-editar">Editar</button>

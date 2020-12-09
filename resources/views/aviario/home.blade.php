@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="content-child aviario-home">
-        <a href="">
+    <section class="content-child aviario-home aviario-rc">
+        <a href=" {{route('posts.show', ['slug' => $ultimoPost->slug, 'id' => $ultimoPost->id])}} ">
             <article class="ultimo-post">
                 <h6>{{$ultimoPost->categoria->descricao}}</h6>
                 <h2> {{$ultimoPost->titulo}} </h2>
@@ -13,7 +13,7 @@
         <section class="row justify-content-between">
             
             <article class="col-md-6 pr-0">
-                <a href="">
+                <a href="{{route('posts.show', ['slug' => $penultimoPost->slug, 'id' => $penultimoPost->id])}}">
                     <div class="penultimo-post">
                         <img src="{{ url('storage/imagens/chamadas/'.$penultimoPost->imagem) }}" />
                         <div class="titulo-post">
@@ -27,7 +27,7 @@
     
             <article class="col-md-6 p-0">
                 @foreach ($posts as $post)
-                    <a href="">
+                    <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
                         <article class="col-md-12 p-0 row posts-laterais">
                             <div class="col-6">
                                 <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}" />
