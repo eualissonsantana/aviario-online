@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
 @section('content')    
-    <section class="container-fluid content-child painel-noticias">
-        <article class="row px-3 justify-content-between ">
+    <section class="content-child painel-noticias">
+        <article class="row px-md-3 justify-content-between px-0">
             <div class="">
                 <h2>Notícias</h2>
             </div>
             
-            <section class="row col-8 justify-content-end mt-2">
-                <div class="mr-2 busca-categoria">
+            <section class="row col-md-8 col-sm-12 justify-content-end mt-2 px-0">
+                <div class="col-sm-12 col-md-3 mr-2 busca-categoria px-0 d-none d-sm-block">
                     <div class="input-group">
                         <form class="form-inline my-2 my-lg-0" action="{{route('posts.search')}}" method="POST">
                             @csrf
                             <div class="input-group-prepend">
-                                <button class="btn btn-busca-categoria" type="button submit">O</button>
+                                <button class=" btn-busca-categoria" type="button submit">O</button>
                             </div>
                             <select class="custom-select" id="inputGroupSelect03" name="filter">
                                 @foreach($categorias as $cat)
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="busca-nome">
+                <div class="col-sm-12 col-md-5 busca-nome px-0">
                     <form class="form-inline my-2 my-lg-0" action="{{route('posts.search')}}" method="POST">
                         @csrf
                         <input type="text" hidden="true" name="option" value="titulo">
@@ -33,13 +33,14 @@
                         <button hidden="true" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
                 </div>
-    
-                <a href="{{route("posts.create")}}">
-                    <button class="btn btn-cadastrar">Novo</button>
-                </a>
+                <div class="col-sm-12 col-md-3 px-0">
+                    <a href="{{route("posts.create")}}">
+                        <button class="btn btn-cadastrar">Novo</button>
+                    </a>
+                </div>
             </section>
+            <hr class="col-11 ">
         </article>
-        <hr>
         
         @csrf
         @foreach ($posts as $post)
