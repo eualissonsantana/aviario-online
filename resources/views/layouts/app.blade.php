@@ -77,7 +77,7 @@ use Carbon\Carbon;
                         <img src="{{ url('img/aviario-online-logo.png') }}" alt="">
                     </div>
                     <div class="items col-9 ">
-                        <nav class="navbar nav-admin navbar-expand-lg navbar-light bg-light  ">
+                        <nav class="navbar nav-admin navbar-expand-lg navbar-light   ">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>

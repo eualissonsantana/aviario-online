@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
 
 class PostController extends Controller
 {
@@ -64,6 +66,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        $slug = Str::slug($data['titulo']);
 
         $post = $this->post;
         $post->slug = Str::slug($data['titulo']);
@@ -72,9 +75,12 @@ class PostController extends Controller
         $post->conteudo = $data['conteudo'];
         $post->user_id = $data['usuario_id'];
         $post->categoria_id = $data['categoria_id'];
-        $post->imagem = $this->uploadImage($request);
         
         $post->save();
+        
+        $lastInsert =  DB::table('posts')->orderBy('id','desc')->first();
+        $id = $lastInsert->id;
+        $this->uploadImage($request, $slug, $id);
 
         return redirect()->route('posts.index',  ['posts' => Post::all()]);
     }
@@ -122,8 +128,8 @@ class PostController extends Controller
         $data = $request->all();
         $post = $this->post;
 
-        $nameFile = $this->uploadImage($request);
-
+        $slug = Str::slug($data['titulo']);
+        
         $post->where(['id'=>$id])->update([
             'slug' => Str::slug($data['titulo']),
             'titulo' => $data['titulo'],
@@ -131,8 +137,9 @@ class PostController extends Controller
             'conteudo' => $data['conteudo'],
             'user_id' => $data['usuario_id'],
             'categoria_id' => $data['categoria_id'],
-            'imagem' => $nameFile,
-        ]); 
+            ]); 
+        
+        $this->uploadImage($request, $slug, $id);
 
         return redirect()->route('posts.index');
     }
@@ -151,27 +158,24 @@ class PostController extends Controller
         return($post)?"Sim":"Não";
     }
 
-    public function uploadImage($request)
+    public function uploadImage($request, $slug, $id)
     {
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            
-            if(!Post::all()->isEmpty()){
-                $id = Post::latest()->first()->id + 1;
-            }else {
-                $id = 0;
-            }
-
             $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->encode('jpg');
 
             $extension = $request->imagem->extension();
-            $nameFile = "{$id}.{$extension}";
+            $nameFile = "{$slug}-{$id}.{$extension}";
             $hash = md5($resize->__toString());
          
             $save = Storage::put("imagens/chamadas/{$nameFile}", $resize->__toString());
-            
-            return $nameFile;
+            $post = $this->post;
+            $post->where(['id'=>$id])->update([
+                'imagem' => $nameFile,
+            ]); 
+
+            return;
         }
 
         return null;
