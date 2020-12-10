@@ -1,6 +1,6 @@
 @media only screen and (max-width: 414px) {
     .content-child {
-        padding: 0 20px;
+        padding: 0;
     }
     
     .btn {
@@ -13,14 +13,51 @@
         margin-top: 20px;
     }
 
-  
-
-    .usuarios hr, .post-categorias hr {
+    hr {
         border-color:  #858585;
-        
+    }
+
+    .botao-cadastrar .btn-cadastrar {
+        position: relative;
     }
 
     .usuarios ul {
         padding-top: 0 !important;
     }
+
+    .painel-noticias .imagem-noticia img{
+        width: 150px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .painel-noticias .titulo-noticia h4 {
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .painel-noticias .busca-box {
+        margin: auto;
+    }
+
+    .painel-empresas .imagem-comercio img{
+        width: 115%;
+        object-fit: cover;
+    }
+
+    .painel-empresas h3 {
+        font-size: 1.2rem;
+    }
+
+    .painel-empresas h5 {
+        font-size: 1rem;
+    }
+
+    .botoes {
+        justify-content: space-between !important;
+        margin: auto;
+    }
+    
+
+  
 }

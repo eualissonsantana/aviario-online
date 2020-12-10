@@ -3,14 +3,16 @@
 @section('content')
     
     <div class="content-child usuarios">
-        <div class="row px-md-3 justify-content-between">
-            <h2>Usuários</h2>
-            <div class="col-sm-12 col-md-1 justify-content-end px-0">
-                <a href="{{route("users.create")}}">
+        <div class="row justify-content-between px-md-3">
+            <div class="col-xs-12 col-md-11 px-0">
+                <h2>Usuários</h2>
+            </div>
+            <div class="botao-cadastrar col-sm-12 col-md-1 align-content-end px-0">
+                <a href="{{route("users.create")}}" class="px-0">
                     <button class="btn btn-cadastrar">Novo</button>
                 </a>
             </div>
-            <hr class="col-11">
+            <hr class="col-sm-11 col-md-12">
         </div>
         
         @csrf
@@ -42,6 +44,7 @@
                 @endforeach
             </tbody>
         </table>
+
         <ul class="d-block d-sm-none lista-usuarios">
             @foreach ($usuarios as $user)
                 <li>
@@ -66,7 +69,7 @@
                                 <button class="btn btn-excluir">Excluir</button>
                             </a>
                         </div>
-                        <hr class="col-11">
+                        <hr class="col-11 ">
                     </div>
                 </li>
             @endforeach

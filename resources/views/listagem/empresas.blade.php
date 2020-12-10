@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="container-fluid content-child painel-empresas">
-        <article class="row px-3 justify-content-between ">
+    <section class="content-child painel-empresas px-0">
+        <article class="row px-md-3 justify-content-between ">
             <div class="">
                 <h2>Comércios</h2>
             </div>
             
-            <section class="row col-10 justify-content-end mt-2">
-                <div class="mr-2 busca-categoria">
+            <section class="m-auto row col-md-10 col-sm-12 justify-content-end mt-2 px-0">
+                <div class="mr-2 busca-categoria d-none d-sm-block">
                     <div class="input-group">
                         <form class="form-inline my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
                             @csrf
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="busca-nome">
+                <div class="busca-nome d-none d-sm-block">
                     <form class="form-inline my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
                         @csrf
                         <input type="text" hidden="true" name="option" value="nome">
@@ -34,51 +34,56 @@
                     </form>
                 </div>
     
-                <a href="{{route("empresas.create")}}">
-                    <button class="btn btn-cadastrar">Novo</button>
-                </a>
+                <div class="col-sm-12 col-md-1 justify-content-end px-0">
+                    <a href="{{route("empresas.create")}}">
+                        <button class="btn btn-cadastrar">Novo</button>
+                    </a>
+                </div>
             </section>
-
+            <hr class="col-sm-11 col-md-12">
         </article>
-        <hr>
 
         
         @csrf
-        @foreach ($empresas as $emp)
-            <section class="row">
-                <article class="col-2 imagem-comercio">
-                    <img src="{{ url('storage/imagens/empresas/'.$emp->imagem) }}" style="max-width: 175px " />
-                </article>
+        <ul>
+            @foreach ($empresas as $emp)
+                <li>
+                    <section class="row justify-content-between">
+                        <article class="col-4 col-md-2 col-lg-2 col-xl-2 imagem-comercio px-0">
+                            <img src="{{ url('storage/imagens/empresas/'.$emp->imagem) }}" style="max-width: 175px " />
+                        </article>
 
-                <article class="col-8 dados-comercio">
-                    <article class="mb-3">
-                        <h6>{{$emp->categoria->descricao}}</h6>
-                        <h3><strong>{{$emp->nome}}</strong></h3>
-                        <h5>{{$emp->slogan}} </h5>
-                    </article>
-                    <article class="mb-3">
-                        <p>
-                            {{$emp->endereco->logradouro}}, {{$emp->endereco->numero}} <br> 
-                            {{$emp->endereco->bairro}} - Feira de Santana/BA
-                        </p>
-                    </article>
-                    <article class="telefone">
-                        <h5>{{$emp->telefone}}</h5>
-                    </article>
-                    
-                </article>
+                        <article class="col-7 col-md-8 dados-comercio px-0">
+                            <article class="mb-3">
+                                <h6>{{$emp->categoria->descricao}}</h6>
+                                <h3><strong>{{$emp->nome}}</strong></h3>
+                                <h5 class="d-none d-sm-block">{{$emp->slogan}} </h5>
+                            </article>
+                            <article class="mb-3">
+                                <p>
+                                    {{$emp->endereco->logradouro}}, {{$emp->endereco->numero}} <br> 
+                                    {{$emp->endereco->bairro}} - Feira de Santana/BA
+                                </p>
+                            </article>
+                            <article class="telefone">
+                                <h5>{{$emp->telefone}}</h5>
+                            </article>
+                            
+                        </article>
 
-                <article class="col-2 row justify-content-end">
-                    <a href="{{url("painel/empresas/$emp->id/edit")}}">
-                        <button class="btn btn-editar">Editar</button>
-                    </a>
-                    <a href="{{url("painel/empresas/$emp->id")}}" class="ml-2 js-del-emp">
-                        <button class="btn btn-excluir">Excluir</button>
-                    </a>
-                </article>
-            </section>
-            <hr>
-        @endforeach
+                        <article class="botoes col-md-2 col-12 row mt-3 px-0">
+                            <a href="{{url("painel/empresas/$emp->id/edit")}}">
+                                <button class="btn btn-editar">Editar</button>
+                            </a>
+                            <a href="{{url("painel/empresas/$emp->id")}}" class="ml-2 js-del-emp">
+                                <button class="btn btn-excluir">Excluir</button>
+                            </a>
+                        </article>
+                        <hr class="col-sm-11 col-md-12">
+                    </section>
+                </li>
+            @endforeach
+        </ul>
 
         <div class="container">
             {{ $empresas->links() }}

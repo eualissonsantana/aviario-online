@@ -29,10 +29,10 @@
                 @foreach ($posts as $post)
                     <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
                         <article class="col-md-12 p-0 row posts-laterais">
-                            <div class="col-6">
+                            <div class="col-6 col-xl-5">
                                 <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}" />
                             </div>
-                            <div class="col-6 teste">
+                            <div class="col-6 pl-xl-5 col-xl-7 teste">
                                 <h6> {{$post->categoria->descricao}} </h6>
                                 <h4> {{$post->titulo}} </h4>
                                 <div class="mt-1 previa">

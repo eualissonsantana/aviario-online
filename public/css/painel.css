@@ -82,10 +82,22 @@ table {
     border: 2px solid #0297e5;
 }
 
+.btn-editar:hover {
+    background-color: #0297e5;
+    color: #fff;
+    transform: scale(1.05);
+}
+
 .btn-excluir {
     color: #ff6670;
     background-color: transparent;
     border: 2px solid #ff6670;
+}
+
+.btn-excluir:hover {
+    background-color: #ff6670;
+    color: #fff;
+    transform: scale(1.05);
 }
 
 .btn-salvar {
@@ -105,6 +117,10 @@ table {
     color: #fff;
 }
 
+.botao-cadastrar .btn-cadastrar {
+    position:absolute;
+    right: 0px;
+}
 
 
 /********* APP *********/
@@ -177,8 +193,10 @@ label {
     padding: 0 80px !important;
 }
 
-.home-page .nav-admin {
+.nav-admin {
     padding: 0;
+    background-color: #0084b8;
+    color: #fff;
 }
 
 .items {
@@ -187,9 +205,9 @@ label {
 
 .home-page a {
     text-transform: uppercase;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #0084B8 !important;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #fff !important;
     margin: 0 0 0 10px;
 }
 
@@ -263,9 +281,7 @@ ul {
 
 /********* NOTÍCIAS *********/
 
-.painel-noticias .botoes {
-    margin-left: 2px;
-}
+
 
 .painel-nova-noticia .categoria label, .painel-nova-noticia .autor label {
     height: 37px;
@@ -284,6 +300,4 @@ ul {
     height: 160px;
     object-fit: cover;
 }
-
-
 

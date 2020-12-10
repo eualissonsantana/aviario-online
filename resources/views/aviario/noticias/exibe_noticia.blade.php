@@ -4,7 +4,7 @@
     <section class="content-child exibe-noticia">
         <p></p>
         <section class="row">
-            <article class="col-7">
+            <article class="col-md-7 col-xs-12">
                 <h3> {{$post->categoria->descricao}} </h3>
                 <h1> {{$post->titulo}} </h1>
                 <h4 class="mt-3"> {{$post->previa}} </h4>
