@@ -17,6 +17,7 @@ use Carbon\Carbon;
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src='https://cdn.tiny.cloud/1/5f1scw7zl01d1jwmygfksnkg8tlk7dft9qvie9wkeopsbhdt/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
     <script type="text/javascript" src="{{url("js/tinymce.js")}}"></script>
+    <script type="text/javascript" src="https://widgets-viewer.climacell.co/v1/sdk.js"></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -43,25 +44,25 @@ use Carbon\Carbon;
                     </div>
                 </div>
             </nav>
-        
-            <div class="row px-5 pt-2">
-                <div class="ml-5">
-                    <a class="m-auto" href="#">
-                        <img class="" src="{{ url('img/aviario-online-logo.png') }}" alt="Logo Aviário Online" width="240px">
-                    </a>
+            <section class="content-child d-none d-sm-block">
+                <div class="row px-3 pt-2 justify-content-between">
+                    <div class="col-2">
+                        <a class="" href="#">
+                            <img class="" src="{{ url('img/aviario-online-logo.png') }}" alt="Logo Aviário Online">
+                        </a>
+                    </div>
+    
+                    <div class="col-7 d-none d-sm-block">
+                        <a class="" href="#">
+                            <img class="" src="{{ url('img/3292.png') }}" alt="Logo Aviário Online">
+                        </a>
+                    </div>
+    
+                    <div class="clima-tempo col-2">
+                        <div class="climacell-widget" data-apikey="gO8KkiXKIf5u1zdxkwpFbQHGxCmuumxY" data-type="nowcast" data-location-name="Aviário, Feira de Santana - BA, Brasil" data-location-lon="-38.9302726" data-location-lat="-12.3012574" data-size-mode="small" data-font-color="#000" data-background-color="#fff" data-font-family="verdana" data-weather-params="temp:C" data-allow-users-enter-address="false" ></div>
+                    </div>
                 </div>
-
-                <div class="ml-5">
-                    <a class="m-auto" href="#">
-                        <img class="" src="{{ url('img/3292.png') }}" alt="Logo Aviário Online" width="840px">
-                    </a>
-                </div>
-
-                <div class="ml-5 mr-auto teste">
-                    <h6>{{now()->toDateTimeString()}} </h6>
-                    <h6>{{now()}} </h6>
-                </div>
-            </div>
+            </section>
 
             <nav class="container-fluid navbar nav-admin navbar-expand-lg navbar-light mt-2 pr-5 home-page">                    
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

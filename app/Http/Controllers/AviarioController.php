@@ -55,4 +55,6 @@ class AviarioController extends Controller
         return view('aviario.home', compact('posts', 'categorias', 'ultimoPost', 'penultimoPost'));
     }
 
+    
+
 }
