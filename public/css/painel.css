@@ -185,8 +185,6 @@ label {
     width: 100%;
 }
 
-
-
 /********* PAINEL *********/
 
 .home-page .nav-row, .gerenciamento{
@@ -197,6 +195,8 @@ label {
     padding: 0;
     background-color: #0084b8;
     color: #fff;
+    padding: 8px 16px;
+    margin-top: 24px !important;
 }
 
 .items {
@@ -204,16 +204,16 @@ label {
 }
 
 .home-page a {
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    font-weight: 400;
+    font-size: 1rem;
+    font-weight: 600;
     color: #fff !important;
-    margin: 0 0 0 10px;
+    margin: 0 20px 0 0;
 }
 
 .hr-menu {
     margin: 0;
     border-color:  #0084B8;
+    padding: 16px;
 }
 
 .content-child {

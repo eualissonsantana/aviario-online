@@ -31,6 +31,9 @@ use Carbon\Carbon;
 
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v9.0" nonce="uJ0WJ2He"></script>
+    
     <div id="app">
             <nav class="navbar nav-acesso navbar-expand shadow-sm">
                 <div class="container">  
@@ -59,25 +62,29 @@ use Carbon\Carbon;
                     </div>
     
                     <div class="clima-tempo col-2">
-                        <div class="climacell-widget" data-apikey="gO8KkiXKIf5u1zdxkwpFbQHGxCmuumxY" data-type="nowcast" data-location-name="Aviário, Feira de Santana - BA, Brasil" data-location-lon="-38.9302726" data-location-lat="-12.3012574" data-size-mode="small" data-font-color="#000" data-background-color="#fff" data-font-family="verdana" data-weather-params="temp:C" data-allow-users-enter-address="false" ></div>
+                        {{now()}}
                     </div>
                 </div>
             </section>
 
-            <nav class="container-fluid navbar nav-admin navbar-expand-lg navbar-light mt-2 pr-5 home-page">                    
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon "></span>
+            <nav class="container-fluid navbar nav-admin navbar-expand-lg navbar-light mt-md-2 pr-md-5 home-page">                    
+                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
+                @if(Auth::user())
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+                @else 
+                <div class="collapse navbar-collapse justify-content-end mr-md-5 pr-md-5" id="navbarNavAltMarkup">
+                @endif
                     @auth    
-                        <ul class="navbar-nav justify-content-end ">
+                        <ul class="navbar-nav">
                             @if(Auth::user()->ehGerente)
                                 <li class="nav-item ">
                                     <a class="nav-link" href="{{route('users.index')}}" >Usuários <span class="sr-only">(current)</span></a>
                                 </li>
                             @endif
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Notícias
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -129,14 +136,14 @@ use Carbon\Carbon;
                     @endauth
 
                     @if(!Auth::user())
-                    <ul class="navbar-nav justify-content-end ">
+                    <ul class="navbar-nav  justify-content-between ">
                         
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{route('users.index')}}" >Início<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('aviario.index')}}" >Início<span class="sr-only">(current)</span></a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link " href="#">Notícias</a>
+                            <a class="nav-link " href="{{route('posts.lista')}}">Notícias</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Guia Comercial</a>
@@ -167,12 +174,22 @@ use Carbon\Carbon;
                             </li>
                         @endguest
                     </ul>
+
+                    <form class="form-inline pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                        @csrf
+                        <input type="text" hidden="true" name="option" value="nome">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Procurar" aria-label="Search">
+                        <button hidden="true" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                   
                     @endif
+                    
                 </div>
+                
             </nav>
         
         
-        <main class="content p-4">
+        <main class="content p-4 mb-3">
             @yield('content')
         </main>
     </div>

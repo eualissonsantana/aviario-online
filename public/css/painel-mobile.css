@@ -57,5 +57,17 @@
         justify-content: space-between !important;
         margin: auto;
     }
+
+    .nav-admin {
+        margin-top: 0 !important;
+    }
+
+    .navbar-toggler-icon {
+        color: #fff !important;
+    }
+
+    .navbar-toggler {
+        border-color: #fff !important;
+    }
     
 }

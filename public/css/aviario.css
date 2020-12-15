@@ -25,6 +25,7 @@ html,body
 .exibe-noticia h1{
     font-size: 2rem;
     font-weight: bolder;
+    line-height: 1;
 }
 
 .exibe-noticia h3 {
@@ -123,6 +124,22 @@ a:hover {
     right: 0;
 }
 
+.deixe-comentario {
+    border-bottom: 3px solid #0084B8;
+    font-size: 32px !important;
+    font-weight: bolder;
+    color: #333;
+}
+
+.exibe-noticia p {
+    font-size: 1rem;
+}
+
+.aviario-noticias .imagem-noticia img{
+    width: 320px;
+    height: 200px;
+    object-fit: cover;
+}
 
 
 @media only screen and (min-width: 1400px) {
@@ -144,6 +161,12 @@ a:hover {
 
     .anuncios-laterais img {
         width: 100%;
+    }
+
+    .aviario-noticias .imagem-noticia img{
+        width: 360px;
+        height: 220px;
+        object-fit: cover;
     }
 
 }
@@ -187,6 +210,15 @@ a:hover {
 
     .clima-tempo input {
         visibility: hidden;
+    }
+
+    .exibe-noticia .noticia-imagem img {
+        width: 100%;
+    }
+
+    .aviario-noticias .imagem-noticia img{
+        width: 100%;
+        object-fit: cover;
     }
 
 

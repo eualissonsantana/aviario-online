@@ -58,6 +58,7 @@ Route::any('/painel/empresas/categorias/buscar-por-ramo', [EmpresaCategoriaContr
 // Rotas comuns
 
 Route::get('/', [AviarioController::class, 'index'])->name('aviario.index');
+Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');
 
 

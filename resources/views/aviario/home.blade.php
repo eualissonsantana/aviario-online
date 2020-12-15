@@ -6,7 +6,7 @@
             <article class="ultimo-post ">
                 <h6>{{$ultimoPost->categoria->descricao}}</h6>
                 <h2> {{$ultimoPost->titulo}} </h2>
-                <p class="mt-1"> {{$ultimoPost->previa}} </p>
+                <p class="mt-3"> {{$ultimoPost->previa}} </p>
             </article>
         </a>
         <hr>
