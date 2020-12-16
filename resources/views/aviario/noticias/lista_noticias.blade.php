@@ -43,26 +43,26 @@
             @foreach ($posts as $post)
                 <li> 
                     <section class="row justify-content-between px-md-3">
-                        <div class="row col-12 col-md-9 li-noticia">
-                            <article class="col-6 col-md-4 imagem-noticia px-0">
-                                <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}"/> 
-                            </article>
-                            <article class="col-6 col-md-8 pl-4 d-flex align-content-between flex-wrap titulo-noticia">    
-                                <div class="col-12">
-                                    <h6> {{$post->categoria->descricao}} </h6>
-                                    <h4 class="">{{$post->titulo}} </h4>
-                                </div>
-                                <div class="col-12 d-none d-sm-block previa">
-                                    <p>{{$post->previa}}</p>
-                                </div>
-                                <div class="col-12">
-                                    <p> {{$post->created_at}} </p>
-                                </div>
-                            </article>
-                            <hr class="col-11 col-md-12">
-                        </div>
-
-                        
+                        <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
+                            <div class="row col-12 col-md-9 li-noticia">
+                                <article class="col-6 col-md-4 imagem-noticia px-0">
+                                    <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                                </article>
+                                <article class="col-6 col-md-8 pl-4 d-flex align-content-between flex-wrap titulo-noticia">    
+                                    <div class="col-12">
+                                        <h6> {{$post->categoria->descricao}} </h6>
+                                        <h4 class="">{{$post->titulo}} </h4>
+                                    </div>
+                                    <div class="col-12 d-none d-sm-block previa">
+                                        <p>{{$post->previa}}</p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p> {{$post->created_at}} </p>
+                                    </div>
+                                </article>
+                                <hr class="col-11 col-md-12">
+                            </div>                        
+                        </a>
                     </section>
                 </li>
             @endforeach

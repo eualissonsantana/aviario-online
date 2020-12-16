@@ -40,6 +40,10 @@ html,body
     color: #757575;
 }
 
+h4 {
+    font-size: 1rem;
+}
+
 .exibe-noticia hr {
     border-color: #a7a7a7;
 }
@@ -141,6 +145,33 @@ a:hover {
     object-fit: cover;
 }
 
+.guia-comercial .categorias a{
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.empresas-por-categoria .imagem-comercio img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.empresas-por-categoria h3 {
+    font-weight: bolder;
+}
+
+.empresas-por-categoria .info-comercio h4 {
+    font-size: 1.4rem;
+}
+
+.empresas-por-categoria .info-comercio p {
+    font-size: 1rem;
+}
+
+.empresas-por-categoria ul {
+    padding-inline-start: 0 !important;
+}
 
 @media only screen and (min-width: 1400px) {
     .aviario-home .penultimo-post img {
@@ -168,7 +199,20 @@ a:hover {
         height: 220px;
         object-fit: cover;
     }
+   
+    .empresas-por-categoria .imagem-comercio img{
+        width: 240px;
+        height: 240px;
+        object-fit: cover;
+    }
+}
 
+@media only screen and (max-width: 1360px) {
+    .empresas-por-categoria .imagem-comercio img{
+        width: 215px;
+        height: 215px;
+        object-fit: cover;
+    }
 }
 
 @media only screen and (max-width: 414px) {
@@ -220,6 +264,22 @@ a:hover {
         width: 100%;
         object-fit: cover;
     }
+
+    .empresas-por-categoria .imagem-comercio img{
+        width: 100%;
+        height: 110px;
+        object-fit: cover;
+    }
+
+    .empresas-por-categoria .contatos h4 {
+        font-size: 1.2rem;
+    }
+
+    .empresas-por-categoria .info-comercio p {
+        font-size: 0.8rem;
+    }
+
+   
 
 
 

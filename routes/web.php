@@ -57,14 +57,14 @@ Route::any('/painel/empresas/categorias/buscar-por-ramo', [EmpresaCategoriaContr
 
 // Rotas comuns
 
-Route::get('/', [AviarioController::class, 'index'])->name('aviario.index');
+Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
+Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
 Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');
 
-
-Route::get('/guia-comercial', [EmpresaController::class, 'show'])->name('empresas.show');
-Route::get('/guia-comercial/{categoria}', [EmpresaController::class, 'show'])->name('empresas.show');
-Route::get('/guia-comercial/mostrar/{slug}/{id}', [EmpresaController::class, 'buscaEmpresa'])->name('teste.busca');
+Route::get('/guia-comercial', [EmpresaController::class, 'guia_index'])->name('guia.index');
+Route::get('/guia-comercial/{categoria}', [EmpresaController::class, 'show'])->name('guia.categoria');
+Route::get('/guia-comercial/mostrar/{slug}/{id}', [EmpresaController::class, 'buscaEmpresa'])->name('empresas.show');
 
 
 Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');

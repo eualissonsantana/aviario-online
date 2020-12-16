@@ -35,6 +35,18 @@
                     </div>
                 </div>
             </article>
+
+            <article class="col-md-3 anuncios-laterais">
+                <div class="col-12 anuncio px-0 mb-4">
+                    <img src="{{ url('img/lateral-1.png/') }}" />
+                </div>
+                <div class="col-12 anuncio px-0 mb-4">
+                    <img src="{{ url('img/lateral-2.jpg/') }}" />
+                </div>
+                <div class="col-12 anuncio px-0 mb-4">
+                    <img src="{{ url('img/lateral-1.png/') }}" />
+                </div>
+            </article>
         </section>
         
     </section>

@@ -146,7 +146,7 @@ use Carbon\Carbon;
                             <a class="nav-link " href="{{route('posts.lista')}}">Notícias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Guia Comercial</a>
+                            <a class="nav-link" href="{{route('guia.index')}}">Guia Comercial</a>
                         </li>
                         @guest
                         @if (Route::has('login'))

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use App\Models\Endereco;
 use App\Models\EmpresaCategoria;
+use App\Models\Ramo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -16,6 +17,7 @@ class EmpresaController extends Controller
 
     private $empresa;
     private $empresas;
+    private $ramos;
     private $categorias;
     private $endereco;
 
@@ -24,6 +26,7 @@ class EmpresaController extends Controller
         $this->empresa = new Empresa();
         $this->empresas = Empresa::paginate();
         $this->categorias = EmpresaCategoria::all()->sortBy("descricao");
+        $this->ramos = Ramo::all()->sortBy("descricao");
         $this->endereco = new Endereco();
     }
 
@@ -39,6 +42,14 @@ class EmpresaController extends Controller
         $categorias = $this->categorias;
 
         return view('listagem.empresas', compact('empresas', 'categorias'));
+    }
+
+    public function guia_index()
+    {
+        $ramos = $this->ramos;
+        $categorias = $this->categorias;
+
+        return view('aviario.guia-comercial.index', compact('ramos', 'categorias'));
     }
 
     /**
@@ -121,6 +132,17 @@ class EmpresaController extends Controller
         $this->uploadImage($request, $slug, $id);
         
         return redirect()->route('empresas.index');
+    }
+
+    public function show($id) {
+        
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
+        $categoria = EmpresaCategoria::find($id);
+
+        return view('aviario.guia-comercial.empresas_por_categoria', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+        ]);
     }
 
     /**

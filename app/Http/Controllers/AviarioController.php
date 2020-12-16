@@ -55,6 +55,11 @@ class AviarioController extends Controller
         return view('aviario.home', compact('posts', 'categorias', 'ultimoPost', 'penultimoPost'));
     }
 
+    public function hotsite()
+    {
+        return view('aviario.index');
+    }
+
     
 
 }
