@@ -15,6 +15,7 @@ class CreateEnquetesTable extends Migration
     {
         Schema::create('enquetes', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->string('pergunta');
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('users');

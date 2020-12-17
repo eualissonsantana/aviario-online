@@ -8,6 +8,7 @@ use App\Http\Controllers\EmpresaCategoriaController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCategoriaController;
 use App\Http\Controllers\AviarioController;
+use App\Http\Controllers\BannerController;
 
 
 
@@ -54,6 +55,13 @@ Route::put('/painel/noticias/categorias/{categoria}', [PostCategoriaController::
 Route::delete('/painel/noticias/categorias/{categoria}', [PostCategoriaController::class, 'destroy'])->name('post_categorias.destroy')->middleware('auth');
 Route::any('/painel/empresas/categorias/buscar-por-ramo', [EmpresaCategoriaController::class, 'search'])->name('ramos.search');
 
+// Banners
+Route::get('/painel/banners', [BannerController::class, 'index'])->name('banners.index')->middleware('auth');
+Route::get('/painel/banners/cadastro', [BannerController::class, 'create'])->name('banners.create')->middleware('auth');
+Route::post('/painel/baneners/cadastro', [BannerController::class, 'store'])->name('banners.store')->middleware('auth');
+Route::get('/painel/banners/{banner}/edit', [BannerController::class, 'edit'])->name('banners.edit')->middleware('auth');
+Route::put('/painel/banners/{banner}', [BannerController::class, 'update'])->name('banners.update')->middleware('auth');
+Route::delete('/painel/banners/{banner}', [BannerController::class, 'destroy'])->name('banners.destroy')->middleware('auth');
 
 // Rotas comuns
 

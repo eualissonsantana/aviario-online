@@ -23,27 +23,29 @@ class AviarioController extends Controller
 
     public function __construct()
     {
-        $this->ultimoPost = Post::latest()->first();
-        //dd($this->lastPost);
-        $this->post = new Post();
-        $this->postCategoria = new PostCategoria();
-        
-        Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(3, function($noticias){
-            $i = 0;
-            foreach ($noticias as $post)
-            {
-                if($i == 0) {
-                    $this->penultimoPost = $post;
-                    $i++;
-                }else {
-                    $this->posts[] = $post;
-                }
-            }
+        if(sizeof(Post::all()) > 0){
+            $this->ultimoPost = Post::latest()->first();
+            //dd($this->lastPost);
+            $this->post = new Post();
+            $this->postCategoria = new PostCategoria();
             
-            return false;
-        });
+            Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(3, function($noticias){
+                $i = 0;
+                foreach ($noticias as $post)
+                {
+                    if($i == 0) {
+                        $this->penultimoPost = $post;
+                        $i++;
+                    }else {
+                        $this->posts[] = $post;
+                    }
+                }
+                
+                return false;
+            });
 
-        $this->postCategorias = PostCategoria::all();
+            $this->postCategorias = PostCategoria::all();
+        }
     }
 
     public function index () {

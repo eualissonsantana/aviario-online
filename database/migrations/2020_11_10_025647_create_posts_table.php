@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('titulo');
             $table->string('imagem')->nullable();
             $table->string('previa');
+            $table->bigInteger('visitas');
             $table->longText('conteudo');
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('user_id');
