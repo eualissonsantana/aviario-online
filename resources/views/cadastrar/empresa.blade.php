@@ -179,8 +179,8 @@
                                     <label class="form-check-label" for="inlineCheckbox1">Débito</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" name="aceitaDinheiro" id="inlineCheckbox1" value="1" @if(isset($empresa) && $empresa->aceitaDinheiro) checked @endif>
-                                    <label class="form-check-label" for="inlineCheckbox1">Dinheiro</label>
+                                    <input class="form-check-input" type="checkbox" name="aceitaPix" id="inlineCheckbox1" value="1" @if(isset($empresa) && $empresa->aceitaPix) checked @endif>
+                                    <label class="form-check-label" for="inlineCheckbox1">Pix</label>
                                 </div>
                             </div>
                         </div>   

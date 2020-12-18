@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -55,14 +56,14 @@ class BannerController extends Controller
         $banner = $this->banner;
         $banner->titulo = $data['titulo'];
         $banner->posicao = $data['posicao'];
-        $banner->usuario_id = $data['usuario_id'];
-        
+        $banner->usuario_id = Auth::user()->id;
+        $banner->imagem = 'temp';
         $banner->save();
-        
-        $lastInsert =  DB::table('posts')->orderBy('id','desc')->first();
+
+        $lastInsert =  DB::table('banners')->orderBy('id','desc')->first();
         $id = $lastInsert->id;
         $this->uploadImage($request, $id);
-
+        
         return redirect()->route('banners.index',  ['banners' => Banner::all()]);
     }
 
@@ -133,25 +134,27 @@ class BannerController extends Controller
     }
 
     public function uploadImage($request, $id)
-    {
+    {   
+        //dd($request->hasFile('imagem'),  $request->file('imagem'), $request->imagem);
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            $extension = $request->imagem->extension();
+
             $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
-            })->encode('jpg');
+            })->encode($extension);
 
-            $extension = $request->imagem->extension();
             $nameFile = "{$id}.{$extension}";
             $hash = md5($resize->__toString());
          
             $save = Storage::put("imagens/banners/{$nameFile}", $resize->__toString());
-            $post = $this->post;
-            $post->where(['id'=>$id])->update([
+            $banner = $this->banner;
+            $banner->where(['id'=>$id])->update([
                 'imagem' => $nameFile,
             ]); 
 
             return;
         }
 
-        return null;
+        return "alisson";
     }
 }
