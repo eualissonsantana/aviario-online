@@ -1,25 +1,26 @@
 @media only screen and (max-width: 414px) {
-    .content-child {
-        padding: 0;
-    }
-    
-    .btn {
-        width: 9.5rem;
-        height: 3rem;
+    .padding-padrao {
+        padding: 0 16px;
     }
 
-    .btn-cadastrar, .btn-salvar {
-        width: 100%;
-        margin-top: 20px;
+    #app {
+        padding: 0 0 30px;
     }
+
+    .nav-menu {
+        margin-top: 0 !important;  
+    }
+    
+    .btn-novo, .btn-salvar {
+        width: 95%;
+    }
+
 
     hr {
         border-color:  #858585;
     }
 
-    .botao-cadastrar .btn-cadastrar {
-        position: relative;
-    }
+    
 
     .usuarios ul {
         padding-top: 0 !important;

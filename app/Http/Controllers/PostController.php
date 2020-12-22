@@ -83,6 +83,7 @@ class PostController extends Controller
         $post->conteudo = $data['conteudo'];
         $post->user_id = $data['usuario_id'];
         $post->categoria_id = $data['categoria_id'];
+        $post->visitas = 0;
         
         $post->save();
         

@@ -99,14 +99,7 @@ h4 {
     text-overflow: ellipsis;
 }
 
-a {
-    color: #333;
-}
 
-a:hover {
-    text-decoration: none;
-    color: #333;
-}
 
 .box {
     max-width: 140px;
