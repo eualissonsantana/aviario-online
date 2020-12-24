@@ -1,11 +1,32 @@
 @extends('layouts.app')
 
 @section('content')    
-    <section class="content-child painel-noticias ">
-        <article class="row justify-content-between px-md-3">
-            <div class="col-sm-12 col-md-4 px-0">
-                <h2>Notícias</h2>
+<div class="painel-noticias">
+    <div class="row justify-content-between titulo">
+        <div class="col-6 col-md-6  mt-md-2">
+            <h2>Notícias</h2>
+        </div>
+        <div class="col-6 col-md-6 row text-right">
+            <div class="col-8 busca-nome d-none d-sm-block">
+                <form class="form-inline" action="{{route('posts.search')}}" method="POST">
+                    @csrf
+                    <input type="text" hidden="true" name="option" value="titulo">
+                    <input class="form-control " type="search" placeholder="Pesquisar por uma parte do nome" name="filter" aria-label="Search">
+                    <button hidden="true" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
             </div>
+            <div class="col-4">
+                <a href="{{route("posts.create")}}">
+                    <button class="btn btn-lg btn-novo">Nova</button>
+                </a>
+            </div>
+
+
+           
+        </div>
+    </div>
+    
+    <hr>
             
             <section class="row busca-box col-md-8 col-sm-12 justify-content-end mt-2 px-0">
                 <div class="col-sm-12 col-md-3 mr-2 busca-categoria px-0 d-none d-sm-block">

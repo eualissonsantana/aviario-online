@@ -22,6 +22,10 @@ body{
     padding: 0 !important;
 }
 
+.nav-item a:hover {
+    color: #fff;
+}
+
 h1, h2, h3, h4, h5, h6, p, small {
     padding: 0;
     margin: 0;
@@ -144,7 +148,8 @@ a:hover {
 }
 
 .busca-nome input {
-    width: 350px !important;
+    width: 300px !important;
+    height: 44px;
 }
 
 table {
@@ -183,7 +188,7 @@ table {
 
 .btn-lg {
     height: 44px;               
-    width: 200px;
+    width: 150px;
 }
 
 .btn-editar {
@@ -238,27 +243,14 @@ label {
 
 /********* USUÁRIOS *********/
 
-
-.painel-usuarios .titulo .teste{
-    align-items: baseline;
-}
-
 ul {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.usuarios th {
-    height: 10px !important;
-}
-
-.usuarios th:nth-child(1){
-    width: 20%;
-}
-
-.usuarios th:nth-child(2) {
-    width: 70%;
+.username {
+    margin: 12px 0 14px 0 ;
 }
 
 
@@ -315,3 +307,27 @@ ul {
 @media only screen and (min-width: 1400px) {
 
 }
+
+#import {
+    margin: 0em 0em 0em .2em;
+    content: 'Import Settings';
+    display: inline-block;
+    border: 1px solid;
+    border-color: #ddd #bbb #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+    font: bold 12px/1.2 Arial,sans-serif !important;
+    /* fallback */
+    background-color: #f9f9f9;
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#C2C1C1), to(#2F2727));
+  }
+  
+  .hideMe{
+      display: none;
+  }

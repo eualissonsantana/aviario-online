@@ -25,18 +25,18 @@
                                     <h5>Nome</h5>
                                     <h5 class="thin">{{$user->name}}</h5>
                                 </div>
-                                <div class="mt-2">
+                                <div class="username">
                                     <h5>Username</h5>
                                     <h5 class="thin">{{$user->username}}</h5>
                                 </div>
-                                <div class="row justify-content-start mt-2">
+                                <div class="row justify-content-start botoes">
                                     <div class="col pr-0">
-                                        <a href="{{url("painel/users/$user->id/edit")}}">
+                                        <a href="{{url("painel/usuarios/$user->id/edit")}}">
                                             <button class="btn btn-sm btn-editar">Editar</button>
                                         </a>
                                     </div>
                                     <div class="col pl-0 text-right">
-                                        <a href="{{url("painel/users/$user->id")}}" class="js-del-user">
+                                        <a href="{{url("painel/usuarios/$user->id")}}" class="js-del-user">
                                             <button class="btn btn-sm btn-excluir">Excluir</button>
                                         </a>
                                     </div>

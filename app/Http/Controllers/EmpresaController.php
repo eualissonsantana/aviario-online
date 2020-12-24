@@ -6,11 +6,13 @@ use App\Models\Empresa;
 use App\Models\Endereco;
 use App\Models\EmpresaCategoria;
 use App\Models\Ramo;
+use App\Models\FotoAdicional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Http\Requests\ShareFormRequest;
 
 class EmpresaController extends Controller
 {
@@ -36,6 +38,13 @@ class EmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function cadastrarComercio(){
+        $categorias = $this->categorias;
+
+        return view('formulario', compact('categorias'));
+    }
+
     public function index()
     {
         $empresas = $this->empresas;
@@ -70,12 +79,81 @@ class EmpresaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+    public function storeFormulario(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nome' => ['required', 'string', 'max:255'],
+            'slogan' => ['max:255'],
+            'imagem' => [],
+            'fotos' => ['array', 'max:4'],
+            'telefone' => ['required', 'string', 'max:16', 'min:15'],
+            'email' => ['max:255'],
+            'youtube' => ['max:255'],
+            'instagram' => ['max:255'],
+            'facebook' => ['max:255'],
+            'bairro' => ['string', 'max:255'],
+            'logradouro' => ['max:255'],
+            'complemento' => ['max:255'],
+        ]); 
+       
+        $data = $request->all();
+        
+        $endereco_id = $this->createEndereco($request);
+
+        $slug = Str::slug($data['nome']);
+
+        $empresa = new Empresa();
+        $empresa->slug = Str::slug($data['nome']);
+        $empresa->nome = $data['nome'];
+        $empresa->slogan = $data['slogan'];
+        $empresa->descricao = $data['descricao'];
+        $empresa->telefone = $data['telefone'];
+        $empresa->email = $data['email'];
+        $empresa->youtube = $data['youtube'];
+        $empresa->instagram = $data['instagram'];
+        $empresa->facebook = $data['facebook'];
+        $empresa->categoria_id = $data['categoria_id'];
+        $empresa->endereco_id = $endereco_id;
+
+        if(array_key_exists("ehWhats", $data)){
+            $empresa->ehWhats = $data['ehWhats'];
+        }
+
+        if(array_key_exists("aceitaBoleto", $data)){
+            $empresa->aceitaBoleto = $data['aceitaBoleto'];
+        }
+
+        if(array_key_exists("aceitaCredito", $data)){
+            $empresa->aceitaCredito = $data['aceitaCredito'];
+        }
+
+        if(array_key_exists("aceitaDebito", $data)){
+            $empresa->aceitaDebito = $data['aceitaDebito'];
+        }
+
+        if(array_key_exists("aceitaPix", $data)){
+            $empresa->aceitaPix = $data['aceitaPix'];
+        }
+
+        $empresa->save();
+
+        $lastInsert =  DB::table('empresas')->orderBy('id','desc')->first();
+        $id = $lastInsert->id;
+        $this->uploadImage($request, $slug, $id);
+        $this->uploadImageAdd($request, $slug, $id);    
+        
+        return view('cadastro-sucesso');
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'nome' => ['required', 'string', 'max:255'],
             'slogan' => ['max:255'],
             'imagem' => [],
+            'fotos[]' => ['max:4'],
             'telefone' => ['required', 'string', 'max:14'],
             'email' => ['max:255'],
             'youtube' => ['max:255'],
@@ -121,8 +199,8 @@ class EmpresaController extends Controller
             $empresa->aceitaDebito = $data['aceitaDebito'];
         }
 
-        if(array_key_exists("aceitaDinheiro", $data)){
-            $empresa->aceitaDinheiro = $data['aceitaDinheiro'];
+        if(array_key_exists("aceitaPix", $data)){
+            $empresa->aceitaPix = $data['aceitaPix'];
         }
 
         $empresa->save();
@@ -130,7 +208,7 @@ class EmpresaController extends Controller
         $lastInsert =  DB::table('empresas')->orderBy('id','desc')->first();
         $id = $lastInsert->id;
         $this->uploadImage($request, $slug, $id);
-        
+        $this->uploadImageAdd($request, $slug, $id);    
         return redirect()->route('empresas.index');
     }
 
@@ -229,10 +307,10 @@ class EmpresaController extends Controller
             $aceitaDebito = 0;
         }
 
-        if(array_key_exists("aceitaDinheiro", $data)){
-            $aceitaDinheiro = $data['aceitaDinheiro'];
+        if(array_key_exists("aceitaPix", $data)){
+            $aceitaPix = $data['aceitaPix'];
         }else {
-            $aceitaDinheiro = 0;
+            $aceitaPix = 0;
         }
         
         $slug = Str::slug($data['nome']);
@@ -250,7 +328,7 @@ class EmpresaController extends Controller
             'categoria_id' => $data['categoria_id'],
             'endereco_id' => $id,
             'ehWhats' => $ehWhats,
-            'aceitaDinheiro' => $aceitaDinheiro,
+            'aceitaPix' => $aceitaPix,
             'aceitaDebito' => $aceitaDebito,
             'aceitaCredito' => $aceitaCredito,
             'aceitaBoleto' => $aceitaBoleto,
@@ -320,7 +398,7 @@ class EmpresaController extends Controller
     public function uploadImage($request, $slug, $id)
     {
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            $resize = Image::make($request->file('imagem'))->resize(300, null, function ($constraint) {
+            $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->encode('jpg');
 
@@ -328,11 +406,41 @@ class EmpresaController extends Controller
             $nameFile = "{$slug}-{$id}.{$extension}";
             $hash = md5($resize->__toString());
          
-            $save = Storage::put("imagens/empresas/{$nameFile}", $resize->__toString());
+            $save = Storage::put("imagens/empresas/logomarcas/{$nameFile}", $resize->__toString());
             $empresa = $this->empresa;
             $empresa->where(['id'=>$id])->update([
                 'imagem' => $nameFile,
             ]); 
+
+            return;
+        }
+
+        return null;
+    }
+
+    public function uploadImageAdd($request, $slug, $id)
+    {
+        if($request->hasFile('fotos')){
+            $files = $request->file('fotos');
+            $cont = 1;
+
+            foreach($files as $file){
+                $resize = Image::make($file)->resize(600, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->encode('jpg');
+
+                $extension = $file->extension();
+                $nameFile = "{$slug}-{$id}-{$cont}.{$extension}";
+                $hash = md5($resize->__toString());
+            
+                $save = Storage::put("imagens/empresas/adicionais/{$nameFile}", $resize->__toString());
+                $adicional = new FotoAdicional();
+                
+                $adicional->nome = $nameFile;
+                $adicional->empresa_id = $id;
+                $adicional->save();
+                $cont++;
+            }
 
             return;
         }

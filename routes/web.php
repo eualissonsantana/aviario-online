@@ -13,12 +13,12 @@ use App\Http\Controllers\BannerController;
 
 
 //Usuários
-Route::get('/painel/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
-Route::get('/painel/users/cadastro', [UserController::class, 'create'])->name('users.create')->middleware('auth');
-Route::post('/painel/users/cadastro', [UserController::class, 'store'])->name('users.store')->middleware('auth');
-Route::get('/painel/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
-Route::put('/painel/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
-Route::delete('/painel/users/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
+Route::get('/painel/usuarios', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+Route::get('/painel/usuarios/cadastro', [UserController::class, 'create'])->name('users.create')->middleware('auth');
+Route::post('/painel/usuarios/cadastro', [UserController::class, 'store'])->name('users.store')->middleware('auth');
+Route::get('/painel/usuarios/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
+Route::put('/painel/usuarios/{user}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
+Route::delete('/painel/usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 
 // Empresas
 Route::get('/painel/empresas', [EmpresaController::class, 'index'])->name('empresas.index')->middleware('auth');
@@ -76,6 +76,10 @@ Route::get('/guia-comercial/mostrar/{slug}/{id}', [EmpresaController::class, 'bu
 
 
 Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
+Route::get('/cadastrar-comercio', [App\Http\Controllers\EmpresaController::class, 'cadastrarComercio'])->name('cadastrar-comercio');
+Route::post('/cadastrar-comercio/enviado', [EmpresaController::class, 'storeFormulario'])->name('empresas.cadastrar-comercio');
+
+
 
 
 Auth::routes(['register' => false]);
