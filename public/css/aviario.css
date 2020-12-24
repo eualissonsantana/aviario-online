@@ -272,8 +272,11 @@ h4 {
         font-size: 0.8rem;
     }
 
-   
 
+}
 
-
+.btn-enviar {
+    background-color: #2d9cdb;
+    color: #fff;
+    width: 100%;
 }

@@ -145,7 +145,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-12 col-md- col-form-label text-md-left">
+                            <div class="form-group col-12 col-md-4 col-form-label text-md-left">
                                 <label for="email" class="col-form-label">Email</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  name="email" value="{{$empresa->email ?? ''}}">
 
@@ -180,7 +180,7 @@
                                 @enderror 
                             </div>
                 
-                            <div class="form-group col-12 col-m-4 col-form-label text-md-left">
+                            <div class="form-group col-12 col-md-4 col-form-label text-md-left">
                                 <label for="instagram" class="col-form-label">Instagram</label>
                                 <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror"  name="instagram">
 
@@ -273,8 +273,11 @@
                             </div>
                         </article>
                         
-                        <div class="row pr-3 justify-content-end">
-                            <button type="submit" class="btn btn-salvar">Salvar</button>
+                        <div class="row justify-content-end">
+                            <div class="col-12 col-md-3">
+                                <button type="submit" class="btn btn-enviar">Enviar</button>
+
+                            </div>
                         </div>
                     </form>
                 </article>
@@ -282,6 +285,5 @@
         </section>
             
     </section>
-    <script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>
 </body>
 </html>
