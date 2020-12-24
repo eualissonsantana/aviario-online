@@ -20,14 +20,14 @@
 <body>
     <section class="container formulario">
         <div class="text-center">
-            <img src="{{ url('img/aviario-online-logo.png') }}" alt="Logo Aviário Online" width="300px">
+            <img src="{{ url('img/logo-formulario.png') }}" alt="Logo Aviário Online" width="300px">
         </div>
         
         <section class="content-child empresa">
             <section class="card mb-5 mt-3">
                 <article class="card-body text-center p-4">
                     <h1>Cadastro efetuado com sucesso!</h1>
-                    <h5>Em breve sua empresa estará visível na internet para toda comunidade.</h5>
+                    <h5  class="mt-2">Em breve sua empresa estará visível na internet para toda comunidade.</h5>
                 </article>
             </section>
         </section>
