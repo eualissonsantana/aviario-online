@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         if(Gate::allows('gerente')) {
-            $usuarios = User::all()->forget(0);
+            $usuarios = User::paginate()->forget(0);
             return view('listagem.usuarios', compact('usuarios'));
         }else {
             return redirect('/');

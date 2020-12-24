@@ -1,0 +1,333 @@
+/********* GERAL *********/
+
+body{
+    background-color: #f2f5f9;
+    color: #4D4D4D;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#app {
+    padding: 30px 0;
+}
+
+.padding-padrao {
+    padding: 0 100px;
+}
+
+.nav-item a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 30px;
+    padding: 0 !important;
+}
+
+.nav-item a:hover {
+    color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6, p, small {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 44px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 36px;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.categoria h4 {
+    font-weight: 800;
+    color: #2F80ED;
+}
+
+h5 {
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: bold;
+}
+
+.thin {
+    font-weight: 500;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.home p {
+    font-size: 20px;
+    font-family: Open Sans;
+}
+
+a {
+    color: #4d4d4d;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #4d4d4d;
+}
+
+.bg-destaque {
+    background-color: #2D9CDB;
+}
+
+.nav-menu {
+    padding: 0 !important;
+    height: 50px;
+    margin: 24px 0 !important;  
+}
+
+.banners-topo img {
+    width: 100%;
+}    
+
+.av-card {
+    width: 100%;
+    border-radius: 8px;
+    background-color: #FFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.av-card:hover {
+    transform: scale(1.05);
+    transition-delay: 0.s;
+}
+
+.av-card-no-scale:hover{
+    transform: none;
+}
+
+.av-card-title {
+    padding: 12px;
+    background-color: #2D9CDB;
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.av-card-body {
+    padding: 12px;
+    margin: 0 !important;
+    align-items: center;
+}
+
+
+.av-card-body h4 {
+    font-size: 80px;
+    line-height: 80px;
+    color: #2D9CDB;
+    padding: 0 !important;
+}
+
+.av-card-body p {
+    color: #2D9CDB;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0;
+    padding-left: 4px;
+    line-height: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.busca-nome input {
+    width: 300px !important;
+    height: 44px;
+}
+
+table {
+    border: 1px solid #dee2e6;
+}
+
+.w-5{
+    display: none;
+}
+
+
+/********* BOTÕES *********/
+
+.btn {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    box-shadow: none;
+}
+
+.btn-excluir:hover{
+    color: #EB5757;
+}
+
+.btn-editar:hover {
+    color: #0084B8;
+}
+
+.btn-sm {
+    height: 44px;
+    width: 95%;
+}
+
+.btn-lg {
+    height: 44px;               
+    width: 150px;
+}
+
+.btn-editar {
+    border: 1px solid #0084B8;
+    color: #0084B8;
+}
+
+.btn-excluir {
+    border: 1px solid #EB5757;
+    color: #EB5757;
+}
+
+.btn-busca-categoria {
+    background-color: #8f8f8f;
+    width: auto;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.btn-novo, .btn-salvar {
+    background-color: #2EA44F;
+    color: #fff;
+}
+
+/********* LOGIN *********/
+
+.login-page .login-img {
+    margin: auto;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 0.6rem;
+}
+
+label {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.form-control:focus{
+    box-shadow: none !important;
+    border: 1px solid #0084B8;
+}
+
+.login-page .btn-entrar, .login-page .btn-salvar {
+    width: 100%;
+}
+
+
+/********* USUÁRIOS *********/
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.username {
+    margin: 12px 0 14px 0 ;
+}
+
+
+/********* COMÉRCIOS *********/
+
+.imagem-comercio {
+    margin-right: 15px;
+}
+
+.dados-comercio {
+    padding-top: 0 !important;
+}
+
+.dados-comercio small {
+    color: #06C7C4;
+}
+
+.dados-comercio .telefone h5 {
+    font-weight: 600;
+}
+
+.arquivo input{
+    padding:  20px !important;
+}
+
+.painel-empresas .busca-categoria select{
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+/********* NOTÍCIAS *********/
+
+
+
+.painel-nova-noticia .categoria label, .painel-nova-noticia .autor label {
+    height: 37px;
+}
+
+.painel-nova-noticia .categoria {
+    vertical-align: bottom;
+}
+
+.arquivo label {
+    height: 37px;
+}
+
+.painel-noticias .imagem-noticia img{
+    width: 250px;
+    height: 160px;
+    object-fit: cover;
+}
+
+
+@media only screen and (min-width: 1400px) {
+
+}
+
+#import {
+    margin: 0em 0em 0em .2em;
+    content: 'Import Settings';
+    display: inline-block;
+    border: 1px solid;
+    border-color: #ddd #bbb #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+    font: bold 12px/1.2 Arial,sans-serif !important;
+    /* fallback */
+    background-color: #f9f9f9;
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#C2C1C1), to(#2F2727));
+  }
+  
+  .hideMe{
+      display: none;
+  }

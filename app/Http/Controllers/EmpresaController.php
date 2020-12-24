@@ -5,21 +5,60 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use App\Models\Endereco;
 use App\Models\EmpresaCategoria;
+use App\Models\Ramo;
+use App\Models\FotoAdicional;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use App\Http\Requests\ShareFormRequest;
 
 class EmpresaController extends Controller
 {
+
+    private $empresa;
+    private $empresas;
+    private $ramos;
+    private $categorias;
+    private $endereco;
+
+    public function __construct()
+    {
+        $this->empresa = new Empresa();
+        $this->empresas = Empresa::paginate();
+        $this->categorias = EmpresaCategoria::all()->sortBy("descricao");
+        $this->ramos = Ramo::all()->sortBy("descricao");
+        $this->endereco = new Endereco();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function cadastrarComercio(){
+        $categorias = $this->categorias;
+
+        return view('formulario', compact('categorias'));
+    }
+
     public function index()
     {
-        $empresas = Empresa::all();
-        $categorias = EmpresaCategoria::all();
+        $empresas = $this->empresas;
+        $categorias = $this->categorias;
 
         return view('listagem.empresas', compact('empresas', 'categorias'));
+    }
+
+    public function guia_index()
+    {
+        $ramos = $this->ramos;
+        $categorias = $this->categorias;
+
+        return view('aviario.guia-comercial.index', compact('ramos', 'categorias'));
     }
 
     /**
@@ -29,7 +68,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        $categorias = EmpresaCategoria::all();
+        $categorias = $this->categorias;
 
         return view('cadastrar.empresa', compact('categorias'));
     }
@@ -40,41 +79,33 @@ class EmpresaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+
+    public function storeFormulario(Request $request)
     {
         $validatedData = $request->validate([
             'nome' => ['required', 'string', 'max:255'],
             'slogan' => ['max:255'],
             'imagem' => [],
-            'telefone' => ['required', 'string', 'max:14'],
+            'fotos' => ['array', 'max:4'],
+            'telefone' => ['required', 'string', 'max:16', 'min:15'],
             'email' => ['max:255'],
             'youtube' => ['max:255'],
             'instagram' => ['max:255'],
             'facebook' => ['max:255'],
             'bairro' => ['string', 'max:255'],
-            'rua' => ['max:255'],
-            'cep' => ['max:9'],
-            'cidade' => ['max:255'],
-            'estado' => ['max:2']
+            'logradouro' => ['max:255'],
+            'complemento' => ['max:255'],
         ]); 
        
         $data = $request->all();
         
-        $endereco = new Endereco();
-        $endereco->bairro = $data['bairro'];
-        $endereco->rua = $data['rua'];
-        $endereco->cep = $data['cep'];
-        $endereco->numero = $data['numero'];
-        $endereco->cidade = $data['cidade'];
-        $endereco->estado = $data['estado'];
+        $endereco_id = $this->createEndereco($request);
 
-        if(array_key_exists("ehComercial", $data)){
-            $endereco->ehComercial = $data['ehComercial'];
-        }
-
-        $endereco->save();
+        $slug = Str::slug($data['nome']);
 
         $empresa = new Empresa();
+        $empresa->slug = Str::slug($data['nome']);
         $empresa->nome = $data['nome'];
         $empresa->slogan = $data['slogan'];
         $empresa->descricao = $data['descricao'];
@@ -84,7 +115,7 @@ class EmpresaController extends Controller
         $empresa->instagram = $data['instagram'];
         $empresa->facebook = $data['facebook'];
         $empresa->categoria_id = $data['categoria_id'];
-        $empresa->endereco_id = $endereco->id;
+        $empresa->endereco_id = $endereco_id;
 
         if(array_key_exists("ehWhats", $data)){
             $empresa->ehWhats = $data['ehWhats'];
@@ -102,28 +133,94 @@ class EmpresaController extends Controller
             $empresa->aceitaDebito = $data['aceitaDebito'];
         }
 
-        if(array_key_exists("aceitaDinheiro", $data)){
-            $empresa->aceitaDinheiro = $data['aceitaDinheiro'];
+        if(array_key_exists("aceitaPix", $data)){
+            $empresa->aceitaPix = $data['aceitaPix'];
         }
 
-        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            if(!Empresa::all()->isEmpty()){
-                $id = Empresa::latest()->first()->id + 1;
-            }else {
-                $id = 0;
-            }
+        $empresa->save();
 
-            $path = 'imagens/empresas';
-            $extension = $request->imagem->extension();
-            $nameFile = "{$id}.{$extension}";
-            $empresa->imagem = $nameFile;
+        $lastInsert =  DB::table('empresas')->orderBy('id','desc')->first();
+        $id = $lastInsert->id;
+        $this->uploadImage($request, $slug, $id);
+        $this->uploadImageAdd($request, $slug, $id);    
+        
+        return view('cadastro-sucesso');
+    }
 
-            $upload = $request->imagem->storeAs($path, $nameFile);
-        }  
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nome' => ['required', 'string', 'max:255'],
+            'slogan' => ['max:255'],
+            'imagem' => [],
+            'fotos[]' => ['max:4'],
+            'telefone' => ['required', 'string', 'max:14'],
+            'email' => ['max:255'],
+            'youtube' => ['max:255'],
+            'instagram' => ['max:255'],
+            'facebook' => ['max:255'],
+            'bairro' => ['string', 'max:255'],
+            'logradouro' => ['max:255'],
+            'complemento' => ['max:255'],
+        ]); 
+       
+        $data = $request->all();
+        
+        $endereco_id = $this->createEndereco($request);
+
+        $slug = Str::slug($data['nome']);
+
+        $empresa = new Empresa();
+        $empresa->slug = Str::slug($data['nome']);
+        $empresa->nome = $data['nome'];
+        $empresa->slogan = $data['slogan'];
+        $empresa->descricao = $data['descricao'];
+        $empresa->telefone = $data['telefone'];
+        $empresa->email = $data['email'];
+        $empresa->youtube = $data['youtube'];
+        $empresa->instagram = $data['instagram'];
+        $empresa->facebook = $data['facebook'];
+        $empresa->categoria_id = $data['categoria_id'];
+        $empresa->endereco_id = $endereco_id;
+
+        if(array_key_exists("ehWhats", $data)){
+            $empresa->ehWhats = $data['ehWhats'];
+        }
+
+        if(array_key_exists("aceitaBoleto", $data)){
+            $empresa->aceitaBoleto = $data['aceitaBoleto'];
+        }
+
+        if(array_key_exists("aceitaCredito", $data)){
+            $empresa->aceitaCredito = $data['aceitaCredito'];
+        }
+
+        if(array_key_exists("aceitaDebito", $data)){
+            $empresa->aceitaDebito = $data['aceitaDebito'];
+        }
+
+        if(array_key_exists("aceitaPix", $data)){
+            $empresa->aceitaPix = $data['aceitaPix'];
+        }
 
         $empresa->save();
-        
+
+        $lastInsert =  DB::table('empresas')->orderBy('id','desc')->first();
+        $id = $lastInsert->id;
+        $this->uploadImage($request, $slug, $id);
+        $this->uploadImageAdd($request, $slug, $id);    
         return redirect()->route('empresas.index');
+    }
+
+    public function show($id) {
+        
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
+        $categoria = EmpresaCategoria::find($id);
+
+        return view('aviario.guia-comercial.empresas_por_categoria', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+        ]);
     }
 
     /**
@@ -132,9 +229,14 @@ class EmpresaController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(Empresa $empresa)
-    {
-        //
+    public function buscaEmpresa($slug, $id)
+    {   
+        if (!$empresa = Empresa::find($id))
+            return redirect()->back();
+    
+        return view('aviario.guia-comercial.exibe_empresa', [
+            'empresa' => $empresa
+        ]);
     }
 
     /**
@@ -145,8 +247,9 @@ class EmpresaController extends Controller
      */
     public function edit($id)
     {
-        $empresa = new Empresa();
-        $categorias = EmpresaCategoria::all();
+        $empresa = $this->empresa;
+        $categorias = $this->categorias;
+        
         $empresa = $empresa->find($id);
         
         return view('cadastrar.empresa', compact('empresa', 'categorias'));
@@ -171,33 +274,14 @@ class EmpresaController extends Controller
             'instagram' => ['max:255'],
             'facebook' => ['max:255'],
             'bairro' => ['string', 'max:255'],
-            'rua' => ['max:255'],
+            'logradouro' => ['max:255'],
             'cep' => ['max:9'],
-            'cidade' => ['max:255'],
-            'estado' => ['max:2']
         ]); 
        
         $data = $request->all();
 
-        $empresa = new Empresa();
-        $endereco = new Endereco();
-
-        
-        if(array_key_exists("ehComercial", $data)){
-            $ehComercial = $data['ehComercial'];
-        }else {
-            $ehComercial = 0;
-        }
-
-        $endereco->where(['id'=>$id])->update([
-            'bairro' => $data['bairro'],
-            'rua' => $data['rua'],
-            'cep' => $data['cep'],
-            'numero' => $data['numero'],
-            'cidade' => $data['cidade'],
-            'estado' => $data['estado'],
-            'ehComercial' => $ehComercial,
-        ]);
+        $this->updateEndereco($request, $id);
+        $empresa = $this->empresa;
 
         if(array_key_exists("ehWhats", $data)){
             $ehWhats = $data['ehWhats'];
@@ -223,13 +307,16 @@ class EmpresaController extends Controller
             $aceitaDebito = 0;
         }
 
-        if(array_key_exists("aceitaDinheiro", $data)){
-            $aceitaDinheiro = $data['aceitaDinheiro'];
+        if(array_key_exists("aceitaPix", $data)){
+            $aceitaPix = $data['aceitaPix'];
         }else {
-            $aceitaDinheiro = 0;
+            $aceitaPix = 0;
         }
-
+        
+        $slug = Str::slug($data['nome']);
+        
         $empresa->where(['id'=>$id])->update([
+            'slug' => Str::slug($data['nome']),
             'nome' => $data['nome'],
             'slogan' => $data['slogan'],
             'descricao' => $data['descricao'],
@@ -241,31 +328,14 @@ class EmpresaController extends Controller
             'categoria_id' => $data['categoria_id'],
             'endereco_id' => $id,
             'ehWhats' => $ehWhats,
-            'aceitaDinheiro' => $aceitaDinheiro,
+            'aceitaPix' => $aceitaPix,
             'aceitaDebito' => $aceitaDebito,
             'aceitaCredito' => $aceitaCredito,
             'aceitaBoleto' => $aceitaBoleto,
         ]);
+            
+        $this->uploadImage($request, $slug, $id);
 
-        
-        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-
-            $path = 'imagens/empresas';
-            $extension = $request->imagem->extension();
-            $nameFile = "{$id}.{$extension}";
-            $empresa->where(['id'=>$id])->update([
-                'imagem' => $nameFile
-            ]);
-
-            $upload = $request->imagem->storeAs($path, $nameFile);
-
-            if(!$upload) {
-                return redirect()
-                            ->back()
-                            ->with('error', 'Falha ao fazer upload de imagem');
-            }
-        }  
-        
         return redirect()->route('empresas.index');
     }
 
@@ -278,10 +348,104 @@ class EmpresaController extends Controller
     
     public function destroy($id)
     {
-        $empresa = new Empresa();
+        $empresa = $this->empresa;
         $empresa = $empresa->destroy($id);
 
         return($empresa)?"Sim":"Não";
+    }
+
+    public function createEndereco(Request $request)
+    {
+        $data = $request->all();
+        
+        $endereco = $this->endereco;
+        $endereco->bairro = $data['bairro'];
+        $endereco->logradouro = $data['logradouro'];
+        $endereco->numero = $data['numero'];
+        $endereco->complemento = $data['complemento'];
+
+        if(array_key_exists("ehComercial", $data)){
+            $endereco->ehComercial = $data['ehComercial'];
+        }
+
+        $endereco->save();
+
+        return $endereco->id;
+    }
+
+    public function updateEndereco(Request $request, $id)
+    {
+        $data = $request->all();
+        $endereco = $this->endereco;
+
+        if(array_key_exists("ehComercial", $data)){
+            $ehComercial = $data['ehComercial'];
+        }else {
+            $ehComercial = 0;
+        }
+
+        $endereco->where(['id'=>$id])->update([
+            'bairro' => $data['bairro'],
+            'logradouro' => $data['logradouro'],
+            'complemento' => $data['complemento'],
+            'numero' => $data['numero'],
+            'ehComercial' => $ehComercial,
+        ]);
+
+        return;
+    }
+
+    public function uploadImage($request, $slug, $id)
+    {
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode('jpg');
+
+            $extension = $request->imagem->extension();
+            $nameFile = "{$slug}-{$id}.{$extension}";
+            $hash = md5($resize->__toString());
+         
+            $save = Storage::put("imagens/empresas/logomarcas/{$nameFile}", $resize->__toString());
+            $empresa = $this->empresa;
+            $empresa->where(['id'=>$id])->update([
+                'imagem' => $nameFile,
+            ]); 
+
+            return;
+        }
+
+        return null;
+    }
+
+    public function uploadImageAdd($request, $slug, $id)
+    {
+        if($request->hasFile('fotos')){
+            $files = $request->file('fotos');
+            $cont = 1;
+
+            foreach($files as $file){
+                $resize = Image::make($file)->resize(600, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->encode('jpg');
+
+                $extension = $file->extension();
+                $nameFile = "{$slug}-{$id}-{$cont}.{$extension}";
+                $hash = md5($resize->__toString());
+            
+                $save = Storage::put("imagens/empresas/adicionais/{$nameFile}", $resize->__toString());
+                $adicional = new FotoAdicional();
+                
+                $adicional->nome = $nameFile;
+                $adicional->empresa_id = $id;
+                $adicional->save();
+                $cont++;
+            }
+
+            return;
+        }
+
+        return null;
     }
 
     public function search(Request $request)
@@ -298,5 +462,6 @@ class EmpresaController extends Controller
         return view('listagem.empresas', compact('empresas', 'categorias'));
         
     }
+
     
 }

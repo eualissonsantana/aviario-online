@@ -15,6 +15,7 @@ class CreateEmpresasTable extends Migration
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->string('nome');
             $table->string('slogan')->nullable();
             $table->string('imagem')->nullable();
@@ -28,7 +29,7 @@ class CreateEmpresasTable extends Migration
             $table->boolean('aceitaBoleto')->default(0);
             $table->boolean('aceitaCredito')->default(0);
             $table->boolean('aceitaDebito')->default(0);
-            $table->boolean('aceitaDinheiro')->default(0);
+            $table->boolean('aceitaPix')->default(0);
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('endereco_id');
             $table->foreign('categoria_id')->references('id')->on('empresa_categorias');

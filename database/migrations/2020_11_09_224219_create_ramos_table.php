@@ -15,6 +15,7 @@ class CreateRamosTable extends Migration
     {
         Schema::create('ramos', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->string('descricao');
             $table->timestamps();
         });
