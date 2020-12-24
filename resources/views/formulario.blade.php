@@ -27,7 +27,7 @@
             <section class="card mb-5 mt-3">
                 <article class="card-body">
             
-                        <h2 >Cadastra-se</h2>
+                        <h2 >Cadastre-se</h2>
                         <small class="ml-1">Os campos com asterisco (*) são obrigatórios</small>
             
 
