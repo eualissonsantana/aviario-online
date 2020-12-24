@@ -1,3 +1,12 @@
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
 .aviario-home h2{
     font-size: 2.1rem;
     font-weight: 700;
@@ -16,6 +25,7 @@
 .exibe-noticia h1{
     font-size: 2rem;
     font-weight: bolder;
+    line-height: 1;
 }
 
 .exibe-noticia h3 {
@@ -30,13 +40,17 @@
     color: #757575;
 }
 
+h4 {
+    font-size: 1rem;
+}
+
 .exibe-noticia hr {
     border-color: #a7a7a7;
 }
 
 .aviario-home .penultimo-post img {
     width: 100%;
-    height: 378px;
+    height: 332px;
     object-fit: cover;
 }
 
@@ -67,29 +81,202 @@
 }
 
 .aviario-home .posts-laterais img {
-    width: 280px;
-    height: 176px;
+    width: 100%;
+    height: 152px;
     object-fit: cover;
 }
 
 .aviario-home .posts-laterais:nth-child(1){
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 .aviario-home .previa {   
     width: 100%;      
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-a {
+
+
+.box {
+    max-width: 140px;
+    height: 140px;
+    background-color: #FFD800;
+}
+
+
+.aviario-home .anuncios-laterais .anuncio:nth-child(1){
+    margin-bottom: 20px;
+}
+
+.anuncios-laterais img {
+    width: 100%;
+}
+
+.anuncios-laterais {
+    position: relative;
+    right: 0;
+}
+
+.deixe-comentario {
+    border-bottom: 3px solid #0084B8;
+    font-size: 32px !important;
+    font-weight: bolder;
     color: #333;
 }
 
-a:hover {
-    text-decoration: none;
-    color: #333;
+.exibe-noticia p {
+    font-size: 1rem;
+}
+
+.aviario-noticias .imagem-noticia img{
+    width: 320px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.guia-comercial .categorias a{
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+
+.empresas-por-categoria .imagem-comercio img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.empresas-por-categoria h3 {
+    font-weight: bolder;
+}
+
+.empresas-por-categoria .info-comercio h4 {
+    font-size: 1.4rem;
+}
+
+.empresas-por-categoria .info-comercio p {
+    font-size: 1rem;
+}
+
+.empresas-por-categoria ul {
+    padding-inline-start: 0 !important;
+}
+
+@media only screen and (min-width: 1400px) {
+    .aviario-home .penultimo-post img {
+        width: 100%;
+        height: 375px;
+        object-fit: cover;
+    }
+    
+    .aviario-home .posts-laterais img {
+        width: 100%;
+        height: 174px;
+        object-fit: cover;
+    }
+
+    .aviario-home .previa { 
+        -webkit-line-clamp: 3;
+    }
+
+    .anuncios-laterais img {
+        width: 100%;
+    }
+
+    .aviario-noticias .imagem-noticia img{
+        width: 360px;
+        height: 220px;
+        object-fit: cover;
+    }
+   
+    .empresas-por-categoria .imagem-comercio img{
+        width: 240px;
+        height: 240px;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (max-width: 1360px) {
+    .empresas-por-categoria .imagem-comercio img{
+        width: 215px;
+        height: 215px;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+
+    .aviario-home h2 {
+        font-size: 1.7rem;
+        line-height: 1.1;
+    }
+
+    .aviario-home .posts-laterais h4 {
+        font-size: 1rem;
+    }
+
+
+    .aviario-home .penultimo-post img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .aviario-home .posts-laterais {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    
+    .aviario-home .posts-laterais img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+    }
+
+    .aviario-home .previa { 
+        -webkit-line-clamp: 3;
+    }
+
+    .anuncios-laterais img {
+        width: 100%;
+    }
+
+    .clima-tempo input {
+        visibility: hidden;
+    }
+
+    .exibe-noticia .noticia-imagem img {
+        width: 100%;
+    }
+
+    .aviario-noticias .imagem-noticia img{
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .empresas-por-categoria .imagem-comercio img{
+        width: 100%;
+        height: 110px;
+        object-fit: cover;
+    }
+
+    .empresas-por-categoria .contatos h4 {
+        font-size: 1.2rem;
+    }
+
+    .empresas-por-categoria .info-comercio p {
+        font-size: 0.8rem;
+    }
+
+
+}
+
+.btn-enviar {
+    background-color: #2d9cdb;
+    color: #fff;
+    width: 100%;
 }

@@ -15,6 +15,7 @@ class CreateEmpresaCategoriasTable extends Migration
     {
         Schema::create('empresa_categorias', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
             $table->string('descricao');
             $table->unsignedBigInteger('ramo_id');
             $table->foreign('ramo_id')->references('id')->on('ramos');

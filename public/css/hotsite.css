@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    background-color: #eaeaea;
+    font-family: 'Raleway', sans-serif;
+    background-image: url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    overflow: auto;
+}
+
+.content {
+    padding: 50px;
+    margin: 0;
+}
+
+.content img {
+    width: 500px;
+}
+
+.image, .text {
+    align-items: initial;
+    justify-content: initial;
+}
+
+.content h2 {
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #616161;
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 415px) {
+    body {
+        background-image: url('../img/background-sm.jpg');
+    }
+
+    .content {
+        padding: 30px 0 0 10px;
+
+    } 
+
+    .content img {
+      width: 330px;
+    }
+
+    .content h2 {
+        text-align: initial;
+        font-size: 1.5rem;
+    }
+
+}
+
+@media only screen and (max-width: 320px) {
+    .content img {
+        width: 300px;
+    }
+}

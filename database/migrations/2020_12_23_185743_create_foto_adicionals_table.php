@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRamosTable extends Migration
+class CreateFotoAdicionalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateRamosTable extends Migration
      */
     public function up()
     {
-        Schema::create('ramos', function (Blueprint $table) {
+        Schema::create('foto_adicionals', function (Blueprint $table) {
             $table->id();
-            $table->string('slug');
-            $table->string('descricao');
+            $table->string('nome');
+            $table->unsignedBigInteger('empresa_id');
+            $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateRamosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ramos');
+        Schema::dropIfExists('foto_adicionals');
     }
 }

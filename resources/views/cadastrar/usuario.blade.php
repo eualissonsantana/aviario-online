@@ -11,7 +11,7 @@
             @endif
         </h1>
         <section class="py-4 row justify-content-center">
-            <article class="col-md-4">
+            <article class="col-md-4 ">
                 <section class="card">
                     <article class="card-body">
                         @if(isset($user))

@@ -8,16 +8,17 @@ use App\Http\Controllers\EmpresaCategoriaController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostCategoriaController;
 use App\Http\Controllers\AviarioController;
+use App\Http\Controllers\BannerController;
 
 
 
 //Usuários
-Route::get('/painel/users', [UserController::class, 'index'])->name('users.index')->middleware('auth');
-Route::get('/painel/users/cadastro', [UserController::class, 'create'])->name('users.create')->middleware('auth');
-Route::post('/painel/users/cadastro', [UserController::class, 'store'])->name('users.store')->middleware('auth');
-Route::get('/painel/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
-Route::put('/painel/users/{user}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
-Route::delete('/painel/users/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
+Route::get('/painel/usuarios', [UserController::class, 'index'])->name('users.index')->middleware('auth');
+Route::get('/painel/usuarios/cadastro', [UserController::class, 'create'])->name('users.create')->middleware('auth');
+Route::post('/painel/usuarios/cadastro', [UserController::class, 'store'])->name('users.store')->middleware('auth');
+Route::get('/painel/usuarios/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->middleware('auth');
+Route::put('/painel/usuarios/{user}', [UserController::class, 'update'])->name('users.update')->middleware('auth');
+Route::delete('/painel/usuarios/{user}', [UserController::class, 'destroy'])->name('users.destroy')->middleware('auth');
 
 // Empresas
 Route::get('/painel/empresas', [EmpresaController::class, 'index'])->name('empresas.index')->middleware('auth');
@@ -54,19 +55,31 @@ Route::put('/painel/noticias/categorias/{categoria}', [PostCategoriaController::
 Route::delete('/painel/noticias/categorias/{categoria}', [PostCategoriaController::class, 'destroy'])->name('post_categorias.destroy')->middleware('auth');
 Route::any('/painel/empresas/categorias/buscar-por-ramo', [EmpresaCategoriaController::class, 'search'])->name('ramos.search');
 
+// Banners
+Route::get('/painel/banners', [BannerController::class, 'index'])->name('banners.index')->middleware('auth');
+Route::get('/painel/banners/cadastro', [BannerController::class, 'create'])->name('banners.create')->middleware('auth');
+Route::post('/painel/banners/cadastro', [BannerController::class, 'store'])->name('banners.store')->middleware('auth');
+Route::get('/painel/banners/{banner}/edit', [BannerController::class, 'edit'])->name('banners.edit')->middleware('auth');
+Route::put('/painel/banners/{banner}', [BannerController::class, 'update'])->name('banners.update')->middleware('auth');
+Route::delete('/painel/banners/{banner}', [BannerController::class, 'destroy'])->name('banners.destroy')->middleware('auth');
 
 // Rotas comuns
 
-Route::get('/', [AviarioController::class, 'index'])->name('aviario.index');
+Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
+Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
+Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');
 
-
-Route::get('/guia-comercial', [EmpresaController::class, 'show'])->name('empresas.show');
-Route::get('/guia-comercial/{categoria}', [EmpresaController::class, 'show'])->name('empresas.show');
-Route::get('/guia-comercial/mostrar/{slug}/{id}', [EmpresaController::class, 'buscaEmpresa'])->name('teste.busca');
+Route::get('/guia-comercial', [EmpresaController::class, 'guia_index'])->name('guia.index');
+Route::get('/guia-comercial/{categoria}', [EmpresaController::class, 'show'])->name('guia.categoria');
+Route::get('/guia-comercial/mostrar/{slug}/{id}', [EmpresaController::class, 'buscaEmpresa'])->name('empresas.show');
 
 
 Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
+Route::get('/cadastrar-comercio', [App\Http\Controllers\EmpresaController::class, 'cadastrarComercio'])->name('cadastrar-comercio');
+Route::post('/cadastrar-comercio/enviado', [EmpresaController::class, 'storeFormulario'])->name('empresas.cadastrar-comercio');
+
+
 
 
 Auth::routes(['register' => false]);

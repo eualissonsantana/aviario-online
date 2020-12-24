@@ -1,45 +1,52 @@
 @extends('layouts.app')
 
-@section('content')
-    
-    <div class="content-child usuarios">
-        <div class="row px-3 justify-content-between ">
-            <h2>Usuários</h2>
-            <a href="{{route("users.create")}}">
-                <button class="btn btn-cadastrar">Novo</button>
-            </a>
+@section('content')  
+    <div class="painel-usuarios">
+        <div class="row justify-content-between titulo">
+            <div class="col-6 col-md-9 mt-md-2">
+                <h2>Usuários</h2>
+            </div>
+            <div class="col-6 col-md-3 text-right">
+                <a href="{{route("users.create")}}">
+                    <button class="btn btn-lg btn-novo">Novo</button>
+                </a>
+            </div>
         </div>
+        
+        <hr>
         @csrf
-        <table class="mt-4 table table-hover table-md">
-            <thead class="thead-light">
-              <tr>
-                <th scope="col">Nome</th>
-                <th scope="col" >Username</th>
-                <th scope="col" ></th>
-                <th scope="col" ></th>
-              </tr>
-            </thead>
-            <tbody>
+        <section class="usuario-cards">
+            <article class="row">
                 @foreach ($usuarios as $user)
-                <tr>
-                    <td>{{$user->name}}</td>
-                    <td>{{$user->username}}</td>
-                    <td>
-                        <a href="{{url("painel/users/$user->id/edit")}}">
-                            <button class="btn btn-editar">Editar</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{url("painel/users/$user->id")}}" class="js-del-user">
-                            <button class="btn btn-excluir">Excluir</button>
-                        </a>
-                    </td>
-                </tr>
+                    <div class="col-md-3 col-sm-12 ">
+                        <article class="av-card av-card-no-scale mt-3">
+                            <div class="av-card-body">
+                                <div>
+                                    <h5>Nome</h5>
+                                    <h5 class="thin">{{$user->name}}</h5>
+                                </div>
+                                <div class="username">
+                                    <h5>Username</h5>
+                                    <h5 class="thin">{{$user->username}}</h5>
+                                </div>
+                                <div class="row justify-content-start botoes">
+                                    <div class="col pr-0">
+                                        <a href="{{url("painel/usuarios/$user->id/edit")}}">
+                                            <button class="btn btn-sm btn-editar">Editar</button>
+                                        </a>
+                                    </div>
+                                    <div class="col pl-0 text-right">
+                                        <a href="{{url("painel/usuarios/$user->id")}}" class="js-del-user">
+                                            <button class="btn btn-sm btn-excluir">Excluir</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
                 @endforeach
-            </tbody>
-          </table>
-        </div>
-    </div>
-    <hr>
+            </article>
+        </section>
+        
     </div>
 @endsection

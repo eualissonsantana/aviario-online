@@ -25,7 +25,7 @@ class PostController extends Controller
     {
         $this->post = new Post();
         $this->postCategoria = new PostCategoria();
-        $this->posts = Post::all();
+        $this->posts = Post::all()->sortByDesc('created_at');
         $this->postCategorias = PostCategoria::all()->sortBy("descricao");
         $this->users = User::all();
     }
@@ -42,6 +42,14 @@ class PostController extends Controller
         
 
         return view('listagem.posts', compact('posts', 'categorias'));
+    }
+
+    public function lista_posts()
+    {
+        $posts = $this->posts;
+        $categorias = $this->postCategorias;
+
+        return view('aviario.noticias.lista_noticias', compact('posts', 'categorias'));
     }
 
     /**
@@ -75,6 +83,7 @@ class PostController extends Controller
         $post->conteudo = $data['conteudo'];
         $post->user_id = $data['usuario_id'];
         $post->categoria_id = $data['categoria_id'];
+        $post->visitas = 0;
         
         $post->save();
         
