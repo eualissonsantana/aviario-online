@@ -50,7 +50,7 @@
                 <li>
                     <section class="row justify-content-between">
                         <article class="col-4 col-md-2 col-lg-2 col-xl-2 imagem-comercio px-0">
-                            <img src="{{ url('storage/imagens/empresas/'.$emp->imagem) }}" style="max-width: 175px " />
+                            <img src="{{ url('storage/imagens/empresas/logomarcas/'.$emp->imagem) }}" />
                         </article>
 
                         <article class="col-7 col-md-8 dados-comercio px-0">

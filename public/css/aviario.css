@@ -280,3 +280,9 @@ h4 {
     color: #fff;
     width: 100%;
 }
+
+.painel-empresas .imagem-comercio img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+}

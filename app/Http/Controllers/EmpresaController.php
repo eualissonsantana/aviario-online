@@ -398,9 +398,10 @@ class EmpresaController extends Controller
     public function uploadImage($request, $slug, $id)
     {
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
+            $resize = Image::make($request->file('imagem'))->orientate()->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->encode('jpg');
+
 
             $extension = $request->imagem->extension();
             $nameFile = "{$slug}-{$id}.{$extension}";
@@ -425,7 +426,7 @@ class EmpresaController extends Controller
             $cont = 1;
 
             foreach($files as $file){
-                $resize = Image::make($file)->resize(600, null, function ($constraint) {
+                $resize = Image::make($file)->orientate()->resize(600, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->encode('jpg');
 

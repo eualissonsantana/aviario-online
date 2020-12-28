@@ -76,8 +76,8 @@ Route::get('/guia-comercial/mostrar/{slug}/{id}', [EmpresaController::class, 'bu
 
 
 Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
-Route::get('/cadastrar-comercio', [App\Http\Controllers\EmpresaController::class, 'cadastrarComercio'])->name('cadastrar-comercio');
-Route::post('/cadastrar-comercio/enviado', [EmpresaController::class, 'storeFormulario'])->name('empresas.cadastrar-comercio');
+Route::get('/cadastrar', [App\Http\Controllers\EmpresaController::class, 'cadastrarComercio'])->name('cadastrar-comercio');
+Route::post('/cadastrar/enviado', [EmpresaController::class, 'storeFormulario'])->name('empresas.cadastrar-comercio');
 
 
 

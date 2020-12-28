@@ -15,7 +15,7 @@
     <link href="{{ asset('css/painel.css') }}" rel="stylesheet">
     <link href="{{ asset('css/painel-mobile.css') }}" rel="stylesheet">
     <link href="{{ asset('css/aviario.css') }}" rel="stylesheet">
-    <title>Aviário Online</title>
+    <title>Cadastre-se - Aviário Online</title>
 </head>
 <body>
     <section class="container formulario">
@@ -86,7 +86,7 @@
                             </div>
 
                             <div class="col-md-6 col-form-label text-md-left">
-                                <label class="col-form-label">Logomarca</label>
+                                <label class="col-form-label">Logomarca <small>Preferencialmente a imagem deve ser quadrada</small></label>
                                 <div>
                                     <input id="arquivo" type="file" name="imagem" class="filestyle" @error('arquivo') is-invalid @enderror  name="arquivo" >
 
@@ -136,7 +136,7 @@
                                 <label for="telefone" class="col-form-label">Telefone/Celular *</label>
                                 <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" id="telefone" required autocomplete="telefone" autofocus>
                                 <input type="checkbox" class="mt-2" name="ehWhats" value="1">
-                                <small>Marque aqui se o número for Whats App</small>
+                                <small>Marque aqui se o número for WhatsApp</small>
                                 
                                 @error('telefone')
                                     <span class="invalid-feedback" role="alert">

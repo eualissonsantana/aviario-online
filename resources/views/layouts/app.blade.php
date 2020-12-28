@@ -18,6 +18,7 @@ use Carbon\Carbon;
     <script type="text/javascript" src='https://cdn.tiny.cloud/1/5f1scw7zl01d1jwmygfksnkg8tlk7dft9qvie9wkeopsbhdt/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
     <script type="text/javascript" src="{{url("js/tinymce.js")}}"></script>
     <script type="text/javascript" src="https://widgets-viewer.climacell.co/v1/sdk.js"></script>
+    <script src="{{ url('js/mask.js') }}" ></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
