@@ -144,12 +144,6 @@ h4 {
     text-transform: capitalize;
 }
 
-.empresas-por-categoria .imagem-comercio img{
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-}
-
 .empresas-por-categoria h3 {
     font-weight: bolder;
 }
@@ -193,17 +187,25 @@ h4 {
         object-fit: cover;
     }
    
-    .empresas-por-categoria .imagem-comercio img{
-        width: 240px;
-        height: 240px;
+    .painel-empresas .imagem-comercio img {
+        width: 220px;
+        height: 220px;
         object-fit: cover;
     }
 }
 
-@media only screen and (max-width: 1360px) {
-    .empresas-por-categoria .imagem-comercio img{
-        width: 215px;
-        height: 215px;
+@media only screen and (max-width: 1400px) {
+    .painel-empresas .imagem-comercio img{
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (max-width:1280px) {
+    .painel-empresas .imagem-comercio img {
+        width: 190px;
+        height: 190px;
         object-fit: cover;
     }
 }
@@ -245,10 +247,6 @@ h4 {
         width: 100%;
     }
 
-    .clima-tempo input {
-        visibility: hidden;
-    }
-
     .exibe-noticia .noticia-imagem img {
         width: 100%;
     }
@@ -281,8 +279,5 @@ h4 {
     width: 100%;
 }
 
-.painel-empresas .imagem-comercio img {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-}
+
+

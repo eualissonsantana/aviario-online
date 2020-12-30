@@ -63,6 +63,11 @@ h5 {
     font-weight: bold;
 }
 
+h6 {
+    font-weight: bold;
+    color: #2D9CDB;
+}
+
 .thin {
     font-weight: 500;
 }
@@ -107,8 +112,7 @@ a:hover {
 }
 
 .av-card:hover {
-    transform: scale(1.05);
-    transition-delay: 0.s;
+   box-shadow: none;
 }
 
 .av-card-no-scale:hover{
@@ -147,10 +151,7 @@ a:hover {
     font-family: 'Montserrat', sans-serif;
 }
 
-.busca-nome input {
-    width: 300px !important;
-    height: 44px;
-}
+
 
 table {
     border: 1px solid #dee2e6;
@@ -187,7 +188,7 @@ table {
 }
 
 .btn-lg {
-    height: 44px;               
+    height: 40px;               
     width: 150px;
 }
 
@@ -279,6 +280,24 @@ ul {
 .painel-empresas .busca-categoria select{
     border-bottom-left-radius: 0 !important;
     border-top-left-radius: 0 !important;
+}
+
+.titulo-categoria {
+    border-bottom: 4px solid #2D9CDB;
+}
+
+.titulo-categoria h3 {
+    color: #2D9CDB;
+}
+
+.painel-empresas .card-body {
+    padding: 6px;
+    padding-left: 1.25rem;
+    border-bottom: 1px solid rgba(126, 120, 120, 0.125);
+}
+
+.busca-nome input {
+    width: 100% !important;
 }
 
 /********* NOTÍCIAS *********/

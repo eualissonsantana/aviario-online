@@ -49,8 +49,9 @@ class EmpresaController extends Controller
     {
         $empresas = $this->empresas;
         $categorias = $this->categorias;
+        $ramos = $this->ramos;
 
-        return view('listagem.empresas', compact('empresas', 'categorias'));
+        return view('listagem.empresas', compact('empresas', 'categorias', 'ramos'));
     }
 
     public function guia_index()
@@ -154,7 +155,7 @@ class EmpresaController extends Controller
             'slogan' => ['max:255'],
             'imagem' => [],
             'fotos[]' => ['max:4'],
-            'telefone' => ['required', 'string', 'max:14'],
+            'telefone' => ['required', 'string', 'max:16', 'min:15'],
             'email' => ['max:255'],
             'youtube' => ['max:255'],
             'instagram' => ['max:255'],

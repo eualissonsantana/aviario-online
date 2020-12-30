@@ -3,7 +3,7 @@
 @section('content')    
 <div class="painel-noticias">
     <div class="row justify-content-between titulo">
-        <div class="col-6 col-md-6  mt-md-2">
+        <div class="col-6 col-md-6 mt-md-2">
             <h2>Notícias</h2>
         </div>
         <div class="col-6 col-md-6 row text-right">

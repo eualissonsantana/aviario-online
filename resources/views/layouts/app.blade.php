@@ -109,7 +109,7 @@ use Carbon\Carbon;
                 <form class="form-inline pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
                     @csrf
                     <input type="text" hidden="true" name="option" value="nome">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Procurar" aria-label="Search">
+                    <input class="form-control " type="search" placeholder="Procurar" aria-label="Search">
                     <button hidden="true" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
