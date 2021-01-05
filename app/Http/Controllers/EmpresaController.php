@@ -269,7 +269,7 @@ class EmpresaController extends Controller
             'nome' => ['required', 'string', 'max:255'],
             'slogan' => ['max:255'],
             'imagem' => [],
-            'telefone' => ['required', 'string', 'max:14'],
+            'telefone' => ['required', 'string', 'max:16', 'min:15'],
             'email' => ['max:255'],
             'youtube' => ['max:255'],
             'instagram' => ['max:255'],
@@ -452,8 +452,10 @@ class EmpresaController extends Controller
 
     public function search(Request $request)
     {
-        $categorias = EmpresaCategoria::all();
-        $emp = new Empresa();
+       
+        $ramos = $this->ramos;
+        $categorias = $this->categorias;
+        $emp = $this->empresa;
         
         if($request->option == 'nome') {
             $empresas = $emp->searchName($request->filter);
@@ -461,7 +463,7 @@ class EmpresaController extends Controller
             $empresas = $emp->searchCategory($request->filter);
         }
         
-        return view('listagem.empresas', compact('empresas', 'categorias'));
+        return view('listagem.empresas', compact('empresas', 'ramos', 'categorias'));
         
     }
 

@@ -172,6 +172,7 @@ table {
 
 .btn:hover {
     box-shadow: none;
+    color: #fff;
 }
 
 .btn-excluir:hover{
@@ -183,8 +184,8 @@ table {
 }
 
 .btn-sm {
-    height: 44px;
-    width: 95%;
+    height: 40px;
+    width: 100%;
 }
 
 .btn-lg {
@@ -193,8 +194,8 @@ table {
 }
 
 .btn-editar {
-    border: 1px solid #0084B8;
-    color: #0084B8;
+    border: 1px solid #2D9CDB;
+    color: #2D9CDB;
 }
 
 .btn-excluir {
@@ -202,11 +203,18 @@ table {
     color: #EB5757;
 }
 
-.btn-busca-categoria {
-    background-color: #8f8f8f;
+.btn-categoria {
+    background-color: transparent;
     width: auto;
-    border-bottom-right-radius: 0 !important;
-    border-top-right-radius: 0 !important;
+    border: none;
+    box-shadow: none;
+    padding: 0 !important;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.btn-categoria:hover {
+    color: #4d4d4d;
 }
 
 .btn-novo, .btn-salvar {
@@ -257,10 +265,6 @@ ul {
 
 /********* COMÉRCIOS *********/
 
-.imagem-comercio {
-    margin-right: 15px;
-}
-
 .dados-comercio {
     padding-top: 0 !important;
 }
@@ -271,6 +275,10 @@ ul {
 
 .dados-comercio .telefone h5 {
     font-weight: 600;
+}
+
+.dados-comercio p {
+    line-height: normal;
 }
 
 .arquivo input{
@@ -288,6 +296,15 @@ ul {
 
 .titulo-categoria h3 {
     color: #2D9CDB;
+}
+
+.painel-empresas .card-header {
+    padding: 6px;
+    padding-left: 1.25rem;
+}
+
+.painel-empresas .card-header p {
+    font-weight: bolder !important;
 }
 
 .painel-empresas .card-body {
@@ -314,12 +331,6 @@ ul {
 
 .arquivo label {
     height: 37px;
-}
-
-.painel-noticias .imagem-noticia img{
-    width: 250px;
-    height: 160px;
-    object-fit: cover;
 }
 
 

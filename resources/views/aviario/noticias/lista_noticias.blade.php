@@ -42,7 +42,7 @@
         <ul>
             @foreach ($posts as $post)
                 <li> 
-                    <section class="row justify-content-between px-md-3">
+                    <section class="row justify-content-between lista-noticias px-md-3">
                         <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
                             <div class="row col-12 col-md-9 li-noticia">
                                 <article class="col-6 col-md-4 imagem-noticia px-0">

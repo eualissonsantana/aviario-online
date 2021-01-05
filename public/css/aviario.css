@@ -7,43 +7,6 @@ html,body
     overflow-x: hidden; 
 }
 
-.aviario-home h2{
-    font-size: 2.1rem;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.aviario-home h4{
-    font-size: 1.2rem;
-    line-height: 1.15;
-}
-
-.aviario-home h6{
-    font-size: 0.95rem;
-}
-
-.exibe-noticia h1{
-    font-size: 2rem;
-    font-weight: bolder;
-    line-height: 1;
-}
-
-.exibe-noticia h3 {
-    color: #0084B8;
-    font-size: 1.3rem;
-    font-weight: bold;
-}
-
-.exibe-noticia h4 {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #757575;
-}
-
-h4 {
-    font-size: 1rem;
-}
-
 .exibe-noticia hr {
     border-color: #a7a7a7;
 }
@@ -66,10 +29,6 @@ h4 {
     bottom: 0;
     padding: 10px 15px;
     background: linear-gradient(0deg, rgba(0,0,0,0.83) 34%, rgba(0,0,0,0.82) 35%, rgba(0,0,0,0.66) 68%, transparent 100%);
-}
-
-.aviario-home .penultimo-post .titulo-post h4 {
-    color: #fff;
 }
 
 .aviario-home .posts-laterais {
@@ -132,9 +91,9 @@ h4 {
     font-size: 1rem;
 }
 
-.aviario-noticias .imagem-noticia img{
-    width: 320px;
-    height: 200px;
+.painel-noticias .imagem-noticia img{
+    width: 200px;
+    height: 130px;
     object-fit: cover;
 }
 
@@ -144,21 +103,11 @@ h4 {
     text-transform: capitalize;
 }
 
-.empresas-por-categoria h3 {
-    font-weight: bolder;
-}
-
-.empresas-por-categoria .info-comercio h4 {
-    font-size: 1.4rem;
-}
-
-.empresas-por-categoria .info-comercio p {
-    font-size: 1rem;
-}
-
 .empresas-por-categoria ul {
     padding-inline-start: 0 !important;
 }
+
+
 
 @media only screen and (min-width: 1400px) {
     .aviario-home .penultimo-post img {
@@ -181,16 +130,20 @@ h4 {
         width: 100%;
     }
 
-    .aviario-noticias .imagem-noticia img{
-        width: 360px;
-        height: 220px;
+    .lista-noticias .imagem-noticia img{
+        width: 250px;
+        height: 160px;
         object-fit: cover;
     }
    
     .painel-empresas .imagem-comercio img {
-        width: 220px;
+        width: 20px;
         height: 220px;
         object-fit: cover;
+    }
+
+    .painel-noticias .imagem-noticia img {
+
     }
 }
 
@@ -198,6 +151,12 @@ h4 {
     .painel-empresas .imagem-comercio img{
         width: 200px;
         height: 200px;
+        object-fit: cover;
+    }
+
+    .lista-noticias .imagem-noticia img{
+        width: 220px;
+        height: 140px;
         object-fit: cover;
     }
 }
@@ -208,19 +167,15 @@ h4 {
         height: 190px;
         object-fit: cover;
     }
+
+    .painel-noticias .imagem-noticia img{
+        width: 210px;
+        height: 135px;
+        object-fit: cover;
+    }
 }
 
 @media only screen and (max-width: 414px) {
-
-    .aviario-home h2 {
-        font-size: 1.7rem;
-        line-height: 1.1;
-    }
-
-    .aviario-home .posts-laterais h4 {
-        font-size: 1rem;
-    }
-
 
     .aviario-home .penultimo-post img {
         width: 100%;
@@ -256,20 +211,11 @@ h4 {
         object-fit: cover;
     }
 
-    .empresas-por-categoria .imagem-comercio img{
-        width: 100%;
-        height: 110px;
+    .painel-empresas .imagem-comercio img {
+        width: 150px;
+        height: 150px;
         object-fit: cover;
     }
-
-    .empresas-por-categoria .contatos h4 {
-        font-size: 1.2rem;
-    }
-
-    .empresas-por-categoria .info-comercio p {
-        font-size: 0.8rem;
-    }
-
 
 }
 
@@ -278,6 +224,7 @@ h4 {
     color: #fff;
     width: 100%;
 }
+
 
 
 
