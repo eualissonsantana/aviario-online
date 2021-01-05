@@ -11,9 +11,26 @@ html,body
     border-color: #a7a7a7;
 }
 
+.aviario-home .zoom {
+    overflow: hidden;
+}
+
+.aviario-home .zoom img {
+    max-width: 100%;
+	-moz-transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+	transition: all 0.4s;
+}
+
+.aviario-home .zoom:hover img {
+	-moz-transform: scale(1.15);
+	-webkit-transform: scale(1.15);
+	transform: scale(1.15);
+}
+
 .aviario-home .penultimo-post img {
     width: 100%;
-    height: 332px;
+    height: 370px;
     object-fit: cover;
 }
 
@@ -31,25 +48,33 @@ html,body
     background: linear-gradient(0deg, rgba(0,0,0,0.83) 34%, rgba(0,0,0,0.82) 35%, rgba(0,0,0,0.66) 68%, transparent 100%);
 }
 
+.aviario-home .penultimo-post h3 {
+    color: #fff;
+}
+
 .aviario-home .posts-laterais {
-    margin-left: 15px;
+    margin-left: 10px;
+    position: relative;
+    overflow: hidden;
+    
 }
 
 .aviario-home .posts-laterais p {
-    font-size: 0.8rem;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 .aviario-home .posts-laterais img {
     width: 100%;
-    height: 152px;
+    height: 174px;
     object-fit: cover;
 }
 
 .aviario-home .posts-laterais:nth-child(1){
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.aviario-home .previa {   
+.aviario-home .posts-laterais .previa p{   
     width: 100%;      
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -87,14 +112,16 @@ html,body
     color: #333;
 }
 
-.exibe-noticia p {
-    font-size: 1rem;
-}
-
 .painel-noticias .imagem-noticia img{
     width: 200px;
     height: 130px;
     object-fit: cover;
+}
+
+.exibe-noticia .imagem-noticia img {
+    width: 400px;
+    margin: 0 16px 10px 0;
+    float: left;
 }
 
 .guia-comercial .categorias a{
@@ -112,18 +139,18 @@ html,body
 @media only screen and (min-width: 1400px) {
     .aviario-home .penultimo-post img {
         width: 100%;
-        height: 375px;
+        height: 420px;
         object-fit: cover;
     }
     
     .aviario-home .posts-laterais img {
         width: 100%;
-        height: 174px;
+        height: 192px;
         object-fit: cover;
     }
 
     .aviario-home .previa { 
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
     }
 
     .anuncios-laterais img {
@@ -142,9 +169,7 @@ html,body
         object-fit: cover;
     }
 
-    .painel-noticias .imagem-noticia img {
-
-    }
+   
 }
 
 @media only screen and (max-width: 1400px) {
@@ -158,6 +183,10 @@ html,body
         width: 220px;
         height: 140px;
         object-fit: cover;
+    }
+
+    .aviario-home .posts-laterais img {
+        height: 173px;
     }
 }
 
@@ -179,7 +208,7 @@ html,body
 
     .aviario-home .penultimo-post img {
         width: 100%;
-        height: 200px;
+        height: 240px;
         object-fit: cover;
     }
 
@@ -194,15 +223,11 @@ html,body
         object-fit: cover;
     }
 
-    .aviario-home .previa { 
+    .aviario-home .previa p { 
         -webkit-line-clamp: 3;
     }
 
     .anuncios-laterais img {
-        width: 100%;
-    }
-
-    .exibe-noticia .noticia-imagem img {
         width: 100%;
     }
 

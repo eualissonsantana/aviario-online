@@ -45,9 +45,9 @@
                                     <button class="btn btn-sm btn-excluir">Excluir</button>
                                 </a>
                             </article>
-                            <hr class="col-11 col-md-12">
                         </section>
                     </li>
+                    <hr >
                 @endforeach
             </ul>
         </div>

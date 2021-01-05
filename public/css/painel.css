@@ -16,8 +16,8 @@ body{
 
 .nav-item a {
     color: #fff;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 400;
     margin-right: 30px;
     padding: 0 !important;
 }
@@ -43,12 +43,12 @@ h2 {
 }
 
 h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 h4 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 
@@ -58,14 +58,15 @@ h4 {
 }
 
 h5 {
-    font-size: 18px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 16px;
     font-weight: bold;
 }
 
 h6 {
     font-weight: bold;
     color: #2D9CDB;
+    text-transform: uppercase;
 }
 
 .thin {
@@ -74,12 +75,10 @@ h6 {
 
 p {
     font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
 }
 
-.home p {
-    font-size: 20px;
-    font-family: Open Sans;
-}
+
 
 a {
     color: #4d4d4d;
@@ -247,6 +246,8 @@ label {
 
 .login-page .btn-entrar, .login-page .btn-salvar {
     width: 100%;
+    background-color: #2D9CDB;
+    color: #fff;
 }
 
 
@@ -296,7 +297,10 @@ ul {
 
 .titulo-categoria h3 {
     color: #2D9CDB;
+    font-size: 20px;
 }
+
+
 
 .painel-empresas .card-header {
     padding: 6px;
