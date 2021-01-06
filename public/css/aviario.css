@@ -124,6 +124,13 @@ html,body
     float: left;
 }
 
+.exibe-noticia .conteudo p {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
 .guia-comercial .categorias a{
     font-size: 0.8rem;
     font-weight: 400;
@@ -240,6 +247,10 @@ html,body
         width: 150px;
         height: 150px;
         object-fit: cover;
+    }
+
+    .row-post-lateral{
+        padding-right: 0 !important;
     }
 
 }

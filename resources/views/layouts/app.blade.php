@@ -57,12 +57,13 @@ use Carbon\Carbon;
             </div>
         </section>
 
-        <nav class="container-fluid navbar nav-menu bg-destaque navbar-expand-lg  mt-md-2 pr-md-5 home-page">                    
+        <nav class="container-fluid navbar bg-destaque navbar-expand-lg  mt-md-2 pr-md-5 home-page">                    
+            <a class="navbar-brand d-block d-sm-none pl-3 logo" href="#">Aviário Online</a>
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
            
-            <div class="collapse navbar-collapse justify-content-between padding-padrao" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse justify-content-between " id="navbarNavAltMarkup">
                 <ul class="navbar-nav  justify-content-between ">
                     <li class="nav-item ">
                         <a class="nav-link" href="{{route('aviario.index')}}" >Início<span class="sr-only">(current)</span></a>
@@ -106,7 +107,7 @@ use Carbon\Carbon;
                     @endguest
                 </ul>
 
-                <form class="form-inline pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                <form class="search-nav form-inline pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
                     @csrf
                     <input type="text" hidden="true" name="option" value="nome">
                     <input class="form-control " type="search" placeholder="Procurar" aria-label="Search">

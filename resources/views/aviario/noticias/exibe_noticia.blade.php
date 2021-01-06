@@ -11,7 +11,7 @@
                 <hr class="mt-4">
                 <p>Postado em {{$post->created_at}} </p>
                 <div class="imagem-noticia conteudo my-3">
-                    <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                    <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}"/> 
                
                     <p class="text-justify">
                         {!! $post->conteudo !!}

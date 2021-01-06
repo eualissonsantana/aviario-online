@@ -93,10 +93,10 @@ a:hover {
     background-color: #2D9CDB;
 }
 
-.nav-menu {
-    padding: 0 !important;
-    height: 50px;
-    margin: 24px 0 !important;  
+.navbar {
+    padding-right: 100px !important;
+    padding-left: 100px !important;
+    margin-bottom: 16px;
 }
 
 .banners-topo img {
@@ -338,10 +338,21 @@ ul {
 }
 
 
-@media only screen and (min-width: 1400px) {
-
+.lista-noticias .li-noticia p {
+    font-size: 15px;
+    line-height: 20px;
 }
 
+.aviario-noticias .card-header {
+    padding: 4px 8px;
+}
+
+.aviario-noticias .card-header p {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+}
+ 
 #import {
     margin: 0em 0em 0em .2em;
     content: 'Import Settings';

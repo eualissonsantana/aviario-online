@@ -1,26 +1,38 @@
 @media only screen and (max-width: 414px) {
     
     h1 {
-        font-size: 36px;
+        font-size: 30px;
         font-weight: bold;
     }
     
     h2 {
-        font-size: 30px;
+        font-size: 24px;
         font-weight: bold;
         line-height: 24px;
     }
     
-    h3 {
-        font-size: 22px;
+    .aviario-home h3 {
+        font-size: 18px;
+        line-height: 20px;
         font-weight: bold;
     }
+
+     .posts-laterais h3 {
+        font-size: 15px !important; 
+        line-height: 18px;
+        font-weight: bold;
+    }
+
+
     
-    h4 {
-        font-size: 20px;
+    .home-aviario h4 {
+        font-size: 14px;
         font-weight: 600;
     }
     
+    .lista-noticias h4 {
+        font-size: 16px;
+    }
     .categoria h4 {
         font-weight: 800;
         color: #2F80ED;
@@ -38,12 +50,16 @@
         color: #2D9CDB;
     }
     
-    .thin {
-        font-weight: 500;
-    }
     
-    p {
+    .home-aviario p {
         font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 22px;
     }
 
     .botoes {
@@ -92,11 +108,23 @@
         object-fit: cover;
     }
 
-    
-
     .botoes {
         justify-content: space-between !important;
         margin: auto;
+    }
+
+    .navbar-nav, .search-nav {
+        padding-right: 16px !important;
+        padding-left: 16px !important;
+    }
+
+    .navbar {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .navbar .logo {
+        color: #fff;
     }
 
     .nav-admin {
@@ -107,8 +135,18 @@
         color: #fff !important;
     }
 
-    .navbar-toggler {
-        border-color: #fff !important;
+
+
+    .exibe-noticia .imagem-noticia img {
+        width: 100% !important;
+    }
+
+    .exibe-noticia .conteudo p {
+        line-height: 26px;
+    }
+
+    .deixe-comentario {
+        font-size: 22px !important;
     }
     
 }
