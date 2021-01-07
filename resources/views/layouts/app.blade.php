@@ -116,7 +116,7 @@ use Carbon\Carbon;
             </div>
         </nav>
         
-        <main class="content padding-padrao">
+        <main class="content">
             @yield('content')
         </main>
     </div>

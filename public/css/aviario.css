@@ -83,14 +83,28 @@ html,body
     text-overflow: ellipsis;
 }
 
-
-
-.box {
-    max-width: 140px;
-    height: 140px;
-    background-color: #FFD800;
+.aviario-home .busca-guia-comercial {
+    background-image: url('../img/bg-area-comercial.jpg');
+    background-position: center;
+    height: 320px;
+    margin: 30px 0;
+    padding: 60px;
+    color: #fff;
 }
 
+.aviario-home .busca-guia-comercial p {
+    font-size: 18px;
+}
+
+.aviario-home .busca-guia-comercial .procura-comercio {
+    width: 580px;
+    height: 45px;
+    margin: 20px 0;
+}
+
+.aviario-home .busca-guia-comercial .rodape p {
+    font-size: 14px;
+}
 
 .aviario-home .anuncios-laterais .anuncio:nth-child(1){
     margin-bottom: 20px;
@@ -152,7 +166,7 @@ html,body
     
     .aviario-home .posts-laterais img {
         width: 100%;
-        height: 192px;
+        height: 198px;
         object-fit: cover;
     }
 

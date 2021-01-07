@@ -221,6 +221,19 @@ table {
     color: #fff;
 }
 
+.btn-cadastrar {
+    background-color: #2D9CDB;
+    color: #fff;
+    vertical-align: middle;
+    padding: 4px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    width: auto;
+    height: auto;
+    margin-top: 4px;
+    border-radius: 4px;
+}
+
 /********* LOGIN *********/
 
 .login-page .login-img {
