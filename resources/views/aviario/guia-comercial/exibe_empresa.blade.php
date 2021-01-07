@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="content-child exibe-noticia">
+    <section class="padding-padrao exibe-noticia">
         <p></p>
         <section class="row">
             <article class="col-7">

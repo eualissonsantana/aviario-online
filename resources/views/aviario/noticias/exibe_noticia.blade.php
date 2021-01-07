@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="exibe-noticia">
+    <section class="exibe-noticia padding-padrao">
         <p></p>
         <section class="row justify-content-between">
             <article class="col-md-9 col-12">

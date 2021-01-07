@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')    
-    <section class="content-child empresas-por-categoria ">
+    <section class="padding-padrao empresas-por-categoria ">
         <article class="row justify-content-between px-md-3">
             <div class="col-sm-12 px-md-0 titulo-pagina">
                 <h3> {{$categoria->descricao}} </h3>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')    
-    <section class="content-child guia-comercial">
+    <section class="padding-padrao guia-comercial">
         <article class="row justify-content-between px-md-3">
             <div class="col-sm-12 col-md-6 px-0">
                 <h2>Guia Comercial do Aviário</h2>

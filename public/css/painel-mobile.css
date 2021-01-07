@@ -17,10 +17,10 @@
         font-weight: bold;
     }
 
-     .posts-laterais h3 {
-        font-size: 15px !important; 
-        line-height: 18px;
-        font-weight: bold;
+     .posts-laterais h3, .posts-secundarios h3 {
+        font-size: 14px !important; 
+        line-height: 16px;
+        font-weight: 600;
     }
 
 
