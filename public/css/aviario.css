@@ -99,7 +99,7 @@ html,body
 
 .aviario-home .busca-guia-comercial .area-procura-comercio {
     margin: 20px 0;
-    padding: 10px 15px;
+    padding: 10px;
     width: 580px;
     height: 40px;
     background-color: #fff;
@@ -291,7 +291,12 @@ footer .navegacao {
     }
 }
 
-@media only screen and (max-width: 415px) {
+@media only screen and (max-width: 414px) {
+
+    .navbar .area-procura-noticia {
+        width: 100%;
+       
+    }
 
     .aviario-home .penultimo-post img {
         width: 100%;
@@ -361,8 +366,6 @@ footer .navegacao {
         font-size: 16px;
         line-height: 16px;
     }
-
-    
 
     footer .logo, footer .dev-info, footer .navegacao {
         text-align: center !important;

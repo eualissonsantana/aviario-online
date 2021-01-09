@@ -109,7 +109,7 @@ use Carbon\Carbon;
                     @endguest
                 </ul>
 
-                <form class="search-nav  pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                <form class="search-nav pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
                     @csrf
                     <div class="area-procura-noticia">
                         <input type="text" hidden="true" name="option" value="nome">
