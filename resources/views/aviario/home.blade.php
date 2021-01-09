@@ -66,18 +66,18 @@
                     <p>Encontre os comércios e serviços da comunidade.</p>
                 </article>
 
-                <article class="px-0">
+                <article class="d-flex justify-content-center px-0">
                     <form>
-                        <div class="form-group d-flex justify-content-center">
-                          <input type="search" class="form-control procura-comercio" aria-describedby="emailHelp" placeholder="Pesquisar por nome ou categoria">
+                        <div class="area-procura-comercio">
+                          <input type="text" class="procura-comercio" placeholder="Pesquisar por nome ou categoria">
+                          <button><i type="submit" class="fas fa-search"></i></button>
                         </div>
-                        <button type="submit" hidden="true" class="btn btn-primary">Submit</button>
                     </form>
                 </article>
 
                 <article class="rodape mt-4">
                     <p>Não encontrou sua empresa?</p>
-                    <button class="btn btn-lg btn-cadastrar">Cadastre-a</button>
+                    <button class="btn btn-lg btn-cadastrar">Cadastre aqui</button>
                 </article>
             </section>
         </section>

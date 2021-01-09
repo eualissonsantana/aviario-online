@@ -1,5 +1,9 @@
 @media only screen and (max-width: 414px) {
     
+    #app {
+        padding: 0;
+    }
+
     h1 {
         font-size: 30px;
         font-weight: bold;
@@ -47,7 +51,6 @@
         font-weight: bold;
         color: #2D9CDB;
     }
-    
     
     .home-aviario p {
         font-family: 'Open Sans', sans-serif;

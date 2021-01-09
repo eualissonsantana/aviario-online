@@ -7,6 +7,7 @@ use Carbon\Carbon;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,6 +17,7 @@ use Carbon\Carbon;
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src='https://cdn.tiny.cloud/1/5f1scw7zl01d1jwmygfksnkg8tlk7dft9qvie9wkeopsbhdt/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    <script src="https://kit.fontawesome.com/263db3eba8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{url("js/tinymce.js")}}"></script>
     <script type="text/javascript" src="https://widgets-viewer.climacell.co/v1/sdk.js"></script>
     <script src="{{ url('js/mask.js') }}" ></script>
@@ -107,11 +109,13 @@ use Carbon\Carbon;
                     @endguest
                 </ul>
 
-                <form class="search-nav form-inline pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                <form class="search-nav  pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
                     @csrf
-                    <input type="text" hidden="true" name="option" value="nome">
-                    <input class="form-control " type="search" placeholder="Procurar" aria-label="Search">
-                    <button hidden="true" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <div class="area-procura-noticia">
+                        <input type="text" hidden="true" name="option" value="nome">
+                        <input class="procura-noticia" type="text" placeholder="Procurar notícia" aria-label="Search">
+                        <button><i type="submit" class="fas fa-search"></i></button>
+                    </div>
                 </form>
             </div>
         </nav>
