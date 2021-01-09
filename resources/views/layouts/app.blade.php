@@ -7,7 +7,8 @@ use Carbon\Carbon;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <meta name="theme-color"  content="#2d9cdb">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2d9cdb">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -60,7 +61,9 @@ use Carbon\Carbon;
         </section>
 
         <nav class="container-fluid navbar bg-destaque navbar-expand-lg  mt-md-2 pr-md-5 home-page">                    
-            <a class="navbar-brand d-block d-sm-none pl-3 logo" href="#">Aviário Online</a>
+            <a class="navbar-brand d-block d-sm-none pl-3 logo" href="#">
+                <img src="{{ url('img/logo-branco.png') }}" alt="Logo Aviário Online" width="100px">
+            </a>
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

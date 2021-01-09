@@ -293,9 +293,11 @@ footer .navegacao {
 
 @media only screen and (max-width: 414px) {
 
+    .navbar {
+        padding: 0;
+    }
     .navbar .area-procura-noticia {
         width: 100%;
-       
     }
 
     .aviario-home .penultimo-post img {

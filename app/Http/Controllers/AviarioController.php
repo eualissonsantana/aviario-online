@@ -30,7 +30,7 @@ class AviarioController extends Controller
             $this->post = new Post();
             $this->postCategoria = new PostCategoria();
             
-            Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(7, function($noticias){
+            Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(11, function($noticias){
                 $i = 0;
                 foreach ($noticias as $post)
                 {

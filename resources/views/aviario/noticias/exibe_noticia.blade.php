@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="d-block d-sm-none banners-topo mb-3">
+        <a class="anuncio-topo" href="#">
+            <img class="" src="{{ url('img/3312.gif') }}" alt="Logo Aviário Online">
+        </a>
+    </div>
     <section class="exibe-noticia padding-padrao">
-        <p></p>
         <section class="row justify-content-between">
             <article class="col-md-9 col-12">
                 <h6> {{$post->categoria->descricao}} </h6>

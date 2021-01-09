@@ -60,7 +60,7 @@
 
     p {
         font-size: 16px;
-        line-height: 22px;
+        line-height: 18px;
     }
 
     .botoes {
@@ -71,9 +71,15 @@
         padding: 0 16px;
     }
 
+    .pt {
+        padding-top: 16px;
+    }
+
     .navbar {
         margin-bottom: 0;
     }
+
+   
     
     .btn-novo, .btn-salvar {
         width: 95%;

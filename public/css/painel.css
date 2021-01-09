@@ -19,11 +19,14 @@ body{
     font-size: 16px;
     font-weight: 400;
     margin-right: 30px;
-    padding: 0 !important;
 }
 
 .nav-item a:hover {
     color: #fff;
+}
+
+.dropdown-item {
+    color: #4D4D4D !important;
 }
 
 h1, h2, h3, h4, h5, h6, p, small {
@@ -75,7 +78,8 @@ h6 {
 
 p {
     font-family: 'Open Sans', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
+    line-height: 22px;
 }
 
 

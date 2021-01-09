@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')    
-    <section class="aviario-noticias padding-padrao">
+    <section class="aviario-noticias padding-padrao pt">
         <article>
             <div>
                 <h2>Notícias</h2>
