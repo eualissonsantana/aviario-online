@@ -23,8 +23,6 @@
         font-weight: 600;
     }
 
-
-    
     .home-aviario h4 {
         font-size: 14px;
         font-weight: 600;
@@ -70,12 +68,8 @@
         padding: 0 16px;
     }
 
-    #app {
-        padding: 0 0 30px;
-    }
-
-    .nav-menu {
-        margin-top: 0 !important;  
+    .navbar {
+        margin-bottom: 0;
     }
     
     .btn-novo, .btn-salvar {

@@ -22,7 +22,7 @@ use Carbon\Carbon;
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600family=Oxygen:wght@300&display=swap" rel="stylesheet">
     
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -41,13 +41,13 @@ use Carbon\Carbon;
             <div class="row pt-2 justify-content-between">
                 <div class="col">
                     <a class="" href="{{route('aviario.index')}}">
-                        <img class="" src="{{ url('img/aviario-online-logo.png') }}" alt="Logo Aviário Online">
+                        <img class="" src="{{ url('img/logo.png') }}" alt="Logo Aviário Online">
                     </a>
                 </div>
 
                 <div class="col-7 d-none d-sm-block banners-topo">
-                    <a class="" href="#">
-                        <img class="" src="{{ url('img/3292.png') }}" alt="Logo Aviário Online">
+                    <a class="anuncio-topo" href="#">
+                        <img class="" src="{{ url('img/3312.gif') }}" alt="Logo Aviário Online">
                     </a>
                 </div>
 
@@ -119,6 +119,38 @@ use Carbon\Carbon;
         <main class="content">
             @yield('content')
         </main>
+
+        <footer class="padding-padrao">
+            <div class="row ">
+                <div class="col-12 col-md-2 logo">
+                    <img src="{{ url('img/logo-branco.png') }}" width="180px" alt="Logo Aviário Online">
+                </div>
+
+                <div class="col-12 col-md-3 row pb-1 align-self-end navegacao">
+                    <div class="col-6">
+                        <p>Início</p>
+                        <p>Notícias</p>
+                        <p>Guia Comercial</p>
+                    </div>
+
+                    <div class="col-6">
+                        <p>Contato</p>
+                        <p>Contato</p>
+                        <p>Contato</p>
+                    </div>
+
+                </div>
+
+                <div class="text-right dev-info col-12 col-md-7 pb-1 align-self-end">
+                    <p>© Copyright 2021 - Aviário Online</p>
+                    <p>Desenvolvido por <strong>Alisson Santana</strong> </p>
+                </div>
+
+            </div>
+
+            
+            
+        </footer>
     </div>
     <script src="{{url("js/script.js")}}"></script>
 </body>

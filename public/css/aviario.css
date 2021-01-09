@@ -7,6 +7,8 @@ html,body
     overflow-x: hidden; 
 }
 
+
+
 .exibe-noticia hr {
     border-color: #a7a7a7;
 }
@@ -107,7 +109,7 @@ html,body
 
 .aviario-home .posts-secundarios img {
     width: 100%;
-    height: 200px;
+    height: 260px;
     object-fit: cover;
 }
 
@@ -160,6 +162,18 @@ html,body
     padding-inline-start: 0 !important;
 }
 
+footer {
+    background-color: #2d9cdb;
+    color: #f2f5f9;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    margin-top: 22px;
+}
+
+footer p {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 13px;
+}
 
 
 @media only screen and (min-width: 1400px) {
@@ -190,7 +204,7 @@ html,body
     }
    
     .painel-empresas .imagem-comercio img {
-        width: 20px;
+        width: 220px;
         height: 220px;
         object-fit: cover;
     }
@@ -303,9 +317,17 @@ html,body
         margin: 20px 0;
     }
 
-  
-    
+    footer .logo, footer .dev-info, footer .navegacao {
+        text-align: center !important;
+    }
 
+    footer .navegacao {
+        margin: 15px 0;
+    }
+
+    footer .dev-info p {
+        line-height: 16px;
+    }
 
 
 }
