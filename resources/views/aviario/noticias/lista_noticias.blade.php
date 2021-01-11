@@ -10,7 +10,30 @@
 
         <hr>
         @csrf
+        <section class="card mb-4 shadow-sm" id="card-swipe">
+            <div class="swipeView p-2 ">
+                @foreach ($categorias as $cat)
+                    <div class="opcao  px-3 py-2">
+                        <form class="" action="{{route('posts.search')}}" method="POST">
+                            @csrf
+                            <div class="input-group-prepend">
+                                <button class="btn btn-categoria" type="button submit">
+                                    <p class="mb-0 text-center">
+                                        <strong>
+                                            {{$cat->descricao}}
+                                        </strong>
+                                    </p>
+                                </button>
+                            </div>
+                            
+                            <input class="form-control" type="search" hidden="true" name="filter" value="{{$cat->id}}" aria-label="Search">
+                            <input type="text" hidden="true" name="option" value="categoria">
+                        </form>
+                    </div>
+                @endforeach
+            </div>
 
+        </section>
         <article class="row justify-content-between">
             <div class="col-12 col-md-7 lista-noticias">
                 <ul>
@@ -80,8 +103,16 @@
                     @endforeach
                 </div> 	
             </div>
-            <div class="col-3">
-
+            <div class="col-3 anuncios-laterais d-none d-sm-block">
+                <div class="col-12 anuncio px-0 mb-5">
+                    <img src="{{ url('img/lateral-1.png/') }}" />
+                </div>
+                <div class="col-12 anuncio px-0 mb-5">
+                    <img src="{{ url('img/lateral-2.jpg/') }}" />
+                </div>
+                <div class="col-12 anuncio px-0 mb-5">
+                    <img src="{{ url('img/lateral-1.png/') }}" />
+                </div>
             </div>
     
         </article>
