@@ -104,6 +104,12 @@ class PostController extends Controller
     {
         if (!$post = Post::find($id))
             return redirect()->back();
+
+        $updateVisitas = $post->visitas + 1;
+
+        $post->update([
+            'visitas' => $updateVisitas
+        ]);
         
         return view('aviario.noticias.exibe_noticia', [
             'post' => $post
@@ -217,6 +223,24 @@ class PostController extends Controller
         
         return view('aviario.noticias.lista_noticias', compact('posts', 'categorias'));
         
+    }
+
+    public function showNoticias($slug) {
+
+        $categoria = new PostCategoria();
+        $categoria = DB::table('post_categorias')->where('slug', $slug)->first();
+        $id = $categoria->id;
+
+        $categorias = $this->postCategorias;
+
+        
+        $posts = Post::orderByDesc('created_at')->where('categoria_id', $id)->get();
+
+        return view('aviario.noticias.lista_noticias', [
+            'posts' => $posts,
+            'categorias' => $categorias,
+            'categoria' => $categoria,
+        ]);
     }
 
 }

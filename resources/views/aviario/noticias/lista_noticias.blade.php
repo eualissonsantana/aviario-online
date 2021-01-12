@@ -85,7 +85,7 @@
                     @foreach ($categorias as $cat)
                         <div class="card">
                             <div class="card-header"> 
-                                <form class="form-inline" action="{{route('posts.search')}}" method="POST">
+                                <a class="form-inline" href="{{route('posts.categoria', $cat->slug)}}" >
                                     @csrf
                                     <div class="input-group-prepend">
                                         <button class="btn btn-categoria" type="button submit">
@@ -99,7 +99,7 @@
                                     
                                     <input class="form-control" type="search" hidden="true" name="filter" value="{{$cat->id}}" aria-label="Search">
                                     <input type="text" hidden="true" name="option" value="categoria">
-                                </form>
+                                </a>
                                 
                             </div>
                         </div>    

@@ -67,9 +67,12 @@ Route::delete('/painel/banners/{banner}', [BannerController::class, 'destroy'])-
 
 Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
 Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
+
 Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::any('/noticias/buscar', [PostController::class, 'searchAviario'])->name('aviario.posts.search');
+Route::get('/noticias/{slug}', [PostController::class, 'showNoticias'])->name('posts.categoria');
+
 
 Route::get('/guia-comercial', [EmpresaController::class, 'guia_index'])->name('guia.index');
 Route::get('/guia-comercial/{slug}', [EmpresaController::class, 'showEmpresas'])->name('guia.categoria');
