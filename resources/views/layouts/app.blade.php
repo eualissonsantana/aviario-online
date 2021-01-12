@@ -61,7 +61,7 @@ use Carbon\Carbon;
         </section>
 
         <nav class="container-fluid navbar bg-destaque navbar-expand-lg  mt-md-2 pr-md-5 home-page">                    
-            <a class="navbar-brand d-block d-sm-none pl-3 logo" href="#">
+            <a class="navbar-brand d-block d-sm-none pl-3 logo" href="{{route('aviario.index')}}">
                 <img src="{{ url('img/logo-branco.png') }}" alt="Logo Aviário Online" width="100px">
             </a>
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
