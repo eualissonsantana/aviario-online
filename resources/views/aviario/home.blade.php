@@ -86,51 +86,41 @@
 
         <section class="padding-padrao">
             <article class="row justify-content-between px-0">
-                <section class="col-12 col-md-8 row justify-content-between row-post-secundario">
-                    @if($postsSecundarios)
-                        @php
-                            $i = 0;
-                        @endphp
-                        @foreach ($postsSecundarios as $post)
-                            <article class="col-6 col-post-secundario mb-3">
-                                <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
-                                    <article class="posts-secundarios">
-                                        <div class="">
-                                            <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}" />
-                                        </div>
-                                        <div class="">
-                                            <h6 class="mt-1"> {{$post->categoria->descricao}} </h6>
-                                            <h3> {{$post->titulo}} </h3>
-                                        </div>
-                                    </article>
-                                </a>
-                            </article>
-                            @php
-                                $i++;
-                            @endphp
-                            
-                            @if($i == 4)
-                                <section class="col-12 pr-0 anuncios-laterais d-block d-sm-none">
-                                    <div class="anuncio mb-3">
-                                        <img src="{{ url('img/lateral-1.png/') }}" />
+                <section class="col-12 col-md-8 ">
+                    <div class="row area-categoria">
+                        <div class="col-12 mb-4">
+                            <h2>Os serviços que você procura estão aqui:</h2>
+                        </div>
+                        @if($empresaCategorias)
+                            <div class="row col-12 linha-categorias">
+                                @foreach ($empresaCategorias as $cat)
+                                    <div class="categorias-random mb-3 shadow-sm">
+                                        <a href="#">
+                                            <p>{{$cat->descricao}}</p>
+                                        </a>
                                     </div>
-                                </section>
-                                @php
-                                    $i = 0;
-                                @endphp
-                            @endif
-                        @endforeach
-                    @endif
+                                @endforeach
+                                
+                            </div> 
+                        @endif
+                    </div>
+                    <div class="legenda-area-categoria">
+                        <p class="mt-2 legenda">Essas e muitas outras categorias no <br class="d-block d-sm-none"><span class="destaque"> Guia Comercial do Aviário </span></p>
+                    </div>
+                    <hr>
                 </section>
+
+               
+                <div class="col-12 anuncio d-block d-sm-none">
+                    <img src="{{ url('img/lateral-1.png/') }}" />
+                </div>
+
                 <section class="col-md-3 anuncios-laterais d-none d-sm-block">
                     <div class="col-12 anuncio px-0 mb-5">
                         <img src="{{ url('img/lateral-1.png/') }}" />
                     </div>
                     <div class="col-12 anuncio px-0 mb-5">
                         <img src="{{ url('img/lateral-2.jpg/') }}" />
-                    </div>
-                    <div class="col-12 anuncio px-0 mb-5">
-                        <img src="{{ url('img/lateral-1.png/') }}" />
                     </div>
                 </section>
             </article>

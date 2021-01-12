@@ -108,6 +108,25 @@ html,body
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.linha-categorias {
+    padding-left: 30px;
+}
+
+.aviario-home .categorias-random {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    margin-right: 12px;
+    background-color: #2d9cdb;
+    
+}
+
+.aviario-home .categorias-random p {
+    font-size: 18px;
+    line-height: 20px;
+    color: #fff;
+}
+
 .navbar .area-procura-noticia {
     width: 300px;
     padding: 10px;
@@ -199,7 +218,7 @@ html,body
     margin-bottom: 20px;
 }
 
-.anuncios-laterais img {
+.anuncios-laterais img, .anuncio img {
     width: 100%;
 }
 
@@ -395,6 +414,22 @@ footer .navegacao {
     .aviario-home .busca-guia-comercial .area-procura-comercio {
         width: 382px;
     }
+
+    .aviario-home .area-categoria {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .linha-categorias {
+        justify-content: center !important;
+    }
+
+    .legenda-area-categoria {
+        text-align: center;
+    }
+
+
+    
 
     .guia-comercial .area-procura-comercio {
         margin-top: 16px;
