@@ -112,11 +112,11 @@ use Carbon\Carbon;
                     @endguest
                 </ul>
 
-                <form class="search-nav pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                <form class="search-nav pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('aviario.posts.search')}}" method="POST">
                     @csrf
                     <div class="area-procura-noticia">
-                        <input type="text" hidden="true" name="option" value="nome">
-                        <input class="procura-noticia" type="text" placeholder="Procurar notícia" aria-label="Search">
+                        <input type="text" hidden="true" name="option" value="titulo">
+                        <input class="procura-noticia" type="text" name="filter" placeholder="Procurar notícia" aria-label="Search">
                         <button><i type="submit" class="fas fa-search"></i></button>
                     </div>
                 </form>
@@ -160,5 +160,6 @@ use Carbon\Carbon;
         </footer>
     </div>
     <script src="{{url("js/script.js")}}"></script>
+    <script src="{{ url('js/teste.js') }}" ></script>
 </body>
 </html>

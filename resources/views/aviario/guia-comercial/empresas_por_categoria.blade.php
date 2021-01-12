@@ -4,7 +4,7 @@
     <section class="padding-padrao empresas-por-categoria ">
         <article class="row justify-content-between px-md-3">
             <div class="col-sm-12 px-md-0 titulo-pagina">
-                <h3> {{$categoria->descricao}} </h3>
+                <h2> Guia Comercial / {{$categoria->descricao}} </h2>
                 <hr class="">
             </div>
         

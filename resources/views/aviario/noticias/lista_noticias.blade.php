@@ -10,15 +10,15 @@
 
         <hr>
         @csrf
-        <section class="card mb-4 shadow-sm" id="card-swipe">
-            <div class="swipeView p-2 ">
+        <section class="card mb-4 px-2 pt-3 shadow-sm d-block d-sm-none text-center" id="card-swipe">
+            <div class="swipeView">
                 @foreach ($categorias as $cat)
-                    <div class="opcao  px-3 py-2">
-                        <form class="" action="{{route('posts.search')}}" method="POST">
+                    <div class="opcao">
+                        <form class="pb-3" action="{{route('posts.search')}}" method="POST">
                             @csrf
-                            <div class="input-group-prepend">
-                                <button class="btn btn-categoria" type="button submit">
-                                    <p class="mb-0 text-center">
+                            <div class="">
+                                <button class="btn-categoria" onclick="defineActive(this)" type="button submit">
+                                    <p class="categoria-swipe"  >
                                         <strong>
                                             {{$cat->descricao}}
                                         </strong>
@@ -34,7 +34,7 @@
             </div>
 
         </section>
-        <article class="row justify-content-between">
+        <article class="row justify-content-between listagem-noticias">
             <div class="col-12 col-md-7 lista-noticias">
                 <ul>
                     @foreach ($posts as $post)
@@ -63,13 +63,16 @@
                     @endforeach
                 </ul>
             </div>
+
             <div class="col-2 d-none d-sm-block">
-                <div class="mb-3 busca-nome d-none d-sm-block">
-                    <form class="form-inline" action="{{route('posts.search')}}" method="POST">
+                <div class="mb-3 busca-nome ">
+                    <form class="" action="{{route('aviario.posts.search')}}" method="POST">
                         @csrf
-                        <input type="text" hidden="true" name="option" value="titulo">
-                        <input class="form-control " type="search" placeholder="Pesquisar por uma parte do nome" name="filter" aria-label="Search">
-                        <button hidden="true" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                        <div class="area-procura-noticia">
+                            <input type="text" hidden="true" name="option" value="titulo">
+                            <input class="procura-noticia" type="text" name="filter" placeholder="Procurar notícia" aria-label="Search">
+                            <button><i type="submit" class="fas fa-search"></i></button>
+                        </div>
                     </form>
                 </div>
     

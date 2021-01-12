@@ -13,10 +13,12 @@
                 <div class="legenda-guia d-none d-sm-block">
                     <p>Encontre os serviços e empresas do Aviário aqui.</p>
                 </div>
-                <form>
+                <form  action="{{route('aviario.empresas.search')}}" method="POST">
+                    @csrf
                     <div class="area-procura-comercio">
-                      <input type="text" class="procura-comercio" placeholder="Pesquise pelo nome ou categoria da empresa">
-                      <button><i type="submit" class="fas fa-search"></i></button>
+                        <input type="text" hidden="true" name="option" value="nome">
+                        <input type="text" class="procura-comercio" name="filter" placeholder="Pesquisar por nome ou categoria">
+                        <button><i type="submit" class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
@@ -40,7 +42,7 @@
                             @foreach ($categorias as $cat)
                                 @if($cat->ramo->descricao == $ramo->descricao)
                                     <li> 
-                                        <a href="{{route('guia.categoria', $cat->id)}}"> {{$cat->descricao}}  </a> 
+                                        <a href="{{route('guia.categoria', $cat->slug)}}"> {{$cat->descricao}}  </a> 
                                     </li>
                                     <hr class="my-1 p-0 mx-0 col-10 align-item-start">
                                 @endif
@@ -70,25 +72,26 @@
                                 </p>
                             </a>
                         </div>
-                        @foreach ($ramo->categoria as $cat)
-                            <div id="collapse{{$ramo->id}}" class="collapse" aria-labelledby="heading{{$ramo->id}}" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    <a class="form-inline" href="{{route('guia.categoria', $cat->id)}}" >
-                                        @csrf
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-categoria" type="button submit">
-                                                <p class="mb-0 text-left">
-                                                    <strong>
-                                                        {{$cat->descricao}}
-                                                    </strong>
-                                                </p>
-                                            </button>
-                                        </div>
-                                    </a>
+
+                        @foreach ($categorias as $cat)
+                            @if($cat->ramo->descricao == $ramo->descricao)
+                                <div id="collapse{{$ramo->id}}" class="collapse" aria-labelledby="heading{{$ramo->id}}" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <a class="form-inline" href="{{route('guia.categoria', $cat->slug)}}" >
+                                            @csrf
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-categoria" type="button submit">
+                                                    <p class="mb-0 text-left">
+                                                        <strong>
+                                                            {{$cat->descricao}}
+                                                        </strong>
+                                                    </p>
+                                                </button>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>    
-    
-                            
+                            @endif   
                         @endforeach
                     </div>    
                 @endforeach

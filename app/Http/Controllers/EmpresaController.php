@@ -20,13 +20,15 @@ class EmpresaController extends Controller
     private $empresa;
     private $empresas;
     private $ramos;
-    private $categorias;
+    private $categoria;
     private $endereco;
+    private $categoriaEmpresa;
 
     public function __construct()
     {
         $this->empresa = new Empresa();
         $this->empresas = Empresa::paginate();
+        $this->categoria = new EmpresaCategoria();
         $this->categorias = EmpresaCategoria::all()->sortBy("descricao");
         $this->ramos = Ramo::all()->sortBy("descricao");
         $this->endereco = new Endereco();
@@ -466,6 +468,41 @@ class EmpresaController extends Controller
         return view('listagem.empresas', compact('empresas', 'ramos', 'categorias'));
         
     }
+
+    public function searchAviario(Request $request)
+    {
+       
+        $ramos = $this->ramos;
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('id', 1)->first();
+        $emp = $this->empresa;
+        
+        if($request->option == 'nome') {
+            $empresas = $emp->searchName($request->filter);
+        }else {
+            $empresas = $emp->searchCategory($request->filter);
+        }
+        
+        return view('aviario.guia-comercial.empresas_por_categoria', compact('empresas', 'ramos', 'categoria'));
+        
+    }
+
+
+    public function showEmpresas($slug) {
+
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
+        $id = $categoria->id;
+
+        
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
+
+        return view('aviario.guia-comercial.empresas_por_categoria', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+        ]);
+    }
+
 
     
 }

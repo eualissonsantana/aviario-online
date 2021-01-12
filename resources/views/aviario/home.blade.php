@@ -67,10 +67,12 @@
                 </article>
 
                 <article class="d-flex justify-content-center px-0">
-                    <form>
+                    <form  action="{{route('aviario.empresas.search')}}" method="POST">
+                        @csrf
                         <div class="area-procura-comercio">
-                          <input type="text" class="procura-comercio" placeholder="Pesquisar por nome ou categoria">
-                          <button><i type="submit" class="fas fa-search"></i></button>
+                            <input type="text" hidden="true" name="option" value="nome">
+                            <input type="text" class="procura-comercio" name="filter" placeholder="Pesquisar por nome ou categoria">
+                            <button><i type="submit" class="fas fa-search"></i></button>
                         </div>
                     </form>
                 </article>

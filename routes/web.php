@@ -69,16 +69,18 @@ Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
 Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
 Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::any('/noticias/buscar', [PostController::class, 'searchAviario'])->name('aviario.posts.search');
 
 Route::get('/guia-comercial', [EmpresaController::class, 'guia_index'])->name('guia.index');
-Route::get('/guia-comercial/{categoria}', [EmpresaController::class, 'show'])->name('guia.categoria');
+Route::get('/guia-comercial/{slug}', [EmpresaController::class, 'showEmpresas'])->name('guia.categoria');
 Route::get('/guia-comercial/mostrar/{slug}/{id}', [EmpresaController::class, 'buscaEmpresa'])->name('empresas.show');
+Route::any('/guia-comercial/busca', [EmpresaController::class, 'searchAviario'])->name('aviario.empresas.search');
+
 
 
 Route::get('/painel', [App\Http\Controllers\HomeController::class, 'index'])->name('painel')->middleware('auth');
 Route::get('/cadastrar', [App\Http\Controllers\EmpresaController::class, 'cadastrarComercio'])->name('cadastrar-comercio');
 Route::post('/cadastrar/enviado', [EmpresaController::class, 'storeFormulario'])->name('empresas.cadastrar-comercio');
-
 
 
 

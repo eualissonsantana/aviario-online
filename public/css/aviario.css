@@ -120,16 +120,28 @@ html,body
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.aviario-home .busca-guia-comercial .area-procura-comercio button, .navbar .area-procura-noticia button, .guia-comercial .area-procura-comercio button{
+.listagem-noticias .area-procura-noticia {
+    width: 100%;
+    padding: 10px;
+    height: 40px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.aviario-home .busca-guia-comercial .area-procura-comercio button, .navbar .area-procura-noticia button, .guia-comercial .area-procura-comercio button, .listagem-noticias .area-procura-noticia button {
     border: none;
     background-color: transparent;
 }
 
-.aviario-home .busca-guia-comercial .area-procura-comercio button:focus, .navbar .area-procura-noticia button:focus, .guia-comercial .area-procura-comercio button:focus {
+.aviario-home .busca-guia-comercial .area-procura-comercio button:focus, .navbar .area-procura-noticia button:focus, .guia-comercial .area-procura-comercio button:focus, .listagem-noticias .area-procura-noticia button:focus {
     outline: none;
 }
 
-.aviario-home .busca-guia-comercial .procura-comercio, .navbar .procura-noticia, .guia-comercial .procura-comercio{
+.aviario-home .busca-guia-comercial .procura-comercio, .navbar .procura-noticia, .guia-comercial .procura-comercio, .listagem-noticias .procura-noticia{
     flex: 1;
     height: 30px;
     border: none;
@@ -240,7 +252,7 @@ html,body
 
 .swipeView {
     display: grid;
-    grid-template-columns: repeat(4, 30%);
+    grid-template-columns: repeat(8, 30%);
     will-change: transform;
     align-content: center;
     overflow-x: auto;
@@ -250,11 +262,21 @@ html,body
     -webkit-overflow-scrolling: touch;
 }
 
+#card-swipe {
+    background-color: #f3f3f3 !important;
+}
+
 .opcao {
     scroll-snap-align: start;
 }
 
-.swipeView p {
+.swipeView .active {
+    color: #2d9cdb;
+    font-weight: 500;
+}
+
+.btn-categoria:focus {
+    color: #2d9cdb;
 }
 
 footer {
@@ -302,9 +324,6 @@ footer .navegacao {
         object-fit: cover;
     }
 
-    #card-swipe{
-        background-color: #f2f5f9 !important;
-    }
    
     .painel-empresas .imagem-comercio img {
         width: 220px;
