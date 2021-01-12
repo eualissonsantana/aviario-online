@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content-child painel-nova-noticia">
+    <div class="padding-padrao painel-nova-noticia">
         <section class="card">
             <article class="card-body">
                 <h2>

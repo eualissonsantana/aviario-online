@@ -11,7 +11,7 @@
 <body>
     <section class="content container-fluid col-lg-11 col-sm-10">
         <article class="image">
-            <img src="{{ url('img/logo-aviario.png') }}" alt="Logo Aviário Online">
+            <img src="{{ url('img/logo.png') }}" alt="Logo Aviário Online">
         </article>
 
         <article class=" mt-4 text col-md-12">

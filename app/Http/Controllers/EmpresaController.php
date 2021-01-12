@@ -20,13 +20,15 @@ class EmpresaController extends Controller
     private $empresa;
     private $empresas;
     private $ramos;
-    private $categorias;
+    private $categoria;
     private $endereco;
+    private $categoriaEmpresa;
 
     public function __construct()
     {
         $this->empresa = new Empresa();
         $this->empresas = Empresa::paginate();
+        $this->categoria = new EmpresaCategoria();
         $this->categorias = EmpresaCategoria::all()->sortBy("descricao");
         $this->ramos = Ramo::all()->sortBy("descricao");
         $this->endereco = new Endereco();
@@ -49,8 +51,9 @@ class EmpresaController extends Controller
     {
         $empresas = $this->empresas;
         $categorias = $this->categorias;
+        $ramos = $this->ramos;
 
-        return view('listagem.empresas', compact('empresas', 'categorias'));
+        return view('listagem.empresas', compact('empresas', 'categorias', 'ramos'));
     }
 
     public function guia_index()
@@ -154,7 +157,7 @@ class EmpresaController extends Controller
             'slogan' => ['max:255'],
             'imagem' => [],
             'fotos[]' => ['max:4'],
-            'telefone' => ['required', 'string', 'max:14'],
+            'telefone' => ['required', 'string', 'max:16', 'min:15'],
             'email' => ['max:255'],
             'youtube' => ['max:255'],
             'instagram' => ['max:255'],
@@ -268,7 +271,7 @@ class EmpresaController extends Controller
             'nome' => ['required', 'string', 'max:255'],
             'slogan' => ['max:255'],
             'imagem' => [],
-            'telefone' => ['required', 'string', 'max:14'],
+            'telefone' => ['required', 'string', 'max:16', 'min:15'],
             'email' => ['max:255'],
             'youtube' => ['max:255'],
             'instagram' => ['max:255'],
@@ -398,9 +401,10 @@ class EmpresaController extends Controller
     public function uploadImage($request, $slug, $id)
     {
         if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            $resize = Image::make($request->file('imagem'))->resize(600, null, function ($constraint) {
+            $resize = Image::make($request->file('imagem'))->orientate()->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->encode('jpg');
+
 
             $extension = $request->imagem->extension();
             $nameFile = "{$slug}-{$id}.{$extension}";
@@ -425,7 +429,7 @@ class EmpresaController extends Controller
             $cont = 1;
 
             foreach($files as $file){
-                $resize = Image::make($file)->resize(600, null, function ($constraint) {
+                $resize = Image::make($file)->orientate()->resize(600, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->encode('jpg');
 
@@ -450,8 +454,10 @@ class EmpresaController extends Controller
 
     public function search(Request $request)
     {
-        $categorias = EmpresaCategoria::all();
-        $emp = new Empresa();
+       
+        $ramos = $this->ramos;
+        $categorias = $this->categorias;
+        $emp = $this->empresa;
         
         if($request->option == 'nome') {
             $empresas = $emp->searchName($request->filter);
@@ -459,9 +465,44 @@ class EmpresaController extends Controller
             $empresas = $emp->searchCategory($request->filter);
         }
         
-        return view('listagem.empresas', compact('empresas', 'categorias'));
+        return view('listagem.empresas', compact('empresas', 'ramos', 'categorias'));
         
     }
+
+    public function searchAviario(Request $request)
+    {
+       
+        $ramos = $this->ramos;
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('id', 1)->first();
+        $emp = $this->empresa;
+        
+        if($request->option == 'nome') {
+            $empresas = $emp->searchName($request->filter);
+        }else {
+            $empresas = $emp->searchCategory($request->filter);
+        }
+        
+        return view('aviario.guia-comercial.empresas_por_categoria', compact('empresas', 'ramos', 'categoria'));
+        
+    }
+
+
+    public function showEmpresas($slug) {
+
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
+        $id = $categoria->id;
+
+        
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
+
+        return view('aviario.guia-comercial.empresas_por_categoria', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+        ]);
+    }
+
 
     
 }

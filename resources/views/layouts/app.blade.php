@@ -7,6 +7,8 @@ use Carbon\Carbon;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color"  content="#2d9cdb">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2d9cdb">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,12 +18,14 @@ use Carbon\Carbon;
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src='https://cdn.tiny.cloud/1/5f1scw7zl01d1jwmygfksnkg8tlk7dft9qvie9wkeopsbhdt/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
+    <script src="https://kit.fontawesome.com/263db3eba8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{url("js/tinymce.js")}}"></script>
     <script type="text/javascript" src="https://widgets-viewer.climacell.co/v1/sdk.js"></script>
+    <script src="{{ url('js/mask.js') }}" ></script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;600family=Oxygen:wght@300&display=swap" rel="stylesheet">
     
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -40,13 +44,13 @@ use Carbon\Carbon;
             <div class="row pt-2 justify-content-between">
                 <div class="col">
                     <a class="" href="{{route('aviario.index')}}">
-                        <img class="" src="{{ url('img/aviario-online-logo.png') }}" alt="Logo Aviário Online">
+                        <img class="" src="{{ url('img/logo.png') }}" alt="Logo Aviário Online">
                     </a>
                 </div>
 
                 <div class="col-7 d-none d-sm-block banners-topo">
-                    <a class="" href="#">
-                        <img class="" src="{{ url('img/3292.png') }}" alt="Logo Aviário Online">
+                    <a class="anuncio-topo" href="#">
+                        <img class="" src="{{ url('img/3312.gif') }}" alt="Logo Aviário Online">
                     </a>
                 </div>
 
@@ -56,12 +60,15 @@ use Carbon\Carbon;
             </div>
         </section>
 
-        <nav class="container-fluid navbar nav-menu bg-destaque navbar-expand-lg  mt-md-2 pr-md-5 home-page">                    
+        <nav class="container-fluid navbar bg-destaque navbar-expand-lg  mt-md-2 pr-md-5 home-page">                    
+            <a class="navbar-brand d-block d-sm-none pl-3 logo" href="{{route('aviario.index')}}">
+                <img src="{{ url('img/logo-branco.png') }}" alt="Logo Aviário Online" width="100px">
+            </a>
             <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
            
-            <div class="collapse navbar-collapse justify-content-between padding-padrao" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse justify-content-between " id="navbarNavAltMarkup">
                 <ul class="navbar-nav  justify-content-between ">
                     <li class="nav-item ">
                         <a class="nav-link" href="{{route('aviario.index')}}" >Início<span class="sr-only">(current)</span></a>
@@ -105,19 +112,54 @@ use Carbon\Carbon;
                     @endguest
                 </ul>
 
-                <form class="form-inline pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('empresas.search')}}" method="POST">
+                <form class="search-nav pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('aviario.posts.search')}}" method="POST">
                     @csrf
-                    <input type="text" hidden="true" name="option" value="nome">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Procurar" aria-label="Search">
-                    <button hidden="true" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <div class="area-procura-noticia">
+                        <input type="text" hidden="true" name="option" value="titulo">
+                        <input class="procura-noticia" type="text" name="filter" placeholder="Procurar notícia" aria-label="Search">
+                        <button><i type="submit" class="fas fa-search"></i></button>
+                    </div>
                 </form>
             </div>
         </nav>
         
-        <main class="content padding-padrao">
+        <main class="content">
             @yield('content')
         </main>
+
+        <footer class="padding-padrao">
+            <div class="row ">
+                <div class="col-12 col-md-2 logo">
+                    <img src="{{ url('img/logo-branco.png') }}" width="180px" alt="Logo Aviário Online">
+                </div>
+
+                <div class="col-12 col-md-3 row pb-1 align-self-end navegacao">
+                    <div class="col-6">
+                        <p>Início</p>
+                        <p>Notícias</p>
+                        <p>Guia Comercial</p>
+                    </div>
+
+                    <div class="col-6">
+                        <p>Contato</p>
+                        <p>Contato</p>
+                        <p>Contato</p>
+                    </div>
+
+                </div>
+
+                <div class="text-right dev-info col-12 col-md-7 pb-1 align-self-end">
+                    <p>© Copyright 2021 - Aviário Online</p>
+                    <p>Desenvolvido por <strong>Alisson Santana</strong> </p>
+                </div>
+
+            </div>
+
+            
+            
+        </footer>
     </div>
     <script src="{{url("js/script.js")}}"></script>
+    <script src="{{ url('js/teste.js') }}" ></script>
 </body>
 </html>

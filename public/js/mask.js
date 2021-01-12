@@ -1,3 +1,7 @@
+function defineActive() {
+    console.log("Teste 2")
+}
+
 const phoneMask = event => {
     const e = event || window.event;
     const code = e.keyCode;
@@ -25,3 +29,5 @@ const phoneMask = event => {
 function teste(){
     console.log("Teste")
 }
+
+

@@ -7,7 +7,7 @@ body{
 }
 
 #app {
-    padding: 30px 0;
+    padding: 20px 0 0;
 }
 
 .padding-padrao {
@@ -16,14 +16,17 @@ body{
 
 .nav-item a {
     color: #fff;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 400;
     margin-right: 30px;
-    padding: 0 !important;
 }
 
 .nav-item a:hover {
     color: #fff;
+}
+
+.dropdown-item {
+    color: #4D4D4D !important;
 }
 
 h1, h2, h3, h4, h5, h6, p, small {
@@ -43,12 +46,12 @@ h2 {
 }
 
 h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
 
 h4 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 
@@ -58,9 +61,15 @@ h4 {
 }
 
 h5 {
-    font-size: 18px;
-    line-height: 18px;
+    font-size: 16px;
+    line-height: 16px;
     font-weight: bold;
+}
+
+h6 {
+    font-weight: bold;
+    color: #2D9CDB;
+    text-transform: uppercase;
 }
 
 .thin {
@@ -69,12 +78,11 @@ h5 {
 
 p {
     font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    line-height: 22px;
 }
 
-.home p {
-    font-size: 20px;
-    font-family: Open Sans;
-}
+
 
 a {
     color: #4d4d4d;
@@ -89,10 +97,10 @@ a:hover {
     background-color: #2D9CDB;
 }
 
-.nav-menu {
-    padding: 0 !important;
-    height: 50px;
-    margin: 24px 0 !important;  
+.navbar {
+    padding-right: 100px !important;
+    padding-left: 100px !important;
+    margin-bottom: 16px;
 }
 
 .banners-topo img {
@@ -107,8 +115,7 @@ a:hover {
 }
 
 .av-card:hover {
-    transform: scale(1.05);
-    transition-delay: 0.s;
+   box-shadow: none;
 }
 
 .av-card-no-scale:hover{
@@ -147,10 +154,7 @@ a:hover {
     font-family: 'Montserrat', sans-serif;
 }
 
-.busca-nome input {
-    width: 300px !important;
-    height: 44px;
-}
+
 
 table {
     border: 1px solid #dee2e6;
@@ -171,6 +175,7 @@ table {
 
 .btn:hover {
     box-shadow: none;
+    color: #fff;
 }
 
 .btn-excluir:hover{
@@ -182,18 +187,18 @@ table {
 }
 
 .btn-sm {
-    height: 44px;
-    width: 95%;
+    height: 40px;
+    width: 100%;
 }
 
 .btn-lg {
-    height: 44px;               
+    height: 40px;               
     width: 150px;
 }
 
 .btn-editar {
-    border: 1px solid #0084B8;
-    color: #0084B8;
+    border: 1px solid #2D9CDB;
+    color: #2D9CDB;
 }
 
 .btn-excluir {
@@ -201,16 +206,36 @@ table {
     color: #EB5757;
 }
 
-.btn-busca-categoria {
-    background-color: #8f8f8f;
+.btn-categoria {
+    background-color: transparent;
     width: auto;
-    border-bottom-right-radius: 0 !important;
-    border-top-right-radius: 0 !important;
+    border: none;
+    box-shadow: none;
+    padding: 0 !important;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.btn-categoria:hover {
+    color: #4d4d4d;
 }
 
 .btn-novo, .btn-salvar {
     background-color: #2EA44F;
     color: #fff;
+}
+
+.btn-cadastrar {
+    background-color: #2D9CDB;
+    color: #fff;
+    vertical-align: middle;
+    padding: 4px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    width: auto;
+    height: auto;
+    margin-top: 4px;
+    border-radius: 4px;
 }
 
 /********* LOGIN *********/
@@ -238,6 +263,8 @@ label {
 
 .login-page .btn-entrar, .login-page .btn-salvar {
     width: 100%;
+    background-color: #2D9CDB;
+    color: #fff;
 }
 
 
@@ -256,10 +283,6 @@ ul {
 
 /********* COMÉRCIOS *********/
 
-.imagem-comercio {
-    margin-right: 15px;
-}
-
 .dados-comercio {
     padding-top: 0 !important;
 }
@@ -272,6 +295,10 @@ ul {
     font-weight: 600;
 }
 
+.dados-comercio p {
+    line-height: normal;
+}
+
 .arquivo input{
     padding:  20px !important;
 }
@@ -279,6 +306,36 @@ ul {
 .painel-empresas .busca-categoria select{
     border-bottom-left-radius: 0 !important;
     border-top-left-radius: 0 !important;
+}
+
+.titulo-categoria {
+    border-bottom: 4px solid #2D9CDB;
+}
+
+.titulo-categoria h3 {
+    color: #2D9CDB;
+    font-size: 20px;
+}
+
+
+
+.painel-empresas .card-header {
+    padding: 6px;
+    padding-left: 1.25rem;
+}
+
+.painel-empresas .card-header p {
+    font-weight: bolder !important;
+}
+
+.painel-empresas .card-body {
+    padding: 6px;
+    padding-left: 1.25rem;
+    border-bottom: 1px solid rgba(126, 120, 120, 0.125);
+}
+
+.busca-nome input {
+    width: 100% !important;
 }
 
 /********* NOTÍCIAS *********/
@@ -297,17 +354,22 @@ ul {
     height: 37px;
 }
 
-.painel-noticias .imagem-noticia img{
-    width: 250px;
-    height: 160px;
-    object-fit: cover;
+
+.lista-noticias .li-noticia p {
+    font-size: 15px;
+    line-height: 20px;
 }
 
-
-@media only screen and (min-width: 1400px) {
-
+.aviario-noticias .card-header {
+    padding: 4px 8px;
 }
 
+.aviario-noticias .card-header p {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 500;
+}
+ 
 #import {
     margin: 0em 0em 0em .2em;
     content: 'Import Settings';

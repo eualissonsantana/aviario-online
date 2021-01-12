@@ -14,6 +14,7 @@ class AviarioController extends Controller
     private $ultimoPost;
     private $penultimoPost;
     private $posts;
+    private $postsSecundarios;
     private $postCategoria;
     private $postCategorias;
     private $empresa;
@@ -29,16 +30,19 @@ class AviarioController extends Controller
             $this->post = new Post();
             $this->postCategoria = new PostCategoria();
             
-            Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(3, function($noticias){
+            Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(11, function($noticias){
                 $i = 0;
                 foreach ($noticias as $post)
                 {
                     if($i == 0) {
                         $this->penultimoPost = $post;
-                        $i++;
-                    }else {
+                    }else if($i <= 2) {
                         $this->posts[] = $post;
+                    } else {
+                        $this->postsSecundarios[] = $post;
                     }
+
+                    $i++;
                 }
                 
                 return false;
@@ -50,11 +54,12 @@ class AviarioController extends Controller
 
     public function index () {
         $posts = $this->posts;
+        $postsSecundarios = $this->postsSecundarios;
         $categorias = $this->postCategorias;
         $ultimoPost = $this->ultimoPost;
         $penultimoPost = $this->penultimoPost;
         
-        return view('aviario.home', compact('posts', 'categorias', 'ultimoPost', 'penultimoPost'));
+        return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'penultimoPost'));
     }
 
     public function hotsite()

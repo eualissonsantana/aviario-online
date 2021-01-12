@@ -204,4 +204,19 @@ class PostController extends Controller
         
     }
 
+    public function searchAviario(Request $request)
+    {
+        $categorias = $this->postCategorias;
+        
+        if($request->option == 'titulo') {
+            $posts = $this->post->searchTitulo($request->filter);
+        }else {
+            $posts = $this->post->searchCategory($request->filter);
+        }
+
+        
+        return view('aviario.noticias.lista_noticias', compact('posts', 'categorias'));
+        
+    }
+
 }
