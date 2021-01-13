@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="content-child empresa">
+    <section class="padding-padrao empresa">
         <section class="card">
             <article class="card-body">
         
@@ -258,11 +258,11 @@
                             @enderror
                         </div>
                     </article>
-                    
-                    <div class="row pr-3 justify-content-end">
-                     
-                            <button type="submit" class="ml-3 btn btn-salvar">Salvar</button>
-                       
+
+                    <div class="row justify-content-end pr-3">
+                        <div class="col-12 col-md-3 ">
+                            <button type="submit" class="ml-3 btn btn-enviar">Salvar</button>
+                        </div>
                     </div>
                 </form>
             </article>

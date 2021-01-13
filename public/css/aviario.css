@@ -315,6 +315,10 @@ footer .navegacao {
     padding-left: 40px;
 }
 
+.contato p {
+    font-size: 14px;
+}
+
 
 @media only screen and (min-width: 1400px) {
     .aviario-home .penultimo-post img {

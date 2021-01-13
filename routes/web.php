@@ -65,8 +65,9 @@ Route::delete('/painel/banners/{banner}', [BannerController::class, 'destroy'])-
 
 // Rotas comuns
 
-Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
 Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
+Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
+Route::get('/contato', [AviarioController::class, 'contato'])->name('aviario.contato');
 
 Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');

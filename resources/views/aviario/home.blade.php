@@ -79,7 +79,9 @@
 
                 <article class="rodape mt-4">
                     <p>Não encontrou sua empresa?</p>
-                    <button class="btn btn-lg btn-cadastrar">Cadastre aqui</button>
+                    <a href="http://aviario.online/cadastrar">
+                        <button  class="btn btn-lg btn-cadastrar">  Cadastre aqui</button>
+                    </a>
                 </article>
             </section>
         </section>

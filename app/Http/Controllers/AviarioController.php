@@ -79,6 +79,11 @@ class AviarioController extends Controller
         return view('aviario.index');
     }
 
+    public function contato()
+    {
+        return view('aviario.contato.contato');
+    }
+
     
 
 }

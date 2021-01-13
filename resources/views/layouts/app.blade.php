@@ -54,9 +54,6 @@ use Carbon\Carbon;
                     </a>
                 </div>
 
-                <div class="clima-tempo col">
-                    {{now()}}
-                </div>
             </div>
         </section>
 
@@ -81,7 +78,7 @@ use Carbon\Carbon;
                         <a class="nav-link" href="{{route('guia.index')}}">Guia Comercial</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('guia.index')}}">Contato</a>
+                        <a class="nav-link" href="{{route('aviario.contato')}}">Contato</a>
                     </li>
                     
 
@@ -133,24 +130,19 @@ use Carbon\Carbon;
                     <img src="{{ url('img/logo-branco.png') }}" width="180px" alt="Logo Aviário Online">
                 </div>
 
-                <div class="col-12 col-md-3 row pb-1 align-self-end navegacao">
+                <div class="col-12 col-md-7 row pb-1 align-self-end navegacao">
                     <div class="col-6">
                         <p>Início</p>
                         <p>Notícias</p>
                         <p>Guia Comercial</p>
                     </div>
 
-                    <div class="col-6">
-                        <p>Contato</p>
-                        <p>Contato</p>
-                        <p>Contato</p>
-                    </div>
-
                 </div>
 
-                <div class="text-right dev-info col-12 col-md-7 pb-1 align-self-end">
-                    <p>© Copyright 2021 - Aviário Online</p>
-                    <p>Desenvolvido por <strong>Alisson Santana</strong> </p>
+                <div class="text-left dev-info col-12 col-md-2 pb-1 align-self-end">
+                    <p><strong>Projeto e idealização:</strong></p>
+                    <p>IFBA - Feira da Santana</p>
+                    <p>Associações locais</p>
                 </div>
 
             </div>

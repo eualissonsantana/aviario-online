@@ -23,7 +23,7 @@
                         <li>
                             <section class="row justify-content-between">
                                 <article class="col-5 col-md-3 imagem-comercio ">
-                                    <img src="{{ url('storage/imagens/empresas/logomarcas/'.$emp->imagem) }}" />
+                                    <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem) }}" />
                                 </article>
         
                                 <article class="col-7 col-md-5 dados-comercio ">
@@ -82,7 +82,7 @@
                     @foreach ($ramos as $ramo)
                         <div class="card">
                             <div class="card-header" id="heading{{$ramo->id}}">
-                                <a class="collapsed" href="#" data-toggle="collapse" data-target="#collapse{{$ramo->id}}" aria-expanded="true" aria-controls="{{$ramo->descricao}}">
+                                <a class="collapsed ramo" href="#" data-toggle="collapse" data-target="#collapse{{$ramo->id}}" aria-expanded="true" aria-controls="{{$ramo->descricao}}">
                                     <p class="mb-0 text-left">
                                         <strong>
                                             {{$ramo->descricao}}
@@ -95,9 +95,9 @@
                                     <div class="card-body">
                                         <form class="form-inline" action="{{route('empresas.search')}}" method="POST">
                                             @csrf
-                                            <div class="input-group-prepend">
+                                            <div class="input-group-prepend categoria">
                                                 <button class="btn btn-categoria" type="button submit">
-                                                    <p class="mb-0 text-left">
+                                                    <p class="mb-0 text-left ">
                                                         <strong>
                                                             {{$cat->descricao}}
                                                         </strong>

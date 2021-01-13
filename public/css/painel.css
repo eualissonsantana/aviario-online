@@ -296,7 +296,18 @@ ul {
 }
 
 .dados-comercio p {
-    line-height: normal;
+    line-height: 18px;
+    font-size: 16px;
+}
+
+.painel-empresas .ramos-categorias .ramo p{
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400 !important;
+}
+
+.painel-empresas .ramos-categorias .categoria p {
+    font-size: 14px !important;
 }
 
 .arquivo input{
