@@ -310,6 +310,10 @@ ul {
     font-size: 14px !important;
 }
 
+.lista-empresas .imagem-comercio img {
+    width: 100%;
+}
+
 .arquivo input{
     padding:  20px !important;
 }
@@ -357,12 +361,25 @@ ul {
     height: 37px;
 }
 
+
+
 .painel-nova-noticia .categoria {
     vertical-align: bottom;
 }
 
 .arquivo label {
     height: 37px;
+}
+
+.painel-noticias .card .card-header {
+    padding: 8px 20px;
+}
+
+.painel-noticias .card .card-header p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #4D4D4D;
 }
 
 

@@ -82,7 +82,8 @@
    
     
     .btn-novo, .btn-salvar {
-        width: 95%;
+        width: 100%;
+        margin-top: 12px;
     }
 
     .usuarios ul {
@@ -90,13 +91,16 @@
     }
 
     .painel-noticias .imagem-noticia img{
-        width: 150px;
+        width: 100% !important;
         height: 100px;
-        object-fit: cover;
     }
 
     .painel-noticias .busca-box {
         margin: auto;
+    }
+
+    .painel-nova-noticia .categoria, .painel-nova-noticia .autor {
+        margin-top: 12px;
     }
 
     .painel-empresas .imagem-comercio img{
@@ -130,7 +134,6 @@
     .navbar-toggler-icon {
         color: #fff !important;
     }
-
 
 
     .exibe-noticia .imagem-noticia img {

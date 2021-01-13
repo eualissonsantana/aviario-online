@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="padding-padrao painel-nova-noticia">
+    <div class="padding-padrao pt painel-nova-noticia">
         <section class="card">
             <article class="card-body">
                 <h2>
@@ -55,7 +55,7 @@
                             @enderror
                         </div>
                         
-                        <div class="input-group col-md-4 categoria align-self-end">
+                        <div class="input-group form-group col-md-4 categoria align-self-end">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="categoria_id">Categoria</label>
                             </div>
@@ -82,7 +82,7 @@
                            
                         </div>
     
-                        <div class="input-group col-md-4 autor align-self-end">
+                        <div class="input-group form-group col-md-4 autor align-self-end">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="usuario_id">Autor</label>
                             </div>
@@ -116,8 +116,10 @@
                     </div>
 
 
-                    <div class="row col-12 justify-content-end">
-                        <button type="submit" class="btn btn-salvar">Salvar</button>
+                    <div class="row mt-2 justify-content-end">
+                        <div class="col-12 col-md-3">
+                            <button type="submit" class="btn btn-enviar">Salvar</button>
+                        </div> 
                     </div>
                 </form>
             </article>
