@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bannersCarousel' => $bannersRetangulares ?? ''])
 
 @section('content')
     <section class="no-padding aviario-home aviario-rc">
@@ -110,20 +110,49 @@
                         <p class="mt-2 legenda">Essas e muitas outras categorias no <br class="d-block d-sm-none"><span class="destaque"> Guia Comercial do Aviário </span></p>
                     </div>
                     <hr>
+
+                    <div class="enquete">
+                        <div class="card">
+                            <div class="card-header">
+                                <p>Queremos saber a sua opinião!</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="pergunta mt-2">
+                                    <h3> {{$enquete->pergunta}} </h3>
+                                    <form class="mt-3" action="{{route('aviario.enquetes.respostas')}}" method="POST">
+                                        @csrf
+                                        <div class="text-center">
+                                            @foreach ($opcoes as $opcao)
+                                                <div class="form-check form-check-inline">
+                                                    <input type="text" hidden="true" name="enquete" value=" {{$enquete->id}} ">
+                                                    <input class="form-check-input" type="radio" name="resposta" id="inlineRadio1" value=" {{$opcao->id}} ">
+                                                    <label class="form-check-label" for="inlineRadio1"> {{$opcao->descricao}} </label>
+                                                </div>
+                                            @endforeach
+                                            
+                                            <div class="mt-3">
+                                                <button type="submit" class="btn btn-primary">Enviar Resposta</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                
-                <div class="col-12 anuncio d-block d-sm-none">
+                <div class="col-12 mt-3 anuncio d-block d-sm-none">
                     <img src="{{ url('img/lateral-1.png/') }}" />
                 </div>
 
                 <section class="col-md-3 anuncios-laterais d-none d-sm-block">
-                    <div class="col-12 anuncio px-0 mb-5">
-                        <img src="{{ url('img/lateral-1.png/') }}" />
-                    </div>
-                    <div class="col-12 anuncio px-0 mb-5">
-                        <img src="{{ url('img/lateral-2.jpg/') }}" />
-                    </div>
+                    @foreach ($bannersQuadrados as $banner)
+                        <div class="col-12 anuncio px-0 mb-5">
+                            <img src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" />
+                        </div>    
+                    @endforeach
+                   
                 </section>
             </article>
 

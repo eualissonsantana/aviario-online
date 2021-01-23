@@ -13,7 +13,7 @@
         </div>
     </div>
     
-    <hr class="d-none sm-block">
+    <hr class="d-none d-sm-block">
 
     <section class="card my-4 px-2 pt-3 shadow-sm d-block d-sm-none text-center" id="card-swipe">
         <div class="swipeView">
@@ -47,7 +47,7 @@
                     <li> 
                         <section class="row li-noticia justify-content-between px-md-3">
                             <article class="col-6 col-md-3 imagem-noticia px-md-0 pr-0 pr-md-3">
-                                <img src="{{ url('storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                                <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}"/> 
                             </article>
                             <article class="col-6 col-md-5 d-flex align-content-between flex-wrap titulo-noticia">    
                                 <div class="col-12 px-0 px-md-3">
@@ -62,13 +62,17 @@
                                 </div>
                             </article>   
     
-                            <article class="row botoes col-12 col-md-4 justify-content-end pr-3 pr-md-5">
-                                <a href="{{url("painel/noticias/$post->id/edit")}}">
-                                    <button class="btn btn-lg btn-editar">Editar</button>
-                                </a>
-                                <a href="{{url("painel/noticias/$post->id")}}" class="ml-md-3 js-del-post">
-                                    <button class="btn btn-lg btn-excluir">Excluir</button>
-                                </a>
+                            <article class="row botoes col-12 col-md-4 justify-content-end pr-3 pr-md-4">
+                                <div class="col-6 pl-0">
+                                    <a href="{{url("painel/noticias/$post->id/edit")}}">
+                                        <button class="btn btn-full btn-primary">Editar</button>
+                                    </a>
+                                </div>
+                                <div class="col-6 pr-0">
+                                    <a href="{{url("painel/noticias/$post->id")}}" class="ml-md-3 js-del-post">
+                                        <button class="btn btn-sm btn-danger">Excluir</button>
+                                    </a>
+                                </div> 
                             </article>
                         </section>
                     </li>

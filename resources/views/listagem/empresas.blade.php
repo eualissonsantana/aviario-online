@@ -1,14 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
 
 @section('content')
-    <section class="padding-padrao painel-empresas">
+    <section class="padding-padrao pt painel-empresas">
         <article class="row justify-content-between ">
             <div class="col-12 col-md-6">
                 <h2>Comércios</h2>
             </div>
             <div class="mt-2 mt-md-0 col-12 col-md-6 text-right">
                 <a href="{{route("empresas.create")}}">
-                    <button class="btn btn-lg btn-novo">Novo</button>
+                    <button class="btn btn-lg btn-novo">Novo</i></button>
                 </a>
             </div>
             
@@ -29,10 +29,10 @@
                                 <article class="col-7 col-md-5 dados-comercio ">
                                     <article class="mb-1 mb-md-3">
                                         <h6>{{$emp->categoria->descricao}}</h6>
-                                        <h3><strong>{{$emp->nome}}</strong></h3>
+                                        <h3>{{$emp->nome}}</h3>
                                         <h5 class="mt-1 d-none d-sm-block">{{$emp->slogan}} </h5>
                                     </article>
-                                    <article class="mb-2 mb-md-3">
+                                    <article class="mb-2 mb-md-3 endereco">
                                         <p>
                                             {{$emp->endereco->logradouro}}, {{$emp->endereco->numero}} <br> 
                                             {{$emp->endereco->bairro}} - Feira de Santana/BA
@@ -47,12 +47,12 @@
                                 <article class="row botoes col-12 col-md-4 justify-content-end pr-3 pr-md-5">
                                     <div class="col-6 pl-0">
                                         <a href="{{url("painel/empresas/$emp->id/edit")}}">
-                                            <button class="btn btn-sm btn-editar">Editar</button>
+                                            <button class="btn btn-full btn-primary">Editar</i></button>
                                         </a>
                                     </div>
                                     <div class="col-6 pr-0">
                                         <a href="{{url("painel/empresas/$emp->id")}}" class="js-del-emp">
-                                            <button class="btn btn-sm btn-excluir">Excluir</button>
+                                            <button class="btn btn-full btn-danger">Excluir</i></button>
                                         </a>
                                     </div>
                                 </article>

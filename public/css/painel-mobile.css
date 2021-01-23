@@ -1,4 +1,4 @@
-@media only screen and (max-width: 414px) {
+@media only screen and (max-width: 415px) {
     
     #app {
         padding: 0;
@@ -45,6 +45,10 @@
         line-height: 18px;
         font-weight: bold;
     }
+
+    .painel-categorias-empresas .card-body h5 {
+        font-size: 14px;
+    }
     
     h6 {
         font-size: 12px;
@@ -79,7 +83,9 @@
         margin-bottom: 0;
     }
 
-   
+    .btn-novo, .btn-salvar {
+        width: 100%;
+    }
     
     .btn-novo, .btn-salvar {
         width: 100%;
@@ -148,4 +154,27 @@
         font-size: 22px !important;
     }
     
+}
+
+@media only screen and (max-width: 365px) {
+    
+
+    .dados-comercio h3 {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .dados-comercio .endereco p {
+        font-size: 14px;
+    }
+
+    .dados-comercio .telefone h5 {
+        font-size: 14px;
+    }
+
+    .painel-empresas .imagem-comercio img {
+        width: 130px !important;
+        height: 130px !important;
+        object-fit: cover;
+    }
 }

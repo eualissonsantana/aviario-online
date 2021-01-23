@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpresaCategoriaController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EnqueteController;
 use App\Http\Controllers\PostCategoriaController;
 use App\Http\Controllers\AviarioController;
 use App\Http\Controllers\BannerController;
@@ -63,11 +64,24 @@ Route::get('/painel/banners/{banner}/edit', [BannerController::class, 'edit'])->
 Route::put('/painel/banners/{banner}', [BannerController::class, 'update'])->name('banners.update')->middleware('auth');
 Route::delete('/painel/banners/{banner}', [BannerController::class, 'destroy'])->name('banners.destroy')->middleware('auth');
 
+// Enquetes
+Route::get('/painel/enquetes', [EnqueteController::class, 'index'])->name('enquetes.index')->middleware('auth');
+Route::get('/painel/enquetes/cadastro', [EnqueteController::class, 'create'])->name('enquetes.create')->middleware('auth');
+Route::post('/painel/enquetes/cadastro', [EnqueteController::class, 'store'])->name('enquetes.store')->middleware('auth');
+Route::get('/painel/enquetes/{enquete}/edit', [EnqueteController::class, 'edit'])->name('enquetes.edit')->middleware('auth');
+Route::put('/painel/enquetes/{enquete}', [EnqueteController::class, 'update'])->name('enquetes.update')->middleware('auth');
+Route::delete('/painel/enquetes/{enquete}', [EnqueteController::class, 'destroy'])->name('enquetes.destroy')->middleware('auth');
+Route::any('/painel/enquetes/buscar', [EnqueteController::class, 'search'])->name('enquetes.search');
+
+
+
+
 // Rotas comuns
 
 Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
 Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
 Route::get('/contato', [AviarioController::class, 'contato'])->name('aviario.contato');
+Route::post('/responde-enquete', [AviarioController::class, 'registraResposta'])->name('aviario.enquetes.respostas');
 
 Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');

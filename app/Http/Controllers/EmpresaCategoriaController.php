@@ -15,8 +15,8 @@ class EmpresaCategoriaController extends Controller
 
     public function __construct()
     {
-        $this->ramos = Ramo::all();
-        $this->categorias = EmpresaCategoria::paginate(10);
+        $this->ramos = Ramo::orderBy('descricao')->get();
+        $this->categorias = EmpresaCategoria::orderBy('descricao')->get();
         $this->categoria = new EmpresaCategoria();
     }
 
@@ -42,7 +42,9 @@ class EmpresaCategoriaController extends Controller
      */
     public function create()
     {
-        return view('cadastrar.empresa_categoria');
+        $ramos = $this->ramos;
+
+        return view('cadastrar.empresa_categoria', compact('ramos'));
     }
 
     /**
@@ -87,8 +89,9 @@ class EmpresaCategoriaController extends Controller
     {
         $categoria = new EmpresaCategoria();
         $categoria = $categoria->find($id);
+        $ramos = $this->ramos;
 
-        return view('cadastrar.empresa_categoria', compact('categoria'));
+        return view('cadastrar.empresa_categoria', compact('categoria', 'ramos'));
     }
 
     /**

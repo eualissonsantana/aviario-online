@@ -7,6 +7,10 @@ html,body
     overflow-x: hidden; 
 }
 
+.content {
+    padding-bottom: 300px;
+}
+
 .exibe-noticia hr {
     border-color: #a7a7a7;
 }
@@ -304,6 +308,9 @@ footer {
     padding-top: 20px !important;
     padding-bottom: 20px !important;
     margin-top: 22px;
+    position:absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
@@ -518,6 +525,14 @@ footer .navegacao {
     background-color: #2d9cdb;
     color: #fff;
     width: 100%;
+}
+
+.alerta {
+    color: #EB5757;
+}
+
+.verde {
+    color:#2EA44F;
 }
 
   

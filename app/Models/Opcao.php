@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Opcao extends Model
 {
     use HasFactory;
+
+    public function opcao()
+    {
+        return $this->belongsTo('App\Models\Enquete');
+    }
 }

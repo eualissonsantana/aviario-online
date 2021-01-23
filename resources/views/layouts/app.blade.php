@@ -1,9 +1,9 @@
 <?php
-use Carbon\Carbon;
+    use Carbon\Carbon;
 ?>
 
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +34,7 @@ use Carbon\Carbon;
     <link href="{{ asset('css/aviario.css') }}" rel="stylesheet">
 
 </head>
-<body>
+<body onload="defineActive()">
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v9.0" nonce="uJ0WJ2He"></script>
     
@@ -42,16 +42,30 @@ use Carbon\Carbon;
            
         <section class="padding-padrao d-none d-sm-block">
             <div class="row pt-2 justify-content-between">
-                <div class="col">
-                    <a class="" href="{{route('aviario.index')}}">
-                        <img class="" src="{{ url('img/logo.png') }}" alt="Logo Aviário Online">
+                <div class="col-2">
+                    <a href="{{route('aviario.index')}}">
+                        <img src="{{ url('img/logo.png') }}" alt="Logo Aviário Online" >
                     </a>
                 </div>
 
                 <div class="col-7 d-none d-sm-block banners-topo">
-                    <a class="anuncio-topo" href="#">
-                        <img class="" src="{{ url('img/3312.gif') }}" alt="Logo Aviário Online">
-                    </a>
+                    @yield('bannersCarousel')
+
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                        <div class="carousel-inner">
+                            @if(isset($bannersCarousel))
+                                @foreach ($bannersCarousel as $banner)
+                                    <div class="carousel-item ">
+                                        <img class="d-block w-100" src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <h3>teste</h3>
                 </div>
 
             </div>
@@ -94,13 +108,27 @@ use Carbon\Carbon;
                                     Painel
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href=" {{route('posts.index')}} ">Notícias</a>
+                                    <a class="dropdown-item" href=" {{route('post_categorias.index')}} ">Categorias de Notícias</a>
+                                    <div class="dropdown-divider"></div>
+
+                                    <a class="dropdown-item" href=" {{route('empresas.index')}} ">Guia Comercial</a>
+                                    <a class="dropdown-item" href=" {{route('empresa_categorias.index')}} ">Categorias do Guia Comercial</a>
+                                    
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{route('enquetes.index')}}">Enquetes</a>
+                                    
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{route('banners.index')}}">Banners</a>
+                                    
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Sair') }}
                                     </a>
-
+                                    
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -152,6 +180,6 @@ use Carbon\Carbon;
         </footer>
     </div>
     <script src="{{url("js/script.js")}}"></script>
-    <script src="{{ url('js/teste.js') }}" ></script>
+    <script src="{{ url('js/delete.js') }}" ></script>
 </body>
 </html>

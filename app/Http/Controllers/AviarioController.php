@@ -7,6 +7,9 @@ use App\Models\Post;
 use App\Models\PostCategoria;
 use App\Models\Empresa;
 use App\Models\EmpresaCategoria;
+use App\Models\Enquete;
+use App\Models\Opcao;
+use App\Models\Banner;
 use Illuminate\Support\Facades\DB;
 
 class AviarioController extends Controller
@@ -22,6 +25,10 @@ class AviarioController extends Controller
     private $empresas;
     private $empresaCategoria;
     private $empresaCategorias;
+    private $enquete;
+    private $bannersQuadrados;
+    private $bannersRetangulares;
+    private $opcoesEnquete;
 
     public function __construct()
     {
@@ -56,8 +63,10 @@ class AviarioController extends Controller
             });
 
             $this->empresaCategorias = EmpresaCategoria::inRandomOrder()->take(8)->skip(8)->get();
-            
             $this->postCategorias = PostCategoria::all();
+            $this->enquete = DB::table('enquetes')->inRandomOrder()->first();
+            $this->bannersQuadrados = Banner::where('posicao', 'lado')->where('ativo', '1')->get();
+            $this->bannersRetangulares = Banner::where('posicao', 'topo')->where('ativo', '1')->get();
         }
     }
 
@@ -69,9 +78,13 @@ class AviarioController extends Controller
         $penultimoPost = $this->penultimoPost;
         $maisLidas = $this->maisLidas;
         $empresaCategorias = $this->empresaCategorias;
-        
+        $enquete = $this->enquete;
+        $opcoes =  DB::table('opcaos')->where('enquete_id', 10)->get();
+        $bannersQuadrados = $this->bannersQuadrados;
+        $bannersRetangulares = $this->bannersRetangulares;
 
-        return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'penultimoPost', 'maisLidas', 'empresaCategorias'));
+        
+        return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'penultimoPost', 'maisLidas', 'empresaCategorias', 'enquete', 'opcoes', 'bannersQuadrados', 'bannersRetangulares'));
     }
 
     public function hotsite()
@@ -82,6 +95,23 @@ class AviarioController extends Controller
     public function contato()
     {
         return view('aviario.contato.contato');
+    }
+
+    public function registraResposta(Request $request) 
+    {
+        $data = $request->all();
+        $id = $data['resposta'];
+
+        if (!$opcao = Opcao::find($id))
+            return redirect()->back();
+
+        $updateVotos = $opcao->qtd_votos + 1;
+
+        $opcao->where(['id'=>$id])->update([
+            'qtd_votos' => $updateVotos
+        ]);
+        
+        return $this->index();
     }
 
     

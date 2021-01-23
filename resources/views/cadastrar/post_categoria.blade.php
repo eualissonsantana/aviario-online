@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
 
 @section('content')
-    <div class="content-child">
+    <div class="padding-padrao pt">
         <section class="card">
             <article class="card-body">
                 <h2>
@@ -31,8 +31,13 @@
                         @enderror
                     
                     </div>
-                    <div class="d-flex justify-content-end px-0">
-                        <button type="submit" class="btn btn-salvar">Salvar</button>
+                    <div class="row justify-content-end px-0 my-3">
+                        <div class="col-6 col-md-2">
+                            <a href="{{ route('post_categorias.index') }}" class="btn btn-full btn-secondary mt-2"> Cancelar </a>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <button type="submit" class="btn btn-full btn-salvar mt-2">Salvar</button>
+                        </div>
 
                     </div>
                 </form>

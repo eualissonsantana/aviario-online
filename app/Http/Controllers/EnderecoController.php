@@ -94,8 +94,8 @@ class EnderecoController extends Controller
      * @param  \App\Models\Endereco  $endereco
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Endereco $endereco)
+    public function destroy($id)
     {
-        //
+       //
     }
 }

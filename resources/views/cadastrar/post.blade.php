@@ -64,12 +64,12 @@
                                 @foreach($categorias as $cat) 
                                     @if(isset($post))
                                         @if($cat->id != $post->categoria_id)
-                                            <option value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>
+                                            <option value="{{$cat->id}}">{{$cat->descricao}}</option>
                                         @else
-                                            <option selected value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>
+                                            <option selected value="{{$cat->id}}">{{$cat->descricao}}</option>
                                         @endif
                                     @else
-                                        <option value="{{$cat->id}}">{{$cat->id}} - {{$cat->descricao}}</option>   
+                                        <option value="{{$cat->id}}">{{$cat->descricao}}</option>   
                                     @endif
                                 @endforeach
                             </select>
@@ -116,9 +116,13 @@
                     </div>
 
 
-                    <div class="row mt-2 justify-content-end">
-                        <div class="col-12 col-md-3">
-                            <button type="submit" class="btn btn-enviar">Salvar</button>
+                    <div class="row mt-2 justify-content-end my-3">
+                        <div class="col-6 col-md-2">
+                            <a href="{{ route('posts.index') }}" class="btn btn-full btn-secondary mt-2"> Cancelar </a>
+                        </div> 
+
+                        <div class="col-6 col-md-2 ">
+                            <button type="submit" class="btn btn-enviar mt-2">Salvar</button>
                         </div> 
                     </div>
                 </form>

@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
 
 @section('content')
-    <section class="padding-padrao empresa">
+    <section class="padding-padrao pt empresa">
         <section class="card">
             <article class="card-body">
         
@@ -259,9 +259,12 @@
                         </div>
                     </article>
 
-                    <div class="row justify-content-end pr-3">
-                        <div class="col-12 col-md-3 ">
-                            <button type="submit" class="ml-3 btn btn-enviar">Salvar</button>
+                    <div class="row justify-content-end px-0 px-md-3 my-3">
+                        <div class="col-6 col-md-2">
+                            <a href="{{ route('empresas.index') }}" class="btn btn-full btn-secondary mt-2"> Cancelar </a>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <button type="submit" class="btn btn-full btn-salvar mt-2">Salvar</button>
                         </div>
                     </div>
                 </form>

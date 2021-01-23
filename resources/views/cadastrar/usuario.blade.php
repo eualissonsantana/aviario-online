@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
 
 @section('content')
     <section class="content-child">
