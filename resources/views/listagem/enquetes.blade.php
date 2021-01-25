@@ -34,7 +34,7 @@
                                         @endif
                                     </div>
                                     <div class="mt-2">
-                                        <p>Criada em {{$enquete->created_at}}</p>
+                                        <p>Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($enquete->created_at))}}</p>
                                     </div>
                                 </article>
 

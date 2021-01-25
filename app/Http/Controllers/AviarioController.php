@@ -62,7 +62,12 @@ class AviarioController extends Controller
                 }
             });
 
-            $this->empresaCategorias = EmpresaCategoria::inRandomOrder()->take(8)->skip(8)->get();
+            $this->empresaCategorias = db::table('empresa_categorias')
+                                            ->join('empresas', 'empresas.categoria_id', '=', 'empresa_categorias.id')
+                                            ->inRandomOrder()->take(8)
+                                            ->select('empresa_categorias.*')
+                                            ->get();
+                                            
             $this->postCategorias = PostCategoria::all();
             $this->enquete = DB::table('enquetes')->inRandomOrder()->first();
             $this->bannersQuadrados = Banner::where('posicao', 'lado')->where('ativo', '1')->get();
@@ -84,7 +89,7 @@ class AviarioController extends Controller
         $bannersRetangulares = $this->bannersRetangulares;
 
         
-        return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'penultimoPost', 'maisLidas', 'empresaCategorias', 'enquete', 'opcoes', 'bannersQuadrados', 'bannersRetangulares'));
+        return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'penultimoPost', 'maisLidas', 'empresaCategorias', 'enquete', 'opcoes'));
     }
 
     public function hotsite()

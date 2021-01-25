@@ -53,7 +53,7 @@
                                             <p>{{$post->previa}}</p>
                                         </div>
                                         <div class="col-12 px-0 px-md-3">
-                                            <p> {{$post->created_at}} </p>
+                                            <p> {{date('j \d\e M \à\s  H:i\h', strtotime($post->created_at))}} </p>
                                         </div>
                                     </article>                  
                                 </section>
@@ -107,15 +107,11 @@
                 </div> 	
             </div>
             <div class="col-3 anuncios-laterais d-none d-sm-block">
-                <div class="col-12 anuncio px-0 mb-5">
-                    <img src="{{ url('img/lateral-1.png/') }}" />
-                </div>
-                <div class="col-12 anuncio px-0 mb-5">
-                    <img src="{{ url('img/lateral-2.jpg/') }}" />
-                </div>
-                <div class="col-12 anuncio px-0 mb-5">
-                    <img src="{{ url('img/lateral-1.png/') }}" />
-                </div>
+                @foreach ($bannersQuadrados as $banner)
+                    <div class="col-12 anuncio px-0 mb-5">
+                        <img src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" />
+                    </div>    
+                @endforeach
             </div>
     
         </article>

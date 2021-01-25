@@ -58,7 +58,7 @@
                                     <p>{{$post->previa}}</p>
                                 </div>
                                 <div class="col-12 px-0 px-md-3">
-                                    <p> {{$post->created_at}} </p>
+                                    <p> {{date('j \d\e M \à\s  H:i\h', strtotime($post->created_at))}}  </p>
                                 </div>
                             </article>   
     

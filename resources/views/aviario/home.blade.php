@@ -1,4 +1,4 @@
-@extends('layouts.app', ['bannersCarousel' => $bannersRetangulares ?? ''])
+@extends('layouts.app')
 
 @section('content')
     <section class="no-padding aviario-home aviario-rc">

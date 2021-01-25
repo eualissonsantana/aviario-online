@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class PostController extends Controller
@@ -39,9 +40,9 @@ class PostController extends Controller
     {
         $posts = $this->posts;
         $categorias = $this->postCategorias;
-        
+        $carbon = new Carbon();
 
-        return view('listagem.posts', compact('posts', 'categorias'));
+        return view('listagem.posts', compact('posts', 'categorias', 'carbon'));
     }
 
     public function lista_posts()

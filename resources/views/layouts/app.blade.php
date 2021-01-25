@@ -1,5 +1,6 @@
 <?php
     use Carbon\Carbon;
+    $carbon = new Carbon;
 ?>
 
 <!doctype html>
@@ -48,13 +49,11 @@
                     </a>
                 </div>
 
-                <div class="col-7 d-none d-sm-block banners-topo">
-                    @yield('bannersCarousel')
-
+                <div class="col-7 d-none d-sm-block banners-topo">           
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
                         <div class="carousel-inner">
-                            @if(isset($bannersCarousel))
-                                @foreach ($bannersCarousel as $banner)
+                            @if(isset($bannersRetangulares))
+                                @foreach ($bannersRetangulares as $banner)
                                     <div class="carousel-item ">
                                         <img class="d-block w-100" src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                                     </div>
