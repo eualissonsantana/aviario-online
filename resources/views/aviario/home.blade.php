@@ -97,10 +97,12 @@
                             <div class="row col-12 linha-categorias">
                                 @foreach ($empresaCategorias as $cat)
                                     <div class="categorias-random mb-3 shadow-sm">
-                                        <a href="#">
+                                        <a href="{{route('guia.categoria', $cat->slug)}}">
                                             <p>{{$cat->descricao}}</p>
                                         </a>
                                     </div>
+
+                                    
                                 @endforeach
                                 
                             </div> 
@@ -149,7 +151,7 @@
                 <section class="col-md-3 anuncios-laterais d-none d-sm-block">
                     @foreach ($bannersQuadrados as $banner)
                         <div class="col-12 anuncio px-0 mb-5">
-                            <img src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" />
+                            <img src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" />
                         </div>    
                     @endforeach
                    

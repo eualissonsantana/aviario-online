@@ -55,7 +55,7 @@
                             @if(isset($bannersRetangulares))
                                 @foreach ($bannersRetangulares as $banner)
                                     <div class="carousel-item ">
-                                        <img class="d-block w-100" src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                                        <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                                     </div>
                                 @endforeach
                             @endif
