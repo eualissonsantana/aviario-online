@@ -439,9 +439,6 @@ footer .navegacao {
         text-align: center;
     }
 
-
-    
-
     .guia-comercial .area-procura-comercio {
         margin-top: 16px;
     }
@@ -494,6 +491,16 @@ footer .navegacao {
         line-height: 16px;
     }
 
+    .aviario-home .opcao label {
+        font-size: 16px !important;
+        line-height: 20px;
+        margin: 30px 0 10px 5px;
+    }
+
+    .aviario-home .opcao, .aviario-home .pergunta  {
+        text-align: center !important;
+    }
+
     footer .logo, footer .dev-info, footer .navegacao {
         text-align: center !important;
     }
@@ -533,6 +540,10 @@ footer .navegacao {
 
 .verde {
     color:#2EA44F;
+}
+
+.aviario-home .opcao label {
+    font-size: 20px;
 }
 
   

@@ -10,6 +10,7 @@ use App\Models\EmpresaCategoria;
 use App\Models\Enquete;
 use App\Models\Opcao;
 use App\Models\Banner;
+use App\Models\Voto;
 use Illuminate\Support\Facades\DB;
 
 class AviarioController extends Controller
@@ -29,6 +30,7 @@ class AviarioController extends Controller
     private $bannersQuadrados;
     private $bannersRetangulares;
     private $opcoesEnquete;
+    private $voto;
 
     public function __construct()
     {
@@ -37,6 +39,7 @@ class AviarioController extends Controller
             //dd($this->lastPost);
             $this->post = new Post();
             $this->postCategoria = new PostCategoria();
+            $this->voto = new Voto();
             
             Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(3, function($noticias){
                 $i = 0;
@@ -89,7 +92,7 @@ class AviarioController extends Controller
         $bannersQuadrados = $this->bannersQuadrados;
         $bannersRetangulares = $this->bannersRetangulares;
 
-        
+        //dd(request()->cookie());        
 
         
         return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'penultimoPost', 'maisLidas', 'empresaCategorias', 'enquete', 'opcoes'));
@@ -109,19 +112,35 @@ class AviarioController extends Controller
     {
         $data = $request->all();
         $id = $data['resposta'];
+        $voto = $this->voto;
 
         if (!$opcao = Opcao::find($id))
             return redirect()->back();
 
-        $updateVotos = $opcao->qtd_votos + 1;
+        $voto->token = request()->cookie('XSRF-TOKEN');
+        $voto->opcao_id = $opcao->id;
+        $voto->save();
 
-        $opcao->where(['id'=>$id])->update([
-            'qtd_votos' => $updateVotos
-        ]);
+        //$updateVotos = $opcao->qtd_votos + 1;
+
+        //$opcao->where(['id'=>$id])->update([
+        //    'qtd_votos' => $updateVotos
+        //]);
         
-        return $this->index();
+        return redirect()->route('aviario.index');
     }
 
+    public function jaVotou($cookie) 
+    {
+        $token = db::table('votos')->where('token', $cookie)->get();
+        
+        if($token)
+        {
+            return true;
+        }else {
+            return false;
+        }
+    }
     
 
 }

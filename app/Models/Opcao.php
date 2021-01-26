@@ -9,8 +9,13 @@ class Opcao extends Model
 {
     use HasFactory;
 
-    public function opcao()
+    public function enquete()
     {
         return $this->belongsTo('App\Models\Enquete');
+    }
+
+    public function voto()
+    {
+        return $this->hasMany('App\Models\Voto');
     }
 }
