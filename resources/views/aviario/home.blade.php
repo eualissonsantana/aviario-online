@@ -2,10 +2,18 @@
 
 @section('content')
     <section class="no-padding aviario-home aviario-rc">
-        <div class="d-block d-sm-none banners-topo mb-3">
-            <a class="anuncio-topo" href="#">
-                <img class="" src="{{ url('img/3312.gif') }}" alt="Logo Aviário Online">
-            </a>
+        <div class="d-block d-sm-none banners-topo mb-3" onload="defineActiveMobile()">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                <div class="carousel-inner">
+                    @if(isset($bannersRetangulares))
+                        @foreach ($bannersRetangulares as $banner)
+                            <div class="carousel-item carousel-mobile">
+                                <img class="d-block w-100" src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
         </div>
         <section class="padding-padrao">
             @if($ultimoPost)
@@ -148,7 +156,7 @@
                             <div class="carousel-inner">
                                 @if(isset($bannersRetangulares))
                                     @foreach ($bannersRetangulares as $banner)
-                                        <div class="carousel-item ">
+                                        <div class="carousel-item bottom-carousel">
                                             <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                                         </div>
                                     @endforeach
@@ -160,7 +168,17 @@
 
                
                 <div class="col-12 mt-3 anuncio d-block d-sm-none">
-                    <img src="{{ url('img/lateral-1.png/') }}" />
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                        <div class="carousel-inner">
+                            @if(isset($bannersQuadrados))
+                                @foreach ($bannersQuadrados as $banner)
+                                    <div class="carousel-item bottom-carousel-mobile">
+                                        <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
                 </div>
 
                 <section class="col-md-3 anuncios-laterais d-none d-sm-block">

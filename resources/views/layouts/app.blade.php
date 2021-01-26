@@ -63,9 +63,7 @@
                     </div>
                 </div>
 
-                <div class="col-2">
-                    <h3>teste</h3>
-                </div>
+              
 
             </div>
         </section>
@@ -79,9 +77,9 @@
             </button>
            
             <div class="collapse navbar-collapse justify-content-between " id="navbarNavAltMarkup">
-                <ul class="navbar-nav  justify-content-between ">
+                <ul class="navbar-nav justify-content-between ">
                     <li class="nav-item ">
-                        <a class="nav-link" href="{{route('aviario.index')}}" >Início<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{route('aviario.index')}}">Início<span class="sr-only">(current)</span></a>
                     </li>
                     
                     <li class="nav-item">
@@ -158,7 +156,7 @@
                 </div>
 
                 <div class="col-12 col-md-7 row pb-1 align-self-end navegacao">
-                    <div class="col-6">
+                    <div class="col-12 col-md-6">
                         <p>Início</p>
                         <p>Notícias</p>
                         <p>Guia Comercial</p>
