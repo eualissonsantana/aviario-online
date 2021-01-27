@@ -35,7 +35,7 @@
     <link href="{{ asset('css/aviario.css') }}" rel="stylesheet">
 
 </head>
-<body onload="defineActive()">
+<body onload="carregaClasses()">
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v9.0" nonce="uJ0WJ2He"></script>
     
@@ -50,11 +50,11 @@
                 </div>
 
                 <div class="col-7 d-none d-sm-block banners-topo">           
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                    <div id="carouselExampleControls" class="carousel slide carousel-app" data-ride="carousel" >
                         <div class="carousel-inner">
                             @if(isset($bannersRetangulares))
                                 @foreach ($bannersRetangulares as $banner)
-                                    <div class="carousel-item ">
+                                    <div class="carousel-item carousel-app-item">
                                         <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                                     </div>
                                 @endforeach

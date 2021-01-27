@@ -30,14 +30,15 @@
                 <ul class="">
                     @foreach ($empresas as $emp)
                         <li>
-                            <a href="#">
+                            <a href="{{route('empresas.show', ['slug' => $emp->slug, 'id' => $emp->id])}}">
                                 <section class="row col-sm-12 mx-0 px-0">
                                     <article class="imagem-comercio col-4 col-md-2 col-xl-3 px-0 mr-0">
                                         <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem)}}"/>
                                     </article>
 
-                                    <article class="info-comercio col-8 col-md-10 col-xl-9 pl-2 pl-md-0 px-0 py-md-4 d-flex align-content-around flex-wrap">
+                                    <article class="dados-comercio col-8 col-md-10 col-xl-9 pl-2 pl-md-0 px-0 py-md-4 d-flex align-content-around flex-wrap">
                                         <div class="nome col-12 px-0">
+                                            <h6>{{$emp->categoria->descricao}}</h6>
                                             <h4> {{$emp->nome}} </h4>
                                             <p class="d-none d-sm-block"> {{$emp->slogan}} </p>
                                         </div>

@@ -120,8 +120,12 @@
                         <p class="mt-2 legenda">Essas e muitas outras categorias no <br class="d-block d-sm-none"><span class="destaque"> Guia Comercial do Aviário </span></p>
                     </div>
                     <hr>
-
-                    @if(!jaVotou(request()->cookie('XSRF-TOKEN')))
+                    
+                    @if(!isset($_COOKIE['enquete-'.$enquete->id]))
+                        <?php
+                            $id = $enquete->id;
+                            setcookie('enquete-'.$id, $id, (time() + (3600 * 24 * 30 * 12 * 5)));
+                        ?>
                         <div class="enquete">
                             <div class="card">
                                 <div class="card-header">
@@ -150,7 +154,6 @@
                                 </div>
                             </div>
                         </div>
-                    
                     @else
                         <div id="carouselExampleControls" class="carousel slide active" data-ride="carousel" >
                             <div class="carousel-inner">
@@ -168,11 +171,11 @@
 
                
                 <div class="col-12 mt-3 anuncio d-block d-sm-none">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                    <div id="carouselExampleControls" class="carousel slide bottom-carousel-mobile" data-ride="carousel" >
                         <div class="carousel-inner">
                             @if(isset($bannersQuadrados))
                                 @foreach ($bannersQuadrados as $banner)
-                                    <div class="carousel-item bottom-carousel-mobile">
+                                    <div class="carousel-item bottom-carousel-mobile-item">
                                         <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                                     </div>
                                 @endforeach

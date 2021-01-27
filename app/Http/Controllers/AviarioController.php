@@ -112,34 +112,17 @@ class AviarioController extends Controller
     {
         $data = $request->all();
         $id = $data['resposta'];
-        $voto = $this->voto;
 
         if (!$opcao = Opcao::find($id))
             return redirect()->back();
 
-        $voto->token = request()->cookie('XSRF-TOKEN');
-        $voto->opcao_id = $opcao->id;
-        $voto->save();
+        $updateVotos = $opcao->qtd_votos + 1;
 
-        //$updateVotos = $opcao->qtd_votos + 1;
-
-        //$opcao->where(['id'=>$id])->update([
-        //    'qtd_votos' => $updateVotos
-        //]);
+        $opcao->where(['id'=>$id])->update([
+            'qtd_votos' => $updateVotos
+        ]);
         
         return redirect()->route('aviario.index');
-    }
-
-    public function jaVotou($cookie) 
-    {
-        $token = db::table('votos')->where('token', $cookie)->get();
-        
-        if($token)
-        {
-            return true;
-        }else {
-            return false;
-        }
     }
     
 

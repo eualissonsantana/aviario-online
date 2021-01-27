@@ -236,9 +236,12 @@ class EmpresaController extends Controller
     {   
         if (!$empresa = Empresa::find($id))
             return redirect()->back();
+
+        $fotos = db::table('foto_adicionals')->where('empresa_id', $id)->get();
     
         return view('aviario.guia-comercial.exibe_empresa', [
-            'empresa' => $empresa
+            'empresa' => $empresa,
+            'fotos' => $fotos
         ]);
     }
 
@@ -338,6 +341,7 @@ class EmpresaController extends Controller
         ]);
             
         $this->uploadImage($request, $slug, $id);
+        $this->uploadImageAdd($request, $slug, $id);    
 
         return redirect()->route('empresas.index');
     }
