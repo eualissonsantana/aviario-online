@@ -60,8 +60,6 @@ class EmpresaController extends Controller
 
     public function guia_index()
     {
-       
-
         $ramos = db::table('ramos')
                             ->join('empresa_categorias', 'empresa_categorias.ramo_id', '=', 'ramos.id')
                             ->join('empresas', 'empresas.categoria_id', '=', 'empresa_categorias.id')
