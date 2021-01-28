@@ -180,7 +180,7 @@
                                 <div class="carousel-inner">
                                     @foreach ($fotos as $foto)
                                         <div class="carousel-item comercio-carousel">
-                                            <img class="d-block w-100" src="{{ url('storage/imagens/empresas/adicionais/'.$foto->nome)}}" alt="First slide">
+                                            <img class="d-block w-100" src="{{ url('public/storage/imagens/empresas/adicionais/'.$foto->nome)}}" alt="First slide">
                                         </div>    
                                     @endforeach
                                 </div>

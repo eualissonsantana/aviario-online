@@ -31,7 +31,7 @@
                     @csrf
                     <div class="area-procura-comercio">
                         <input type="text" hidden="true" name="option" value="nome">
-                        <input type="text" class="procura-comercio" name="filter" placeholder="Pesquisar por nome ou categoria">
+                        <input type="text" class="procura-comercio" name="filter" placeholder="Pesquisar pelo nome da empresa">
                         <button><i type="submit" class="fas fa-search"></i></button>
                     </div>
                 </form>
@@ -47,51 +47,55 @@
         <section class="row pl-md-3 mt-3 justify-content-between">
             <article class="col-12 col-md-9 px-md-0">
                 <ul class="">
-                    @foreach ($empresas as $emp)
-                        <li>
-                            <a href="{{route('empresas.show', ['slug' => $emp->slug, 'id' => $emp->id])}}">
-                                <section class="row col-sm-12 mx-0 px-0">
-                                    <article class="imagem-comercio col-5 col-md-2 col-xl-3 px-0 mr-0">
-                                        <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem)}}"/>
-                                    </article>
+                    @if($empresas[0] != null)
+                        @foreach ($empresas as $emp)
+                            <li>
+                                <a href="{{route('empresas.show', ['slug' => $emp->slug, 'id' => $emp->id])}}">
+                                    <section class="row col-sm-12 mx-0 px-0">
+                                        <article class="imagem-comercio col-5 col-md-2 col-xl-3 px-0 mr-0">
+                                            <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem)}}"/>
+                                        </article>
 
-                                    <article class="dados-comercio col-7 col-md-10 col-xl-9 pl-2 pl-md-0 px-0 py-md-4 d-flex align-content-around flex-wrap">
-                                        <div class="nome col-12 px-0">
-                                            <h6>{{$emp->categoria->descricao}}</h6>
-                                            <h4> {{$emp->nome}} </h4>
-                                            <p class="d-none d-sm-block"> {{$emp->slogan}} </p>
-                                        </div>
-                                        <div class="endereco col-12 px-0">
-                                            <p>
-                                                @if($emp->endereco->logradouro)
-                                                    {{$emp->endereco->logradouro}} ,
-                                                @endif
-                                                @if ($emp->endereco->numero)
-                                                    {{$emp->endereco->numero}}
-                                                @endif
-                                            </p>
+                                        <article class="dados-comercio col-7 col-md-10 col-xl-9 pl-2 pl-md-0 px-0 py-md-4 d-flex align-content-around flex-wrap">
+                                            <div class="nome col-12 px-0">
+                                                <h6>{{$emp->categoria->descricao}}</h6>
+                                                <h4> {{$emp->nome}} </h4>
+                                                <p class="d-none d-sm-block"> {{$emp->slogan}} </p>
+                                            </div>
+                                            <div class="endereco col-12 px-0">
+                                                <p>
+                                                    @if($emp->endereco->logradouro)
+                                                        {{$emp->endereco->logradouro}} ,
+                                                    @endif
+                                                    @if ($emp->endereco->numero)
+                                                        {{$emp->endereco->numero}}
+                                                    @endif
+                                                </p>
 
-                                            <p>
-                                                {{$emp->endereco->bairro}} -
+                                                <p>
+                                                    {{$emp->endereco->bairro}} -
 
-                                                @if ($emp->endereco->cep)
-                                                    {{$emp->endereco->rua}} -
-                                                @endif
+                                                    @if ($emp->endereco->cep)
+                                                        {{$emp->endereco->rua}} -
+                                                    @endif
 
-                                                Feira de Santana/BA
-                                            </p>
-                                        </div>
+                                                    Feira de Santana/BA
+                                                </p>
+                                            </div>
 
-                                        <div class="contatos col-12 px-0">
-                                            <h4> {{$emp->telefone}} </h4>
-                                        </div>
-                                    </article>
-                                    
-                                    <hr class="col-11 px-md-0 mx-md-0">
-                                </section>
-                            </a> 
-                        </li>
-                    @endforeach
+                                            <div class="contatos col-12 px-0">
+                                                <h4> {{$emp->telefone}} </h4>
+                                            </div>
+                                        </article>
+                                        
+                                        <hr class="col-11 px-md-0 mx-md-0">
+                                    </section>
+                                </a> 
+                            </li>
+                        @endforeach
+                    @else 
+                        <h3>Nenhuma empresa encontrada</h3>
+                    @endif
                 </ul>
             </article>   
 

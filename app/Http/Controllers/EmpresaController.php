@@ -60,8 +60,22 @@ class EmpresaController extends Controller
 
     public function guia_index()
     {
-        $ramos = $this->ramos;
-        $categorias = $this->categorias;
+       
+
+        $ramos = db::table('ramos')
+                            ->join('empresa_categorias', 'empresa_categorias.ramo_id', '=', 'ramos.id')
+                            ->join('empresas', 'empresas.categoria_id', '=', 'empresa_categorias.id')
+                            ->select('ramos.*')
+                            ->distinct()
+                            ->get();
+
+        
+        
+        $categorias = db::table('empresa_categorias')
+                    ->join('empresas', 'empresas.categoria_id', '=', 'empresa_categorias.id')
+                    ->select('empresa_categorias.*')
+                    ->get();
+
         $numEmpresas = $this->numEmpresas;
 
         return view('aviario.guia-comercial.index', compact('ramos', 'categorias', 'numEmpresas'));

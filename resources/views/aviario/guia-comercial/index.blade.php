@@ -17,7 +17,7 @@
                     @csrf
                     <div class="area-procura-comercio">
                         <input type="text" hidden="true" name="option" value="nome">
-                        <input type="text" class="procura-comercio" name="filter" placeholder="Pesquisar por nome ou categoria">
+                        <input type="text" class="procura-comercio" name="filter" placeholder="Pesquisar pelo nome da empresa">
                         <button><i type="submit" class="fas fa-search"></i></button>
                     </div>
                 </form>
@@ -40,7 +40,7 @@
                         <h4 class="mb-2"> {{$ramo->descricao}} </h4>
                         <ul>
                             @foreach ($categorias as $cat)
-                                @if($cat->ramo->descricao == $ramo->descricao)
+                                @if($cat->ramo_id == $ramo->id)
                                     <li> 
                                         <a href="{{route('guia.categoria', $cat->slug)}}"> {{$cat->descricao}}  </a> 
                                     </li>
@@ -74,7 +74,7 @@
                         </div>
 
                         @foreach ($categorias as $cat)
-                            @if($cat->ramo->descricao == $ramo->descricao)
+                            @if($cat->ramo_id == $ramo->id)
                                 <div id="collapse{{$ramo->id}}" class="collapse" aria-labelledby="heading{{$ramo->id}}" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <a class="form-inline" href="{{route('guia.categoria', $cat->slug)}}" >

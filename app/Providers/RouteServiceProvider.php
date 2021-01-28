@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/painel';
+    public const HOME = '/home';
     public const USERS = '/users';
 
     /**
