@@ -81,7 +81,9 @@ Route::any('/painel/enquetes/buscar', [EnqueteController::class, 'search'])->nam
 Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
 Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
 Route::get('/contato', [AviarioController::class, 'contato'])->name('aviario.contato');
+Route::get('/enquetes', [AviarioController::class, 'indexEnquetes'])->name('aviario.enquetes');
 Route::post('/responde-enquete', [AviarioController::class, 'registraResposta'])->name('aviario.enquetes.respostas');
+Route::get('/enquetes/{id}', [AviarioController::class, 'showEnquete'])->name('enquetes.show');
 
 Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');

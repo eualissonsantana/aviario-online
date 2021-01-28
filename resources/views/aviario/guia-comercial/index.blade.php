@@ -23,8 +23,8 @@
                 </form>
             </div>
             <div class="col-3 d-none d-sm-block info pb-1">
-                <p><span class="destaque">1325</span> empresas cadastradas.</p>
-                <p>Não encontrou a sua? <span class="destaque">Cadastre aqui!</span></p>
+                <p><span class="destaque">{{$numEmpresas}}</span> empresas cadastradas.</p>
+                <p>Não encontrou a sua? <a class="destaque" href="{{route('cadastrar-comercio')}}">Cadastre aqui!</a></p>
             </div>
             <div class="col-3"></div>
         </article>

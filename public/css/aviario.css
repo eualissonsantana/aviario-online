@@ -240,8 +240,7 @@ html,body
 }
 
 .deixe-comentario {
-    border-bottom: 3px solid #0084B8;
-    font-size: 32px !important;
+    font-size: 28px !important;
     font-weight: bolder;
     color: #333;
 }
@@ -371,6 +370,10 @@ footer .navegacao {
 
 .exibe-comercio .card p{
    font-size: 14px;
+}
+
+.exibe-comercio .carousel-inner img {
+    max-height: 500px;
 }
 
 @media only screen and (min-width: 1400px) {

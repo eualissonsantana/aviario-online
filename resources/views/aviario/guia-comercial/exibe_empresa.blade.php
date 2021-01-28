@@ -86,35 +86,37 @@
         
                 <section class="row">
                     <div class="col-12 col-md-6">
-                        <h4>Formas de pagamento</h4>
-                        <div class="mt-3 formas-pagamento">
-                            <div class="row text-center">
-                                @if($empresa->aceitaBoleto)
+                        @if($empresa->aceitaBoleto || $empresa->aceitaCredito || $empresa->aceitaDebito || $empresa->aceitaPix)
+                            <h4>Formas de pagamento</h4>
+                            <div class="mt-3 formas-pagamento">
+                                <div class="row text-center">
+                                    @if($empresa->aceitaBoleto)
+                                        <div class="col-2">
+                                            <img src="{{url('img/icons/boleto.png')}}" alt="Ícone Boleto">
+                                            <p class="mt-2">boleto</p>  
+                                        </div>
+                                    @endif
+                                    @if ($empresa->aceitaCredito)
                                     <div class="col-2">
-                                        <img src="{{url('img/icons/boleto.png')}}" alt="Ícone Boleto">
-                                        <p class="mt-2">boleto</p>  
+                                        <img src="{{url('img/icons/credito.png')}}" alt="ìcone Cartão de Crédito">
+                                        <p class="mt-2">crédito</p> 
                                     </div>
-                                @endif
-                                @if ($empresa->aceitaCredito)
-                                <div class="col-2">
-                                    <img src="{{url('img/icons/credito.png')}}" alt="ìcone Cartão de Crédito">
-                                    <p class="mt-2">crédito</p> 
+                                    @endif
+                                    @if ($empresa->aceitaDebito)
+                                    <div class="col-2">
+                                        <img src="{{url('img/icons/debito.png')}}" alt="Ícone Cartão de Débito">
+                                        <p class="mt-2">débito</p> 
+                                    </div>
+                                    @endif
+                                    @if ($empresa->aceitaPix)
+                                    <div class="col-2">
+                                        <img src="{{url('img/icons/pix.png')}}" alt="Ícone Pix">
+                                        <p class="mt-2">pix</p> 
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
-                                @if ($empresa->aceitaDebito)
-                                <div class="col-2">
-                                    <img src="{{url('img/icons/debito.png')}}" alt="Ícone Cartão de Débito">
-                                    <p class="mt-2">débito</p> 
-                                </div>
-                                @endif
-                                @if ($empresa->aceitaPix)
-                                <div class="col-2">
-                                    <img src="{{url('img/icons/pix.png')}}" alt="Ícone Pix">
-                                    <p class="mt-2">pix</p> 
-                                </div>
-                                @endif
                             </div>
-                        </div>
+                        @endif
                     </div>
 
                     <hr class="col-10 d-block d-sm-none">
@@ -149,12 +151,14 @@
                 </section>
         
                 <section class="mt-5 sobre">
-                    <h4>Sobre a Empresa</h4>
-                    <div class="mt-3">
-                        <p>  
-                            {{$empresa->descricao}}
-                        </p>
-                    </div>
+                    @if($empresa->descricao)
+                        <h4>Sobre a Empresa</h4>
+                        <div class="mt-3">
+                            <p>  
+                                {{$empresa->descricao}}
+                            </p>
+                        </div>
+                    @endif
                 </section>
 
                 @if($fotos != null)
@@ -176,7 +180,7 @@
                                 <div class="carousel-inner">
                                     @foreach ($fotos as $foto)
                                         <div class="carousel-item comercio-carousel">
-                                            <img class="d-block w-100" src="{{ url('public/storage/imagens/empresas/adicionais/'.$foto->nome)}}" alt="First slide">
+                                            <img class="d-block w-100" src="{{ url('storage/imagens/empresas/adicionais/'.$foto->nome)}}" alt="First slide">
                                         </div>    
                                     @endforeach
                                 </div>

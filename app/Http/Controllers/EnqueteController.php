@@ -99,14 +99,11 @@ class EnqueteController extends Controller
         if (!$enquete = Enquete::find($id))
             return redirect()->back();
 
-        $updateVisitas = $enquete->visitas + 1;
-
-        $enquete->update([
-            'visitas' => $updateVisitas
-        ]);
+        $opcoes = db::table('opcaos')->where('enquete_id', $id)->get();
         
         return view('aviario.noticias.exibe_noticia', [
-            'post' => $enquete
+            'enquete' => $enquete,
+            'opcoes' => $opcoes
         ]);
     }
 

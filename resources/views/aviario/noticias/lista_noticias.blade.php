@@ -3,12 +3,12 @@
 @section('content')    
     <section class="aviario-noticias padding-padrao pt">
         <div class="d-block d-sm-none banners-topo mb-3">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+            <div id="carouselExampleControls" class="carousel slide carousel-mobile" data-ride="carousel" >
                 <div class="carousel-inner">
                     @if(isset($bannersRetangulares))
                         @foreach ($bannersRetangulares as $banner)
-                            <div class="carousel-item carousel-mobile">
-                                <img class="d-block w-100" src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                            <div class="carousel-item carousel-mobile-item">
+                                <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                             </div>
                         @endforeach
                     @endif
@@ -67,7 +67,7 @@
                                             <p>{{$post->previa}}</p>
                                         </div>
                                         <div class="col-12 px-0 px-md-3">
-                                            <p> {{date('j \d\e M \à\s  H:i\h', strtotime($post->created_at))}} </p>
+                                            <p> Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($post->created_at))}} </p>
                                         </div>
                                     </article>                  
                                 </section>

@@ -19,6 +19,7 @@ class EmpresaController extends Controller
 
     private $empresa;
     private $empresas;
+    private $numEmpresas;
     private $ramos;
     private $categoria;
     private $endereco;
@@ -28,6 +29,7 @@ class EmpresaController extends Controller
     {
         $this->empresa = new Empresa();
         $this->empresas = Empresa::paginate();
+        $this->numEmpresas = Empresa::count();
         $this->categoria = new EmpresaCategoria();
         $this->categorias = EmpresaCategoria::all()->sortBy("descricao");
         $this->ramos = Ramo::all()->sortBy("descricao");
@@ -60,8 +62,9 @@ class EmpresaController extends Controller
     {
         $ramos = $this->ramos;
         $categorias = $this->categorias;
+        $numEmpresas = $this->numEmpresas;
 
-        return view('aviario.guia-comercial.index', compact('ramos', 'categorias'));
+        return view('aviario.guia-comercial.index', compact('ramos', 'categorias', 'numEmpresas'));
     }
 
     /**

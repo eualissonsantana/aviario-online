@@ -27,6 +27,8 @@ class AviarioController extends Controller
     private $empresaCategoria;
     private $empresaCategorias;
     private $enquete;
+    private $enquetes;
+    private $opcoes;
     private $bannersQuadrados;
     private $bannersRetangulares;
     private $opcoesEnquete;
@@ -40,6 +42,8 @@ class AviarioController extends Controller
             $this->post = new Post();
             $this->postCategoria = new PostCategoria();
             $this->voto = new Voto();
+            $this->enquetes = Enquete::all();
+            $this->opcoes = Opcao::all();
             
             Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(3, function($noticias){
                 $i = 0;
@@ -112,7 +116,10 @@ class AviarioController extends Controller
     {
         $data = $request->all();
         $id = $data['resposta'];
-
+        $enquete = $data['enquete'];
+        
+        setcookie('enquete-'.$enquete, $enquete, (time() + (3600 * 24 * 30 * 12 * 5)));
+        
         if (!$opcao = Opcao::find($id))
             return redirect()->back();
 
@@ -123,6 +130,16 @@ class AviarioController extends Controller
         ]);
         
         return redirect()->route('aviario.index');
+    }
+
+    public function indexEnquetes() {
+        $enquetes = $this->enquetes;
+        $opcoes = $this->opcoes;
+
+        return view('aviario.enquetes.index', [
+            'enquetes' => $enquetes, 
+            'opcoes' => $opcoes
+        ]);
     }
     
 

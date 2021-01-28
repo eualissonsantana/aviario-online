@@ -89,6 +89,9 @@
                         <a class="nav-link" href="{{route('guia.index')}}">Guia Comercial</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{route('aviario.enquetes')}}">Enquetes</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{route('aviario.contato')}}">Contato</a>
                     </li>
                     
@@ -159,7 +162,9 @@
                     <div class="col-12 col-md-6">
                         <p>Início</p>
                         <p>Notícias</p>
-                        <p>Guia Comercial</p>
+                        <a href="{{route('cadastrar-comercio')}}">
+                            Guia Comercial
+                        </a>
                     </div>
 
                 </div>

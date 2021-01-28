@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')    
-    <section class="padding-padrao pt empresas-por-categoria ">
+    <section class="padding-padrao pt empresas-por-categoria guia-comercial">
         <div class="d-block d-sm-none banners-topo mb-3">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+            <div id="carouselExampleControls" class="carousel slide carousel-mobile" data-ride="carousel" >
                 <div class="carousel-inner">
                     @if(isset($bannersRetangulares))
                         @foreach ($bannersRetangulares as $banner)
-                            <div class="carousel-item carousel-mobile">
+                            <div class="carousel-item carousel-mobile-item">
                                 <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                             </div>
                         @endforeach
@@ -16,27 +16,46 @@
             </div>
         </div>
         
-        <article class="row justify-content-between px-md-3">
-            <div class="col-sm-12 px-md-0 titulo-pagina">
-                <h2> Guia Comercial / {{$categoria->descricao}} </h2>
-                <hr class="">
-            </div>
+        <div class="">
+            <h2>Guia Comercial do Aviário</h2>
+        </div>
         
+        <hr class="d-none d-sm-block">
+        
+        <article class="row justify-content-between align-items-end">
+            <div class="col-12 col-md-6">
+                <div class="legenda-guia d-none d-sm-block">
+                    <p>Encontre os serviços e empresas do Aviário aqui.</p>
+                </div>
+                <form  action="{{route('aviario.empresas.search')}}" method="POST">
+                    @csrf
+                    <div class="area-procura-comercio">
+                        <input type="text" hidden="true" name="option" value="nome">
+                        <input type="text" class="procura-comercio" name="filter" placeholder="Pesquisar por nome ou categoria">
+                        <button><i type="submit" class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3 d-none d-sm-block info pb-1">
+                <p><span class="destaque">{{$numEmpresas}}</span> empresas cadastradas.</p>
+                <p>Não encontrou a sua? <span class="destaque"> <a href="{{route('cadastrar-comercio')}}">Cadastre aqui!</a></span></p>
+            </div>
+            <div class="col-3"></div>
         </article>
         @csrf
 
-        <section class="row pl-md-3 justify-content-between">
+        <section class="row pl-md-3 mt-3 justify-content-between">
             <article class="col-12 col-md-9 px-md-0">
                 <ul class="">
                     @foreach ($empresas as $emp)
                         <li>
                             <a href="{{route('empresas.show', ['slug' => $emp->slug, 'id' => $emp->id])}}">
                                 <section class="row col-sm-12 mx-0 px-0">
-                                    <article class="imagem-comercio col-4 col-md-2 col-xl-3 px-0 mr-0">
+                                    <article class="imagem-comercio col-5 col-md-2 col-xl-3 px-0 mr-0">
                                         <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem)}}"/>
                                     </article>
 
-                                    <article class="dados-comercio col-8 col-md-10 col-xl-9 pl-2 pl-md-0 px-0 py-md-4 d-flex align-content-around flex-wrap">
+                                    <article class="dados-comercio col-7 col-md-10 col-xl-9 pl-2 pl-md-0 px-0 py-md-4 d-flex align-content-around flex-wrap">
                                         <div class="nome col-12 px-0">
                                             <h6>{{$emp->categoria->descricao}}</h6>
                                             <h4> {{$emp->nome}} </h4>

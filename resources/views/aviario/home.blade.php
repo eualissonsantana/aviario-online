@@ -3,11 +3,11 @@
 @section('content')
     <section class="no-padding aviario-home aviario-rc">
         <div class="d-block d-sm-none banners-topo mb-3" onload="defineActiveMobile()">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+            <div id="carouselExampleControls" class="carousel slide carousel-mobile" data-ride="carousel" >
                 <div class="carousel-inner">
                     @if(isset($bannersRetangulares))
                         @foreach ($bannersRetangulares as $banner)
-                            <div class="carousel-item carousel-mobile">
+                            <div class="carousel-item carousel-mobile-item">
                                 <img class="d-block w-100" src="{{ url('storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                             </div>
                         @endforeach
@@ -88,7 +88,7 @@
                 <article class="rodape mt-4">
                     <p>Não encontrou sua empresa?</p>
                     <a href="http://aviario.online/cadastrar">
-                        <button  class="btn btn-lg btn-cadastrar">  Cadastre aqui</button>
+                        <button  class="btn btn-lg btn-cadastrar">Cadastre aqui</button>
                     </a>
                 </article>
             </section>
@@ -122,10 +122,6 @@
                     <hr>
                     
                     @if(!isset($_COOKIE['enquete-'.$enquete->id]))
-                        <?php
-                            $id = $enquete->id;
-                            setcookie('enquete-'.$id, $id, (time() + (3600 * 24 * 30 * 12 * 5)));
-                        ?>
                         <div class="enquete">
                             <div class="card">
                                 <div class="card-header">

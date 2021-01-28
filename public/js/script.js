@@ -42,6 +42,8 @@ function defineBannerBottom() {
 }
 
 function defineActiveComercio() {
+    var el = document.getElementsByClassName('comercio-carousel')[0]
+
     el.classList.add('active')
 
 

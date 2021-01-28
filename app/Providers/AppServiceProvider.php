@@ -27,11 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $bannersQuadrados = db::table('banners')->where('posicao', 'lado')->where('ativo', '1')->get();
-        $bannersRetangulares = db::table('banners')->where('posicao', 'topo')->where('ativo', '1')->get();
+        $bannersQuadrados = db::table('banners')->where('posicao', 'lado')->where('ativo', '1')->inRandomOrder()->get();
+        $bannersRetangulares = db::table('banners')->where('posicao', 'topo')->where('ativo', '1')->inRandomOrder()->get();
+        $numEmpresas = db::table('empresas')->count();
        
         Carbon::setlocale(LC_TIME, 'pt_BR');
         Schema::defaultStringLength(191);
-        View::share(compact('bannersQuadrados', 'bannersRetangulares'));
+        View::share(compact('bannersQuadrados', 'bannersRetangulares', 'numEmpresas'));
     }
 }
