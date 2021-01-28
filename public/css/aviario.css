@@ -376,6 +376,15 @@ footer .navegacao {
     max-height: 500px;
 }
 
+.aviario-enquetes form label {
+    font-size: 16px;
+}
+
+footer .navegacao a {
+    display: block;
+    color: #fff;
+}
+
 @media only screen and (min-width: 1400px) {
     .aviario-home .penultimo-post img {
         width: 100%;
@@ -606,12 +615,49 @@ footer .navegacao {
         height: 140px !important;
         object-fit: cover;
     }
+
+    .entrar-contato {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 320px) {
     .aviario-home .busca-guia-comercial .area-procura-comercio {
         width: 296px;
     }
+
+    .imagem-comercio img, .exibe-comercio .imagem-comercio img {
+        width: 130px !important;
+        height: 130px !important;
+        object-fit: cover;
+    }
+
+    .dados-comercio {
+        padding-left: 20px !important;
+    }
+
+    .dados-comercio h4 {
+        font-size: 18px;
+    }
+
+    .dados-comercio h6 {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .dados-comercio .endereco p {
+        line-height: 15px;
+        font-size: 13px;
+    }
+
+    .dados-comercio .contatos h4 {
+        font-size: 15px;
+    }
+
+    .exibe-comercio .dados {
+        padding-left: 20px !important;
+    }
+
 }
 
 .btn-enviar {

@@ -8,7 +8,7 @@
                     <article class="imagem-comercio col-5 col-md-4 mr-0">
                         <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$empresa->imagem)}}"/>
                     </article>
-                    <div class="col-7 col-md-8 d-flex align-content-around flex-wrap">
+                    <div class="col-7 col-md-8 d-flex align-content-around flex-wrap dados">
                         <div class="titulo">
                             <h2> {{$empresa->nome}} </h2>
                             <p> {{$empresa->slogan}} </p>
@@ -46,7 +46,7 @@
                             @if ($empresa->ehWhats == 1)
                                 <div class="mt-1">
                                     <p ><small>Esse número também é <span class="verde"> Whats App! </span> </small></p>
-                                    <p class="mt-1" ><small> Ao entrar em contato, informe que viu no <strong class="destaque">Aviário Online</strong> </small></p>
+                                    <p class="mt-1 entrar-contato" ><small> Ao entrar em contato, informe que viu no <strong class="destaque">Aviário Online</strong> </small></p>
                                 </div>
                             @endif
                         </div>

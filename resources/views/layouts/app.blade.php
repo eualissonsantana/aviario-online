@@ -158,13 +158,15 @@
                     <img src="{{ url('img/logo-branco.png') }}" width="180px" alt="Logo Aviário Online">
                 </div>
 
-                <div class="col-12 col-md-7 row pb-1 align-self-end navegacao">
-                    <div class="col-12 col-md-6">
-                        <p>Início</p>
-                        <p>Notícias</p>
-                        <a href="{{route('cadastrar-comercio')}}">
-                            Guia Comercial
-                        </a>
+                <div class="col-12 col-md-8 row pb-1 align-self-end navegacao">
+                    <div class="col-12 col-md-2">
+                        <a href="{{route('aviario.index')}}">Início</a>
+                        <a href="{{route('posts.lista')}}">Notícias</a>
+                        <a href="{{route('guia.index')}}">Guia Comercial</a>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <a href="{{route('aviario.enquetes')}}">Enquetes</a>
+                        <a href="{{route('aviario.contato')}}">Contato</a>
                     </div>
 
                 </div>
