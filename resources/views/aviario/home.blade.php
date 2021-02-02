@@ -120,36 +120,49 @@
                         <p class="mt-2 legenda">Essas e muitas outras categorias no <br class="d-block d-sm-none"><span class="destaque"> Guia Comercial do Aviário </span></p>
                     </div>
                     <hr>
-                    
-                    @if(!isset($_COOKIE['enquete-'.$enquete->id]))
-                        <div class="enquete">
-                            <div class="card">
-                                <div class="card-header">
-                                    <p>Queremos saber a sua opinião!</p>
-                                </div>
-                                <div class="card-body">
-                                    <div class="pergunta mt-2">
-                                        <h3> {{$enquete->pergunta}} </h3>
-                                        <form class="mt-3" action="{{route('aviario.enquetes.respostas')}}" method="POST">
-                                            @csrf
-                                            <div class="text-left opcao">
-                                                @foreach ($opcoes as $opcao)
-                                                    <div class="form-check form-check-inline">
-                                                        <input type="text" hidden="true" name="enquete" value=" {{$enquete->id}} ">
-                                                        <input class="form-check-input" type="radio" name="resposta" id="inlineRadio1" value=" {{$opcao->id}} ">
-                                                        <label class="form-check-label" for="inlineRadio1"> {{$opcao->descricao}} </label>
+                    @if($enquete->aberta)
+                        @if(!isset($_COOKIE['enquete-'.$enquete->id]))
+                            <div class="enquete">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <p>Queremos saber a sua opinião!</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="pergunta mt-2">
+                                            <h3> {{$enquete->pergunta}} </h3>
+                                            <form class="mt-3" action="{{route('aviario.enquetes.respostas')}}" method="POST">
+                                                @csrf
+                                                <div class="text-left opcao">
+                                                    @foreach ($opcoes as $opcao)
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="text" hidden="true" name="enquete" value=" {{$enquete->id}} ">
+                                                            <input class="form-check-input" type="radio" name="resposta" id="inlineRadio1" value=" {{$opcao->id}} ">
+                                                            <label class="form-check-label" for="inlineRadio1"> {{$opcao->descricao}} </label>
+                                                        </div>
+                                                    @endforeach
+                                                    
+                                                    <div class="mt-3">
+                                                        <button type="submit" class="btn btn-primary">Enviar Resposta</button>
                                                     </div>
-                                                @endforeach
-                                                
-                                                <div class="mt-3">
-                                                    <button type="submit" class="btn btn-primary">Enviar Resposta</button>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <div id="carouselExampleControls" class="carousel slide active" data-ride="carousel" >
+                                <div class="carousel-inner">
+                                    @if(isset($bannersRetangulares))
+                                        @foreach ($bannersRetangulares as $banner)
+                                            <div class="carousel-item bottom-carousel">
+                                                <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
                     @else
                         <div id="carouselExampleControls" class="carousel slide active" data-ride="carousel" >
                             <div class="carousel-inner">

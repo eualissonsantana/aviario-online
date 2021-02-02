@@ -72,6 +72,7 @@ class EmpresaController extends Controller
         $categorias = db::table('empresa_categorias')
                     ->join('empresas', 'empresas.categoria_id', '=', 'empresa_categorias.id')
                     ->select('empresa_categorias.*')
+                    ->distinct()
                     ->get();
 
         $numEmpresas = $this->numEmpresas;

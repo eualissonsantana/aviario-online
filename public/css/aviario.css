@@ -8,8 +8,10 @@ html,body
 }
 
 .content {
-    padding-bottom: 300px;
+    padding-bottom: 200px;
 }
+
+
 
 .exibe-noticia hr {
     border-color: #a7a7a7;
@@ -141,6 +143,11 @@ html,body
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+.cadastre-seu-negocio img, .anuncie-sua-empresa img {
+    width: 100%;
 }
 
 .listagem-noticias .area-procura-noticia {
@@ -374,6 +381,7 @@ footer .navegacao {
 
 .exibe-comercio .carousel-inner img {
     max-height: 500px;
+    object-fit: cover;
 }
 
 .aviario-enquetes form label {

@@ -2,6 +2,20 @@
 
 @section('content')    
     <section class="padding-padrao pt guia-comercial">
+        <div class="d-block d-sm-none banners-topo mb-3" onload="defineActiveMobile()">
+            <div id="carouselExampleControls" class="carousel slide carousel-mobile" data-ride="carousel" >
+                <div class="carousel-inner">
+                    @if(isset($bannersRetangulares))
+                        @foreach ($bannersRetangulares as $banner)
+                            <div class="carousel-item carousel-mobile-item">
+                                <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+
         <div class="">
             <h2>Guia Comercial do Aviário</h2>
         </div>
@@ -26,7 +40,11 @@
                 <p><span class="destaque">{{$numEmpresas}}</span> empresas cadastradas.</p>
                 <p>Não encontrou a sua? <a class="destaque" href="{{route('cadastrar-comercio')}}">Cadastre aqui!</a></p>
             </div>
-            <div class="col-3"></div>
+            <div class="col-12 col-md-3 mt-3 mt-md-0 anuncie-sua-empresa">
+                <a href="{{route('aviario.contato')}}">
+                    <img src="{{ url('img/anuncie-sua-empresa.jpg') }}" alt="Anúncie sua empresa no Aviário Online" >
+                </a>
+            </div>
         </article>
 
         <section class="d-none d-sm-block mt-4">

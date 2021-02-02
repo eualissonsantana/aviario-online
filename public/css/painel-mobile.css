@@ -4,6 +4,10 @@
         padding: 0;
     }
 
+    .content {
+        padding-bottom: 400px !important;
+    }
+
     h1 {
         font-size: 30px;
         font-weight: bold;
@@ -77,6 +81,7 @@
 
     .pt {
         padding-top: 16px;
+        min-height: 100vh;
     }
 
     .navbar {

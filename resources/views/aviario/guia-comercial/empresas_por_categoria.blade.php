@@ -40,7 +40,11 @@
                 <p><span class="destaque">{{$numEmpresas}}</span> empresas cadastradas.</p>
                 <p>Não encontrou a sua? <span class="destaque"> <a href="{{route('cadastrar-comercio')}}">Cadastre aqui!</a></span></p>
             </div>
-            <div class="col-3"></div>
+            <div class="col-12 col-md-3 mt-3 mt-md-0 anuncie-sua-empresa">
+                <a href="{{route('aviario.contato')}}">
+                    <img src="{{ url('img/anuncie-sua-empresa.jpg') }}" alt="Anúncie sua empresa no Aviário Online" >
+                </a>
+            </div>
         </article>
         @csrf
 

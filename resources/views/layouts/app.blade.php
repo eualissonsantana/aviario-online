@@ -63,6 +63,12 @@
                     </div>
                 </div>
 
+                <div class="col-3 cadastre-seu-negocio">
+                    <a href="http://aviario.online/cadastrar">
+                        <img src="{{ url('img/cadastre-seu-negocio.jpg') }}" alt="Logo Aviário Online">
+                    </a>
+                </div>
+
               
 
             </div>

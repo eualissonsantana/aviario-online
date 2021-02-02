@@ -51,6 +51,8 @@
                             @endif
                         </div>
                     </div>
+
+                    
                 </section>
 
                 <section class="mt-3">
@@ -209,11 +211,19 @@
                             <p>Envie um email para essa empresa</p>
                         </div>
         
-                        <form action = "{{ route('empresas.cadastrar-comercio') }}" method = "POST" enctype="multipart/form-data">
+                        <form action = "{{ route('aviario.mensagem') }}" method = "POST" enctype="multipart/form-data">
                             @csrf
+                            @if($message = Session::get('success'))
+                                <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                                    <strong>Email enviado</strong> Sua mensagem será respondida em breve.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
                             <article class="row">
                                 <div class="form-group col-12 col-form-label text-md-left">
-                                    <label for="name" class="col-form-label">Nome </label>            
+                                    <label for="name" class="col-form-label">Nome*</label>            
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="nome"  required autocomplete="name" >
                     
                                     @error('name')
@@ -240,7 +250,7 @@
                             <article class="row">
                                 <div class="form-group col-12 col-form-label text-md-left">
                                     <label for="email" class="col-form-label">Email*</label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  required autocomplete="telefone">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  name="email" required >
         
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -253,9 +263,13 @@
                             <article class="row">
                                 <div class="form-group col-12  col-form-label text-md-left">
                                     <label class="col-form-label">Mensagem*</label>
-                                    <textarea class="form-control" name="mensagem" rows="5"></textarea>
+                                    <textarea class="form-control" name="mensagem" rows="5" ></textarea>
                                 </div>
                             </article>
+
+                            <div>
+                                <input type="text" name="destinatario" hidden="hidden" value=" {{$empresa->email}} ">
+                            </div>
         
                             <div class="row justify-content-end">
                                 <div class="col-12">

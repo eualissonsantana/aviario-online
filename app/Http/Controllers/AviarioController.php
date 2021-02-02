@@ -12,6 +12,9 @@ use App\Models\Opcao;
 use App\Models\Banner;
 use App\Models\Voto;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\sendMail;
+
 
 class AviarioController extends Controller
 {
@@ -94,11 +97,8 @@ class AviarioController extends Controller
         $id = $enquete->id;
         $opcoes =  DB::table('opcaos')->where('enquete_id', $id)->get();
         $bannersQuadrados = $this->bannersQuadrados;
-        $bannersRetangulares = $this->bannersRetangulares;
+        $bannersRetangulares = $this->bannersRetangulares;       
 
-        //dd(request()->cookie());        
-
-        
         return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'penultimoPost', 'maisLidas', 'empresaCategorias', 'enquete', 'opcoes'));
     }
 
@@ -140,6 +140,24 @@ class AviarioController extends Controller
             'enquetes' => $enquetes, 
             'opcoes' => $opcoes
         ]);
+    }
+
+    public function enviaMensagem(Request $request) {
+        $validatedData = $request->validate([
+            'nome' => 'required',
+            'email' => 'required',
+            'telefone' => [],
+            'mensagem' => 'required',
+        ]); 
+
+        $data = $request->all();
+        
+        Mail::to(config('mail.from.address'))
+            ->send(new sendMail($data));
+
+        return back()
+            ->with('success', 'Sua Mensagem foi enviada com sucesso!');
+
     }
     
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="padding-padrao container contato">
+    <section class="padding-padrao pt container contato">
         <article class="card">
             <article class="card-body">
                 <h2>Contato</h2>
@@ -11,9 +11,18 @@
                     <p>Preencha os dados corretamente e responderemos o mais rápido possível</p>
                 </div>
 
-                <form action = "{{ route('empresas.cadastrar-comercio') }}" method = "POST" enctype="multipart/form-data">
+                <form action = "{{ route('aviario.mensagem') }}" method = "POST" enctype="multipart/form-data">
                     @csrf
                     <article class="row">
+                        @if($message = Session::get('success'))
+                            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                                <strong>Email enviado</strong> Sua mensagem será respondida em breve.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        
                         <div class="form-group col-12 col-form-label text-md-left">
                             <label for="name" class="col-form-label">Nome completo* </label>            
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="nome"  required autocomplete="name" autofocus>
@@ -40,7 +49,7 @@
 
                         <div class="form-group col-12 col-md-6 col-form-label text-md-left">
                             <label for="email" class="col-form-label">Email*</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  required autocomplete="telefone" autofocus>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email" autofocus>
 
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -56,6 +65,11 @@
                             <textarea class="form-control" name="mensagem" rows="5"></textarea>
                         </div>
                     </article>
+
+
+                    <div>
+                        <input type="text" hidden="true" name="destinatario" value="contato@aviario.online">
+                    </div>
 
                     <div class="row justify-content-end">
                         <div class="col-12 col-md-3">
