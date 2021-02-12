@@ -74,6 +74,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'titulo' => ['required'],
+            'previa' => ['required'],
+            'autor' => ['required'],
+            'conteudo' => ['required']
+        ]);
+
         $data = $request->all();
         $slug = Str::slug($data['titulo']);
 
@@ -142,6 +150,13 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'titulo' => ['required'],
+            'previa' => ['required'],
+            'autor' => ['required'],
+            'conteudo' => ['required']
+        ]);
+        
         $data = $request->all();
         $post = $this->post;
 

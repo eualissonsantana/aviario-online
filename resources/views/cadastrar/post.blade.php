@@ -20,11 +20,6 @@
                 @endif
 
                     @csrf
-                    @if(isset($post))
-                        @if(Auth::user()->id != $post->usuario_id && !Auth::user()->ehGerente)
-                            <p class="alerta"><small> Você não tem permissão para editar essa notícia</small></p>
-                        @endif 
-                    @endif
 
                     <div class="form-group col-form-label text-md-left">
                         <label for="titulo" class="col-form-label">{{ __('Titulo') }}</label>
@@ -104,7 +99,13 @@
 
                     <div class="form-group col-form-label text-md-left">
                         <label for="conteudo" class="col-form-label">Conteúdo</label>
-                        <textarea name="conteudo" id="myTextarea" {{$post->conteudo ?? ''}}> </textarea>
+                        <textarea name="conteudo" id="myTextarea" {{$post->conteudo ?? ''}} class="form-control @error('conteudo') is-invalid @enderror"> </textarea>
+
+                        @error('conteudo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
 
