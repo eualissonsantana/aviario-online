@@ -31,7 +31,7 @@
                     </p>
 
                     <div class="mt-5 mb-4">
-                        <h4>Autor: {{$post->user->name}} </h4>
+                        <h4>Autor: {{$post->autor}} </h4>
                         <hr>
                     </div>
                 </div>

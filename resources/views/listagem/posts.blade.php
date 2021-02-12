@@ -63,16 +63,20 @@
                             </article>   
     
                             <article class="row botoes col-12 col-md-4 justify-content-end pr-3 pr-md-4">
-                                <div class="col-6 pl-0">
-                                    <a href="{{url("painel/noticias/$post->id/edit")}}">
-                                        <button class="btn btn-full btn-primary">Editar</button>
-                                    </a>
-                                </div>
-                                <div class="col-6 pr-0">
-                                    <a href="{{url("painel/noticias/$post->id")}}" class="ml-md-3 js-del-post">
-                                        <button class="btn btn-sm btn-danger">Excluir</button>
-                                    </a>
-                                </div> 
+                                @if(Auth::user()->id != $post->usuario_id && !Auth::user()->ehGerente) 
+                                    <p class="alerta"><small>Você não tem permissão para editar essa notícia</small></p>
+                                @else
+                                    <div class="col-6 pl-0">
+                                        <a href="{{url("painel/noticias/$post->id/edit")}}">
+                                            <button class="btn btn-full btn-primary">Editar</button>
+                                        </a>
+                                    </div>
+                                    <div class="col-6 pr-0">
+                                        <a href="{{url("painel/noticias/$post->id")}}" class="ml-md-3 js-del-post">
+                                            <button class="btn btn-sm btn-danger">Excluir</button>
+                                        </a>
+                                    </div>
+                                @endif
                             </article>
                         </section>
                     </li>

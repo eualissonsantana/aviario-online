@@ -102,45 +102,39 @@
                     </li>
                     
 
-                    @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Acesso Restrito') }}</a>
-                            </li>
-                        @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Painel
+                    @if (auth()->user())
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Painel
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href=" {{route('posts.index')}} ">Notícias</a>
+                                <a class="dropdown-item" href=" {{route('post_categorias.index')}} ">Categorias de Notícias</a>
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" href=" {{route('empresas.index')}} ">Guia Comercial</a>
+                                <a class="dropdown-item" href=" {{route('empresa_categorias.index')}} ">Categorias do Guia Comercial</a>
+                                
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{route('enquetes.index')}}">Enquetes</a>
+                                
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{route('banners.index')}}">Banners</a>
+                                
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                    {{ __('Sair') }}
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href=" {{route('posts.index')}} ">Notícias</a>
-                                    <a class="dropdown-item" href=" {{route('post_categorias.index')}} ">Categorias de Notícias</a>
-                                    <div class="dropdown-divider"></div>
-
-                                    <a class="dropdown-item" href=" {{route('empresas.index')}} ">Guia Comercial</a>
-                                    <a class="dropdown-item" href=" {{route('empresa_categorias.index')}} ">Categorias do Guia Comercial</a>
-                                    
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{route('enquetes.index')}}">Enquetes</a>
-                                    
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{route('banners.index')}}">Banners</a>
-                                    
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Sair') }}
-                                    </a>
-                                    
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                    @endguest
+                                
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>   
+                    @endif
                 </ul>
 
                 <form class="search-nav pl-md-5 ml-md-5 my-2 my-lg-0" action="{{route('aviario.posts.search')}}" method="POST">

@@ -45,7 +45,7 @@
                             <h4> {{$empresa->telefone}} </h4>
                             @if ($empresa->ehWhats == 1)
                                 <div class="mt-1">
-                                    <p ><small>Esse número também é <span class="verde"> Whats App! </span> </small></p>
+                                    <p ><small>Esse número também é  <a href="https://api.whatsapp.com/send?phone=55 {{$empresa->telefone}}"> <span class="verde"> Whats App! </span> </a></small></p>
                                     <p class="mt-1 entrar-contato" ><small> Ao entrar em contato, informe que viu no <strong class="destaque">Aviário Online</strong> </small></p>
                                 </div>
                             @endif
@@ -203,82 +203,84 @@
             <hr class="col-10 d-block d-sm-none"> 
 
             <div class="col-12 col-md-4 ">
-                <article class="card">
-                    <article class="card-body">
-                        <h2>Contato</h2>
-        
-                        <div class="">
-                            <p>Envie um email para essa empresa</p>
-                        </div>
-        
-                        <form action = "{{ route('aviario.mensagem') }}" method = "POST" enctype="multipart/form-data">
-                            @csrf
-                            @if($message = Session::get('success'))
-                                <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-                                    <strong>Email enviado</strong> Sua mensagem será respondida em breve.
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
-                            <article class="row">
-                                <div class="form-group col-12 col-form-label text-md-left">
-                                    <label for="name" class="col-form-label">Nome*</label>            
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="nome"  required autocomplete="name" >
-                    
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </article>
-        
-                            <article class="row">
-                                <div class="form-group col-12 col-form-label text-md-left">
-                                    <label for="telefone" class="col-form-label">Telefone/Celular</label>
-                                    <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" id="telefone" >
-                                    
-                                    @error('telefone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </article>
-
-                            <article class="row">
-                                <div class="form-group col-12 col-form-label text-md-left">
-                                    <label for="email" class="col-form-label">Email*</label>
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  name="email" required >
-        
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </article>
-        
-                            <article class="row">
-                                <div class="form-group col-12  col-form-label text-md-left">
-                                    <label class="col-form-label">Mensagem*</label>
-                                    <textarea class="form-control" name="mensagem" rows="5" ></textarea>
-                                </div>
-                            </article>
-
-                            <div>
-                                <input type="text" name="destinatario" hidden="hidden" value=" {{$empresa->email}} ">
+                @if($empresa->email)
+                    <article class="card">
+                        <article class="card-body">
+                            <h2>Contato</h2>
+            
+                            <div class="">
+                                <p>Envie um email para essa empresa</p>
                             </div>
-        
-                            <div class="row justify-content-end">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-enviar">Enviar</button>
+            
+                            <form action = "{{ route('aviario.mensagem') }}" method = "POST" enctype="multipart/form-data">
+                                @csrf
+                                @if($message = Session::get('success'))
+                                    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                                        <strong>Email enviado</strong> Sua mensagem será respondida em breve.
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                <article class="row">
+                                    <div class="form-group col-12 col-form-label text-md-left">
+                                        <label for="name" class="col-form-label">Nome*</label>            
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="nome"  required autocomplete="name" >
+                        
+                                        @error('name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </article>
+            
+                                <article class="row">
+                                    <div class="form-group col-12 col-form-label text-md-left">
+                                        <label for="telefone" class="col-form-label">Telefone/Celular</label>
+                                        <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" id="telefone" >
+                                        
+                                        @error('telefone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </article>
+
+                                <article class="row">
+                                    <div class="form-group col-12 col-form-label text-md-left">
+                                        <label for="email" class="col-form-label">Email*</label>
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  name="email" required >
+            
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </article>
+            
+                                <article class="row">
+                                    <div class="form-group col-12  col-form-label text-md-left">
+                                        <label class="col-form-label">Mensagem*</label>
+                                        <textarea class="form-control" name="mensagem" rows="5" ></textarea>
+                                    </div>
+                                </article>
+
+                                <div>
+                                    <input type="text" name="destinatario" hidden="hidden" value=" {{$empresa->email}} ">
                                 </div>
-                            </div>
-                        </form>
+            
+                                <div class="row justify-content-end">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-enviar">Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </article>
                     </article>
-                </article>
+                @endif
             </div>
         </section>
         

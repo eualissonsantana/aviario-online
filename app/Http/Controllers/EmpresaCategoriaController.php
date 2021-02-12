@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EmpresaCategoria;
 use App\Models\Ramo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class EmpresaCategoriaController extends Controller
 {
@@ -63,6 +64,8 @@ class EmpresaCategoriaController extends Controller
 
         $categoria = new EmpresaCategoria();
         $categoria->descricao = $data['descricao'];
+        $categoria->slug = Str::slug($data['descricao']);
+        $categoria->ramo_id = $data['ramo_id'];
         $categoria->save();
         
         return redirect()->route('empresa_categorias.index');
@@ -110,8 +113,11 @@ class EmpresaCategoriaController extends Controller
         $data = $request->all();
         $categoria = new EmpresaCategoria();
         
+        
         $categoria->where(['id'=>$id])->update([
-            'descricao' => $data['descricao']
+            'descricao' => $data['descricao'],
+            'slug' => Str::slug($data['descricao']),
+            'ramo_id' => $data['ramo_id']
         ]);
 
         return redirect()->route('empresa_categorias.index');

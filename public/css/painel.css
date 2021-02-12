@@ -449,8 +449,10 @@ ul {
       width: 600px;
   }
 
-
-
   .banner-lateral {
       width: 300px;
+  }
+
+  .painel-empresas .card-body p {
+      font-size: 14px !important;
   }

@@ -81,6 +81,7 @@ class PostController extends Controller
         $post->slug = Str::slug($data['titulo']);
         $post->titulo = $data['titulo'];
         $post->previa = $data['previa'];
+        $post->autor = $data['autor'];
         $post->conteudo = $data['conteudo'];
         $post->user_id = $data['usuario_id'];
         $post->categoria_id = $data['categoria_id'];
@@ -150,10 +151,11 @@ class PostController extends Controller
             'slug' => Str::slug($data['titulo']),
             'titulo' => $data['titulo'],
             'previa' => $data['previa'],
+            'autor' => $data['autor'],
             'conteudo' => $data['conteudo'],
             'user_id' => $data['usuario_id'],
             'categoria_id' => $data['categoria_id'],
-            ]); 
+        ]); 
         
         $this->uploadImage($request, $slug, $id);
 

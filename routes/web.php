@@ -29,6 +29,7 @@ Route::get('/painel/empresas/{empresa}/edit', [EmpresaController::class, 'edit']
 Route::put('/painel/empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update')->middleware('auth');
 Route::delete('/painel/empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy')->middleware('auth');
 Route::any('/painel/empresas/buscar', [EmpresaController::class, 'search'])->name('empresas.search');
+Route::any('painel/guia-comercial/{slug}', [EmpresaController::class, 'search'])->name('empresas.busca');
 
 // Categorias de empresa
 Route::get('/painel/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresa_categorias.index')->middleware('auth');

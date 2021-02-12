@@ -46,16 +46,9 @@
                             @else 
                                 <h6> <span class="mb-2 alerta"> Banner inativo</span></h6>
                             @endif
-
                             @if ($banner->posicao == 'topo')
-                                <div class="mb-2">
-                                    <p>TOPO</p>
-                                </div>
                                 <img class="banner-topo" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" />
                             @else    
-                                <div class="mb-2">
-                                    <p>LATERAL</p>
-                                </div>
                                 <img class="banner-lateral" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" />
                             @endif
                         </section>

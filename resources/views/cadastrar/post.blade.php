@@ -20,6 +20,12 @@
                 @endif
 
                     @csrf
+                    @if(isset($post))
+                        @if(Auth::user()->id != $post->usuario_id && !Auth::user()->ehGerente)
+                            <p class="alerta"><small> Você não tem permissão para editar essa notícia</small></p>
+                        @endif 
+                    @endif
+
                     <div class="form-group col-form-label text-md-left">
                         <label for="titulo" class="col-form-label">{{ __('Titulo') }}</label>
                         <input id="titulo" type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo" value="{{$post->titulo ?? ''}}" required autocomplete="titulo" autofocus>
@@ -33,7 +39,7 @@
 
                     <div class="form-group col-form-label text-md-left">
                         <label for="previa" class="col-form-label">Prévia</label>
-                        <input id="previa" type="text" class="form-control @error('previa') is-invalid @enderror"  name="previa" value="{{$post->previa ?? ''}}" >
+                        <input id="previa" type="text" class="form-control @error('previa') is-invalid @enderror" name="previa" value="{{$post->previa ?? ''}}" >
 
                         @error('previa')
                             <span class="invalid-feedback" role="alert">
@@ -46,7 +52,7 @@
                     <article class="row">
                         <div class="form-group col-md-4 text-md-left align-self-end">
                             <label for="arquivo" class="col-form-label">Imagem</label>
-                            <input id="arquivo" type="file" name="imagem" class="form-control @error('arquivo') is-invalid @enderror"  name="arquivo" value="{{$post->arquivo ?? ''}}">
+                            <input id="arquivo" type="file" name="imagem" class="form-control @error('arquivo') is-invalid @enderror" name="arquivo" value="{{$post->arquivo ?? ''}}">
 
                             @error('arquivo')
                                 <span class="invalid-feedback" role="alert">
@@ -82,26 +88,12 @@
                            
                         </div>
     
-                        <div class="input-group form-group col-md-4 autor align-self-end">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="usuario_id">Autor</label>
-                            </div>
-
-                            <select class="custom-select" id="usuario_id" name="usuario_id">
-                                @foreach($usuarios as $user) 
-                                    @if(isset($post))
-                                        @if($user->id != $post->usuario_id)
-                                            <option value="{{$user->id}}">{{$user->id}} - {{$user->name}}</option>
-                                        @else
-                                            <option selected value="{{$user->id}}">{{$user->id}} - {{$user->name}}</option>
-                                        @endif
-                                    @else
-                                        <option value="{{$user->id}}">{{$user->id}} - {{$user->name}}</option>   
-                                    @endif
-                                @endforeach
-                            </select>
-
-                            @error('usuario_id')
+                        <div class="form-group col-md-4 text-md-left">
+                            <label for="autor" class="col-form-label">Autor</label>
+                            <input id="autor" type="text" class="form-control @error('autor') is-invalid @enderror" name="autor" value="{{$post->autor ?? ''}}" required autocomplete="autor" autofocus> 
+                            <input type="text" hidden="true" name="usuario_id" value="{{Auth::user()->id}}">
+                            
+                            @error('autor')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -112,7 +104,7 @@
 
                     <div class="form-group col-form-label text-md-left">
                         <label for="conteudo" class="col-form-label">Conteúdo</label>
-                        <textarea name="conteudo" { id="myTextarea">{{$post->conteudo ?? ''}}</textarea>
+                        <textarea name="conteudo" id="myTextarea" {{$post->conteudo ?? ''}}> </textarea>
                     </div>
 
 

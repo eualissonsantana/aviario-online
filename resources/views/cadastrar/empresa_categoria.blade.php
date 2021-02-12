@@ -34,9 +34,9 @@
                         </div>
 
                         <div class="col-md-6 col-form-label text-md-left">
-                            <label class="col-form-label" for="categoria_id">Categoria</label>
+                            <label class="col-form-label" for="ramo_id">Ramo</label>
                             
-                            <select class="custom-select" id="categoria_id" name="categoria_id">
+                            <select class="custom-select" id="ramo_id" name="ramo_id">
                                 @foreach($ramos as $ramo) 
                                     @if(isset($categoria))
                                         @if($ramo->id != $categoria->ramo->id)

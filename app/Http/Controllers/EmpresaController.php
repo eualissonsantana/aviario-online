@@ -472,9 +472,8 @@ class EmpresaController extends Controller
         return null;
     }
 
-    public function search(Request $request)
+    public function searchByName(Request $request)
     {
-       
         $ramos = $this->ramos;
         $categorias = $this->categorias;
         $emp = $this->empresa;
@@ -486,7 +485,39 @@ class EmpresaController extends Controller
         }
         
         return view('listagem.empresas', compact('empresas', 'ramos', 'categorias'));
+    }
+
+    public function search($slug) {
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
+        $id = $categoria->id;
+
         
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->paginate();
+        $ramos = $this->ramos;
+        $categorias = $this->categorias;
+
+        return view('listagem.empresas', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+            'ramos' => $ramos,
+            'categorias' => $categorias,
+        ]);
+    }
+
+    public function showEmpresas($slug) {
+
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
+        $id = $categoria->id;
+
+        
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
+
+        return view('aviario.guia-comercial.empresas_por_categoria', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+        ]);
     }
 
     public function searchAviario(Request $request)
@@ -507,21 +538,6 @@ class EmpresaController extends Controller
         
     }
 
-
-    public function showEmpresas($slug) {
-
-        $categoria = new EmpresaCategoria();
-        $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
-        $id = $categoria->id;
-
-        
-        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
-
-        return view('aviario.guia-comercial.empresas_por_categoria', [
-            'empresas' => $empresas,
-            'categoria' => $categoria,
-        ]);
-    }
 
 
     

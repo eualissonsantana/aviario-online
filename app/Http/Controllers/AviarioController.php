@@ -150,6 +150,7 @@ class AviarioController extends Controller
             'mensagem' => 'required',
         ]); 
 
+    
         $data = $request->all();
         
         Mail::to(config('mail.from.address'))

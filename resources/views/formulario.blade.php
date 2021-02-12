@@ -135,8 +135,10 @@
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
                                 <label for="telefone" class="col-form-label">Telefone/Celular *</label>
                                 <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" id="telefone" required autocomplete="telefone" autofocus>
-                                <input type="checkbox" class="mt-2" name="ehWhats" value="1">
-                                <small>Marque aqui se o número for WhatsApp</small>
+                                <label for="ehWhats">
+                                    <input type="checkbox" class="mt-2" name="ehWhats" value="1">
+                                    <small>Marque aqui se o número for WhatsApp</small>
+                                </label>
                                 
                                 @error('telefone')
                                     <span class="invalid-feedback" role="alert">
@@ -261,8 +263,10 @@
                                 <input id="complemento" type="text" class="form-control @error('complemento') is-invalid @enderror" value="{{$empresa->endereco->complemento ?? ''}}" name="complemento" >
 
                                 <div class="form-check mt-2">
-                                    <input class="form-check-input" type="checkbox" name="ehComercial" id="inlineCheckbox1" value="1" @if(isset($empresa) && $empresa->endereco->ehComercial) checked @endif>
-                                    <label class="form-check-label" for="inlineCheckbox1">Marque aqui se esse for um endereço comercial</label>
+                                    <label for="ehComercial">
+                                        <input class="form-check-input" type="checkbox" name="ehComercial" id="ehComercial" value="1" @if(isset($empresa) && $empresa->endereco->ehComercial) checked @endif>
+                                        <label class="form-check-label" for="ehComercial">Marque aqui se esse for um endereço comercial</label>
+                                    </label>
                                 </div>
 
                                 @error('rua')

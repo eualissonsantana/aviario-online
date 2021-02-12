@@ -49,11 +49,11 @@
                             <div class="row col-12">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="posicao" id="topo" value="topo" @if(isset($banner) && $banner->posicao == 'topo') checked @endif>
-                                    <label class="form-check-label" for="topo">Retangular</label>
+                                    <label class="form-check-label" for="topo"><strong> Topo</strong> - (Retangular 728x90px)</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="posicao" id="inlineCheckbox1" value="lado" @if(isset($banner) && $banner->posicao == 'lado') checked @endif>
-                                    <label class="form-check-label" for="lado">Quadrado</label>
+                                    <label class="form-check-label" for="lado"><strong>Lateral</strong> - (Quadrado 350x350px)</label>
                                 </div>
                             </div>
                         </div>

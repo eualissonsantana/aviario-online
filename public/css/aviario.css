@@ -422,8 +422,8 @@ footer .navegacao a {
 
    
     .imagem-comercio img {
-        width: 220px;
-        height: 220px;
+        width: 220px !important;
+        height: 220px !important;
         object-fit: cover;
     }
 
@@ -454,12 +454,12 @@ footer .navegacao a {
 
 @media only screen and (max-width: 1400px) {
     .imagem-comercio img{
-        width: 200px;
-        height: 200px;
+        width: 200px !important;
+        height: 200px !important;
         object-fit: cover;
     }
 
-    .lista-noticias .imagem-noticia img{
+    .lista-noticias .imagem-noticia img {
         width: 220px;
         height: 140px;
         object-fit: cover;
@@ -472,8 +472,8 @@ footer .navegacao a {
 
 @media only screen and (max-width:1280px) {
     .imagem-comercio img {
-        width: 190px;
-        height: 190px;
+        width: 190px !important;
+        height: 190px !important;
         object-fit: cover;
     }
 
@@ -684,6 +684,11 @@ footer .navegacao a {
 
 .aviario-home .opcao label {
     font-size: 20px;
+}
+
+.painel-banners p {
+    font-size: 14px !important;
+    font-weight: bold;
 }
 
   

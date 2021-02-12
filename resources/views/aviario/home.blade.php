@@ -117,7 +117,7 @@
                         @endif
                     </div>
                     <div class="legenda-area-categoria">
-                        <p class="mt-2 legenda">Essas e muitas outras categorias no <br class="d-block d-sm-none"><span class="destaque"> Guia Comercial do Aviário </span></p>
+                        <p class="mt-2 legenda">Essas e muitas outras categorias no <br class="d-block d-sm-none"> <a href="{{route('guia.index')}}"><span class="destaque"> Guia Comercial do Aviário </span></a></p>
                     </div>
                     <hr>
                     @if($enquete->aberta)
