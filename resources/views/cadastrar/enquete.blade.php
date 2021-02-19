@@ -36,7 +36,7 @@
                     <article class="row">
                         <div class="form-group col-form-label text-md-left col-12 col-md-6">
                             <label for="opcao1" class="col-form-label">Opção de resposta 1 *</label>
-                            <input id="opcao1" type="text" class="form-control @error('opcao1') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '') readonly @endif value="{{$opcoes[0]->descricao ?? ''}}" required autocomplete="opcao1" autofocus>
+                            <input id="opcao1" type="text" class="form-control @error('opcao1') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '')  @endif value="{{$opcoes[0]->descricao ?? ''}}" required autocomplete="opcao1" autofocus>
 
                             @error('opcao1')
                                 <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
 
                         <div class="form-group col-form-label text-md-left col-12 col-md-6">
                             <label for="opcao2" class="col-form-label">Opção de resposta 2 *</label>
-                            <input id="opcao2" type="text" class="form-control @error('opcao2') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '') readonly @endif value="{{$opcoes[1]->descricao ?? ''}}" required autocomplete="opcao2" autofocus>
+                            <input id="opcao2" type="text" class="form-control @error('opcao2') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '')  @endif value="{{$opcoes[1]->descricao ?? ''}}" required autocomplete="opcao2" autofocus>
 
                             @error('opcao2')
                                 <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                     <article class="row">
                         <div class="form-group col-form-label text-md-left col-12 col-md-6">
                             <label for="opcao3" class="col-form-label">Opção de resposta 3</label>
-                            <input id="opcao3" type="text" class="form-control @error('opcao3') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '') readonly @endif value="{{$opcoes[2]->descricao ?? ''}}">
+                            <input id="opcao3" type="text" class="form-control @error('opcao3') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '')  @endif value="{{$opcoes[2]->descricao ?? ''}}">
 
                             @error('opcao3')
                                 <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
 
                         <div class="form-group col-form-label text-md-left col-12 col-md-6">
                             <label for="opcao4" class="col-form-label">Opção de resposta 4</label>
-                            <input id="opcao4" type="text" class="form-control @error('opcao4') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '') readonly @endif value="{{$opcoes[3]->descricao ?? ''}}">
+                            <input id="opcao4" type="text" class="form-control @error('opcao4') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '')  @endif value="{{$opcoes[3]->descricao ?? ''}}">
 
                             @error('opcao3')
                                 <span class="invalid-feedback" role="alert">

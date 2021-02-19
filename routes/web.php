@@ -45,6 +45,7 @@ Route::get('/painel/noticias/cadastro', [PostController::class, 'create'])->name
 Route::post('/painel/noticias/cadastro', [PostController::class, 'store'])->name('posts.store')->middleware('auth');
 Route::get('/painel/noticias/{noticia}/edit', [PostController::class, 'edit'])->name('posts.edit')->middleware('auth');
 Route::put('/painel/noticias/{noticia}', [PostController::class, 'update'])->name('posts.update')->middleware('auth');
+
 Route::delete('/painel/noticias/{noticia}', [PostController::class, 'destroy'])->name('posts.destroy')->middleware('auth');
 Route::any('/painel/noticias/buscar', [PostController::class, 'search'])->name('posts.search');
 
@@ -73,6 +74,7 @@ Route::get('/painel/enquetes/{enquete}/edit', [EnqueteController::class, 'edit']
 Route::put('/painel/enquetes/{enquete}', [EnqueteController::class, 'update'])->name('enquetes.update')->middleware('auth');
 Route::delete('/painel/enquetes/{enquete}', [EnqueteController::class, 'destroy'])->name('enquetes.destroy')->middleware('auth');
 Route::any('/painel/enquetes/buscar', [EnqueteController::class, 'search'])->name('enquetes.search');
+Route::post('/painel/enquetes/encerra', [EnqueteController::class, 'encerraEnquete'])->name('enquete.encerra')->middleware('auth');
 
 
 

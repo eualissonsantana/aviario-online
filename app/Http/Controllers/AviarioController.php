@@ -45,7 +45,7 @@ class AviarioController extends Controller
             $this->post = new Post();
             $this->postCategoria = new PostCategoria();
             $this->voto = new Voto();
-            $this->enquetes = Enquete::all();
+            $this->enquetes = Enquete::orderByDesc('created_at')->get();
             $this->opcoes = Opcao::all();
             
             Post::orderByDesc('created_at')->whereNotIn('id', [$this->ultimoPost->id])->chunk(3, function($noticias){
@@ -114,22 +114,32 @@ class AviarioController extends Controller
 
     public function registraResposta(Request $request) 
     {
-        $data = $request->all();
-        $id = $data['resposta'];
-        $enquete = $data['enquete'];
+        $id = $request->resposta;
+        $enquete = $request->enquete;
         
         setcookie('enquete-'.$enquete, $enquete, (time() + (3600 * 24 * 30 * 12 * 5)));
         
-        if (!$opcao = Opcao::find($id))
-            return redirect()->back();
+        if (!$opcao = Opcao::find($id)){
+            $validacao = false;
+            echo json_encode($validacao);
+            return;
+        } else {
+            $updateVotos = $opcao->qtd_votos + 1;
+    
+            $opcao->where(['id'=>$id])->update([
+                'qtd_votos' => $updateVotos
+            ]);
 
-        $updateVotos = $opcao->qtd_votos + 1;
+            $validacao = true;
+            echo json_encode($validacao);
+            return;
+        }
 
-        $opcao->where(['id'=>$id])->update([
-            'qtd_votos' => $updateVotos
-        ]);
+
+
+        //return back()
+          //  ->with('success', 'Obrigado pela participação!');
         
-        return redirect()->route('aviario.index');
     }
 
     public function indexEnquetes() {

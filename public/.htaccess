@@ -3,6 +3,9 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    php_flag register_globals off
+    php_flag magic_quotes_gpc off
+
     RewriteEngine On
 
     # Handle Authorization Header
@@ -19,3 +22,5 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+

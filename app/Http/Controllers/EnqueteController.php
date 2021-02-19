@@ -81,6 +81,16 @@ class EnqueteController extends Controller
             }
         }
 
+        $enquetes = Enquete::all();
+        
+        foreach($enquetes as $enq) {
+            if($enq->id != $enquete->id){
+                $enq->where(['id'=>$enq->id])->update([
+                    'aberta' => 0,
+                ]);
+            }
+        }
+
         return redirect()->route('enquetes.index', [
             'enquetes' => $this->enquetes
         ]);
@@ -167,7 +177,20 @@ class EnqueteController extends Controller
     public function respondeEnquete(Request $request)
     {
         $data = $request->all();
-
         $resposta = $data['resposta'];
+    }
+
+    public function encerraEnquete(Request $request) {
+        $id = $request->id;
+        $enquete = Enquete::find($id);
+
+        //if (!$enquete = Enquete::find($id))
+          //  return redirect()->back();
+        
+        echo json_encode($enquete->aberta);
+
+        $enquete->aberta = 0;
+
+        return;
     }
 }

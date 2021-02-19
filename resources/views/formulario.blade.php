@@ -136,7 +136,7 @@
                                 <label for="telefone" class="col-form-label">Telefone/Celular *</label>
                                 <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" id="telefone" required autocomplete="telefone" autofocus>
                                 <label for="ehWhats">
-                                    <input type="checkbox" class="mt-2" name="ehWhats" value="1">
+                                    <input type="checkbox" class="mt-2" name="ehWhats" id="ehWhats" value="1">
                                     <small>Marque aqui se o número for WhatsApp</small>
                                 </label>
                                 
@@ -160,7 +160,7 @@
 
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
                                 <label for="facebook" class="col-form-label">Facebook</label>
-                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook">
+                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" placeholder="Ex: facebook.com/nome-do-sua-empresa">
 
                                 @error('facebook')
                                     <span class="invalid-feedback" role="alert">
@@ -173,7 +173,7 @@
                         <article class="row">
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
                                 <label for="youtube" class="col-form-label">Youtube</label>
-                                <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror"  name="youtube">
+                                <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror"  name="youtube" placeholder="Ex: youtube.com/nome-do-seu-canal">
 
                                 @error('youtube')
                                     <span class="invalid-feedback" role="alert">
@@ -184,7 +184,7 @@
                 
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
                                 <label for="instagram" class="col-form-label">Instagram</label>
-                                <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror"  name="instagram">
+                                <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror" name="instagram" placeholder="Ex: instagram.com/nome-do-sua-empresa">
 
                                 @error('instagram')
                                     <span class="invalid-feedback" role="alert">

@@ -185,5 +185,46 @@
     </div>
     <script src="{{url("js/script.js")}}"></script>
     <script src="{{ url('js/delete.js') }}" ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+    <script>
+        $(function(){
+            $('form[name="formVoto"]').submit(function(event){
+                event.preventDefault();
+
+                $.ajax({
+                    url: "{{route('aviario.enquetes.respostas')}}",
+                    type: "post",
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response === true){
+                            $('.mensagemBox').removeClass('d-none').html('Voto registrado com sucesso!')
+                            $('.divFormVoto').addClass('d-none')
+                            $('.resultadoParcial').removeClass('d-none')
+                        } else {
+                            alert('Erro')
+                        }
+                    }
+                });
+            });
+        })
+
+        $(function(){
+            $('form[name="formEncerraEnquete"]').submit(function(event){
+                event.preventDefault();
+
+                $.ajax({
+                    url: "{{route('enquete.encerra')}}",
+                    type: "post",
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response)
+                    }
+                });
+            });
+        })
+    </script>
 </body>
 </html>

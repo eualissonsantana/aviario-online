@@ -142,12 +142,12 @@ return [
             'database' => env('REDIS_CACHE_DB', '1'),
         ],
 
-    ],
-
-    'dbal' => [
-        'types' => [
-            'timestamp' => TimestampType::class,
+        'dbal' => [
+            'types' => [
+                'timestamp' => TimestampType::class,
+            ],
         ],
     ],
+
 
 ];

@@ -136,8 +136,9 @@
                                     @endif
                                     @if($empresa->instagram)
                                         <div class="col-4">
-                                            <img src="{{url('img/icons/instagram.png')}}" alt="Ícone Instagram">
-                                            <p class="mt-2">{{$empresa->instagram}}</p>  
+                                            <a href="{{$empresa->instagram}}" target="_blank">
+                                                <img src="{{url('img/icons/instagram.png')}}" alt="Ícone Instagram">
+                                            </a>
                                         </div>
                                     @endif
                                     @if($empresa->youtube)

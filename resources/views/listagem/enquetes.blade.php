@@ -20,38 +20,51 @@
             <ul>
                 @foreach ($enquetes as $enquete)
                     <li> 
-                        <a href="{{route('posts.show', ['slug' => $enquete->slug, 'id' => $enquete->id])}}">
-                            <section class="row li-noticia justify-content-between ">
-                                <article class="col-12 col-md-8">
-                                    <h3>{{$enquete->pergunta}}</h3>
-                                    <div class="interacoes mt-2">
-                                        @if($enquete->qtd_respostas($enquete->id) == 0)
-                                            <p><span class="alerta">Essa enquete ainda não possui respostas</span> </p>
-                                        @elseif($enquete->qtd_respostas($enquete->id) == 1)
-                                            <p><span class="verde">  A enquete possui 1 resposta. </span></p>
-                                        @else
-                                            <p><span class="verde">  A enquete possui {{$enquete->qtd_respostas($enquete->id)}} respostas. </span></p>
-                                        @endif
-                                    </div>
-                                    <div class="mt-2">
-                                        <p>Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($enquete->created_at))}}</p>
-                                    </div>
-                                </article>
+                        <section class="row li-noticia justify-content-between ">
+                            <article class="col-12 col-md-8">
+                                <h3>{{$enquete->pergunta}}</h3>
+                                <div class="interacoes mt-2">
+                                    @if($enquete->qtd_respostas($enquete->id) == 0)
+                                        <p><span class="alerta">Essa enquete ainda não possui respostas</span> </p>
+                                    @elseif($enquete->qtd_respostas($enquete->id) == 1)
+                                        <p><span class="verde">  A enquete possui 1 resposta. </span></p>
+                                    @else
+                                        <p><span class="verde">  A enquete possui {{$enquete->qtd_respostas($enquete->id)}} respostas. </span></p>
+                                    @endif
+                                </div>
+                                <div class="mt-2 row col-12">
+                                    <p>Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($enquete->created_at))}}</p>
 
-                            </section>
-                            <article class="row col-12 col-md-4 px-0 px-md-3 mt-3 botoes justify-content-end">
-                                    <div class="col-6 pl-0">
-                                        <a href="{{url("painel/enquetes/$enquete->id/edit")}}">
-                                            <button class="btn btn-full btn-primary">Editar</button>
-                                        </a>
-                                    </div>
-                                    <div class="col-6 pr-0">
-                                        <a href="{{url("painel/enquetes/$enquete->id")}}" class="js-del-enquete">
-                                            <button class="btn btn-full btn-danger">Excluir</button>
-                                        </a>
-                                    </div>
+                                    @if(!$enquete->aberta)
+                                        <p class="alerta ml-2">Enquete encerrada</p>
+                                    @else
+                                         <p class="destaque ml-2">- Enquete aberta</p>
+                                    
+                                @endif
+                                </div>
                             </article>
-                        </a>
+
+                        </section>
+                        <article class="row col-12 col-md-8 px-0 px-md-3 mt-3 botoes justify-content-end">
+                                <div class="col-4 pl-0">
+                                    <a href="{{url("painel/enquetes/$enquete->id/edit")}}">
+                                        <button class="btn btn-full btn-primary">Editar</button>
+                                    </a>
+                                </div>
+                                <div class="col-4 pl-0 pr-0">
+                                    <a href="{{url("painel/enquetes/$enquete->id")}}" class="js-del-enquete">
+                                        <button class="btn btn-full btn-danger">Excluir</button>
+                                    </a>
+                                </div>
+
+                                <div class="col-4 pr-0">
+                                    <form name="formEncerraEnquete">
+                                        @csrf
+                                        <input type="text" hidden="true" name="enquete_id" value="{{$enquete->id}}">
+                                        <button type="submit" class="btn btn-full btn-secondary">Encerrar</button>
+                                    </form>
+                                </div>
+                        </article>
                     </li>
                     <hr >
                 @endforeach

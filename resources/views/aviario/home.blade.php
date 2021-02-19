@@ -121,21 +121,29 @@
                     </div>
                     <hr>
                     @if($enquete->aberta)
-                        @if(!isset($_COOKIE['enquete-'.$enquete->id]))
-                            <div class="enquete">
-                                <div class="card">
-                                    <div class="card-header">
+                       
+                        <div class="enquete">
+                            <div class="card">
+                                <div class="card-header">
+                                    @if(!isset($_COOKIE['enquete-'.$enquete->id]))
                                         <p>Queremos saber a sua opinião!</p>
+                                    @else
+                                        <p>Resultado parcial</p>
+                                    @endif 
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert alert-success alert-dismissible fade mensagemBox d-none show mt-2" id="resposta-registrada" role="alert" onload="foco()">
+                                        
                                     </div>
-                                    <div class="card-body">
-                                        <div class="pergunta mt-2">
-                                            <h3> {{$enquete->pergunta}} </h3>
-                                            <form class="mt-3" action="{{route('aviario.enquetes.respostas')}}" method="POST">
+                                    <h3> {{$enquete->pergunta}} </h3>
+                                    @if(!isset($_COOKIE['enquete-'.$enquete->id]))
+                                        <div class="pergunta mt-2 divFormVoto">
+                                            <form class="mt-3" name="formVoto">
                                                 @csrf
                                                 <div class="text-left opcao">
                                                     @foreach ($opcoes as $opcao)
                                                         <div class="form-check form-check-inline">
-                                                            <input type="text" hidden="true" name="enquete" value=" {{$enquete->id}} ">
+                                                            <input type="text" hidden="true" name="enquete" id="enquete_id" value=" {{$enquete->id}} ">
                                                             <input class="form-check-input" type="radio" name="resposta" id="inlineRadio1" value=" {{$opcao->id}} ">
                                                             <label class="form-check-label" for="inlineRadio1"> {{$opcao->descricao}} </label>
                                                         </div>
@@ -147,32 +155,53 @@
                                                 </div>
                                             </form>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @else
-                            <div id="carouselExampleControls" class="carousel slide active" data-ride="carousel" >
-                                <div class="carousel-inner">
-                                    @if(isset($bannersRetangulares))
-                                        @foreach ($bannersRetangulares as $banner)
-                                            <div class="carousel-item bottom-carousel">
-                                                <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                            </div>
-                        @endif
-                    @else
-                        <div id="carouselExampleControls" class="carousel slide active" data-ride="carousel" >
-                            <div class="carousel-inner">
-                                @if(isset($bannersRetangulares))
-                                    @foreach ($bannersRetangulares as $banner)
-                                        <div class="carousel-item bottom-carousel">
-                                            <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                                        <div class="resultadoParcial d-none">
+                                            @php
+                                                $totalVotos = 0;
+                                                $opcoesEnquete; 
+                                            @endphp
+
+                                            @foreach ($opcoes as $opcao)
+                                                @if($opcao->enquete_id == $enquete->id)
+                                                    @php
+                                                        $totalVotos = $totalVotos + $opcao->qtd_votos;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+
+                                            @foreach ($opcoes as $opcao)
+                                                @if($opcao->enquete_id == $enquete->id)
+                                                    <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / $totalVotos) * 100, 2)}}% </p>
+                                                @endif
+                                            @endforeach
                                         </div>
-                                    @endforeach
-                                @endif
+                                    @else 
+                                        <div class="resultadoParcial">
+                                            @php
+                                                $totalVotos = 0;
+                                                $opcoesEnquete; 
+                                            @endphp
+
+                                            @foreach ($opcoes as $opcao)
+                                                @if($opcao->enquete_id == $enquete->id)
+                                                    @php
+                                                        $totalVotos = $totalVotos + $opcao->qtd_votos;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
+
+                                            @foreach ($opcoes as $opcao)
+                                                @if($opcao->enquete_id == $enquete->id)
+                                                    <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / $totalVotos) * 100, 2)}}% </p>
+                                                @endif
+                                            @endforeach
+                                            <p class="destaque"><small> Você respondeu essa enquete</small></p>
+                                        </div>
+
+                                    @endif
+                                    
+                                      
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -180,11 +209,11 @@
 
                
                 <div class="col-12 mt-3 anuncio d-block d-sm-none">
-                    <div id="carouselExampleControls" class="carousel slide bottom-carousel-mobile" data-ride="carousel" >
+                    <div id="carouselExampleControls" class="carousel slide carousel-quadrado-mobile" data-ride="carousel" >
                         <div class="carousel-inner">
                             @if(isset($bannersQuadrados))
                                 @foreach ($bannersQuadrados as $banner)
-                                    <div class="carousel-item bottom-carousel-mobile-item">
+                                    <div class="carousel-item carousel-quadrado-mobile-item">
                                         <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
                                     </div>
                                 @endforeach
@@ -194,16 +223,21 @@
                 </div>
 
                 <section class="col-md-3 anuncios-laterais d-none d-sm-block">
-                    @foreach ($bannersQuadrados as $banner)
-                        <div class="col-12 anuncio px-0 mb-5">
-                            <img src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" />
-                        </div>    
-                    @endforeach
-                   
+                    <div id="carouselExampleControls" class="carousel slide carousel-quadrado" data-ride="carousel" >
+                        <div class="carousel-inner">
+                            @if(isset($bannersQuadrados))
+                                @foreach ($bannersQuadrados as $banner)
+                                    <div class="carousel-item carousel-quadrado-item">
+                                        <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
                 </section>
             </article>
         </section>
     </section>
-
 @endsection
+
 

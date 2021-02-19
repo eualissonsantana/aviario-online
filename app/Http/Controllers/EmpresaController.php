@@ -371,10 +371,16 @@ class EmpresaController extends Controller
     
     public function destroy($id)
     {
+        $fotos = FotoAdicional::where('empresa_id', $id)->get();
+        
+        foreach($fotos as $foto){
+          $foto->destroy($foto->id);
+        }
+
         $empresa = $this->empresa;
         $empresa = $empresa->destroy($id);
 
-        return($empresa)?"Sim":"Não";
+        return redirect()->route('empresas.index');
     }
 
     public function createEndereco(Request $request)

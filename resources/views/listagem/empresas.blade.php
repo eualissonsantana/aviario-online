@@ -18,6 +18,7 @@
 
         <article class="row justify-content-between">
             <div class="col-12 col-md-8 lista-empresas">
+                @csrf
                 <ul>
                     @if($empresas[0] != null)
                         @foreach ($empresas as $emp)
@@ -52,9 +53,29 @@
                                             </a>
                                         </div>
                                         <div class="col-6 pr-0">
-                                            <a href="{{url("painel/empresas/$emp->id")}}" class="js-del-emp">
-                                                <button class="btn btn-full btn-danger">Excluir</i></button>
-                                            </a>
+                                            <button class="btn btn-full btn-danger" data-toggle="modal" data-target="#modal{{$emp->id}}">Excluir</i></button>
+                                
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modal{{$emp->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Deseja realmente excluir esse comércio?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <form action="{{url("painel/empresas/$emp->id")}}" method="POST" data-toggle="modal" data-target="#modal{{$emp->id}}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-full btn-danger">Excluir</button>
+                                                    </form>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </article>
                                 </section>
@@ -122,8 +143,6 @@
         </article>
         
         @csrf
-        
-
         <div class="container">
             {{ $empresas->links() }}
         </div>

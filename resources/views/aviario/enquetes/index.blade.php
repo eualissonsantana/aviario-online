@@ -35,28 +35,34 @@
                             </div>
 
                             <div class="card-body">
+                                @if($enquete->aberta)
+                                    <div class="alert alert-success alert-dismissible fade mensagemBox d-none show mt-2" id="resposta-registrada" role="alert" onload="foco()">
+                                    </div>
+                                @endif
                                 <div class="interacoes mt-2">
-                                    @if(isset($_COOKIE['enquete-'.$enquete->id]))
-                                        <p class="destaque"><small> Você respondeu essa enquete</small></p>    
-                                    @else
-                                        <form class="mt-3" action="{{route('aviario.enquetes.respostas')}}" method="POST">
-                                            @csrf
-                                            <div class="opcao">
-                                                @foreach ($opcoes as $opcao)
-                                                    @if($opcao->enquete_id == $enquete->id)
-                                                        <div class="form-check form-check-inline">
-                                                            <input type="text" hidden="true" name="enquete" value=" {{$enquete->id}} ">
-                                                            <input class="form-check-input" type="radio" name="resposta" id="inlineRadio1" value=" {{$opcao->id}} ">
-                                                            <label class="form-check-label" for="inlineRadio1"> {{$opcao->descricao}} </label>
+                                    @if(!isset($_COOKIE['enquete-'.$enquete->id]))
+                                        @if($enquete->aberta)
+                                            <div class="divFormVoto">
+                                                <form class="mt-3" name="formVoto">
+                                                    @csrf
+                                                    <div class="opcao">
+                                                        @foreach ($opcoes as $opcao)
+                                                            @if($opcao->enquete_id == $enquete->id)
+                                                                <div class="form-check form-check-inline">
+                                                                    <input type="text" hidden="true" name="enquete" value=" {{$enquete->id}} ">
+                                                                    <input class="form-check-input" type="radio" name="resposta" id="inlineRadio1" value=" {{$opcao->id}} ">
+                                                                    <label class="form-check-label" for="inlineRadio1"> {{$opcao->descricao}} </label>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                        
+                                                        <div class="mt-3">
+                                                            <button type="submit" class="btn btn-primary">Enviar Resposta</button>
                                                         </div>
-                                                    @endif
-                                                @endforeach
-                                                
-                                                <div class="mt-3">
-                                                    <button type="submit" class="btn btn-primary">Enviar Resposta</button>
-                                                </div>
+                                                    </div>
+                                                </form>
                                             </div>
-                                        </form>
+                                        @endif
                                     @endif
 
                                     @php
@@ -64,8 +70,8 @@
                                         $opcoesEnquete; 
                                     @endphp
 
-                                    @if(!$enquete->aberta)
-
+                                    @if(!$enquete->aberta || isset($_COOKIE['enquete-'.$enquete->id]))
+                                        <p class="destaque">Resultado</p>
                                         
                                         @foreach ($opcoes as $opcao)
                                             @if($opcao->enquete_id == $enquete->id)
@@ -77,7 +83,7 @@
 
                                         @foreach ($opcoes as $opcao)
                                             @if($opcao->enquete_id == $enquete->id)
-                                                <p class="mt-2"> {{$opcao->descricao}} - {{($opcao->qtd_votos / $totalVotos) * 100}}% </p>
+                                                <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / $totalVotos) * 100, 2)}}% </p>
                                             @endif
                                         @endforeach
 
@@ -87,12 +93,13 @@
                                 </div>
                                 
                                 <div class="mt-3 row col-12">
-                                    <p><small>Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($enquete->created_at))}} - </small></p>
+                                    <p><small>Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($enquete->created_at))}}</small></p>
                                     
                                     @if(!$enquete->aberta)
                                         <p class="alerta ml-2"><small> enquete encerrada</small></p>
                                     @else
-                                        <p class="ml-2"><small> Em breve traremos os resultados dessa enquete.</small></p>
+                                        <p class="destaque ml-2"><small>- Essa enquete ainda está aberta</small></p>
+                                        
                                     @endif
                                 </div>    
                             </div>

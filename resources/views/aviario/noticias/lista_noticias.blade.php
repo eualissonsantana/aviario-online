@@ -125,11 +125,17 @@
                 </div> 	
             </div>
             <div class="col-3 anuncios-laterais d-none d-sm-block">
-                @foreach ($bannersQuadrados as $banner)
-                    <div class="col-12 anuncio px-0 mb-5">
-                        <img src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" />
-                    </div>    
-                @endforeach
+                <div id="carouselExampleControls" class="carousel slide carousel-quadrado" data-ride="carousel" >
+                    <div class="carousel-inner">
+                        @if(isset($bannersQuadrados))
+                            @foreach ($bannersQuadrados as $banner)
+                                <div class="carousel-item carousel-quadrado-item">
+                                    <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
             </div>
     
         </article>
