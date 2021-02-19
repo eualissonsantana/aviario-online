@@ -130,8 +130,9 @@
                                 <div class="row r">
                                     @if($empresa->facebook)
                                         <div class="col-4">
-                                            <img src="{{url('img/icons/facebook.png')}}" alt="Ícone Facebook">
-                                            <p class="mt-2">{{$empresa->facebook}}</p>  
+                                            <a href="{{$empresa->facebook}}" target="_blank">
+                                                <img src="{{url('img/icons/facebook.png')}}" alt="Ícone Facebook">
+                                            </a> 
                                         </div>
                                     @endif
                                     @if($empresa->instagram)
@@ -143,8 +144,9 @@
                                     @endif
                                     @if($empresa->youtube)
                                         <div class="col-4">
-                                            <img src="{{url('img/icons/youtube.png')}}" alt="Ícone Youtube">
-                                            <p class="mt-2">{{$empresa->youtube}}</p>  
+                                            <a href="{{$empresa->youtube}}" target="_blank">
+                                                <img src="{{url('img/icons/youtube.png')}}" alt="Ícone Youtube">>
+                                            </a>
                                         </div>
                                     @endif
                                 </div>
