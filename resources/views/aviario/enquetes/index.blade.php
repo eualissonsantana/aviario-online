@@ -87,7 +87,6 @@
                                                     <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / $totalVotos) * 100, 2)}}% </p>
                                                 @else
                                                     <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / 1) * 100, 2)}}% </p>
-
                                         @endif
                                             @endif
                                         @endforeach

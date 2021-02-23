@@ -346,8 +346,8 @@ footer .navegacao {
 
 .exibe-comercio .imagem-comercio img{
     width: 100% !important;
-    height: 230px;
-}
+    height: 230px !important;
+} 
 
 .exibe-comercio .endereco p {
     font-size: 16px;
@@ -421,7 +421,7 @@ footer .navegacao a {
     }
 
    
-    .imagem-comercio img {
+    .painel-empresas .imagem-comercio img, .guia-comercial .imagem-comercio img{
         width: 220px !important;
         height: 220px !important;
         object-fit: cover;
@@ -429,7 +429,7 @@ footer .navegacao a {
 
     .exibe-comercio .imagem-comercio img{
         width: 100% !important;
-        height: 250px;
+        height: 284px;
     }
 
     .exibe-comercio .endereco p {
@@ -452,11 +452,16 @@ footer .navegacao a {
 
 }
 
-@media only screen and (max-width: 1400px) {
-    .imagem-comercio img{
+@media only screen and (max-width: 1370px) {
+    .imagem-comercio img, .guia-comercial .imagem-comercio img, .lista-empresas .imagem-comercio img{
         width: 200px !important;
         height: 200px !important;
         object-fit: cover;
+    }
+
+    .exibe-comercio .imagem-comercio img {
+        width: 245px !important;
+        height: 245px !important;
     }
 
     .lista-noticias .imagem-noticia img {
@@ -482,6 +487,11 @@ footer .navegacao a {
         height: 135px;
         object-fit: cover;
     }
+
+    .exibe-comercio .imagem-comercio img{
+        width: 210px !important;
+        height: 210px !important;
+    } 
 }
 
 @media only screen and (max-width: 414px) {

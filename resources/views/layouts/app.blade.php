@@ -198,10 +198,11 @@
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response) {
-                        if(response === true){
+                        if(response.validacao === true){
                             $('.mensagemBox').removeClass('d-none').html('Voto registrado com sucesso!')
                             $('.divFormVoto').addClass('d-none')
                             $('.resultadoParcial').removeClass('d-none')
+                            console.log(response)
                         } else {
                             alert('Erro')
                         }

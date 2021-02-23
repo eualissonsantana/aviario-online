@@ -171,7 +171,7 @@ class EnqueteController extends Controller
 
         $enquete = $enquete->destroy($id);
 
-        return($enquete)?"Sim":"Não";
+        return redirect()->route('enquetes.index');
     }
 
     public function respondeEnquete(Request $request)

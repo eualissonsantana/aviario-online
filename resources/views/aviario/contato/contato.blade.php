@@ -37,10 +37,10 @@
 
                     <article class="row">
                         <div class="form-group col-12 col-md-6 col-form-label text-md-left">
-                            <label for="telefone" class="col-form-label">Telefone/Celular</label>
-                            <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" id="telefone" >
-                            
-                            @error('telefone')
+                            <label for="email" class="col-form-label">Email*</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email" autofocus>
+
+                            @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -48,10 +48,10 @@
                         </div>
 
                         <div class="form-group col-12 col-md-6 col-form-label text-md-left">
-                            <label for="email" class="col-form-label">Email*</label>
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email" autofocus>
-
-                            @error('email')
+                            <label for="assunto" class="col-form-label">Assunto*</label>
+                            <input id="assunto" type="text" class="form-control @error('assunto') is-invalid @enderror"  name="assunto" id="assunto" required autofocus>
+                            
+                            @error('assunto')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

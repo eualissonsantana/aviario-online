@@ -116,12 +116,14 @@ class AviarioController extends Controller
     {
         $id = $request->resposta;
         $enquete = $request->enquete;
+        $resposta = ['validacao', 'votos', 'votou'];
         
         setcookie('enquete-'.$enquete, $enquete, (time() + (3600 * 24 * 30 * 12 * 5)));
+        $resposta['votou'] = true;
         
         if (!$opcao = Opcao::find($id)){
-            $validacao = false;
-            echo json_encode($validacao);
+            $resposta['validacao'] = false;
+            echo json_encode($resposta);
             return;
         } else {
             $updateVotos = $opcao->qtd_votos + 1;
@@ -130,8 +132,10 @@ class AviarioController extends Controller
                 'qtd_votos' => $updateVotos
             ]);
 
-            $validacao = true;
-            echo json_encode($validacao);
+          
+            $resposta['validacao'] = true;
+            $resposta['votos'] = $updateVotos;
+            echo json_encode($resposta);
             return;
         }
 
@@ -170,6 +174,107 @@ class AviarioController extends Controller
             ->with('success', 'Sua Mensagem foi enviada com sucesso!');
 
     }
-    
 
+    public function enviaMensagem2(Request $request) {
+       
+        $data = $request->all();
+        /*digite os destinatarios separados por virgula*/
+            
+        if (isset($_POST['enviarFormulario'])){
+
+
+            /*** INÍCIO - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
+            
+            
+            $enviaFormularioParaNome = 'Nome do destinatário que receberá formulário';
+            
+            $enviaFormularioParaEmail = 'email-do-destinatario@dominio';
+            
+            
+            $caixaPostalServidorNome = 'WebSite | Formulário';
+            
+            $caixaPostalServidorEmail = 'usuario@seudominio.com.br';
+            
+            $caixaPostalServidorSenha = 'senha';
+            
+            
+            /*** FIM - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
+            
+            
+            /* abaixo as variaveis principais, que devem conter em seu formulario*/
+            
+            
+            $remetenteNome  = $_POST['remetenteNome'];
+            
+            $remetenteEmail = $_POST['remetenteEmail'];
+            
+            $assunto  = $_POST['assunto'];
+            
+            $mensagem = $_POST['mensagem'];
+            
+            
+            $mensagemConcatenada = 'Formulário gerado via website'.'<br/>';
+            
+            $mensagemConcatenada .= '-------------------------------<br/><br/>';
+            
+            $mensagemConcatenada .= 'Nome: '.$remetenteNome.'<br/>';
+            
+            $mensagemConcatenada .= 'E-mail: '.$remetenteEmail.'<br/>';
+            
+            $mensagemConcatenada .= 'Assunto: '.$assunto.'<br/>';
+            
+            $mensagemConcatenada .= '-------------------------------<br/><br/>';
+            
+            $mensagemConcatenada .= 'Mensagem: "'.$mensagem.'"<br/>';
+            
+            /*********************************** A PARTIR DAQUI NAO ALTERAR ************************************/
+            
+            
+            require ('PHPMailer_5.2.4/class.phpmailer.php');
+            
+            
+            $mail = new PHPMailer();
+            
+            
+            $mail->IsSMTP();
+            
+            $mail->SMTPAuth  = true;
+            
+            $mail->Charset   = 'utf8_decode()';
+            
+            $mail->Host  = 'smtp.'.substr(strstr($caixaPostalServidorEmail, '@'), 1);
+            
+            $mail->Port  = '587';
+            
+            $mail->Username  = $caixaPostalServidorEmail;
+            
+            $mail->Password  = $caixaPostalServidorSenha;
+            
+            $mail->From  = $caixaPostalServidorEmail;
+            
+            $mail->FromName  = utf8_decode($caixaPostalServidorNome);
+            
+            $mail->IsHTML(true);
+            
+            $mail->Subject  = utf8_decode($assunto);
+            
+            $mail->Body  = utf8_decode($mensagemConcatenada);
+            
+            
+            $mail->AddAddress($enviaFormularioParaEmail,utf8_decode($enviaFormularioParaNome));
+            
+            
+            if(!$mail->Send()){
+            
+            $mensagemRetorno = 'Erro ao enviar formulário: '. print($mail->ErrorInfo);
+            
+            }else{
+            
+            $mensagemRetorno = 'Formulário enviado com sucesso!';
+            
+            }
+            
+            }
+    }
+    
 }

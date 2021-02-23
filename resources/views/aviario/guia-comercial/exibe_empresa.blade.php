@@ -42,10 +42,10 @@
                         </div>
 
                         <div class="contatos col-12 px-0">
-                            <h4> {{$empresa->telefone}} </h4>
+                            <h4> {{$empresa->assunto}} </h4>
                             @if ($empresa->ehWhats == 1)
                                 <div class="mt-1">
-                                    <p ><small>Esse número também é  <a href="https://api.whatsapp.com/send?phone=55 {{$empresa->telefone}}"> <span class="verde"> Whats App! </span> </a></small></p>
+                                    <p ><small>Esse número também é  <a href="https://api.whatsapp.com/send?phone=55 {{$empresa->assunto}}"> <span class="verde"> Whats App! </span> </a></small></p>
                                     <p class="mt-1 entrar-contato" ><small> Ao entrar em contato, informe que viu no <strong class="destaque">Aviário Online</strong> </small></p>
                                 </div>
                             @endif
@@ -237,19 +237,6 @@
                                         @enderror
                                     </div>
                                 </article>
-            
-                                <article class="row">
-                                    <div class="form-group col-12 col-form-label text-md-left">
-                                        <label for="telefone" class="col-form-label">Telefone/Celular</label>
-                                        <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" id="telefone" >
-                                        
-                                        @error('telefone')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </article>
 
                                 <article class="row">
                                     <div class="form-group col-12 col-form-label text-md-left">
@@ -264,6 +251,20 @@
                                     </div>
                                 </article>
             
+                                <article class="row">
+                                    <div class="form-group col-12 col-form-label text-md-left">
+                                        <label for="assunto" class="col-form-label">Assunto*</label>
+                                        <input id="assunto" type="text" class="form-control @error('assunto') is-invalid @enderror"  name="assunto" id="assunto" required autofocus>
+                                        
+                                        @error('assunto')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </article>
+
+                                
                                 <article class="row">
                                     <div class="form-group col-12  col-form-label text-md-left">
                                         <label class="col-form-label">Mensagem*</label>
