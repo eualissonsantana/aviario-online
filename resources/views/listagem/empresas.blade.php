@@ -109,8 +109,7 @@
                             <div class="card-header" id="heading{{$ramo->id}}">
                                 <a class="collapsed ramo" href="#" data-toggle="collapse" data-target="#collapse{{$ramo->id}}" aria-expanded="true" aria-controls="{{$ramo->descricao}}">
                                     <p class="mb-0 text-left">
-                                        <strong>
-                                            {{$ramo->descricao}}
+                                        {{$ramo->descricao}}
                                     </p>
                                 </a>
                             </div>

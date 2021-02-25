@@ -227,8 +227,11 @@ class EmpresaController extends Controller
         $lastInsert =  DB::table('empresas')->orderBy('id','desc')->first();
         $id = $lastInsert->id;
         $this->uploadImage($request, $slug, $id);
-        $this->uploadImageAdd($request, $slug, $id);    
-        return redirect()->route('empresas.index');
+        $this->uploadImageAdd($request, $slug, $id);  
+
+        $slugCategoria = $empresa->categoria->slug;
+
+        return redirect("http://localhost:8000/painel/empresas/".$slugCategoria);
     }
 
     public function show($id) {
@@ -358,8 +361,13 @@ class EmpresaController extends Controller
             
         $this->uploadImage($request, $slug, $id);
         $this->uploadImageAdd($request, $slug, $id);    
+        
+        
+        $empresa = Empresa::find($id);
+        $slugCategoria = $empresa->categoria->slug;
 
-        return redirect()->route('empresas.index');
+
+        return redirect("http://localhost:8000/painel/empresas/".$slugCategoria);
     }
 
     /**
@@ -378,9 +386,12 @@ class EmpresaController extends Controller
         }
 
         $empresa = $this->empresa;
+        $empresaAtual = Empresa::find($id);
         $empresa = $empresa->destroy($id);
 
-        return redirect()->route('empresas.index');
+        $slugCategoria = $empresaAtual->categoria->slug;
+
+        return redirect("http://localhost:8000/painel/empresas/".$slugCategoria);
     }
 
     public function createEndereco(Request $request)
@@ -493,7 +504,28 @@ class EmpresaController extends Controller
         return view('listagem.empresas', compact('empresas', 'ramos', 'categorias'));
     }
 
-    public function search($slug) {
+    public function search(Request $request) {
+        $ramos = $this->ramos;
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('id', 1)->first();
+        $emp = $this->empresa;
+        $categorias = $this->categorias;
+        
+        if($request->option == 'nome') {
+            $empresas = $emp->searchName($request->filter);
+        }else {
+            $empresas = $emp->searchCategory($request->filter);
+        }
+
+        return view('listagem.empresas', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+            'ramos' => $ramos,
+            'categorias' => $categorias,
+        ]);
+    }
+
+    public function searchCategoria($slug) {
         $categoria = new EmpresaCategoria();
         $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
         $id = $categoria->id;

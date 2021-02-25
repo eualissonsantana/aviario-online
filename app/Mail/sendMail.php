@@ -34,8 +34,9 @@ class sendMail extends Mailable
         $data = $this->data;
 
         return $this
-               ->from(config('mail.from.address'))
+               ->from('smtp@aviario.online', 'Aviário Online' )
                ->subject('Você tem uma mensagem do Aviário Online')
+               ->replyTo($data['email'])
                ->to($data['destinatario'])
                ->view('aviario.contato.mensagem')
                ->with('data', $this->data);
