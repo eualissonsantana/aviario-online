@@ -28,7 +28,7 @@ class EmpresaController extends Controller
     public function __construct()
     {
         $this->empresa = new Empresa();
-        $this->empresas = Empresa::paginate();
+        $this->empresas = Empresa::paginate(10);
         $this->numEmpresas = Empresa::count();
         $this->categoria = new EmpresaCategoria();
         $this->categorias = EmpresaCategoria::all()->sortBy("descricao");
@@ -231,7 +231,7 @@ class EmpresaController extends Controller
 
         $slugCategoria = $empresa->categoria->slug;
 
-        return redirect("http://localhost:8000/painel/empresas/".$slugCategoria);
+        return redirect("http://aviario.online/painel/empresas/".$slugCategoria);
     }
 
     public function show($id) {
@@ -367,7 +367,7 @@ class EmpresaController extends Controller
         $slugCategoria = $empresa->categoria->slug;
 
 
-        return redirect("http://localhost:8000/painel/empresas/".$slugCategoria);
+        return redirect("http://aviario.online/painel/empresas/".$slugCategoria);
     }
 
     /**
@@ -391,7 +391,7 @@ class EmpresaController extends Controller
 
         $slugCategoria = $empresaAtual->categoria->slug;
 
-        return redirect("http://localhost:8000/painel/empresas/".$slugCategoria);
+        return redirect("http://aviario.online/painel/empresas/".$slugCategoria);
     }
 
     public function createEndereco(Request $request)

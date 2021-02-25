@@ -142,8 +142,10 @@
         </article>
         
         @csrf
-        <div class="container">
-            {{ $empresas->links() }}
+        <div class="text-center">
+            <div>
+                {{ $empresas->links() }}
+            </div>
         </div>
     </section>
 @endsection

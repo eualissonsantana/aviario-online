@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use Illuminate\Pagination\Paginator;
 use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,5 +35,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setlocale(LC_TIME, 'pt_BR');
         Schema::defaultStringLength(191);
         View::share(compact('bannersQuadrados', 'bannersRetangulares', 'numEmpresas'));
+
+        Paginator::useBootstrap();
     }
 }
