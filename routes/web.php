@@ -29,10 +29,10 @@ Route::get('/painel/empresas/{empresa}/edit', [EmpresaController::class, 'edit']
 Route::put('/painel/empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update')->middleware('auth');
 Route::delete('/painel/empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy')->middleware('auth');
 Route::any('/painel/empresas/buscar', [EmpresaController::class, 'search'])->name('empresas.search');
-Route::any('painel/empresas/{slug}', [EmpresaController::class, 'searchCategoria'])->name('empresas.busca');
+Route::any('painel/empresas/busca/{slug}', [EmpresaController::class, 'searchCategoria'])->name('empresas.busca');
 
 // Categorias de empresa
-Route::get('/painel/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresa_categorias.index')->middleware('auth');
+Route::get('/painel/empresas/categorias/', [EmpresaCategoriaController::class, 'index'])->name('empresa_categorias.index')->middleware('auth');
 Route::get('/painel/empresas/categorias/cadastro', [EmpresaCategoriaController::class, 'create'])->name('empresa_categorias.create')->middleware('auth');
 Route::post('/painel/empresas/categorias/cadastro', [EmpresaCategoriaController::class, 'store'])->name('empresa_categorias.store')->middleware('auth');
 Route::get('/painel/empresas/categorias/{categoria}/edit', [EmpresaCategoriaController::class, 'edit'])->name('empresa.edit')->middleware('auth');

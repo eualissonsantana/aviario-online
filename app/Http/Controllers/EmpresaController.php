@@ -54,7 +54,6 @@ class EmpresaController extends Controller
         $empresas = $this->empresas;
         $categorias = $this->categorias;
         $ramos = $this->ramos;
-
         return view('listagem.empresas', compact('empresas', 'categorias', 'ramos'));
     }
 
@@ -526,6 +525,7 @@ class EmpresaController extends Controller
     }
 
     public function searchCategoria($slug) {
+        
         $categoria = new EmpresaCategoria();
         $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
         $id = $categoria->id;
@@ -533,6 +533,7 @@ class EmpresaController extends Controller
         
         $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->paginate();
         $ramos = $this->ramos;
+        $empresas = $this->empresas;
         $categorias = $this->categorias;
 
         return view('listagem.empresas', [

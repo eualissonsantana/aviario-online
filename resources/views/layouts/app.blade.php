@@ -200,9 +200,22 @@
                     success: function(response) {
                         if(response.validacao === true){
                             $('.mensagemBox').removeClass('d-none').html('Voto registrado com sucesso!')
+                            
                             $('.divFormVoto').addClass('d-none')
                             $('.resultadoParcial').removeClass('d-none')
                             console.log(response)
+                            var opcao1 = ((response.opcoes[0].qtd_votos / response.totalVotos) * 100).toFixed(2)
+                            $('.parcial-1').html(response.opcoes[0].descricao + ' - ' + opcao1 + '%')
+
+                            var opcao2 = ((response.opcoes[1].qtd_votos / response.totalVotos) * 100).toFixed(2)
+                            $('.parcial-2').html(response.opcoes[1].descricao + ' - ' + opcao2 + '%')
+
+                            var opcao3 = ((response.opcoes[2].qtd_votos / response.totalVotos) * 100).toFixed(2)
+                            $('.parcial-3').html(response.opcoes[2].descricao + ' - ' + opcao3 + '%')
+
+                            var opcao4 = ((response.opcoes[3].qtd_votos / response.totalVotos) * 100).toFixed(2)
+                            $('.parcial-4').html(response.opcoes[3].descricao + ' - ' + opcao4 + '%')
+                            
                         } else {
                             alert('Erro')
                         }

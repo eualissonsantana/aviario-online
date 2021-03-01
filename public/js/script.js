@@ -61,10 +61,17 @@ function defineBannerQuadrado() {
 }
 
 function defineActiveComercio() {
-    var el = document.getElementsByClassName('comercio-carousel')[0]
+    var div = document.getElementsByClassName('comercio-carousel')[0]
+    
+    var item = document.getElementsByClassName('comercio-carousel-item')[0]
+    
+    if(div && div.offsetParent || divMobile && divMobile.offsetParent){
+        item.classList.add('active')
+    }
 
-    //el.classList.add('active')
+
     return
 }
+
 
 

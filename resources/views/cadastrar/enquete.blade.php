@@ -31,7 +31,16 @@
                         @enderror
                     </div>
 
-                    <h2>Preencha ao menos duas opções para resposta</h2>
+                    @if(isset($enquete))
+                        <div class="form-check col-3">
+                            <input class="form-check-input" type="checkbox" name="status" value="0" @if(!$enquete->aberta) checked @endif id="status">
+                            <label class="form-check-label" for="status">
+                                Marque aqui para encerrar a enquete
+                            </label>
+                        </div>
+                    @endif
+
+                    <h2 class="mt-3">Preencha ao menos duas opções para resposta</h2>
 
                     <article class="row">
                         <div class="form-group col-form-label text-md-left col-12 col-md-6">
@@ -62,7 +71,7 @@
                     <article class="row">
                         <div class="form-group col-form-label text-md-left col-12 col-md-6">
                             <label for="opcao3" class="col-form-label">Opção de resposta 3</label>
-                            <input id="opcao3" type="text" class="form-control @error('opcao3') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '')  @endif value="{{$opcoes[2]->descricao ?? ''}}">
+                            <input id="opcao3" type="text" class="form-control @error('opcao3') is-invalid @enderror"  name="opcao[]" @if(isset($opcoes)) @if(!isset($opcoes[2])) readonly @endif @endif value="{{$opcoes[2]->descricao ?? ''}}">
 
                             @error('opcao3')
                                 <span class="invalid-feedback" role="alert">
@@ -74,7 +83,7 @@
 
                         <div class="form-group col-form-label text-md-left col-12 col-md-6">
                             <label for="opcao4" class="col-form-label">Opção de resposta 4</label>
-                            <input id="opcao4" type="text" class="form-control @error('opcao4') is-invalid @enderror"  name="opcao[]" @if($opcoes ?? '')  @endif value="{{$opcoes[3]->descricao ?? ''}}">
+                            <input id="opcao4" type="text" class="form-control @error('opcao4') is-invalid @enderror"  name="opcao[]" @if(isset($opcoes)) @if(!isset($opcoes[3])) readonly @endif  @endif value="{{$opcoes[3]->descricao ?? ''}}">
 
                             @error('opcao3')
                                 <span class="invalid-feedback" role="alert">

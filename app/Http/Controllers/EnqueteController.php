@@ -82,14 +82,7 @@ class EnqueteController extends Controller
         }
 
         $enquetes = Enquete::all();
-        
-        foreach($enquetes as $enq) {
-            if($enq->id != $enquete->id){
-                $enq->where(['id'=>$enq->id])->update([
-                    'aberta' => 0,
-                ]);
-            }
-        }
+
 
         return redirect()->route('enquetes.index', [
             'enquetes' => $this->enquetes
@@ -146,9 +139,32 @@ class EnqueteController extends Controller
 
         $enquete = $this->enquete;
 
+        if(isset($data['status']))
+            $status = 0;
+        else
+            $status = 1;
+        
+
         $enquete->where(['id'=>$id])->update([
             'pergunta' => $data['pergunta'],
+            'aberta' => $status,
         ]);
+        
+        $opcoes = Opcao::where('enquete_id', $id)->get();
+        $i = 0;
+
+        foreach($data['opcao'] as $resposta)
+        {
+            if($resposta != null) {
+                $opcao = $this->opcao;
+
+                $opcao->where(['id'=>$opcoes[$i]->id])->update([
+                    'descricao' => $resposta
+                ]);
+
+                $i++;
+            }
+        }
 
 
         return redirect()->route('enquetes.index');

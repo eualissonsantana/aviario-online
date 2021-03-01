@@ -16,25 +16,16 @@
             </div>
         </div>
         <section class="padding-padrao">
-            @if($ultimoPost)
-                <a href=" {{route('posts.show', ['slug' => $ultimoPost->slug, 'id' => $ultimoPost->id])}} ">
-                    <article class="ultimo-post ">
-                        <h6>{{$ultimoPost->categoria->descricao}}</h6>
-                        <h2> {{$ultimoPost->titulo}} </h2>
-                        <p class="mt-3"> {{$ultimoPost->previa}} </p>
-                    </article>
-                </a>
-                <hr>
-            @endif
+
             <section class="row">  
-                @if($penultimoPost)
+                @if($ultimoPost)
                     <article class="col-12 col-md-6 zoom ">
-                        <a href="{{route('posts.show', ['slug' => $penultimoPost->slug, 'id' => $penultimoPost->id])}}">
+                        <a href="{{route('posts.show', ['slug' => $ultimoPost->slug, 'id' => $ultimoPost->id])}}">
                             <div class="penultimo-post px-0">
-                                <img src="{{ url('public/storage/imagens/chamadas/'.$penultimoPost->imagem) }}" />
+                                <img src="{{ url('public/storage/imagens/chamadas/'.$ultimoPost->imagem) }}" />
                                 <div class="titulo-post">
-                                    <h6> {{$penultimoPost->categoria->descricao}} </h6>
-                                    <h3> {{$penultimoPost->titulo}} </h3>
+                                    <h6> {{$ultimoPost->categoria->descricao}} </h6>
+                                    <h3> {{$ultimoPost->titulo}} </h3>
                                 </div>
                             </div>
                         </a>
@@ -64,6 +55,18 @@
     
                
             </section>
+
+            @if($quartoPost)
+                <hr>
+                <a href=" {{route('posts.show', ['slug' => $quartoPost->slug, 'id' => $quartoPost->id])}} ">
+                    <article class="ultimo-post ">
+                        <h6>{{$quartoPost->categoria->descricao}}</h6>
+                        <h2> {{$quartoPost->titulo}} </h2>
+                        <p class="mt-3"> {{$quartoPost->previa}} </p>
+                    </article>
+                </a>
+                
+            @endif
         </section>
 
 
@@ -120,95 +123,88 @@
                         <p class="mt-2 legenda">Essas e muitas outras categorias no <br class="d-block d-sm-none"> <a href="{{route('guia.index')}}"><span class="destaque"> Guia Comercial do Aviário </span></a></p>
                     </div>
                     <hr>
-                    @if($enquete->aberta)
-                       
-                        <div class="enquete">
-                            <div class="card">
-                                <div class="card-header">
-                                    @if(!isset($_COOKIE['enquete-'.$enquete->id]))
-                                        <p>Queremos saber a sua opinião!</p>
-                                    @else
-                                        <p>Resultado parcial</p>
-                                    @endif 
-                                </div>
-                                <div class="card-body">
-                                    <div class="alert alert-success alert-dismissible fade mensagemBox d-none show mt-2" id="resposta-registrada" role="alert" onload="foco()">
+                    @if($enquete != null)
+                        @if($enquete->aberta)
+                        
+                            <div class="enquete">
+                                <div class="card">
+                                    <div class="card-header">
+                                        @if(!isset($_COOKIE['enquete-'.$enquete->id]))
+                                            <p>Queremos saber a sua opinião!</p>
+                                        @else
+                                            <p>Resultado parcial</p>
+                                        @endif 
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="alert alert-success alert-dismissible fade mensagemBox d-none show mt-2" id="resposta-registrada" role="alert" onload="foco()">
+                                            
+                                        </div>
+                                        <h3> {{$enquete->pergunta}} </h3>
+                                        @if(!isset($_COOKIE['enquete-'.$enquete->id]))
+                                            <div class="pergunta mt-2 divFormVoto">
+                                                <form class="mt-3" name="formVoto">
+                                                    @csrf
+                                                    <div class="text-left opcao">
+                                                        @foreach ($opcoes as $opcao)
+                                                            <div class="form-check form-check-inline">
+                                                                <input type="text" hidden="true" name="enquete" id="enquete_id" value=" {{$enquete->id}} ">
+                                                                <input class="form-check-input" type="radio" name="resposta" id="inlineRadio1" value=" {{$opcao->id}} ">
+                                                                <label class="form-check-label" for="inlineRadio1"> {{$opcao->descricao}} </label>
+                                                            </div>
+                                                        @endforeach
+                                                        
+                                                        <div class="mt-3">
+                                                            <button type="submit" class="btn btn-primary">Enviar Resposta</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="resultadoParcial d-none">
+                                                @php
+                                                    $i = 1;
+                                                @endphp
+
+                                                @foreach ($opcoes as $opcao)
+                                                    @if($opcao->enquete_id == $enquete->id)
+                                                       <p class="mt-2 parcial-{{$i}}"></p>
+                                                    @endif
+                                                    @php
+                                                        $i++;
+                                                    @endphp
+                                                @endforeach
+
+                                                
+                                            </div>
+                                        @else 
+                                            <div class="resultadoParcial">
+                                                @php
+                                                    $totalVotos = 0;
+                                                    $opcoesEnquete; 
+                                                @endphp
+
+                                                @foreach ($opcoes as $opcao)
+                                                    @if($opcao->enquete_id == $enquete->id)
+                                                        @php
+                                                            $totalVotos = $totalVotos + $opcao->qtd_votos;
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+
+                                                @foreach ($opcoes as $opcao)
+                                                    @if($opcao->enquete_id == $enquete->id)
+                                                        <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / $totalVotos) * 100, 2)}}% </p>
+                                                    @endif
+                                                @endforeach
+                                                <p class="destaque"><small> Você respondeu essa enquete</small></p>
+                                            </div>
+
+                                        @endif
+                                        
                                         
                                     </div>
-                                    <h3> {{$enquete->pergunta}} </h3>
-                                    @if(!isset($_COOKIE['enquete-'.$enquete->id]))
-                                        <div class="pergunta mt-2 divFormVoto">
-                                            <form class="mt-3" name="formVoto">
-                                                @csrf
-                                                <div class="text-left opcao">
-                                                    @foreach ($opcoes as $opcao)
-                                                        <div class="form-check form-check-inline">
-                                                            <input type="text" hidden="true" name="enquete" id="enquete_id" value=" {{$enquete->id}} ">
-                                                            <input class="form-check-input" type="radio" name="resposta" id="inlineRadio1" value=" {{$opcao->id}} ">
-                                                            <label class="form-check-label" for="inlineRadio1"> {{$opcao->descricao}} </label>
-                                                        </div>
-                                                    @endforeach
-                                                    
-                                                    <div class="mt-3">
-                                                        <button type="submit" class="btn btn-primary">Enviar Resposta</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="resultadoParcial d-none">
-                                            @php
-                                                $totalVotos = 0;
-                                                $opcoesEnquete; 
-                                            @endphp
-
-                                            @foreach ($opcoes as $opcao)
-                                                @if($opcao->enquete_id == $enquete->id)
-                                                    @php
-                                                        $totalVotos = $totalVotos + $opcao->qtd_votos;
-                                                    @endphp
-                                                @endif
-                                            @endforeach
-
-                                            @foreach ($opcoes as $opcao)
-                                                @if($opcao->enquete_id == $enquete->id)
-                                                    @if($totalVotos > 0)
-                                                        <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / $totalVotos) * 100, 2)}}% </p>
-                                                    @else
-                                                        <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / 1) * 100, 2)}}% </p>
-
-                                                    @endif
-                                                @endif
-                                            @endforeach
-                                        </div>
-                                    @else 
-                                        <div class="resultadoParcial">
-                                            @php
-                                                $totalVotos = 0;
-                                                $opcoesEnquete; 
-                                            @endphp
-
-                                            @foreach ($opcoes as $opcao)
-                                                @if($opcao->enquete_id == $enquete->id)
-                                                    @php
-                                                        $totalVotos = $totalVotos + $opcao->qtd_votos;
-                                                    @endphp
-                                                @endif
-                                            @endforeach
-
-                                            @foreach ($opcoes as $opcao)
-                                                @if($opcao->enquete_id == $enquete->id)
-                                                    <p class="mt-2"> {{$opcao->descricao}} - {{round(($opcao->qtd_votos / $totalVotos) * 100, 2)}}% </p>
-                                                @endif
-                                            @endforeach
-                                            <p class="destaque"><small> Você respondeu essa enquete</small></p>
-                                        </div>
-
-                                    @endif
-                                    
-                                      
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endif
                 </section>
 

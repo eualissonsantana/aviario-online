@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         $this->post = new Post();
         $this->postCategoria = new PostCategoria();
-        $this->posts = Post::all()->sortByDesc('created_at')->paginate();
+        $this->posts = Post::all()->sortByDesc('created_at');
         $this->postCategorias = PostCategoria::all()->sortBy("descricao");
         $this->users = User::all();
     }

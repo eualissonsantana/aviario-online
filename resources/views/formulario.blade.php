@@ -159,8 +159,8 @@
                             </div>
 
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                                <label for="facebook" class="col-form-label">Facebook</label>
-                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" placeholder="Ex: facebook.com/nome-do-sua-empresa">
+                                <label for="facebook" class="col-form-label">Facebook <small>(O link deve ser informado completamente)</small></label>
+                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" placeholder="Ex:. https://www.facebook.com/sua-page">
 
                                 @error('facebook')
                                     <span class="invalid-feedback" role="alert">
@@ -172,8 +172,8 @@
 
                         <article class="row">
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                                <label for="youtube" class="col-form-label">Youtube</label>
-                                <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror"  name="youtube" placeholder="Ex: youtube.com/nome-do-seu-canal">
+                                <label for="youtube" class="col-form-label">Youtube <small>(O link deve ser informado completamente)</small></label>
+                                <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror" placeholder="Ex:. https://www.youtube.com/seu-canal"  name="youtube">
 
                                 @error('youtube')
                                     <span class="invalid-feedback" role="alert">
@@ -183,8 +183,8 @@
                             </div>
                 
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                                <label for="instagram" class="col-form-label">Instagram</label>
-                                <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror" name="instagram" placeholder="Ex: instagram.com/nome-do-sua-empresa">
+                                <label for="instagram" class="col-form-label">Instagram <small>(O link deve ser informado completamente)</small> </label>
+                                <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror" name="instagram" placeholder="Ex:. https://www.instagram.com/seu-insta">
 
                                 @error('instagram')
                                     <span class="invalid-feedback" role="alert">

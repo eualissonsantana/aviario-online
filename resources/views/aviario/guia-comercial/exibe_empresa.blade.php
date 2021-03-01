@@ -145,7 +145,7 @@
                                     @if($empresa->youtube)
                                         <div class="col-4">
                                             <a href="{{$empresa->youtube}}" target="_blank">
-                                                <img src="{{url('img/icons/youtube.png')}}" alt="Ícone Youtube">>
+                                                <img src="{{url('img/icons/youtube.png')}}" alt="Ícone Youtube">
                                             </a>
                                         </div>
                                     @endif
@@ -170,7 +170,7 @@
                     <section class="mt-5 fotos">
                         <h4>Fotos</h4>
                         <div class="mt-3">
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <div id="carouselExampleIndicators" class="carousel slide comercio-carousel" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                     @php
                                         $i = 0;
@@ -184,7 +184,7 @@
                                 </ol>
                                 <div class="carousel-inner">
                                     @foreach ($fotos as $foto)
-                                        <div class="carousel-item comercio-carousel">
+                                        <div class="carousel-item comercio-carousel-item">
                                             <img class="d-block w-100" src="{{ url('public/storage/imagens/empresas/adicionais/'.$foto->nome)}}" alt="First slide">
                                         </div>    
                                     @endforeach

@@ -99,7 +99,7 @@
 
                     <div class="form-group col-form-label text-md-left">
                         <label for="conteudo" class="col-form-label">Conteúdo</label>
-                        <textarea name="conteudo" id="myTextarea" {{$post->conteudo ?? ''}} class="form-control @error('conteudo') is-invalid @enderror"> </textarea>
+                        <textarea name="conteudo" id="myTextarea" class="form-control @error('conteudo') is-invalid @enderror"> {{$post->conteudo ?? ''}} </textarea>
 
                         @error('conteudo')
                             <span class="invalid-feedback" role="alert">

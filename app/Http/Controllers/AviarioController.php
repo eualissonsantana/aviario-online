@@ -19,7 +19,7 @@ use App\Mail\sendMail;
 class AviarioController extends Controller
 {
     private $ultimoPost;
-    private $penultimoPost;
+    private $quartoPost;
     private $posts;
     private $postsSecundarios;
     private $postCategoria;
@@ -41,7 +41,6 @@ class AviarioController extends Controller
     {
         if(sizeof(Post::all()) > 0){
             $this->ultimoPost = Post::latest()->first();
-            //dd($this->lastPost);
             $this->post = new Post();
             $this->postCategoria = new PostCategoria();
             $this->voto = new Voto();
@@ -52,10 +51,10 @@ class AviarioController extends Controller
                 $i = 0;
                 foreach ($noticias as $post)
                 {
-                    if($i == 0) {
-                        $this->penultimoPost = $post;
-                    }else {
+                    if($i < 2) {
                         $this->posts[] = $post;
+                    }else {
+                        $this->quartoPost = $post;
                     } 
 
                     $i++;
@@ -79,7 +78,7 @@ class AviarioController extends Controller
                                             ->get();
                                             
             $this->postCategorias = PostCategoria::all();
-            $this->enquete = DB::table('enquetes')->latest()->first();
+            $this->enquete = DB::table('enquetes')->where('aberta', 1)->latest()->first();
             $this->bannersQuadrados = Banner::where('posicao', 'lado')->where('ativo', '1')->get();
             $this->bannersRetangulares = Banner::where('posicao', 'topo')->where('ativo', '1')->get();
         }
@@ -90,16 +89,23 @@ class AviarioController extends Controller
         $postsSecundarios = $this->postsSecundarios;
         $categorias = $this->postCategorias;
         $ultimoPost = $this->ultimoPost;
-        $penultimoPost = $this->penultimoPost;
+        $quartoPost = $this->quartoPost;
         $maisLidas = $this->maisLidas;
         $empresaCategorias = $this->empresaCategorias;
-        $enquete = $this->enquete;
-        $id = $enquete->id;
-        $opcoes =  DB::table('opcaos')->where('enquete_id', $id)->get();
+        
+        if(isset($this->enquete)){
+            $enquete = $this->enquete;
+            $id = $enquete->id;
+            $opcoes =  DB::table('opcaos')->where('enquete_id', $id)->get();
+        }else {
+            $enquete = null;
+            $opcoes = null;
+        }
+
         $bannersQuadrados = $this->bannersQuadrados;
         $bannersRetangulares = $this->bannersRetangulares;       
 
-        return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'penultimoPost', 'maisLidas', 'empresaCategorias', 'enquete', 'opcoes'));
+        return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'quartoPost', 'maisLidas', 'empresaCategorias', 'enquete', 'opcoes'));
     }
 
     public function hotsite()
@@ -116,7 +122,8 @@ class AviarioController extends Controller
     {
         $id = $request->resposta;
         $enquete = $request->enquete;
-        $resposta = ['validacao', 'votos', 'votou'];
+        $resposta = ['validacao', 'votos', 'votou', 'opcoes', 'totalVotos'];
+
         
         setcookie('enquete-'.$enquete, $enquete, (time() + (3600 * 24 * 30 * 12 * 5)));
         $resposta['votou'] = true;
@@ -135,8 +142,17 @@ class AviarioController extends Controller
           
             $resposta['validacao'] = true;
             $resposta['votos'] = $updateVotos;
+            
+
+            $enquete = $this->enquete;
+            $id = $enquete->id;
+            $resposta['opcoes'] =  DB::table('opcaos')->where('enquete_id', $id)->get();
+            $resposta['totalVotos'] = DB::table('opcaos')->where('enquete_id', $id)->sum('qtd_votos');
+            
             echo json_encode($resposta);
-            return;
+            //echo json_encode($opcoes);
+
+            return ;
         }
 
 
@@ -175,106 +191,6 @@ class AviarioController extends Controller
 
     }
 
-    public function enviaMensagem2(Request $request) {
-       
-        $data = $request->all();
-        /*digite os destinatarios separados por virgula*/
-            
-        if (isset($_POST['enviarFormulario'])){
-
-
-            /*** INÍCIO - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
-            
-            
-            $enviaFormularioParaNome = 'Nome do destinatário que receberá formulário';
-            
-            $enviaFormularioParaEmail = 'email-do-destinatario@dominio';
-            
-            
-            $caixaPostalServidorNome = 'WebSite | Formulário';
-            
-            $caixaPostalServidorEmail = 'usuario@seudominio.com.br';
-            
-            $caixaPostalServidorSenha = 'senha';
-            
-            
-            /*** FIM - DADOS A SEREM ALTERADOS DE ACORDO COM SUAS CONFIGURAÇÕES DE E-MAIL ***/
-            
-            
-            /* abaixo as variaveis principais, que devem conter em seu formulario*/
-            
-            
-            $remetenteNome  = $_POST['remetenteNome'];
-            
-            $remetenteEmail = $_POST['remetenteEmail'];
-            
-            $assunto  = $_POST['assunto'];
-            
-            $mensagem = $_POST['mensagem'];
-            
-            
-            $mensagemConcatenada = 'Formulário gerado via website'.'<br/>';
-            
-            $mensagemConcatenada .= '-------------------------------<br/><br/>';
-            
-            $mensagemConcatenada .= 'Nome: '.$remetenteNome.'<br/>';
-            
-            $mensagemConcatenada .= 'E-mail: '.$remetenteEmail.'<br/>';
-            
-            $mensagemConcatenada .= 'Assunto: '.$assunto.'<br/>';
-            
-            $mensagemConcatenada .= '-------------------------------<br/><br/>';
-            
-            $mensagemConcatenada .= 'Mensagem: "'.$mensagem.'"<br/>';
-            
-            /*********************************** A PARTIR DAQUI NAO ALTERAR ************************************/
-            
-            
-            require ('PHPMailer_5.2.4/class.phpmailer.php');
-            
-            
-            $mail = new PHPMailer();
-            
-            
-            $mail->IsSMTP();
-            
-            $mail->SMTPAuth  = true;
-            
-            $mail->Charset   = 'utf8_decode()';
-            
-            $mail->Host  = 'smtp.'.substr(strstr($caixaPostalServidorEmail, '@'), 1);
-            
-            $mail->Port  = '587';
-            
-            $mail->Username  = $caixaPostalServidorEmail;
-            
-            $mail->Password  = $caixaPostalServidorSenha;
-            
-            $mail->From  = $caixaPostalServidorEmail;
-            
-            $mail->FromName  = utf8_decode($caixaPostalServidorNome);
-            
-            $mail->IsHTML(true);
-            
-            $mail->Subject  = utf8_decode($assunto);
-            
-            $mail->Body  = utf8_decode($mensagemConcatenada);
-            
-            
-            $mail->AddAddress($enviaFormularioParaEmail,utf8_decode($enviaFormularioParaNome));
-            
-            
-            if(!$mail->Send()){
-            
-            $mensagemRetorno = 'Erro ao enviar formulário: '. print($mail->ErrorInfo);
-            
-            }else{
-            
-            $mensagemRetorno = 'Formulário enviado com sucesso!';
-            
-            }
-            
-            }
-    }
+    
     
 }
