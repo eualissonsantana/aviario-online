@@ -1,7 +1,7 @@
 @extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
 
 @section('content')
-    <section class="content-child">
+    <section class="pt padding-padrao">
 
         <h1>
             @if(isset($user))
@@ -15,7 +15,7 @@
                 <section class="card">
                     <article class="card-body">
                         @if(isset($user))
-                            <form action = "{{ url("painel/users/$user->id")}}" method = "POST">
+                            <form action = "{{ url("painel/usuarios/$user->id")}}" method = "POST">
                                 @method('PUT')
                         @else
                             <form action = "{{ route('users.create') }}" method = "POST">
@@ -35,7 +35,7 @@
 
                             <div class="form-group">
                                 <label for="username" class="col-form-label ">{{ __('Username') }}</label>
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{$user->username ?? ''}}" required autocomplete="username">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" @if(isset($user->username)) readonly @endif value="{{$user->username ?? ''}}" required autocomplete="username">
 
                                 @error('username')
                                     <span class="invalid-feedback" role="alert">

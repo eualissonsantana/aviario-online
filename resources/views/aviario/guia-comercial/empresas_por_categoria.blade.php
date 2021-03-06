@@ -57,7 +57,11 @@
                                 <a href="{{route('empresas.show', ['slug' => $emp->slug, 'id' => $emp->id])}}">
                                     <section class="row col-sm-12 mx-0 px-0">
                                         <article class="imagem-comercio col-5 col-md-2 col-xl-3 px-0 mr-0">
-                                            <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem)}}"/>
+                                            @if($emp->imagem != null)
+                                                <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem)}}"/>
+                                            @else
+                                                <img src="{{ url('img/sem-imagem.png') }}" />
+                                            @endif
                                         </article>
 
                                         <article class="dados-comercio col-7 col-md-10 col-xl-9 pl-2 pl-md-0 px-0 py-md-4 d-flex align-content-around flex-wrap">

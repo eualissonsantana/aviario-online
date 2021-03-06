@@ -42,13 +42,20 @@
                         </div>
 
                         <div class="contatos col-12 px-0">
-                            <h4> {{$empresa->assunto}} </h4>
-                            @if ($empresa->ehWhats == 1)
-                                <div class="mt-1">
-                                    <p ><small>Esse número também é  <a href="https://api.whatsapp.com/send?phone=55 {{$empresa->assunto}}"> <span class="verde"> Whats App! </span> </a></small></p>
-                                    <p class="mt-1 entrar-contato" ><small> Ao entrar em contato, informe que viu no <strong class="destaque">Aviário Online</strong> </small></p>
+                            @if (!$empresa->ehWhats)
+                                <h4> {{$empresa->telefone}} </h4>
+                            @else
+                                <div class="row col-12">
+                                    <a href="https://api.whatsapp.com/send?phone=55 {{$empresa->telefone}}" target="_blank">
+                                        <h4> {{$empresa->telefone}} </h4>
+                                    </a>
+                                    
+                                    <div class="whatsapp">
+                                        <a href="https://api.whatsapp.com/send?phone=55 {{$empresa->telefone}}" target="_blank"> <img class="ml-2" src="{{url('img/icons/whatsapp.png')}}" alt="Link para Whats App Web" /></a>
+                                    </div>
                                 </div>
                             @endif
+                            <p class="mt-1 entrar-contato" ><small> Ao entrar em contato, informe que viu no <strong class="destaque">Aviário Online</strong> </small></p>
                         </div>
                     </div>
 

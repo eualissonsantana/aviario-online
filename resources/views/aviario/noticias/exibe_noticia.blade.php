@@ -22,15 +22,19 @@
                 <h2> {{$post->titulo}} </h2>
                 <p class="mt-3"> {{$post->previa}} </p>
                 <hr class="mt-4">
-                <p>Postado em {{$post->created_at}} </p>
-                <div class="imagem-noticia conteudo my-3">
-                    <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                <div class="date-post">
+                    <p > Postada em {{date('j \d\e M \à\s  H:i\h', strtotime($post->created_at))}} </p>
+                </div>
+                <div class="conteudo my-3">
+                    <div class="imagem-noticia">
+                        <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                    </div>
                
                     <p class="text-justify">
                         {!! $post->conteudo !!}
                     </p>
 
-                    <div class="mt-5 mb-4">
+                    <div class="mt-5 mb-4 autor">
                         <h4>Autor: {{$post->autor}} </h4>
                         <hr>
                     </div>

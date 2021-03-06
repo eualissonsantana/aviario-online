@@ -62,13 +62,13 @@
                                         <article class="col-6 col-md-8 d-flex align-content-between flex-wrap titulo-noticia">    
                                             <div class="col-12 px-0 px-md-3">
                                                 <h6> {{$post->categoria->descricao}} </h6>
+                                                <div class="date-post">
+                                                    <p > Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($post->created_at))}} </p>
+                                                </div>
                                                 <h4 class="">{{$post->titulo}} </h4>
                                             </div>
                                             <div class="col-12 d-none d-sm-block previa">
                                                 <p>{{$post->previa}}</p>
-                                            </div>
-                                            <div class="col-12 px-0 px-md-3">
-                                                <p> Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($post->created_at))}} </p>
                                             </div>
                                         </article>                  
                                     </section>

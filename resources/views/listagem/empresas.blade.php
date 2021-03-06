@@ -25,7 +25,11 @@
                             <li>
                                 <section class="row justify-content-between">
                                     <article class="col-5 col-md-3 imagem-comercio ">
-                                        <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem) }}" />
+                                        @if($emp->imagem != null)
+                                            <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$emp->imagem) }}" />
+                                        @else
+                                            <img src="{{ url('img/sem-imagem.png') }}" />
+                                        @endif
                                     </article>
             
                                     <article class="col-7 col-md-5 dados-comercio ">

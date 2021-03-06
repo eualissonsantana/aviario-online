@@ -230,7 +230,7 @@ class EmpresaController extends Controller
 
         $slugCategoria = $empresa->categoria->slug;
 
-        return redirect("http://aviario.online/painel/empresas/".$slugCategoria);
+        return redirect("http://aviario.online/painel/empresas/busca/".$slugCategoria);
     }
 
     public function show($id) {
@@ -366,7 +366,7 @@ class EmpresaController extends Controller
         $slugCategoria = $empresa->categoria->slug;
 
 
-        return redirect("http://aviario.online/painel/empresas/".$slugCategoria);
+        return redirect("http://aviario.online/painel/empresas/busca/".$slugCategoria);
     }
 
     /**
@@ -385,12 +385,15 @@ class EmpresaController extends Controller
         }
 
         $empresa = $this->empresa;
+        $empresaAtual = $this->empresa;
+        
         $empresaAtual = Empresa::find($id);
-        $empresa = $empresa->destroy($id);
-
+      
         $slugCategoria = $empresaAtual->categoria->slug;
 
-        return redirect("http://aviario.online/painel/empresas/".$slugCategoria);
+        $empresa = $empresa->destroy($id);
+
+        return redirect("http://aviario.online/painel/empresas/busca/".$slugCategoria);
     }
 
     public function createEndereco(Request $request)
@@ -530,10 +533,9 @@ class EmpresaController extends Controller
         $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
         $id = $categoria->id;
 
-        
-        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->paginate();
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->paginate(10);
+
         $ramos = $this->ramos;
-        $empresas = $this->empresas;
         $categorias = $this->categorias;
 
         return view('listagem.empresas', [

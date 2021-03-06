@@ -11,7 +11,9 @@ html,body
     padding-bottom: 200px;
 }
 
-
+.autor {
+    clear: both;
+}
 
 .exibe-noticia hr {
     border-color: #a7a7a7;
@@ -222,6 +224,11 @@ html,body
     width: 32px;
 }
 
+.whatsapp img {
+    width: 20px;
+    margin-top: -10px;
+}
+
 .destaque {
     color: #2d9cdb;
     font-weight: bold;
@@ -250,6 +257,10 @@ html,body
     font-size: 28px !important;
     font-weight: bolder;
     color: #333;
+}
+
+.date-post p{
+    font-size: 12px !important;
 }
 
 .painel-noticias .imagem-noticia img{
@@ -429,7 +440,7 @@ footer .navegacao a {
 
     .exibe-comercio .imagem-comercio img{
         width: 100% !important;
-        height: 284px;
+        height: 284px !important;
     }
 
     .exibe-comercio .endereco p {

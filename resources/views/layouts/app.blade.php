@@ -34,6 +34,9 @@
     <link href="{{ asset('css/painel-mobile.css') }}" rel="stylesheet">
     <link href="{{ asset('css/aviario.css') }}" rel="stylesheet">
 
+    
+    <link rel="icon" type="image/png" href="img/icons/favicon.png">
+
 </head>
 <body onload="carregaClasses()">
     <div id="fb-root"></div>
@@ -109,6 +112,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                @if(auth()->user()->ehGerente)
+                                    <a class="dropdown-item" href=" {{route('users.index')}} ">Usuários</a>
+                                    <div class="dropdown-divider"></div>
+                                @endif
+
                                 <a class="dropdown-item" href=" {{route('posts.index')}} ">Notícias</a>
                                 <a class="dropdown-item" href=" {{route('post_categorias.index')}} ">Categorias de Notícias</a>
                                 <div class="dropdown-divider"></div>
