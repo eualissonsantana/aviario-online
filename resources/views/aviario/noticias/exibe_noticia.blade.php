@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{$post->titulo}} - Aviário Online
+@stop
 
 @section('content')
     <section class="exibe-noticia pt padding-padrao">

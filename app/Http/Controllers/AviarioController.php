@@ -103,7 +103,7 @@ class AviarioController extends Controller
         }
 
         $bannersQuadrados = $this->bannersQuadrados;
-        $bannersRetangulares = $this->bannersRetangulares;       
+        $bannersRetangulares = $this->bannersRetangulares;      
 
         return view('aviario.home', compact('posts', 'postsSecundarios', 'categorias', 'ultimoPost', 'quartoPost', 'maisLidas', 'empresaCategorias', 'enquete', 'opcoes'));
     }

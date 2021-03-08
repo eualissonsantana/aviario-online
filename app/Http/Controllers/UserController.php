@@ -62,7 +62,13 @@ class UserController extends Controller
             $usuario->username = $data['username'];
             $usuario->email = $data['username']."@padrao.com";
             $usuario->password = Hash::make($data['password']);
-            $usuario->ehGerente = '0';
+           
+            if(array_key_exists("ehGerente", $data)){
+                $usuario->ehGerente = 1;
+            }else {
+                $usuario->ehGerente = 0;
+            }
+
             $usuario->save();
             
             return redirect()->route('users.index');
@@ -114,16 +120,24 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
+            
         ]);
 
         if(Gate::allows('gerente')) {
             $data = $request->all();
             $user = new User();
 
+            if(array_key_exists("ehGerente", $data)){
+                $ehGerente = 1;
+            }else {
+                $ehGerente = 0;
+            }
+
             $user->where(['id'=>$id])->update([
                 'name' => $data['name'],
                 'email' => $data['username']."@padrao.com",
                 'password' => Hash::make($data['password']),
+                'ehGerente' => $ehGerente,
             ]);
 
             return redirect()->route('users.index');

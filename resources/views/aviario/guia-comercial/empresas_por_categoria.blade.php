@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    {{$categoria->descricao}} - Aviário Online
+@stop
 
 @section('content')    
     <section class="padding-padrao pt empresas-por-categoria guia-comercial">
@@ -123,5 +126,11 @@
                 </div>  
             </article>
         </section>
+
+        <div class="text-center">
+            <div>
+                {{ $empresas->links() }}
+            </div>
+        </div>
     </section>
 @endsection

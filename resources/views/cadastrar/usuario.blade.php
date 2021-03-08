@@ -59,7 +59,11 @@
                             <div class="form-group">
                                 <label for="password-confirm" class="col-form-label ">{{ __('Confirmação de senha') }}</label>
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                
+                            </div>
+
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" name="ehGerente" id="ehGerente" @if($user->ehGerente) checked @endif>
+                                <label class="form-check-label"  value="1" for="ehGerente" >Usuário administrador</label>
                             </div>
 
                             <button type="submit" class="btn btn-salvar">Salvar</button>

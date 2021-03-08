@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Usuários - Aviário Online
+@stop
 @section('content')  
     <div class="painel-usuarios pt padding-padrao">
         <div class="row justify-content-between titulo">

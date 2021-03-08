@@ -1,5 +1,7 @@
 @extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
-
+@section('title')
+    Categorias de Comércio - Aviário Online
+@stop
 @section('content')
     <div class="padding-padrao pt painel-categorias-empresas">
         <article class="row justify-content-between ">

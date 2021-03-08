@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Aviário Online
+@stop
 @section('content')
     <section class="no-padding aviario-home aviario-rc">
         <div class="d-block d-sm-none banners-topo mb-3" onload="defineActiveMobile()">
@@ -33,24 +35,26 @@
                 @endif
     
                 <article class="row col-12 col-md-6 justify-content-between row-post-lateral">
-                    @foreach ($posts as $post)
-                        <div class="col-6 col-md-12 px-0 ">
-                            <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
-                                <article class="p-md-0 row posts-laterais ">
-                                    <div class="col-12 col-md-6 mb-sm-2">
-                                        <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}" />
-                                    </div>
-                                    <div class="col-12 col-md-6 pl-lg-0 teste">
-                                        <h6 class="mt-2 mt-md-0"> {{$post->categoria->descricao}} </h6>
-                                        <h3> {{$post->titulo}} </h3>
-                                        <div class="mt-1 previa d-none d-sm-block">
-                                            <p> {{$post->previa}}  </p>
+                    @if(isset($posts))
+                        @foreach ($posts as $post)
+                            <div class="col-6 col-md-12 px-0 ">
+                                <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
+                                    <article class="p-md-0 row posts-laterais ">
+                                        <div class="col-12 col-md-6 mb-sm-2">
+                                            <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}" />
                                         </div>
-                                    </div>
-                                </article>
-                            </a>
-                        </div> 
-                    @endforeach
+                                        <div class="col-12 col-md-6 pl-lg-0 teste">
+                                            <h6 class="mt-2 mt-md-0"> {{$post->categoria->descricao}} </h6>
+                                            <h3> {{$post->titulo}} </h3>
+                                            <div class="mt-1 previa d-none d-sm-block">
+                                                <p> {{$post->previa}}  </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </a>
+                            </div> 
+                        @endforeach
+                    @endif
                 </article>
     
                

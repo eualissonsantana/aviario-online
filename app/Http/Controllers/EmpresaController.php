@@ -553,7 +553,7 @@ class EmpresaController extends Controller
         $id = $categoria->id;
 
         
-        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->paginate(10);
 
         return view('aviario.guia-comercial.empresas_por_categoria', [
             'empresas' => $empresas,

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Enquetes - Aviário Online
+@stop
 
 @section('content')
 <section class="aviario-enquetes padding-padrao pt">

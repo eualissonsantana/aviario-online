@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Guia Comercial - Aviário Online
+@stop
 @section('content')    
     <section class="padding-padrao pt guia-comercial">
         <div class="d-block d-sm-none banners-topo mb-3" onload="defineActiveMobile()">

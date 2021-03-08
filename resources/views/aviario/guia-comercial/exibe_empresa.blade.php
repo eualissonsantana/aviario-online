@@ -1,12 +1,18 @@
 @extends('layouts.app')
-
+@section('title')
+    {{$empresa->nome}} - Aviário Online
+@stop
 @section('content')
     <section class="padding-padrao pt exibe-comercio">
         <section class="row justify-content-between">
             <div class="col-12 col-md-8">
                 <section class="row">  
                     <article class="imagem-comercio col-5 col-md-4 mr-0">
-                        <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$empresa->imagem)}}"/>
+                        @if($empresa->imagem != null)
+                            <img src="{{ url('public/storage/imagens/empresas/logomarcas/'.$empresa->imagem)}}"/>
+                        @else
+                            <img src="{{ url('img/sem-imagem.png') }}" />
+                        @endif
                     </article>
                     <div class="col-7 col-md-8 d-flex align-content-around flex-wrap dados">
                         <div class="titulo">

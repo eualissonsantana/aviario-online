@@ -1,5 +1,7 @@
 @extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
-
+@section('title')
+    Banners - Aviário Online
+@stop
 @section('content')
     <section class="padding-padrao pt painel-banners">
         <article class="row justify-content-between">

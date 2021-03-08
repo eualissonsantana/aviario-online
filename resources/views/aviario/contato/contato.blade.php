@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Contato - Aviário Online
+@stop
 
 @section('content')
     <section class="padding-padrao pt container contato">

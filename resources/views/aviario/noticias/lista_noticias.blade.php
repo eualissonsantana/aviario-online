@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Notícias - Aviário Online
+@stop
 
 @section('content')    
     <section class="aviario-noticias padding-padrao pt">
@@ -51,7 +54,7 @@
         <article class="row justify-content-between listagem-noticias">
             <div class="col-12 col-md-7 lista-noticias">
                 <ul>
-                    @if($posts[0] != null)
+                    @if(isset($posts))
                         @foreach ($posts as $post)
                             <li> 
                                 <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
@@ -141,7 +144,12 @@
         </article>
         
 
-
+        @csrf
+        <div class="text-center">
+            <div>
+                {{ $posts->links() }}
+            </div>
+        </div>
         
     </section>
 @endsection
