@@ -19,6 +19,7 @@ class EmpresaController extends Controller
 
     private $empresa;
     private $empresas;
+    private $numEmpresas;
     private $ramos;
     private $categoria;
     private $endereco;
@@ -27,7 +28,8 @@ class EmpresaController extends Controller
     public function __construct()
     {
         $this->empresa = new Empresa();
-        $this->empresas = Empresa::paginate();
+        $this->empresas = Empresa::paginate(10);
+        $this->numEmpresas = Empresa::count();
         $this->categoria = new EmpresaCategoria();
         $this->categorias = EmpresaCategoria::all()->sortBy("descricao");
         $this->ramos = Ramo::all()->sortBy("descricao");
@@ -52,16 +54,29 @@ class EmpresaController extends Controller
         $empresas = $this->empresas;
         $categorias = $this->categorias;
         $ramos = $this->ramos;
-
         return view('listagem.empresas', compact('empresas', 'categorias', 'ramos'));
     }
 
     public function guia_index()
     {
-        $ramos = $this->ramos;
-        $categorias = $this->categorias;
+        $ramos = db::table('ramos')
+                            ->join('empresa_categorias', 'empresa_categorias.ramo_id', '=', 'ramos.id')
+                            ->join('empresas', 'empresas.categoria_id', '=', 'empresa_categorias.id')
+                            ->select('ramos.*')
+                            ->distinct()
+                            ->get();
 
-        return view('aviario.guia-comercial.index', compact('ramos', 'categorias'));
+        
+        
+        $categorias = db::table('empresa_categorias')
+                    ->join('empresas', 'empresas.categoria_id', '=', 'empresa_categorias.id')
+                    ->select('empresa_categorias.*')
+                    ->distinct()
+                    ->get();
+
+        $numEmpresas = $this->numEmpresas;
+
+        return view('aviario.guia-comercial.index', compact('ramos', 'categorias', 'numEmpresas'));
     }
 
     /**
@@ -211,8 +226,11 @@ class EmpresaController extends Controller
         $lastInsert =  DB::table('empresas')->orderBy('id','desc')->first();
         $id = $lastInsert->id;
         $this->uploadImage($request, $slug, $id);
-        $this->uploadImageAdd($request, $slug, $id);    
-        return redirect()->route('empresas.index');
+        $this->uploadImageAdd($request, $slug, $id);  
+
+        $slugCategoria = $empresa->categoria->slug;
+
+        return redirect("http://aviario.online/painel/empresas/busca/".$slugCategoria);
     }
 
     public function show($id) {
@@ -236,9 +254,12 @@ class EmpresaController extends Controller
     {   
         if (!$empresa = Empresa::find($id))
             return redirect()->back();
+
+        $fotos = db::table('foto_adicionals')->where('empresa_id', $id)->get();
     
         return view('aviario.guia-comercial.exibe_empresa', [
-            'empresa' => $empresa
+            'empresa' => $empresa,
+            'fotos' => $fotos
         ]);
     }
 
@@ -338,8 +359,14 @@ class EmpresaController extends Controller
         ]);
             
         $this->uploadImage($request, $slug, $id);
+        $this->uploadImageAdd($request, $slug, $id);    
+        
+        
+        $empresa = Empresa::find($id);
+        $slugCategoria = $empresa->categoria->slug;
 
-        return redirect()->route('empresas.index');
+
+        return redirect("http://aviario.online/painel/empresas/busca/".$slugCategoria);
     }
 
     /**
@@ -351,10 +378,22 @@ class EmpresaController extends Controller
     
     public function destroy($id)
     {
+        $fotos = FotoAdicional::where('empresa_id', $id)->get();
+        
+        foreach($fotos as $foto){
+          $foto->destroy($foto->id);
+        }
+
         $empresa = $this->empresa;
+        $empresaAtual = $this->empresa;
+        
+        $empresaAtual = Empresa::find($id);
+      
+        $slugCategoria = $empresaAtual->categoria->slug;
+
         $empresa = $empresa->destroy($id);
 
-        return($empresa)?"Sim":"Não";
+        return redirect("http://aviario.online/painel/empresas/busca/".$slugCategoria);
     }
 
     public function createEndereco(Request $request)
@@ -452,9 +491,8 @@ class EmpresaController extends Controller
         return null;
     }
 
-    public function search(Request $request)
+    public function searchByName(Request $request)
     {
-       
         $ramos = $this->ramos;
         $categorias = $this->categorias;
         $emp = $this->empresa;
@@ -466,7 +504,61 @@ class EmpresaController extends Controller
         }
         
         return view('listagem.empresas', compact('empresas', 'ramos', 'categorias'));
+    }
+
+    public function search(Request $request) {
+        $ramos = $this->ramos;
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('id', 1)->first();
+        $emp = $this->empresa;
+        $categorias = $this->categorias;
         
+        if($request->option == 'nome') {
+            $empresas = $emp->searchName($request->filter);
+        }else {
+            $empresas = $emp->searchCategory($request->filter);
+        }
+
+        return view('listagem.empresas', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+            'ramos' => $ramos,
+            'categorias' => $categorias,
+        ]);
+    }
+
+    public function searchCategoria($slug) {
+        
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
+        $id = $categoria->id;
+
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->paginate(10);
+
+        $ramos = $this->ramos;
+        $categorias = $this->categorias;
+
+        return view('listagem.empresas', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+            'ramos' => $ramos,
+            'categorias' => $categorias,
+        ]);
+    }
+
+    public function showEmpresas($slug) {
+
+        $categoria = new EmpresaCategoria();
+        $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
+        $id = $categoria->id;
+
+        
+        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
+
+        return view('aviario.guia-comercial.empresas_por_categoria', [
+            'empresas' => $empresas,
+            'categoria' => $categoria,
+        ]);
     }
 
     public function searchAviario(Request $request)
@@ -487,21 +579,6 @@ class EmpresaController extends Controller
         
     }
 
-
-    public function showEmpresas($slug) {
-
-        $categoria = new EmpresaCategoria();
-        $categoria = DB::table('empresa_categorias')->where('slug', $slug)->first();
-        $id = $categoria->id;
-
-        
-        $empresas = Empresa::orderByDesc('nome')->where('categoria_id', $id)->get();
-
-        return view('aviario.guia-comercial.empresas_por_categoria', [
-            'empresas' => $empresas,
-            'categoria' => $categoria,
-        ]);
-    }
 
 
     

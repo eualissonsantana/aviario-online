@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
 
 @section('content')
-    <section class="content-child empresa">
+    <section class="padding-padrao pt empresa">
         <section class="card">
             <article class="card-body">
         
@@ -123,8 +123,10 @@
                         <div class="form-group col-12 col-md-4 col-form-label text-md-left">
                             <label for="telefone" class="col-form-label">Telefone/Celular *</label>
                             <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" value="{{$empresa->telefone ?? ''}}" required autocomplete="telefone" autofocus>
-                            <input type="checkbox" class="mt-2" name="ehWhats" value="1" @if(isset($empresa) && $empresa->ehWhats) checked @endif>
-                            <small>Marque aqui se o número for Whats App</small>
+                            <label for="ehWhats">
+                                <input type="checkbox" class="mt-2" name="ehWhats" id="ehWhats" value="1" @if(isset($empresa) && $empresa->ehWhats) checked @endif>
+                                <small>Marque aqui se o número for Whats App</small>
+                            </label>
                             
                             @error('telefone')
                                 <span class="invalid-feedback" role="alert">
@@ -145,8 +147,8 @@
                         </div>
 
                         <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                            <label for="facebook" class="col-form-label">Facebook</label>
-                            <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" value="{{$empresa->facebook ?? ''}}">
+                            <label for="facebook" class="col-form-label">Facebook <small>(O link deve ser informado completamente)</small></label>
+                            <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" placeholder="Ex:. https://www.facebook.com/sua-page" value="{{$empresa->facebook ?? ''}}">
 
                             @error('facebook')
                                 <span class="invalid-feedback" role="alert">
@@ -158,8 +160,8 @@
 
                     <article class="row">
                         <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                            <label for="youtube" class="col-form-label">Youtube</label>
-                            <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror"  name="youtube" value="{{$empresa->youtube ?? ''}}">
+                            <label for="youtube" class="col-form-label">Youtube <small>(O link deve ser informado completamente)</small></label>
+                            <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror"  placeholder="Ex:. https://www.youtube.com/seu-canal" name="youtube" value="{{$empresa->youtube ?? ''}}">
 
                             @error('youtube')
                                 <span class="invalid-feedback" role="alert">
@@ -169,8 +171,8 @@
                         </div>
             
                         <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                            <label for="instagram" class="col-form-label">Instagram</label>
-                            <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror"  name="instagram" value="{{$empresa->instagram ?? ''}}">
+                            <label for="instagram" class="col-form-label">Instagram <small>(O link deve ser informado completamente)</small></label>
+                            <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror" placeholder="Ex:. https://www.instagram.com/seu-insta" name="instagram" value="{{$empresa->instagram ?? ''}}">
 
                             @error('instagram')
                                 <span class="invalid-feedback" role="alert">
@@ -247,8 +249,10 @@
                             <input id="complemento" type="text" class="form-control @error('complemento') is-invalid @enderror" value="{{$empresa->endereco->complemento ?? ''}}" name="complemento" >
 
                             <div class="form-check mt-2">
-                                <input class="form-check-input" type="checkbox" name="ehComercial" id="inlineCheckbox1" value="1" @if(isset($empresa) && $empresa->endereco->ehComercial) checked @endif>
-                                <label class="form-check-label" for="inlineCheckbox1">Marque aqui se esse for um endereço comercial</label>
+                                <label for="ehComercial">
+                                    <input class="form-check-input" type="checkbox" name="ehComercial" id="ehComercial" value="1" @if(isset($empresa) && $empresa->endereco->ehComercial) checked @endif>
+                                    <label class="form-check-label" for="ehComercial">Marque aqui se esse for um endereço comercial</label>
+                                </label>
                             </div>
 
                             @error('rua')
@@ -258,11 +262,14 @@
                             @enderror
                         </div>
                     </article>
-                    
-                    <div class="row pr-3 justify-content-end">
-                     
-                            <button type="submit" class="ml-3 btn btn-salvar">Salvar</button>
-                       
+
+                    <div class="row justify-content-end px-0 px-md-3 my-3">
+                        <div class="col-6 col-md-2">
+                            <a href="{{ route('empresas.index') }}" class="btn btn-full btn-secondary mt-2"> Cancelar </a>
+                        </div>
+                        <div class="col-6 col-md-2">
+                            <button type="submit" class="btn btn-full btn-salvar mt-2">Salvar</button>
+                        </div>
                     </div>
                 </form>
             </article>

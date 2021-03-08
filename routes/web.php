@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpresaCategoriaController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\EnqueteController;
 use App\Http\Controllers\PostCategoriaController;
 use App\Http\Controllers\AviarioController;
 use App\Http\Controllers\BannerController;
@@ -28,9 +29,10 @@ Route::get('/painel/empresas/{empresa}/edit', [EmpresaController::class, 'edit']
 Route::put('/painel/empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update')->middleware('auth');
 Route::delete('/painel/empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy')->middleware('auth');
 Route::any('/painel/empresas/buscar', [EmpresaController::class, 'search'])->name('empresas.search');
+Route::any('painel/empresas/busca/{slug}', [EmpresaController::class, 'searchCategoria'])->name('empresas.busca');
 
 // Categorias de empresa
-Route::get('/painel/empresas/categorias', [EmpresaCategoriaController::class, 'index'])->name('empresa_categorias.index')->middleware('auth');
+Route::get('/painel/empresas/categorias/', [EmpresaCategoriaController::class, 'index'])->name('empresa_categorias.index')->middleware('auth');
 Route::get('/painel/empresas/categorias/cadastro', [EmpresaCategoriaController::class, 'create'])->name('empresa_categorias.create')->middleware('auth');
 Route::post('/painel/empresas/categorias/cadastro', [EmpresaCategoriaController::class, 'store'])->name('empresa_categorias.store')->middleware('auth');
 Route::get('/painel/empresas/categorias/{categoria}/edit', [EmpresaCategoriaController::class, 'edit'])->name('empresa.edit')->middleware('auth');
@@ -43,6 +45,7 @@ Route::get('/painel/noticias/cadastro', [PostController::class, 'create'])->name
 Route::post('/painel/noticias/cadastro', [PostController::class, 'store'])->name('posts.store')->middleware('auth');
 Route::get('/painel/noticias/{noticia}/edit', [PostController::class, 'edit'])->name('posts.edit')->middleware('auth');
 Route::put('/painel/noticias/{noticia}', [PostController::class, 'update'])->name('posts.update')->middleware('auth');
+
 Route::delete('/painel/noticias/{noticia}', [PostController::class, 'destroy'])->name('posts.destroy')->middleware('auth');
 Route::any('/painel/noticias/buscar', [PostController::class, 'search'])->name('posts.search');
 
@@ -63,13 +66,34 @@ Route::get('/painel/banners/{banner}/edit', [BannerController::class, 'edit'])->
 Route::put('/painel/banners/{banner}', [BannerController::class, 'update'])->name('banners.update')->middleware('auth');
 Route::delete('/painel/banners/{banner}', [BannerController::class, 'destroy'])->name('banners.destroy')->middleware('auth');
 
+// Enquetes
+Route::get('/painel/enquetes', [EnqueteController::class, 'index'])->name('enquetes.index')->middleware('auth');
+Route::get('/painel/enquetes/cadastro', [EnqueteController::class, 'create'])->name('enquetes.create')->middleware('auth');
+Route::post('/painel/enquetes/cadastro', [EnqueteController::class, 'store'])->name('enquetes.store')->middleware('auth');
+Route::get('/painel/enquetes/{enquete}/edit', [EnqueteController::class, 'edit'])->name('enquetes.edit')->middleware('auth');
+Route::put('/painel/enquetes/{enquete}', [EnqueteController::class, 'update'])->name('enquetes.update')->middleware('auth');
+Route::delete('/painel/enquetes/{enquete}', [EnqueteController::class, 'destroy'])->name('enquetes.destroy')->middleware('auth');
+Route::any('/painel/enquetes/buscar', [EnqueteController::class, 'search'])->name('enquetes.search');
+Route::post('/painel/enquetes/encerra', [EnqueteController::class, 'encerraEnquete'])->name('enquete.encerra')->middleware('auth');
+
+
+
+
 // Rotas comuns
 
-Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
 Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
+Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
+Route::get('/contato', [AviarioController::class, 'contato'])->name('aviario.contato');
+Route::post('/contato', [AviarioController::class, 'enviaMensagem'])->name('aviario.mensagem');
+Route::get('/enquetes', [AviarioController::class, 'indexEnquetes'])->name('aviario.enquetes');
+Route::post('/responde-enquete', [AviarioController::class, 'registraResposta'])->name('aviario.enquetes.respostas');
+Route::get('/enquetes/{id}', [AviarioController::class, 'showEnquete'])->name('enquetes.show');
+
 Route::get('/noticias', [PostController::class, 'lista_posts'])->name('posts.lista');
 Route::get('/noticias/{slug}/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::any('/noticias/buscar', [PostController::class, 'searchAviario'])->name('aviario.posts.search');
+Route::get('/noticias/{slug}', [PostController::class, 'showNoticias'])->name('posts.categoria');
+
 
 Route::get('/guia-comercial', [EmpresaController::class, 'guia_index'])->name('guia.index');
 Route::get('/guia-comercial/{slug}', [EmpresaController::class, 'showEmpresas'])->name('guia.categoria');

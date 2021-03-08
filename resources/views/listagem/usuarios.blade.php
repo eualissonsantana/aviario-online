@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')  
-    <div class="painel-usuarios">
+    <div class="painel-usuarios pt padding-padrao">
         <div class="row justify-content-between titulo">
             <div class="col-6 col-md-9 mt-md-2">
                 <h2>Usuários</h2>
@@ -29,15 +29,15 @@
                                     <h5>Username</h5>
                                     <h5 class="thin">{{$user->username}}</h5>
                                 </div>
-                                <div class="row justify-content-start botoes">
-                                    <div class="col pr-0">
+                                <div class="row justify-content-center botoes">
+                                    <div class="col-md-5 pl-0">
                                         <a href="{{url("painel/usuarios/$user->id/edit")}}">
-                                            <button class="btn btn-sm btn-editar">Editar</button>
+                                            <button class="btn btn-full btn-primary">Editar</button>
                                         </a>
                                     </div>
-                                    <div class="col pl-0 text-right">
+                                    <div class="col-md-5 pr-0 text-right">
                                         <a href="{{url("painel/usuarios/$user->id")}}" class="js-del-user">
-                                            <button class="btn btn-sm btn-excluir">Excluir</button>
+                                            <button class="btn btn-full btn-danger">Excluir</button>
                                         </a>
                                     </div>
                                 </div>

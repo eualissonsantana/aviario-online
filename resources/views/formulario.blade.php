@@ -135,8 +135,10 @@
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
                                 <label for="telefone" class="col-form-label">Telefone/Celular *</label>
                                 <input id="telefone" type="text" onkeyup="phoneMask(event)" class="form-control @error('telefone') is-invalid @enderror"  name="telefone" id="telefone" required autocomplete="telefone" autofocus>
-                                <input type="checkbox" class="mt-2" name="ehWhats" value="1">
-                                <small>Marque aqui se o número for WhatsApp</small>
+                                <label for="ehWhats">
+                                    <input type="checkbox" class="mt-2" name="ehWhats" id="ehWhats" value="1">
+                                    <small>Marque aqui se o número for WhatsApp</small>
+                                </label>
                                 
                                 @error('telefone')
                                     <span class="invalid-feedback" role="alert">
@@ -157,8 +159,8 @@
                             </div>
 
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                                <label for="facebook" class="col-form-label">Facebook</label>
-                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook">
+                                <label for="facebook" class="col-form-label">Facebook <small>(O link deve ser informado completamente)</small></label>
+                                <input id="facebook" type="text" class="form-control @error('facebook') is-invalid @enderror" name="facebook" placeholder="Ex:. https://www.facebook.com/sua-page">
 
                                 @error('facebook')
                                     <span class="invalid-feedback" role="alert">
@@ -170,8 +172,8 @@
 
                         <article class="row">
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                                <label for="youtube" class="col-form-label">Youtube</label>
-                                <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror"  name="youtube">
+                                <label for="youtube" class="col-form-label">Youtube <small>(O link deve ser informado completamente)</small></label>
+                                <input id="youtube" type="text" class="form-control @error('youtube') is-invalid @enderror" placeholder="Ex:. https://www.youtube.com/seu-canal"  name="youtube">
 
                                 @error('youtube')
                                     <span class="invalid-feedback" role="alert">
@@ -181,8 +183,8 @@
                             </div>
                 
                             <div class="form-group col-12 col-md-4 col-form-label text-md-left">
-                                <label for="instagram" class="col-form-label">Instagram</label>
-                                <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror"  name="instagram">
+                                <label for="instagram" class="col-form-label">Instagram <small>(O link deve ser informado completamente)</small> </label>
+                                <input id="instagram" type="text" class="form-control @error('instagram') is-invalid @enderror" name="instagram" placeholder="Ex:. https://www.instagram.com/seu-insta">
 
                                 @error('instagram')
                                     <span class="invalid-feedback" role="alert">
@@ -261,8 +263,10 @@
                                 <input id="complemento" type="text" class="form-control @error('complemento') is-invalid @enderror" value="{{$empresa->endereco->complemento ?? ''}}" name="complemento" >
 
                                 <div class="form-check mt-2">
-                                    <input class="form-check-input" type="checkbox" name="ehComercial" id="inlineCheckbox1" value="1" @if(isset($empresa) && $empresa->endereco->ehComercial) checked @endif>
-                                    <label class="form-check-label" for="inlineCheckbox1">Marque aqui se esse for um endereço comercial</label>
+                                    <label for="ehComercial">
+                                        <input class="form-check-input" type="checkbox" name="ehComercial" id="ehComercial" value="1" @if(isset($empresa) && $empresa->endereco->ehComercial) checked @endif>
+                                        <label class="form-check-label" for="ehComercial">Marque aqui se esse for um endereço comercial</label>
+                                    </label>
                                 </div>
 
                                 @error('rua')

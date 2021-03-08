@@ -3,10 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Enquete;
+use App\Models\Opcao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Intervention\Image\Size;
 
 class EnqueteController extends Controller
 {
+
+    private $enquete;
+    private $enquetes;
+    private $opcao;
+    private $opcoes;
+
+    public function __construct()
+    {
+        $this->enquete = new Enquete();
+        $this->opcao = new Opcao();
+        $this->enquetes = Enquete::all()->sortByDesc('created_at');
+        $this->opcoes = Opcao::all();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +32,10 @@ class EnqueteController extends Controller
      */
     public function index()
     {
-        //
+        $enquetes = $this->enquetes;
+        $opcoes = $this->opcoes;
+
+        return view('listagem.enquetes', compact('enquetes', 'opcoes'));
     }
 
     /**
@@ -24,7 +45,7 @@ class EnqueteController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrar.enquete');
     }
 
     /**
@@ -35,8 +56,40 @@ class EnqueteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $slug = Str::slug($data['pergunta']);
+
+        $enquete = $this->enquete;
+
+        $enquete->slug = $slug;
+        $enquete->pergunta = $data['pergunta'];
+        $enquete->usuario_id = 1;
+        $enquete->save();
+        
+
+        $lastInsert =  DB::table('enquetes')->orderBy('id','desc')->first();
+        $id = $lastInsert->id;
+
+        foreach($data['opcao'] as $resposta)
+        {
+            if($resposta != null) {
+                $opcao = new Opcao();
+                $opcao->descricao = $resposta;
+                $opcao->enquete_id = $id;
+                $opcao->qtd_votos = 0;
+                $opcao->save();
+            }
+        }
+
+        $enquetes = Enquete::all();
+
+
+        return redirect()->route('enquetes.index', [
+            'enquetes' => $this->enquetes
+        ]);
+
     }
+
 
     /**
      * Display the specified resource.
@@ -44,9 +97,17 @@ class EnqueteController extends Controller
      * @param  \App\Models\Enquete  $enquete
      * @return \Illuminate\Http\Response
      */
-    public function show(Enquete $enquete)
+    public function show($slug, $id)
     {
-        //
+        if (!$enquete = Enquete::find($id))
+            return redirect()->back();
+
+        $opcoes = db::table('opcaos')->where('enquete_id', $id)->get();
+        
+        return view('aviario.noticias.exibe_noticia', [
+            'enquete' => $enquete,
+            'opcoes' => $opcoes
+        ]);
     }
 
     /**
@@ -55,9 +116,14 @@ class EnqueteController extends Controller
      * @param  \App\Models\Enquete  $enquete
      * @return \Illuminate\Http\Response
      */
-    public function edit(Enquete $enquete)
+    public function edit($id)
     {
-        //
+        $enquete = $this->enquete;
+        
+        $enquete = $enquete->find($id);
+        $opcoes = Opcao::where('enquete_id', $id)->get();
+        
+        return view('cadastrar.enquete', compact('enquete', 'opcoes'));
     }
 
     /**
@@ -67,9 +133,41 @@ class EnqueteController extends Controller
      * @param  \App\Models\Enquete  $enquete
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Enquete $enquete)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $enquete = $this->enquete;
+
+        if(isset($data['status']))
+            $status = 0;
+        else
+            $status = 1;
+        
+
+        $enquete->where(['id'=>$id])->update([
+            'pergunta' => $data['pergunta'],
+            'aberta' => $status,
+        ]);
+        
+        $opcoes = Opcao::where('enquete_id', $id)->get();
+        $i = 0;
+
+        foreach($data['opcao'] as $resposta)
+        {
+            if($resposta != null) {
+                $opcao = $this->opcao;
+
+                $opcao->where(['id'=>$opcoes[$i]->id])->update([
+                    'descricao' => $resposta
+                ]);
+
+                $i++;
+            }
+        }
+
+
+        return redirect()->route('enquetes.index');
     }
 
     /**
@@ -78,8 +176,37 @@ class EnqueteController extends Controller
      * @param  \App\Models\Enquete  $enquete
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Enquete $enquete)
+    public function destroy($id)
     {
-        //
+        $enquete = $this->enquete;
+        $opcoes = Opcao::where('enquete_id', $id)->get();
+
+        foreach($opcoes as $opcao){
+            $opcao->destroy($opcao->id);
+        }
+
+        $enquete = $enquete->destroy($id);
+
+        return redirect()->route('enquetes.index');
+    }
+
+    public function respondeEnquete(Request $request)
+    {
+        $data = $request->all();
+        $resposta = $data['resposta'];
+    }
+
+    public function encerraEnquete(Request $request) {
+        $id = $request->id;
+        $enquete = Enquete::find($id);
+
+        //if (!$enquete = Enquete::find($id))
+          //  return redirect()->back();
+        
+        echo json_encode($enquete->aberta);
+
+        $enquete->aberta = 0;
+
+        return;
     }
 }

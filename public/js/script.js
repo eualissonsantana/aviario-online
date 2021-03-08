@@ -1,139 +1,77 @@
+function carregaClasses() {
+    defineBannerTop()
+    defineBannerBottom()
+    defineBannerQuadrado()
+    defineActiveComercio()
+}
 
-
-(function(win, doc){
+function defineBannerTop() {
+    var div = document.getElementsByClassName('carousel-app')[0]
+    var divMobile = document.getElementsByClassName('carousel-mobile')[0]
     
-    function confirmDelUsers(event){
-        event.preventDefault();
-        let token = doc.getElementsByName("_token")[0].value;
-        if(confirm("Deseja mesmo apagar?")){
-            let ajax = new XMLHttpRequest();
-            ajax.open("DELETE", event.target.parentNode.href);
-            ajax.setRequestHeader("X-CSRF-TOKEN", token);
+    var item = document.getElementsByClassName('carousel-app-item')[0]
+    var mobile = document.getElementsByClassName('carousel-mobile-item')[0]
 
-            ajax.onreadystatechange = function() {
-                if(ajax.readyState === 4 && ajax.status === 200){
-                    win.location.href = "usuarios";
-                }
-            }
-            
-            ajax.send();
+
+    if(div && div.offsetParent || divMobile && divMobile.offsetParent){
+        if (window.screen.width > 500) {
+            item.classList.add('active')
         }else {
-            return false;
+            mobile.classList.add('active')     
         }
     }
 
-    function confirmDelEmpresa(event){
-        event.preventDefault();
-        let token = doc.getElementsByName("_token")[0].value;
-        if(confirm("Deseja mesmo apagar?")){
-            let ajax = new XMLHttpRequest();
-            ajax.open("DELETE", event.target.parentNode.href);
-            ajax.setRequestHeader("X-CSRF-TOKEN", token);
+    return
+}
 
-            ajax.onreadystatechange = function() {
-                if(ajax.readyState === 4 && ajax.status === 200){
-                    win.location.href = "empresas";
-                }
-            }
-            
-            ajax.send();
-        }else {
-            return false;
-        }
-    }
+function defineBannerBottom() {
+    var div = document.getElementsByClassName('bottom-carousel')[0]
+    var divMobile = document.getElementsByClassName('bottom-carousel-mobile')[0]
 
-    function confirmDelCategoriaEmpresa(event){
-        event.preventDefault();
-        let token = doc.getElementsByName("_token")[0].value;
-        if(confirm("Deseja mesmo apagar?")){
-            let ajax = new XMLHttpRequest();
-            ajax.open("DELETE", event.target.parentNode.href);
-            ajax.setRequestHeader("X-CSRF-TOKEN", token);
-
-            ajax.onreadystatechange = function() {
-                if(ajax.readyState === 4 && ajax.status === 200){
-                    win.location.href = "categorias";
-                }
-            }
-            
-            ajax.send();
-        }else {
-            return false;
-        }
-    }
-
-    function confirmDelCategoriaNoticia(event){
-        event.preventDefault();
-        let token = doc.getElementsByName("_token")[0].value;
-        if(confirm("Deseja mesmo apagar?")){
-            let ajax = new XMLHttpRequest();
-            ajax.open("DELETE", event.target.parentNode.href);
-            ajax.setRequestHeader("X-CSRF-TOKEN", token);
-
-            ajax.onreadystatechange = function() {
-                if(ajax.readyState === 4 && ajax.status === 200){
-                    win.location.href = "categorias";
-                }
-            }
-            
-            ajax.send();
-        }else {
-            return false;
-        }
-    }
-
-    function confirmDelPost(event){
-        event.preventDefault();
-        let token = doc.getElementsByName("_token")[0].value;
-        if(confirm("Deseja mesmo apagar?")){
-            let ajax = new XMLHttpRequest();
-            ajax.open("DELETE", event.target.parentNode.href);
-            ajax.setRequestHeader("X-CSRF-TOKEN", token);
-
-            ajax.onreadystatechange = function() {
-                if(ajax.readyState === 4 && ajax.status === 200){
-                    win.location.href = "noticias";
-                }
-            }
-            
-            ajax.send();
-        }else {
-            return false;
-        }
-    }
+    var bottom = document.getElementsByClassName('bottom-carousel-item')[0]
+    var bottomMobile = document.getElementsByClassName('bottom-carousel-mobile-item')[0]
     
-    if(doc.querySelector('.js-del-user')){
-        let btn = doc.querySelectorAll('.js-del-user')
-
-        for(let i=0; i < btn.length; i++) {
-            btn[i].addEventListener('click', confirmDelUsers, false);
-        }
-    } else if(doc.querySelector('.js-del-emp')){
-        console.log("teste")
-        let btn = doc.querySelectorAll('.js-del-emp')
-
-        for(let i=0; i < btn.length; i++) {
-            btn[i].addEventListener('click', confirmDelEmpresa, false);
-        }
-    } else if (doc.querySelector('.js-del-emp-cat')){
-        let btn = doc.querySelectorAll('.js-del-emp-cat')
-
-        for(let i=0; i < btn.length; i++) {
-            btn[i].addEventListener('click', confirmDelCategoriaEmpresa, false);
-        }
-    } else if (doc.querySelector('.js-del-not-cat')){
-        let btn = doc.querySelectorAll('.js-del-not-cat')
-
-        for(let i=0; i < btn.length; i++) {
-            btn[i].addEventListener('click', confirmDelCategoriaNoticia, false);
-        }
-    } else if (doc.querySelector('.js-del-post')){
-        let btn = doc.querySelectorAll('.js-del-post')
-
-        for(let i=0; i < btn.length; i++) {
-            btn[i].addEventListener('click', confirmDelPost, false);
+    if(div && div.offsetParent || divMobile && divMobile.offsetParent){
+        if (window.screen.width > 500) { 
+            bottom.classList.add('active')
+        }else {
+            bottomMobile.classList.add('active')
         }
     }
-})(window, document)
+
+    return
+}
+
+function defineBannerQuadrado() {
+    var div = document.getElementsByClassName('carousel-quadrado')[0]
+    var divMobile = document.getElementsByClassName('carousel-quadrado-mobile')[0]
+
+    var quadrado = document.getElementsByClassName('carousel-quadrado-item')[0]
+    var quadradoMobile = document.getElementsByClassName('carousel-quadrado-mobile-item')[0]
+
+    if(div && div.offsetParent || divMobile && divMobile.offsetParent){
+        if (window.screen.width > 500) { 
+            quadrado.classList.add('active')
+        }else {
+            quadradoMobile.classList.add('active')
+        }
+    }
+
+    return
+}
+
+function defineActiveComercio() {
+    var div = document.getElementsByClassName('comercio-carousel')[0]
+    
+    var item = document.getElementsByClassName('comercio-carousel-item')[0]
+    
+    if(div && div.offsetParent || divMobile && divMobile.offsetParent){
+        item.classList.add('active')
+    }
+
+
+    return
+}
+
 
 

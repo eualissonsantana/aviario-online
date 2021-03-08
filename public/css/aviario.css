@@ -7,6 +7,14 @@ html,body
     overflow-x: hidden; 
 }
 
+.content {
+    padding-bottom: 200px;
+}
+
+.autor {
+    clear: both;
+}
+
 .exibe-noticia hr {
     border-color: #a7a7a7;
 }
@@ -108,6 +116,25 @@ html,body
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.linha-categorias {
+    padding-left: 30px;
+}
+
+.aviario-home .categorias-random {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    margin-right: 12px;
+    background-color: #2d9cdb;
+    
+}
+
+.aviario-home .categorias-random p {
+    font-size: 18px;
+    line-height: 20px;
+    color: #fff;
+}
+
 .navbar .area-procura-noticia {
     width: 300px;
     padding: 10px;
@@ -118,6 +145,11 @@ html,body
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+.cadastre-seu-negocio img, .anuncie-sua-empresa img {
+    width: 100%;
 }
 
 .listagem-noticias .area-procura-noticia {
@@ -184,6 +216,19 @@ html,body
     line-height: 18px;
 }
 
+.exibe-comercio .formas-pagamento img{
+    width: 40px;
+}
+
+.exibe-comercio .redes-sociais img {
+    width: 32px;
+}
+
+.whatsapp img {
+    width: 20px;
+    margin-top: -10px;
+}
+
 .destaque {
     color: #2d9cdb;
     font-weight: bold;
@@ -199,7 +244,7 @@ html,body
     margin-bottom: 20px;
 }
 
-.anuncios-laterais img {
+.anuncios-laterais img, .anuncio img {
     width: 100%;
 }
 
@@ -209,10 +254,13 @@ html,body
 }
 
 .deixe-comentario {
-    border-bottom: 3px solid #0084B8;
-    font-size: 32px !important;
+    font-size: 28px !important;
     font-weight: bolder;
     color: #333;
+}
+
+.date-post p{
+    font-size: 12px !important;
 }
 
 .painel-noticias .imagem-noticia img{
@@ -285,6 +333,9 @@ footer {
     padding-top: 20px !important;
     padding-bottom: 20px !important;
     margin-top: 22px;
+    position:absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
@@ -296,6 +347,62 @@ footer .navegacao {
     padding-left: 40px;
 }
 
+.contato p {
+    font-size: 14px;
+}
+
+.exibe-comercio .imagem-comercio {
+    padding-right: 0 !important;
+}
+
+.exibe-comercio .imagem-comercio img{
+    width: 100% !important;
+    height: 230px !important;
+} 
+
+.exibe-comercio .endereco p {
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.exibe-comercio .titulo p {
+    font-size: 16px;
+}
+
+.exibe-comercio .contatos p {
+    line-height: 16px;
+}
+
+.exibe-comercio .formas-pagamento p, .exibe-comercio .redes-sociais p {
+    font-size: 14px;
+}
+
+.exibe-comercio .sobre p {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.exibe-comercio .carousel-inner {
+    border-top: 5px solid #2d9cdb;
+}
+
+.exibe-comercio .card p{
+   font-size: 14px;
+}
+
+.exibe-comercio .carousel-inner img {
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.aviario-enquetes form label {
+    font-size: 16px;
+}
+
+footer .navegacao a {
+    display: block;
+    color: #fff;
+}
 
 @media only screen and (min-width: 1400px) {
     .aviario-home .penultimo-post img {
@@ -325,23 +432,50 @@ footer .navegacao {
     }
 
    
-    .painel-empresas .imagem-comercio img {
-        width: 220px;
-        height: 220px;
+    .painel-empresas .imagem-comercio img, .guia-comercial .imagem-comercio img{
+        width: 220px !important;
+        height: 220px !important;
         object-fit: cover;
     }
 
-   
+    .exibe-comercio .imagem-comercio img{
+        width: 100% !important;
+        height: 284px !important;
+    }
+
+    .exibe-comercio .endereco p {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .exibe-comercio .contatos p {
+        line-height: 16px;
+    }
+
+    .exibe-comercio .formas-pagamento p {
+        font-size: 14px;
+    }
+
+    .exibe-comercio .sobre p {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
 }
 
-@media only screen and (max-width: 1400px) {
-    .painel-empresas .imagem-comercio img{
-        width: 200px;
-        height: 200px;
+@media only screen and (max-width: 1370px) {
+    .imagem-comercio img, .guia-comercial .imagem-comercio img, .lista-empresas .imagem-comercio img{
+        width: 200px !important;
+        height: 200px !important;
         object-fit: cover;
     }
 
-    .lista-noticias .imagem-noticia img{
+    .exibe-comercio .imagem-comercio img {
+        width: 245px !important;
+        height: 245px !important;
+    }
+
+    .lista-noticias .imagem-noticia img {
         width: 220px;
         height: 140px;
         object-fit: cover;
@@ -353,9 +487,9 @@ footer .navegacao {
 }
 
 @media only screen and (max-width:1280px) {
-    .painel-empresas .imagem-comercio img {
-        width: 190px;
-        height: 190px;
+    .imagem-comercio img {
+        width: 190px !important;
+        height: 190px !important;
         object-fit: cover;
     }
 
@@ -364,6 +498,11 @@ footer .navegacao {
         height: 135px;
         object-fit: cover;
     }
+
+    .exibe-comercio .imagem-comercio img{
+        width: 210px !important;
+        height: 210px !important;
+    } 
 }
 
 @media only screen and (max-width: 414px) {
@@ -396,6 +535,19 @@ footer .navegacao {
         width: 382px;
     }
 
+    .aviario-home .area-categoria {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .linha-categorias {
+        justify-content: center !important;
+    }
+
+    .legenda-area-categoria {
+        text-align: center;
+    }
+
     .guia-comercial .area-procura-comercio {
         margin-top: 16px;
     }
@@ -426,9 +578,9 @@ footer .navegacao {
         object-fit: cover;
     }
 
-    .painel-empresas .imagem-comercio img {
-        width: 150px;
-        height: 150px;
+    .imagem-comercio img, .exibe-comercio .imagem-comercio img {
+        width: 150px !important;
+        height: 150px !important;
         object-fit: cover;
     }
 
@@ -448,6 +600,24 @@ footer .navegacao {
         line-height: 16px;
     }
 
+    .exibe-comercio .contatos p {
+        line-height: 14px;
+    }
+
+    .exibe-comercio .titulo p {
+        font-size: 14px;
+        line-height: 16px;
+    }
+    .aviario-home .opcao label {
+        font-size: 16px !important;
+        line-height: 20px;
+        margin: 30px 0 10px 5px;
+    }
+
+    .aviario-home .opcao, .aviario-home .pergunta  {
+        text-align: center !important;
+    }
+
     footer .logo, footer .dev-info, footer .navegacao {
         text-align: center !important;
     }
@@ -455,6 +625,7 @@ footer .navegacao {
     footer .navegacao {
         margin: 15px 0;
         padding-left: 0;
+        text-align: center !important;
     }
 
     footer .dev-info p {
@@ -467,18 +638,78 @@ footer .navegacao {
     .aviario-home .busca-guia-comercial .area-procura-comercio {
         width: 328px;
     }
+
+    .imagem-comercio img, .exibe-comercio .imagem-comercio img {
+        width: 140px !important;
+        height: 140px !important;
+        object-fit: cover;
+    }
+
+    .entrar-contato {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 320px) {
     .aviario-home .busca-guia-comercial .area-procura-comercio {
         width: 296px;
     }
+
+    .imagem-comercio img, .exibe-comercio .imagem-comercio img {
+        width: 130px !important;
+        height: 130px !important;
+        object-fit: cover;
+    }
+
+    .dados-comercio {
+        padding-left: 20px !important;
+    }
+
+    .dados-comercio h4 {
+        font-size: 18px;
+    }
+
+    .dados-comercio h6 {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .dados-comercio .endereco p {
+        line-height: 15px;
+        font-size: 13px;
+    }
+
+    .dados-comercio .contatos h4 {
+        font-size: 15px;
+    }
+
+    .exibe-comercio .dados {
+        padding-left: 20px !important;
+    }
+
 }
 
 .btn-enviar {
     background-color: #2d9cdb;
     color: #fff;
     width: 100%;
+}
+
+.alerta {
+    color: #EB5757;
+}
+
+.verde {
+    color:#2EA44F;
+}
+
+.aviario-home .opcao label {
+    font-size: 20px;
+}
+
+.painel-banners p {
+    font-size: 14px !important;
+    font-weight: bold;
 }
 
   

@@ -8,7 +8,11 @@ body{
 
 #app {
     padding: 20px 0 0;
+    min-height: 100%;
+    position: relative;
 }
+
+
 
 .padding-padrao {
     padding: 0 100px;
@@ -191,9 +195,13 @@ table {
     width: 100%;
 }
 
+.btn-full {
+    width: 100%;
+}
+
 .btn-lg {
     height: 40px;               
-    width: 150px;
+    width: 100%;
 }
 
 .btn-editar {
@@ -220,8 +228,14 @@ table {
     color: #4d4d4d;
 }
 
-.btn-novo, .btn-salvar {
+.btn-novo {
     background-color: #2EA44F;
+    color: #fff;
+    width: 150px;
+}
+
+.btn-salvar {
+    background-color: #2D9CDB;
     color: #fff;
 }
 
@@ -291,12 +305,36 @@ ul {
     color: #06C7C4;
 }
 
+.dados-comercio h3 {
+    font-weight: 800 !important;
+}
+
+.dados-comercio h5 {
+    font-weight: 600 !important;
+    color: hsl(0, 0%, 40%);
+}
+
 .dados-comercio .telefone h5 {
     font-weight: 600;
 }
 
 .dados-comercio p {
-    line-height: normal;
+    line-height: 18px;
+    font-size: 16px;
+}
+
+.painel-empresas .ramos-categorias .ramo p{
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400 !important;
+}
+
+.painel-empresas .ramos-categorias .categoria p {
+    font-size: 14px !important;
+}
+
+.lista-empresas .imagem-comercio img {
+    width: 100%;
 }
 
 .arquivo input{
@@ -346,12 +384,25 @@ ul {
     height: 37px;
 }
 
+
+
 .painel-nova-noticia .categoria {
     vertical-align: bottom;
 }
 
 .arquivo label {
     height: 37px;
+}
+
+.painel-noticias .card .card-header {
+    padding: 8px 20px;
+}
+
+.painel-noticias .card .card-header p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #4D4D4D;
 }
 
 
@@ -392,4 +443,16 @@ ul {
   
   .hideMe{
       display: none;
+  }
+
+  .banner-topo {
+      width: 600px;
+  }
+
+  .banner-lateral {
+      width: 300px;
+  }
+
+  .painel-empresas .card-body p {
+      font-size: 14px !important;
   }

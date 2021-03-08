@@ -2,6 +2,20 @@
 
 @section('content')    
     <section class="aviario-noticias padding-padrao pt">
+        <div class="d-block d-sm-none banners-topo mb-3">
+            <div id="carouselExampleControls" class="carousel slide carousel-mobile" data-ride="carousel" >
+                <div class="carousel-inner">
+                    @if(isset($bannersRetangulares))
+                        @foreach ($bannersRetangulares as $banner)
+                            <div class="carousel-item carousel-mobile-item">
+                                <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+
         <article>
             <div>
                 <h2>Notícias</h2>
@@ -37,30 +51,34 @@
         <article class="row justify-content-between listagem-noticias">
             <div class="col-12 col-md-7 lista-noticias">
                 <ul>
-                    @foreach ($posts as $post)
-                        <li> 
-                            <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
-                                <section class="row li-noticia justify-content-between px-md-3">
-                                    <article class="col-6 col-md-4 imagem-noticia pr-0 px-md-0">
-                                        <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}"/> 
-                                    </article>
-                                    <article class="col-6 col-md-8 d-flex align-content-between flex-wrap titulo-noticia">    
-                                        <div class="col-12 px-0 px-md-3">
-                                            <h6> {{$post->categoria->descricao}} </h6>
-                                            <h4 class="">{{$post->titulo}} </h4>
-                                        </div>
-                                        <div class="col-12 d-none d-sm-block previa">
-                                            <p>{{$post->previa}}</p>
-                                        </div>
-                                        <div class="col-12 px-0 px-md-3">
-                                            <p> {{$post->created_at}} </p>
-                                        </div>
-                                    </article>                  
-                                </section>
-                            </a>
-                        </li>
-                        <hr>
-                    @endforeach
+                    @if($posts[0] != null)
+                        @foreach ($posts as $post)
+                            <li> 
+                                <a href="{{route('posts.show', ['slug' => $post->slug, 'id' => $post->id])}}">
+                                    <section class="row li-noticia justify-content-between px-md-3">
+                                        <article class="col-6 col-md-4 imagem-noticia pr-0 px-md-0">
+                                            <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                                        </article>
+                                        <article class="col-6 col-md-8 d-flex align-content-between flex-wrap titulo-noticia">    
+                                            <div class="col-12 px-0 px-md-3">
+                                                <h6> {{$post->categoria->descricao}} </h6>
+                                                <div class="date-post">
+                                                    <p > Criada em {{date('j \d\e M \à\s  H:i\h', strtotime($post->created_at))}} </p>
+                                                </div>
+                                                <h4 class="">{{$post->titulo}} </h4>
+                                            </div>
+                                            <div class="col-12 d-none d-sm-block previa">
+                                                <p>{{$post->previa}}</p>
+                                            </div>
+                                        </article>                  
+                                    </section>
+                                </a>
+                            </li>
+                            <hr>
+                        @endforeach
+                    @else
+                        <h3>Nenhuma notícia encontrada</h3>
+                    @endif
                 </ul>
             </div>
 
@@ -85,7 +103,7 @@
                     @foreach ($categorias as $cat)
                         <div class="card">
                             <div class="card-header"> 
-                                <form class="form-inline" action="{{route('posts.search')}}" method="POST">
+                                <a class="form-inline" href="{{route('posts.categoria', $cat->slug)}}" >
                                     @csrf
                                     <div class="input-group-prepend">
                                         <button class="btn btn-categoria" type="button submit">
@@ -99,7 +117,7 @@
                                     
                                     <input class="form-control" type="search" hidden="true" name="filter" value="{{$cat->id}}" aria-label="Search">
                                     <input type="text" hidden="true" name="option" value="categoria">
-                                </form>
+                                </a>
                                 
                             </div>
                         </div>    
@@ -107,14 +125,16 @@
                 </div> 	
             </div>
             <div class="col-3 anuncios-laterais d-none d-sm-block">
-                <div class="col-12 anuncio px-0 mb-5">
-                    <img src="{{ url('img/lateral-1.png/') }}" />
-                </div>
-                <div class="col-12 anuncio px-0 mb-5">
-                    <img src="{{ url('img/lateral-2.jpg/') }}" />
-                </div>
-                <div class="col-12 anuncio px-0 mb-5">
-                    <img src="{{ url('img/lateral-1.png/') }}" />
+                <div id="carouselExampleControls" class="carousel slide carousel-quadrado" data-ride="carousel" >
+                    <div class="carousel-inner">
+                        @if(isset($bannersQuadrados))
+                            @foreach ($bannersQuadrados as $banner)
+                                <div class="carousel-item carousel-quadrado-item">
+                                    <img class="d-block w-100" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" alt="{{$banner->titulo}}">
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
             </div>
     

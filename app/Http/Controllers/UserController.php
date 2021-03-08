@@ -113,7 +113,6 @@ class UserController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'username' => ['required', 'max:15', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ]);
 
@@ -122,11 +121,9 @@ class UserController extends Controller
             $user = new User();
 
             $user->where(['id'=>$id])->update([
-            'name' => $data['name'],
-                'username' => $data['username'],
+                'name' => $data['name'],
                 'email' => $data['username']."@padrao.com",
                 'password' => Hash::make($data['password']),
-                'ehGerente' => '0'
             ]);
 
             return redirect()->route('users.index');

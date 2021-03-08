@@ -1,7 +1,11 @@
-@media only screen and (max-width: 414px) {
+@media only screen and (max-width: 415px) {
     
     #app {
         padding: 0;
+    }
+
+    .content {
+        padding-bottom: 400px !important;
     }
 
     h1 {
@@ -45,6 +49,10 @@
         line-height: 18px;
         font-weight: bold;
     }
+
+    .painel-categorias-empresas .card-body h5 {
+        font-size: 14px;
+    }
     
     h6 {
         font-size: 12px;
@@ -73,16 +81,20 @@
 
     .pt {
         padding-top: 16px;
+        min-height: 100vh;
     }
 
     .navbar {
         margin-bottom: 0;
     }
 
-   
+    .btn-novo, .btn-salvar {
+        width: 100%;
+    }
     
     .btn-novo, .btn-salvar {
-        width: 95%;
+        width: 100%;
+        margin-top: 12px;
     }
 
     .usuarios ul {
@@ -90,13 +102,16 @@
     }
 
     .painel-noticias .imagem-noticia img{
-        width: 150px;
+        width: 100% !important;
         height: 100px;
-        object-fit: cover;
     }
 
     .painel-noticias .busca-box {
         margin: auto;
+    }
+
+    .painel-nova-noticia .categoria, .painel-nova-noticia .autor {
+        margin-top: 12px;
     }
 
     .painel-empresas .imagem-comercio img{
@@ -132,7 +147,6 @@
     }
 
 
-
     .exibe-noticia .imagem-noticia img {
         width: 100% !important;
     }
@@ -145,4 +159,27 @@
         font-size: 22px !important;
     }
     
+}
+
+@media only screen and (max-width: 365px) {
+    
+
+    .dados-comercio h3 {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .dados-comercio .endereco p {
+        font-size: 14px;
+    }
+
+    .dados-comercio .telefone h5 {
+        font-size: 14px;
+    }
+
+    .painel-empresas .imagem-comercio img {
+        width: 130px !important;
+        height: 130px !important;
+        object-fit: cover;
+    }
 }

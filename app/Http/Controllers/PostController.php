@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 class PostController extends Controller
@@ -39,9 +40,9 @@ class PostController extends Controller
     {
         $posts = $this->posts;
         $categorias = $this->postCategorias;
-        
+        $carbon = new Carbon();
 
-        return view('listagem.posts', compact('posts', 'categorias'));
+        return view('listagem.posts', compact('posts', 'categorias', 'carbon'));
     }
 
     public function lista_posts()
@@ -73,6 +74,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'titulo' => ['required'],
+            'previa' => ['required'],
+            'autor' => ['required'],
+            'conteudo' => ['required']
+        ]);
+
         $data = $request->all();
         $slug = Str::slug($data['titulo']);
 
@@ -80,6 +89,7 @@ class PostController extends Controller
         $post->slug = Str::slug($data['titulo']);
         $post->titulo = $data['titulo'];
         $post->previa = $data['previa'];
+        $post->autor = $data['autor'];
         $post->conteudo = $data['conteudo'];
         $post->user_id = $data['usuario_id'];
         $post->categoria_id = $data['categoria_id'];
@@ -104,6 +114,12 @@ class PostController extends Controller
     {
         if (!$post = Post::find($id))
             return redirect()->back();
+
+        $updateVisitas = $post->visitas + 1;
+
+        $post->update([
+            'visitas' => $updateVisitas
+        ]);
         
         return view('aviario.noticias.exibe_noticia', [
             'post' => $post
@@ -134,6 +150,13 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'titulo' => ['required'],
+            'previa' => ['required'],
+            'autor' => ['required'],
+            'conteudo' => ['required']
+        ]);
+        
         $data = $request->all();
         $post = $this->post;
 
@@ -143,10 +166,11 @@ class PostController extends Controller
             'slug' => Str::slug($data['titulo']),
             'titulo' => $data['titulo'],
             'previa' => $data['previa'],
+            'autor' => $data['autor'],
             'conteudo' => $data['conteudo'],
             'user_id' => $data['usuario_id'],
             'categoria_id' => $data['categoria_id'],
-            ]); 
+        ]); 
         
         $this->uploadImage($request, $slug, $id);
 
@@ -217,6 +241,24 @@ class PostController extends Controller
         
         return view('aviario.noticias.lista_noticias', compact('posts', 'categorias'));
         
+    }
+
+    public function showNoticias($slug) {
+
+        $categoria = new PostCategoria();
+        $categoria = DB::table('post_categorias')->where('slug', $slug)->first();
+        $id = $categoria->id;
+
+        $categorias = $this->postCategorias;
+
+        
+        $posts = Post::orderByDesc('created_at')->where('categoria_id', $id)->get();
+
+        return view('aviario.noticias.lista_noticias', [
+            'posts' => $posts,
+            'categorias' => $categorias,
+            'categoria' => $categoria,
+        ]);
     }
 
 }

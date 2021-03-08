@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PostCategoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostCategoriaController extends Controller
 {
@@ -52,9 +53,10 @@ class PostCategoriaController extends Controller
         ]);
         
         $data = $request->all();
-
+        
         $categoria = $this->categoria;
         $categoria->descricao = $data['descricao'];
+        $categoria->slug = Str::slug($data['descricao']);
         $categoria->save();
         
         return redirect()->route('post_categorias.index');
@@ -102,7 +104,8 @@ class PostCategoriaController extends Controller
         $categoria = $this->categoria;
         
         $categoria->where(['id'=>$id])->update([
-            'descricao' => $data['descricao']
+            'descricao' => $data['descricao'],
+            'slug' =>  Str::slug($data['descricao'])
         ]);
 
         return redirect()->route('post_categorias.index');

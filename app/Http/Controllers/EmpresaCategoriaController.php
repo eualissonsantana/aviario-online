@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EmpresaCategoria;
 use App\Models\Ramo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class EmpresaCategoriaController extends Controller
 {
@@ -15,8 +16,8 @@ class EmpresaCategoriaController extends Controller
 
     public function __construct()
     {
-        $this->ramos = Ramo::all();
-        $this->categorias = EmpresaCategoria::paginate(10);
+        $this->ramos = Ramo::orderBy('descricao')->get();
+        $this->categorias = EmpresaCategoria::orderBy('descricao')->get();
         $this->categoria = new EmpresaCategoria();
     }
 
@@ -42,7 +43,9 @@ class EmpresaCategoriaController extends Controller
      */
     public function create()
     {
-        return view('cadastrar.empresa_categoria');
+        $ramos = $this->ramos;
+
+        return view('cadastrar.empresa_categoria', compact('ramos'));
     }
 
     /**
@@ -61,6 +64,8 @@ class EmpresaCategoriaController extends Controller
 
         $categoria = new EmpresaCategoria();
         $categoria->descricao = $data['descricao'];
+        $categoria->slug = Str::slug($data['descricao']);
+        $categoria->ramo_id = $data['ramo_id'];
         $categoria->save();
         
         return redirect()->route('empresa_categorias.index');
@@ -87,8 +92,9 @@ class EmpresaCategoriaController extends Controller
     {
         $categoria = new EmpresaCategoria();
         $categoria = $categoria->find($id);
+        $ramos = $this->ramos;
 
-        return view('cadastrar.empresa_categoria', compact('categoria'));
+        return view('cadastrar.empresa_categoria', compact('categoria', 'ramos'));
     }
 
     /**
@@ -107,8 +113,11 @@ class EmpresaCategoriaController extends Controller
         $data = $request->all();
         $categoria = new EmpresaCategoria();
         
+        
         $categoria->where(['id'=>$id])->update([
-            'descricao' => $data['descricao']
+            'descricao' => $data['descricao'],
+            'slug' => Str::slug($data['descricao']),
+            'ramo_id' => $data['ramo_id']
         ]);
 
         return redirect()->route('empresa_categorias.index');

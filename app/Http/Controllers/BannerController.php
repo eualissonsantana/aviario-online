@@ -53,9 +53,11 @@ class BannerController extends Controller
     {
         $data = $request->all();
 
+
         $banner = $this->banner;
         $banner->titulo = $data['titulo'];
         $banner->posicao = $data['posicao'];
+        $banner->ativo = $data['ativo'];
         $banner->usuario_id = Auth::user()->id;
         $banner->imagem = 'temp';
         $banner->save();
@@ -111,7 +113,8 @@ class BannerController extends Controller
         $banner->where(['id'=>$id])->update([
             'titulo' => $data['titulo'],
             'posicao' => $data['posicao'],
-            'usuario_id' => $data['usuario_id'],
+            'ativo' => $data['ativo'],
+            'usuario_id' => Auth::user()->id,
             ]); 
         
         $this->uploadImage($request, $id);
