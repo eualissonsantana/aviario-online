@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+    Login - Aviário Online
+@stop
 
 @section('content')
 <div class="container pt login-page">

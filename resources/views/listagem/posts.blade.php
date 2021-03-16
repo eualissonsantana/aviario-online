@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+    Painel Notícias - Aviário Online
+@stop
 @section('content')    
 <div class="padding-padrao pt painel-noticias">
     <div class="row justify-content-between titulo">

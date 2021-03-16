@@ -10,13 +10,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color"  content="#2d9cdb">
     <meta name="apple-mobile-web-app-status-bar-style" content="#2d9cdb">
+    <meta name="author" content="Alisson Santana">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>@yield('title')</title>
-        <meta name="description" content="@yield('description')">
-        <meta name="keywords" content="@yield('keywords')">
+    <title>@yield('title')</title>
+    <meta property="fb:app_id" content="257193392700081" />
+    <meta property="og:image" content=@yield('og-image')/>
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -39,16 +43,16 @@
     
     <link rel="icon" type="image/png" href="img/icons/favicon.png">
 
-</head>
-<body onload="carregaClasses()">
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v9.0" nonce="uJ0WJ2He"></script>
-    
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v10.0&appId=257193392700081&autoLogAppEvents=1" nonce="uvq0AYBf"></script>  
+</head>
+
+<body onload="carregaClasses()">
     <div id="app">
            
         <section class="padding-padrao d-none d-sm-block">
             <div class="row pt-2 justify-content-between">
-                <div class="col-2">
+                <div class="col-2 logo">
                     <a href="{{route('aviario.index')}}">
                         <img src="{{ url('img/logo.png') }}" alt="Logo Aviário Online" >
                     </a>

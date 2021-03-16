@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Usuários - Aviário Online
+    Painel Usuários - Aviário Online
 @stop
 @section('content')  
     <div class="painel-usuarios pt padding-padrao">

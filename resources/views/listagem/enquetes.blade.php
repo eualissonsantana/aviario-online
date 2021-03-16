@@ -1,6 +1,6 @@
 @extends('layouts.app', ['bannersCarousel' => $bannersRetangulares])
 @section('title')
-    Enquetes - Aviário Online
+    Painel Enquetes - Aviário Online
 @stop
 @section('content')    
 <div class="padding-padrao pt painel-enquetes">

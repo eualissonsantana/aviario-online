@@ -252,7 +252,7 @@ class PostController extends Controller
         $categorias = $this->postCategorias;
 
         
-        $posts = Post::orderByDesc('created_at')->where('categoria_id', $id)->get();
+        $posts = Post::orderByDesc('created_at')->where('categoria_id', $id)->paginate(10);
 
         return view('aviario.noticias.lista_noticias', [
             'posts' => $posts,

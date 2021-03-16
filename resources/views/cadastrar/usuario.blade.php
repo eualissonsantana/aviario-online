@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" name="ehGerente" id="ehGerente" @if($user->ehGerente) checked @endif>
+                                <input type="checkbox" class="form-check-input" name="ehGerente" id="ehGerente" @if(isset($user->ehGerente)) checked @endif>
                                 <label class="form-check-label"  value="1" for="ehGerente" >Usuário administrador</label>
                             </div>
 

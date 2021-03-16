@@ -81,8 +81,10 @@ Route::post('/painel/enquetes/encerra', [EnqueteController::class, 'encerraEnque
 
 // Rotas comuns
 
-Route::get('/', [AviarioController::class, 'hotsite'])->name('aviario.hotsite');
-Route::get('/home', [AviarioController::class, 'index'])->name('aviario.index');
+Route::get('/home', function() {
+    return redirect()->route('aviario.index');
+});
+Route::get('/', [AviarioController::class, 'index'])->name('aviario.index');
 Route::get('/contato', [AviarioController::class, 'contato'])->name('aviario.contato');
 Route::post('/contato', [AviarioController::class, 'enviaMensagem'])->name('aviario.mensagem');
 Route::get('/enquetes', [AviarioController::class, 'indexEnquetes'])->name('aviario.enquetes');

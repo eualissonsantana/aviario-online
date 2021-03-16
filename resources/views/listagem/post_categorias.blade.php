@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Categorias de Notícia - Aviário Online
+    Painel Categorias de Notícia - Aviário Online
 @stop
 @section('content')
     <div class="padding-padrao pt post-categorias">

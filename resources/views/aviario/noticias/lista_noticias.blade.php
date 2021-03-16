@@ -27,15 +27,15 @@
 
         <hr>
         @csrf
-        <section class="card mb-4 px-2 pt-3 shadow-sm d-block d-sm-none text-center" id="card-swipe">
+        <section class="card mb-4 px-3 pt-3 shadow-sm d-block d-sm-none text-center" id="card-swipe">
             <div class="swipeView">
                 @foreach ($categorias as $cat)
                     <div class="opcao">
-                        <form class="pb-3" action="{{route('posts.search')}}" method="POST">
+                        <a class="form-inline" href="{{route('posts.categoria', $cat->slug)}}" >
                             @csrf
                             <div class="">
                                 <button class="btn-categoria" onclick="defineActive(this)" type="button submit">
-                                    <p class="categoria-swipe"  >
+                                    <p class="categoria-swipe categoria-item"  >
                                         <strong>
                                             {{$cat->descricao}}
                                         </strong>
@@ -45,7 +45,7 @@
                             
                             <input class="form-control" type="search" hidden="true" name="filter" value="{{$cat->id}}" aria-label="Search">
                             <input type="text" hidden="true" name="option" value="categoria">
-                        </form>
+                        </a>
                     </div>
                 @endforeach
             </div>

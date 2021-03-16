@@ -267,7 +267,7 @@
                                 <article class="row">
                                     <div class="form-group col-12 col-form-label text-md-left">
                                         <label for="assunto" class="col-form-label">Assunto*</label>
-                                        <input id="assunto" type="text" class="form-control @error('assunto') is-invalid @enderror"  name="assunto" id="assunto" required autofocus>
+                                        <input id="assunto" type="text" class="form-control @error('assunto') is-invalid @enderror"  name="assunto" id="assunto" required>
                                         
                                         @error('assunto')
                                             <span class="invalid-feedback" role="alert">

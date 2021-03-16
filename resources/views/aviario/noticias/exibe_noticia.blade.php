@@ -31,6 +31,9 @@
                 <div class="conteudo my-3">
                     <div class="imagem-noticia">
                         <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}"/> 
+                        @section('og-image')
+                            {{ url('public/storage/imagens/chamadas/'.$post->imagem) }}
+                        @stop
                     </div>
                
                     <p class="text-justify">
@@ -48,7 +51,7 @@
                         Deixe o seu comentário
                     </p>
                     
-                    <div class="px-0 fb-comments" data-href="https://10.0.0.120:8000/noticias/{{$post->id}}" data-numposts="5" data-width="100%">
+                    <div class="px-0 fb-comments" data-href="https://aviario.online/noticias/{{$post->slug}}/{{$post->id}}" data-numposts="5" data-width="100%">
                     </div>
                 </div>
             </article>

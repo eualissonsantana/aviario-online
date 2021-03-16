@@ -75,6 +75,7 @@ class AviarioController extends Controller
                                             ->join('empresas', 'empresas.categoria_id', '=', 'empresa_categorias.id')
                                             ->inRandomOrder()->take(8)->skip(8)
                                             ->select('empresa_categorias.*')
+                                            ->distinct()
                                             ->get();
                                             
             $this->postCategorias = PostCategoria::all();

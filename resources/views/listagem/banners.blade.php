@@ -26,7 +26,6 @@
                         <section class="row px-md-3 justify-content-between">
                             <article class="px-3 px-md-0 col-12 col-md-8">
                                 <h4 > {{$banner->titulo}} </h4>
-                                
                             </article>
                             <article class="row botoes col-12 col-md-4 justify-content-end pr-3 pr-md-4">
                                 <div class="col-6 pl-0">
@@ -53,7 +52,9 @@
                                 <div class="mb-2">
                                     <p>TOPO</p>
                                 </div>
-                                <img class="banner-topo" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" />
+                                <div class="banners-topo">
+                                    <img class="banner-topo" src="{{ url('public/storage/imagens/banners/'.$banner->imagem) }}" />
+                                </div>
                             @else    
                                 <div class="mb-2">
                                     <p>LATERAL</p>
