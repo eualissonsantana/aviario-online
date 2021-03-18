@@ -62,7 +62,7 @@
                                         <article class="col-6 col-md-4 imagem-noticia pr-0 px-md-0">
                                             <img src="{{ url('public/storage/imagens/chamadas/'.$post->imagem) }}"/> 
                                         </article>
-                                        <article class="col-6 col-md-8 d-flex align-content-between flex-wrap titulo-noticia">    
+                                        <article class="col-6 col-md-8 titulo-noticia">    
                                             <div class="col-12 px-0 px-md-3">
                                                 <h6> {{$post->categoria->descricao}} </h6>
                                                 <div class="date-post">
@@ -70,7 +70,7 @@
                                                 </div>
                                                 <h4 class="">{{$post->titulo}} </h4>
                                             </div>
-                                            <div class="col-12 d-none d-sm-block previa">
+                                            <div class="col-12 mt-2 d-none d-sm-block previa">
                                                 <p>{{$post->previa}}</p>
                                             </div>
                                         </article>                  
